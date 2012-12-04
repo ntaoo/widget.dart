@@ -1,6 +1,5 @@
 name:  bootstrap
 description:  A sample application
-
-#dependencies:
-#  js: any
-#  unittest: { sdk: unittest }
+dependencies:
+  unittest: 0.2.7
+  web_components: 0.2.8+3
