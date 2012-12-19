@@ -1,4 +1,4 @@
-import 'package:web_components/web_components.dart';
+import 'package:web_ui/web_ui.dart';
 
 class CounterComponent extends WebComponent {
   int count = 0;
