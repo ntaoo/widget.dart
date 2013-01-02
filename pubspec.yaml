@@ -1,4 +1,4 @@
-name:  bootstrap
+name:  widget
 description:  A sample application
 dependencies:
   unittest: '>=0.2.9 <2.10.0'
