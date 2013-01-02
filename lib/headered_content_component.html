@@ -3,11 +3,12 @@
   <body>
     <element name="x-headered-content" constructor="HeaderedContentComponent" extends="div">
       <template>
-        <h1>{{header}}</h1>
-        <div style='border: 1px lightgray solid; border-radius: 10px; padding: 10px;'>
-          <content></content>
+        <div style='border: 1px lightgray solid; border-radius: 10px; margin: 10px;'>
+          <h1 style='color: #333; background: lightgray; margin: -1px 0 0 -1px; border: 1px lightgray solid; border-radius: 10px 0 10px 0; padding: 15px; display: inline-block;'>{{header}}</h1>
+          <div style='padding: 5px;'>
+            <content></content>
+          </div>
         </div>
-
       </template>
       <script type="application/dart" src='headered_content_component.dart'></script>
     </element>
