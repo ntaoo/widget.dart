@@ -12,15 +12,17 @@
   </head>
 
   <body>
-    <h1>CounterComponent</h1>
-    <x-counter></x-counter>
+    <x-headered-content header='CounterComponent'>
+      <x-counter></x-counter>
+    </x-headered-content>
 
-    <h1>HeaderedContentComponent</h1>
-    <x-headered-content header='This is my title'>
-      <ul>
-        <li>This is some</li>
-        <li>content</li>
-      </ul>
+    <x-headered-content header="HeaderedContentComponent">
+      <x-headered-content header='This is the header'>
+        <ul>
+          <li>This is some</li>
+          <li>content</li>
+        </ul>
+      </x-headered-content>
     </x-headered-content>
   </body>
 
