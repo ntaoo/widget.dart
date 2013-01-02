@@ -1,5 +1,7 @@
 name:  widget
-description:  A sample application
+homepage: https://github.com/kevmoo/widget.dart
+description:  A set of reusable Web Components for Dart applications
+version: 0.0.0-dev
 dependencies:
   unittest: '>=0.2.9 <2.10.0'
   web_ui: 0.2.10+2
