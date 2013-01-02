@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <element name="x-expander" constructor="ExpanderComponent" extends="div">
+      <template>
+        <div style='border: 1px lightgray solid; border-radius: 10px; margin: 10px;'>
+          <header  on-click="_toggle()" style='cursor: pointer; color: #333; background: lightgray; margin: -1px -1px 0 -1px; border: 1px lightgray solid; border-radius: 10px 10px 0 0; padding: 15px; display: block;'>{{header}}</header>
+          <div style='padding: 5px;'>
+            <content></content>
+          </div>
+        </div>
+      </template>
+      <script type="application/dart" src='expander_component.dart'></script>
+    </element>
+  </body>
+</html>

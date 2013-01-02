@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="app.css">
     <link rel="components" href="packages/widget/counter_component.html">
     <link rel="components" href="packages/widget/headered_content_component.html">
+    <link rel="components" href="packages/widget/expander_component.html">
     <script type="application/dart" src="app.dart"></script>
     <script type="text/javascript" src="https://dart.googlecode.com/svn/branches/bleeding_edge/dart/client/dart.js"></script>
   </head>
@@ -24,6 +25,16 @@
         </ul>
       </x-headered-content>
     </x-headered-content>
+
+    <x-headered-content header="ExpanderComponent">
+      <x-expander header='This is the header'>
+        <ul>
+          <li>This is some</li>
+          <li>content</li>
+        </ul>
+      </x-expander>
+    </x-headered-content>
+
   </body>
 
 </html>
