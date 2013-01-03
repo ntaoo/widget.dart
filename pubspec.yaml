@@ -5,3 +5,5 @@ version: 0.0.0-dev
 dependencies:
   unittest: '>=0.2.9 <2.10.0'
   web_ui: 0.2.10+2
+  bot:
+    git: https://github.com/kevmoo/bot.dart.git
