@@ -12,7 +12,7 @@ void registerElementAnimationTests() {
       _cleanUpPlayground();
     });
 
-    test('hide', () {
+    test('height to 0', () {
       final pg = _getPlayground();
       pg.appendHtml("<style scoped>div.foo { height: 50px; background: pink; }</style><div class='foo'>content</div>");
 
@@ -32,12 +32,26 @@ void registerElementAnimationTests() {
       expect(animation.duration, equals(400));
       expect(fooDiv.style.height, equals(''));
 
-      _timeManagerInstance.tick(40);
-      expect(animation.percentComplete, 0.1);
-      expect(fooDiv.style.height, equals('45px'));
+      final wait1 = expectAsync0(() {
+        _timeManagerInstance.tick(40);
+        expect(animation.percentComplete, 0.1);
+        expect(fooDiv.style.height, equals('45px'));
+
+        _timeManagerInstance.tick(320);
+        expect(animation.percentComplete, 0.9);
+        expect(fooDiv.style.height, equals('5px'));
+      });
+
+      window.setTimeout(wait1, 1);
     });
 
   });
+}
+
+void _waitOne() {
+  window.setTimeout(expectAsync0(() {
+    print("wait one...");
+  }), 1000);
 }
 
 void _createPlayground() {

@@ -18,6 +18,19 @@ class AnimationCore {
 
   num get percentComplete => _percentComplete;
 
+  @protected
+  void onStart() { }
+
+  @protected
+  /**
+   * Override in a subclass to perform an animation. [progress] starts at 0 and
+   * ends at 1, although some easing functions may cause it to go below 0 and
+   * extend beyond 1 before finishing.
+   **/
+  void onProgress(num progress) {
+    assert(isValidNumber(progress));
+  }
+
   // internal
   void _start(num timestamp) {
     assert(_startTimestamp == null);
@@ -26,6 +39,7 @@ class AnimationCore {
     assert(timestamp >= 0);
     _startTimestamp = timestamp;
     _percentComplete = 0;
+    onStart();
   }
 
   // internal
@@ -47,6 +61,8 @@ class AnimationCore {
 
     // TODO: easing
     // https://github.com/jquery/jquery-ui/blob/da01fb6a346e1ece3fd6dde5556a98f099e0c0e0/ui/jquery.ui.effect.js#L1206
+    final progress = _percentComplete;
+    onProgress(progress);
 
     return ended;
   }
