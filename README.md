@@ -17,10 +17,9 @@
     * Tracked by [widget.dart bug 4](https://github.com/kevmoo/widget.dart/issues/4)
     * Blocked by [web-ui bug 291](https://github.com/dart-lang/web-ui/issues/291)
 * Naming
-    * For a component `FooBar`
-    * Class is named `FooBarComponent`
-    * Element name is `x-foo-bar`
-    * File names correspond to Dart convention: `foo_bar_component.[dart|html]`
+    * For a custom component with element name `x-foo-bar`
+    * The class name corresponds to the web-ui library convention: `FooBar`
+    * File names correspond to Dart convention: `foo_bar.[dart|html]`
 
 # Versioning
 
