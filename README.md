@@ -12,8 +12,8 @@
 # Conventions
 
 * All components live in `lib/components`
-    * Each component has a unique, inferred library. This keeps the lib dir clean for other code.
-    * Waiting on web-ui features to allow putting many components in one library.
+    * At the moment, all components live in their own inferred library.
+    * While the convention states libraries should be directly in `lib`, it would get noisy to have every component in the `lib` dir.
     * Tracked by [widget.dart bug 4](https://github.com/kevmoo/widget.dart/issues/4)
     * Blocked by [web-ui bug 291](https://github.com/dart-lang/web-ui/issues/291)
 * Naming
