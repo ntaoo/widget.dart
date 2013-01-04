@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <element name="x-headered-content" constructor="HeaderedContentComponent" extends="div">
+    <element name="x-headered-content" extends="div">
       <template>
         <div style='border: 1px lightgray solid; border-radius: 10px; margin: 10px;'>
           <header style='font-weight: bold; color: #333; background: lightgray; margin: -1px 0 0 -1px; border: 1px lightgray solid; border-radius: 10px 0 10px 0; padding: 15px; display: inline-block;'>{{header}}</header>
@@ -10,7 +10,7 @@
           </div>
         </div>
       </template>
-      <script type="application/dart" src='headered_content_component.dart'></script>
+      <script type="application/dart" src='headered_content.dart'></script>
     </element>
   </body>
 </html>

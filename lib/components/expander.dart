@@ -1,7 +1,7 @@
 import 'dart:html';
 import 'package:web_ui/web_ui.dart';
 
-class ExpanderComponent extends WebComponent {
+class Expander extends WebComponent {
   const String _expanderDivSelector = '#-x-expander-container';
 
   bool _isExpanded = true;
