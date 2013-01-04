@@ -9,6 +9,19 @@
 * Read up on the **WEB UI** project before trying to use the code in this project.
 * Pay attention to the current version of **WEB UI** being used by looking at `pubspec.yaml`. 
 
+# Conventions
+
+* All components live in `lib/components`
+    * Each component has a unique, inferred library. This keeps the lib dir clean for other code.
+    * Waiting on web-ui features to allow putting many components in one library.
+    * Tracked by [widget.dart bug 4](https://github.com/kevmoo/widget.dart/issues/4)
+    * Blocked by [web-ui bug 291](https://github.com/dart-lang/web-ui/issues/291)
+* Naming
+    * For a component `FooBar`
+    * Class is named `FooBarComponent`
+    * Element name is `x-foo-bar`
+    * File names correspond to Dart convention: `foo_bar_component.[dart|html]`
+
 # Versioning
 
 Our goal is to follow [Semantic Versioning](http://semver.org/).
