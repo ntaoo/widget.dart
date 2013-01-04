@@ -6,6 +6,7 @@ import 'package:widget/effects.dart';
 import 'package:bot/bot.dart';
 
 part 'animation_core_tests.dart';
+part 'element_animation_tests.dart';
 part 'test_time_manager.dart';
 
 void registerTests() {
@@ -14,7 +15,9 @@ void registerTests() {
       expect(() { assert(false); }, throwsAssertionError);
       expect(() { assert(true); }, returnsNormally);
     });
+
     registerAnimationCoreTests();
+    registerElementAnimationTests();
   });
 }
 

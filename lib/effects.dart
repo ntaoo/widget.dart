@@ -7,4 +7,5 @@ import 'package:bot/bot.dart';
 part 'src/effects/_enum.dart';
 part 'src/effects/animation_core.dart';
 part 'src/effects/animation_queue.dart';
+part 'src/effects/element_animation.dart';
 part 'src/effects/time_manager.dart';
