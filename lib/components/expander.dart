@@ -17,7 +17,7 @@ class Expander extends WebComponent {
 
   void inserted() {
     assert(_expanderDiv == null);
-    _expanderDiv = query(_expanderDivSelector);
+    _expanderDiv = this.query(_expanderDivSelector);
     assert(_expanderDiv != null);
   }
 
