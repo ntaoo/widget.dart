@@ -1,12 +1,16 @@
 import 'dart:io';
-import 'package:bot/bot.dart';
 import 'package:bot/hop.dart';
 import 'package:bot/hop_tasks.dart';
 
 void main() {
   _assertKnownPath();
 
-  addAsyncTask('build', createStartProcessTask('dart', ['build.dart']));
+  final buildTask = new Task.async(createStartProcessTask('dart', ['build.dart']),
+      "execute the project's build.dart file");
+  addTask('build', buildTask);
+
+  final paths = ['web/out/app.html_bootstrap.dart'];
+  addTask('dart2js', createDart2JsTask(paths));
 
   runHopCore();
 }
