@@ -5,6 +5,9 @@ import 'package:bot/hop_tasks.dart';
 
 void main() {
   _assertKnownPath();
+
+  addAsyncTask('build', createStartProcessTask('dart', ['build.dart']));
+
   runHopCore();
 }
 
