@@ -53,21 +53,3 @@ void _waitOne() {
     print("wait one...");
   }), 1000);
 }
-
-void _createPlayground() {
-  final existing = _getPlayground();
-  assert(existing == null);
-  // assert no playground exists
-  final pg = new DivElement();
-  pg.classes.add('playground');
-  document.body.append(pg);
-  // insert it
-}
-
-void _cleanUpPlayground() {
-  final existing = _getPlayground();
-  assert(existing != null);
-  existing.remove();
-}
-
-DivElement _getPlayground() => query('div.playground');
