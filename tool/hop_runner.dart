@@ -5,8 +5,8 @@ import 'package:bot/hop_tasks.dart';
 void main() {
   _assertKnownPath();
 
-  final buildTask = new Task.async(createStartProcessTask('dart', ['build.dart']),
-      "execute the project's build.dart file");
+  final buildTask = createProcessTask('dart', args: ['build.dart'],
+      description: "execute the project's build.dart file");
   addTask('build', buildTask);
 
   final paths = ['web/out/app.html_bootstrap.dart'];
