@@ -9,7 +9,7 @@ part 'animation_core_tests.dart';
 part 'element_animation_tests.dart';
 part 'test_time_manager.dart';
 
-void registerTests() {
+void main() {
   group('effects', () {
     test('asserts should be enabled', () {
       expect(() { assert(false); }, throwsAssertionError);

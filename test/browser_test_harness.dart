@@ -7,5 +7,5 @@ main() {
   groupSep = ' - ';
   useHtmlEnhancedConfiguration();
 
-  effects.registerTests();
+  effects.main();
 }
