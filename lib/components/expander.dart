@@ -1,5 +1,6 @@
 import 'dart:html';
 import 'package:web_ui/web_ui.dart';
+import 'package:widget/effects.dart';
 
 class Expander extends WebComponent {
   const String _expanderDivSelector = '#-x-expander-container';
@@ -29,9 +30,9 @@ class Expander extends WebComponent {
   void _toggle() {
     assert(_expanderDiv != null);
     if(_isExpanded) {
-      _expanderDiv.style.display = 'none';
+      ShowHide.instance.hide(_expanderDiv);
     } else {
-      _expanderDiv.style.display = '';
+      ShowHide.instance.show(_expanderDiv);
     }
     _isExpanded = !_isExpanded;
   }

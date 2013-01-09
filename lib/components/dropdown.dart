@@ -1,5 +1,6 @@
 import 'dart:html';
 import 'package:web_ui/web_ui.dart';
+import 'package:widget/effects.dart';
 
 class Dropdown extends WebComponent {
   const String _dropdownDivSelector = '#-x-dropdown-container';
@@ -14,10 +15,11 @@ class Dropdown extends WebComponent {
     if(value != _isExpanded) {
       _isExpanded = value;
       if(_isExpanded) {
+        ShowHide.instance.show(_expanderDiv);
         _expanderDiv.style.display = '';
         _headerElem.style.background = '#EEE';
       } else {
-        _expanderDiv.style.display = 'none';
+        ShowHide.instance.hide(_expanderDiv);
         _headerElem.style.background = 'lightgray';
       }
     }
