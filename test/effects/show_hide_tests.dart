@@ -4,7 +4,7 @@ void registerShowHideTests() {
   group('ShowHide', () {
     final displayValues = ['block', 'inline-block', 'inline', 'none', 'inherit', ''];
 
-    for(final tag in ['div', 'span', 'li']) {
+    for(final tag in ['div', 'span']) {
       for(final inheritedStyle in displayValues) {
         for(final inlineStyle in displayValues) {
           _registerTest(tag, inheritedStyle, inlineStyle);
@@ -12,11 +12,11 @@ void registerShowHideTests() {
       }
     }
   });
-
-
 }
 
-final String _playgroundWrapperDisplay = 'inline-block';
+// intentionally picking a 'weird' value that neither the style nor the element
+// ever has defined
+final String _playgroundWrapperDisplay = 'list-item';
 
 void _registerTest(String tag, String sheetStyle, String inlineStyle) {
   final title = '[$tag~${_getEmptyText(sheetStyle)}~${_getEmptyText(inlineStyle)}]';
@@ -38,7 +38,7 @@ void _registerTest(String tag, String sheetStyle, String inlineStyle) {
         final calculatedDisplayValue = tuple.item2;
         final calculatedState = tuple.item3;
 
-        final expectedDisplayValue = _expectedValue(defaultTagValue, sheetStyle, inlineStyle);
+        final expectedDisplayValue = _getExpectedInitialCalculatedValue(defaultTagValue, sheetStyle, inlineStyle);
 
         expect(expectedDisplayValue, isNot(isEmpty), reason: 'Expected value should not be empty string');
         expect(calculatedDisplayValue, expectedDisplayValue);
@@ -55,8 +55,6 @@ void _registerTest(String tag, String sheetStyle, String inlineStyle) {
     for(final a1 in actions) {
 
       test(a1, () {
-        //print(title);
-        //print('action: $a1');
         final element = query('.sample');
         final action = _getAction(a1);
 
@@ -75,11 +73,11 @@ void _registerTest(String tag, String sheetStyle, String inlineStyle) {
 
           final calculatedState = tuple.item3;
 
-          final initialDisplayValue = _expectedValue(defaultTagValue, sheetStyle, inlineStyle);
+          final initialDisplayValue = _getExpectedInitialCalculatedValue(defaultTagValue, sheetStyle, inlineStyle);
           final initialState = _getState(initialDisplayValue);
 
 
-          final expectedState = _actionResult(a1, initialState);
+          final expectedState = _getActionResult(a1, initialState);
 
           expect(calculatedState, expectedState);
 
@@ -141,7 +139,7 @@ String _getExpectedCalculatedDisplay(String tag, String sheetStyle, String inlin
   }
 }
 
-ShowHideState _actionResult(String action, ShowHideState initial) {
+ShowHideState _getActionResult(String action, ShowHideState initial) {
   switch(action) {
     case 'show':
       return ShowHideState.SHOWN;
@@ -196,7 +194,7 @@ String _getEmptyText(String text) {
   return text.isEmpty ? 'empty' : text;
 }
 
-String _expectedValue(String defaultTagValue, String sheetStyle, String inlineStyle) {
+String _getExpectedInitialCalculatedValue(String defaultTagValue, String sheetStyle, String inlineStyle) {
   switch(inlineStyle) {
     case 'inherit':
       return _playgroundWrapperDisplay;
