@@ -4,6 +4,7 @@ import 'dart:html';
 import 'package:unittest/unittest.dart';
 import 'package:widget/effects.dart';
 import 'package:bot/bot.dart';
+import 'package:bot/bot_html.dart';
 import 'package:bot/bot_test.dart';
 
 part 'animation_core_tests.dart';
@@ -40,15 +41,6 @@ void tearDownTestTimeManager() {
 }
 
 TestTimeManager _timeManagerInstance;
-
-// TODO: put these in BOT test
-final Matcher throwsAssertionError =
-  const Throws(const _AssertionErrorMatcher());
-
-class _AssertionErrorMatcher extends TypeMatcher {
-  const _AssertionErrorMatcher() : super("AssertMatcher");
-  bool matches(item, MatchState matchState) => item is AssertionError;
-}
 
 void _createPlayground() {
   final existing = _getPlayground();

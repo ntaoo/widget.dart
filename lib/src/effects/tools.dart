@@ -5,18 +5,6 @@ class Tools {
 
   static final Map<String, String> _elemDisplay = new Map<String, String>();
 
-  static Future<int> windowWait(int milliseconds) {
-    if(milliseconds < 0) {
-      return new Future.immediate(0);
-    } else {
-      final completer = new Completer();
-
-      window.setTimeout(() => completer.complete(milliseconds), milliseconds);
-
-      return completer.future;
-    }
-  }
-
   // borrowing from here:
   // https://github.com/jquery/jquery/blob/054daa20afc0e2c84e66f450b155d0253a62aedb/src/css.js#L428
 

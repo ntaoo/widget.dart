@@ -50,7 +50,7 @@ void _registerTest(String tag, String sheetStyle, String inlineStyle) {
         return computedDisplay;
       })
       .chain((value) {
-        return Tools.windowWait(0).transform((_) => value);
+        return getTimeoutFuture(-1).transform((_) => value);
       })
       .transform(validateComputerDisplay)
       .handleException((exp) => registerException(exp));
