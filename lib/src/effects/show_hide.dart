@@ -2,9 +2,10 @@ part of effects;
 
 class _ShowHideValues {
   final String initialComputedDisplay;
+  final String initialLocalDisplay;
   ShowHideState currentState;
 
-  _ShowHideValues(this.initialComputedDisplay, this.currentState);
+  _ShowHideValues(this.initialComputedDisplay, this.initialLocalDisplay, this.currentState);
 }
 
 class ShowHide {
@@ -43,15 +44,16 @@ class ShowHide {
   static ShowHideState _getStateSync(Element element, CssStyleDeclaration computedCss, String tagDefaultDisplay) {
     _defaultDisplays.putIfAbsent(element.tagName, () => tagDefaultDisplay);
 
-    final computedDisplay = computedCss.display;
-    final inferredState = computedDisplay == 'none' ? ShowHideState.HIDDEN : ShowHideState.SHOWN;
-
     //
     // Storing some initial values -- allows us to know how to accurately show/hide
     //
     var values = _values[element];
     if(values == null) {
-      _values[element] = new _ShowHideValues(computedDisplay, inferredState);
+      final localDisplay = element.style.display;
+      final computedDisplay = computedCss.display;
+
+      final inferredState = computedDisplay == 'none' ? ShowHideState.HIDDEN : ShowHideState.SHOWN;
+      _values[element] = new _ShowHideValues(computedDisplay, localDisplay, inferredState);
       return inferredState;
     } else {
       // TODO: could provide some asserts here around consistency...later
@@ -90,16 +92,19 @@ class ShowHide {
   }
 
   static String _getShowDisplayValue(Element element) {
-    final initialComputedDisplay = _values[element].initialComputedDisplay;
+    final values = _values[element];
 
-    if(initialComputedDisplay == 'none') {
-
+    if(values.initialComputedDisplay == 'none') {
       final tagDefault = _defaultDisplays[element.tagName];
       assert(tagDefault != null);
       return tagDefault;
     } else {
+      if(values.initialLocalDisplay == '') {
+        return '';
+      }
+
       // it was initially visible, cool
-      return initialComputedDisplay;
+      return values.initialComputedDisplay;
     }
   }
 }

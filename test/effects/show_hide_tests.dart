@@ -60,7 +60,13 @@ void _registerTest(String tag, String sheetStyle, String inlineStyle) {
         final element = query('.sample');
         final action = _getAction(a1);
 
-        final futureTuple = action(element)
+        String initialCalculatedValue;
+
+        final futureTuple = element.getComputedStyle('')
+            .chain((css) {
+              initialCalculatedValue = css.display;
+              return action(element);
+            })
             .chain((_) => _getValues(tag, sheetStyle, inlineStyle, element));
 
         expectFutureComplete(futureTuple, (Tuple3<String, String, ShowHideState> tuple) {
@@ -77,13 +83,39 @@ void _registerTest(String tag, String sheetStyle, String inlineStyle) {
 
           expect(calculatedState, expectedState);
 
-          final expectedDisplay = _getExpectedCalculatedDisplay(tag, sheetStyle, inlineStyle, calculatedState, defaultTagValue);
-          expect(calculatedDisplayValue, expectedDisplay);
+          final expectedCalculatedDisplay = _getExpectedCalculatedDisplay(tag, sheetStyle, inlineStyle, calculatedState, defaultTagValue);
+          expect(expectedCalculatedDisplay, isNot(''), reason: 'calculated display should never be empty string');
+          expect(calculatedDisplayValue, expectedCalculatedDisplay, reason: 'The calculated display value is off');
+
+          final localDisplay = element.style.display;
+          final expectedLocalDisplay = _getExpectedLocalDisplay(tag, sheetStyle, inlineStyle, calculatedState, defaultTagValue,
+              initialCalculatedValue);
+          expect(localDisplay, expectedLocalDisplay, reason: 'The local display value is off');
         });
 
       });
     }
   });
+}
+
+String _getExpectedLocalDisplay(String tag, String sheetStyle, String inlineStyle, ShowHideState state, String tagDefault, String initialCalculatedValue) {
+  switch(state) {
+    case ShowHideState.HIDDEN:
+      return 'none';
+    case ShowHideState.SHOWN:
+      if(inlineStyle == 'none') {
+        return tagDefault;
+      } else if(inlineStyle == '' && sheetStyle == 'none') {
+        return tagDefault;
+      } else if(inlineStyle == 'inherit') {
+        return initialCalculatedValue;
+      } else if(inlineStyle != '') {
+        return inlineStyle;
+      }
+      return '';
+    default:
+      throw 'no clue about $state';
+  }
 }
 
 String _getExpectedCalculatedDisplay(String tag, String sheetStyle, String inlineStyle, ShowHideState state, String tagDefault) {
