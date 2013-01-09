@@ -2,6 +2,7 @@ library hide_show;
 
 import 'dart:html';
 import 'package:bot/bot.dart';
+import 'package:widget/effects.dart';
 
 void main() {
   query('#show').on.click.add(_show);
@@ -26,18 +27,14 @@ void _toggle(args) {
   _forAllContent(_showHide.toggle);
 }
 
-void _forAllContent(Action1<Element> action) {
-  queryAll('.content').forEach(action);
+void _forAllContent(Func1<Element, Future> action) {
+  queryAll('.content').forEach((e) => _applyAnimation(e, action));
 }
 
-class ShowHide {
-  void show(Element element) {
-    print('showing $element');
-  }
-  void hide(Element element) {
-    print('hiding $element');
-  }
-  void toggle(Element element) {
-    print('toggling $element');
-  }
+void _applyAnimation(Element element, Func1<Element, Future> action) {
+  print('starting the thing');
+
+  action(element)
+    ..transform((foo) => print(foo))
+    ..transformException((foo) => print(foo));
 }
