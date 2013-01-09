@@ -16,55 +16,162 @@ void registerShowHideTests() {
 
 }
 
+final String _playgroundWrapperDisplay = 'inline-block';
+
 void _registerTest(String tag, String sheetStyle, String inlineStyle) {
-  setUp(() {
-    _createShowHidePlayground(tag, sheetStyle, inlineStyle);
-  });
-
-  tearDown(_cleanUpPlayground);
-
-  final title = '[$tag-$sheetStyle-$inlineStyle]';
-  test(title, () {
-
-    final sampleElement = query('.sample');
-
-    final localDisplay = sampleElement.style.display;
-
-    String expectedValue = null;
-
-    final validateComputerDisplay = expectAsync1((String displayValue) {
-      expect(expectedValue, isNot(isEmpty), reason: 'Expected value should not be empty string');
-      expect(displayValue, expectedValue);
+  final title = '[$tag~${_getEmptyText(sheetStyle)}~${_getEmptyText(inlineStyle)}]';
+  group(title, () {
+    setUp(() {
+      _createShowHidePlayground(tag, sheetStyle, inlineStyle);
     });
 
+    tearDown(_cleanUpPlayground);
 
-    Tools.getDefaultDisplay(tag)
-      .chain((String defaultTagDisplay) {
-        expectedValue = _expectedValue(defaultTagDisplay, sheetStyle, inlineStyle);
+    test('initial state', () {
 
-        return sampleElement.getComputedStyle('');
-      })
-      .transform((CssStyleDeclaration css) {
-        final computedDisplay = css.display;
+      final sampleElement = query('.sample');
 
-        return computedDisplay;
-      })
-      .chain((value) {
-        return getTimeoutFuture(-1).transform((_) => value);
-      })
-      .transform(validateComputerDisplay)
-      .handleException((exp) => registerException(exp));
+      final futureTuple = _getValues(tag, sheetStyle, inlineStyle, sampleElement);
+
+      expectFutureComplete(futureTuple, (Tuple3<String, String, ShowHideState> tuple) {
+        final defaultTagValue = tuple.item1;
+        final calculatedDisplayValue = tuple.item2;
+        final calculatedState = tuple.item3;
+
+        final expectedDisplayValue = _expectedValue(defaultTagValue, sheetStyle, inlineStyle);
+
+        expect(expectedDisplayValue, isNot(isEmpty), reason: 'Expected value should not be empty string');
+        expect(calculatedDisplayValue, expectedDisplayValue);
+
+        final expectedState = _getState(calculatedDisplayValue);
+
+        expect(calculatedState, isNotNull);
+        expect(calculatedState, expectedState);
+      });
+    });
+
+    final actions = ['show', 'hide', 'toggle'];
+
+    for(final a1 in actions) {
+
+      test(a1, () {
+        //print(title);
+        //print('action: $a1');
+        final element = query('.sample');
+        final action = _getAction(a1);
+
+        final futureTuple = action(element)
+            .chain((_) => _getValues(tag, sheetStyle, inlineStyle, element));
+
+        expectFutureComplete(futureTuple, (Tuple3<String, String, ShowHideState> tuple) {
+          final defaultTagValue = tuple.item1;
+          final calculatedDisplayValue = tuple.item2;
+
+          final calculatedState = tuple.item3;
+
+          final initialDisplayValue = _expectedValue(defaultTagValue, sheetStyle, inlineStyle);
+          final initialState = _getState(initialDisplayValue);
+
+
+          final expectedState = _actionResult(a1, initialState);
+
+          expect(calculatedState, expectedState);
+
+          final expectedDisplay = _getExpectedCalculatedDisplay(tag, sheetStyle, inlineStyle, calculatedState, defaultTagValue);
+          expect(calculatedDisplayValue, expectedDisplay);
+        });
+
+      });
+    }
   });
+}
+
+String _getExpectedCalculatedDisplay(String tag, String sheetStyle, String inlineStyle, ShowHideState state, String tagDefault) {
+  switch(state) {
+    case ShowHideState.HIDDEN:
+      return 'none';
+    case ShowHideState.SHOWN:
+      if (inlineStyle == '') {
+        if(sheetStyle == 'inherit') {
+          return _playgroundWrapperDisplay;
+        }
+        else if(sheetStyle != 'none' && sheetStyle != '') {
+          return sheetStyle;
+        }
+      } else if(inlineStyle == 'inherit') {
+        return _playgroundWrapperDisplay;
+      } else if(inlineStyle != 'none' && inlineStyle != 'inherit') {
+        return inlineStyle;
+      }
+      return tagDefault;
+    default:
+      throw 'no clue about $state';
+  }
+}
+
+ShowHideState _actionResult(String action, ShowHideState initial) {
+  switch(action) {
+    case 'show':
+      return ShowHideState.SHOWN;
+    case 'hide':
+      return ShowHideState.HIDDEN;
+    case 'toggle':
+      switch(initial) {
+        case ShowHideState.HIDDEN:
+          return ShowHideState.SHOWN;
+        case ShowHideState.SHOWN:
+          return ShowHideState.HIDDEN;
+        default:
+          throw 'boo!';
+      }
+      break;
+    default:
+      throw 'no clue how to party on $action';
+  }
+}
+
+Future<Tuple3<String, String, ShowHideState>> _getValues(String tag, String sheetStyle, String inlineStyle, Element element) {
+  final futureDefaultDisplay = Tools.getDefaultDisplay(tag);
+
+  final futureCalculatedDisplayValue = element.getComputedStyle('')
+      .transform((css) => css.display);
+
+  final futureShowHide = ShowHide.getState(element);
+
+  return Futures.wait([futureDefaultDisplay, futureCalculatedDisplayValue, futureShowHide])
+      .transform((list) => new Tuple3(list[0], list[1], list[2]));
+}
+
+Func1<Element, Future> _getAction(String action) {
+  switch(action) {
+    case 'show':
+      return ShowHide.instance.show;
+    case 'hide':
+      return ShowHide.instance.hide;
+    case 'toggle':
+      return ShowHide.instance.toggle;
+    default:
+      throw 'action "$action" is not supported';
+  }
+}
+
+ShowHideState _getState(String calculatedDisplay) {
+  return calculatedDisplay == 'none' ? ShowHideState.HIDDEN : ShowHideState.SHOWN;
+}
+
+String _getEmptyText(String text) {
+  assert(text != null);
+  return text.isEmpty ? 'empty' : text;
 }
 
 String _expectedValue(String defaultTagValue, String sheetStyle, String inlineStyle) {
   switch(inlineStyle) {
     case 'inherit':
-      return 'block';
+      return _playgroundWrapperDisplay;
     case '':
       switch(sheetStyle) {
         case 'inherit':
-          return 'block';
+          return _playgroundWrapperDisplay;
         case '':
           return defaultTagValue;
         default:
@@ -88,6 +195,7 @@ void _createShowHidePlayground(String tag, String sheetStyle, String inlineStyle
   pg.style.width = '500px';
   pg.style.padding = '10px';
   pg.style.background = 'pink';
+  pg.style.display = _playgroundWrapperDisplay;
 
   final styleElement = new StyleElement();
   styleElement.type = 'text/css';
