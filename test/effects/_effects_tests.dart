@@ -4,10 +4,12 @@ import 'dart:html';
 import 'package:unittest/unittest.dart';
 import 'package:widget/effects.dart';
 import 'package:bot/bot.dart';
+import 'package:bot/bot_test.dart';
 
 part 'animation_core_tests.dart';
 part 'element_animation_tests.dart';
 part 'test_time_manager.dart';
+part 'show_hide_tests.dart';
 
 void main() {
   group('effects', () {
@@ -18,6 +20,7 @@ void main() {
 
     registerAnimationCoreTests();
     registerElementAnimationTests();
+    registerShowHideTests();
   });
 }
 
