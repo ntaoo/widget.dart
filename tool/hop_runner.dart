@@ -9,7 +9,7 @@ void main() {
       description: "execute the project's build.dart file");
   addTask('build', buildTask);
 
-  final paths = ['web/out/app.html_bootstrap.dart'];
+  final paths = ['web/out/index.html_bootstrap.dart'];
   addTask('dart2js', createDart2JsTask(paths));
 
   runHopCore();
