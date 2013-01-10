@@ -73,27 +73,67 @@ void _registerTest(String tag, String sheetStyle, String inlineStyle) {
 
           final calculatedState = tuple.item3;
 
-          final initialDisplayValue = _getExpectedInitialCalculatedValue(defaultTagValue, sheetStyle, inlineStyle);
-          final initialState = _getState(initialDisplayValue);
+          _verifyState([a1], tag, sheetStyle, inlineStyle, defaultTagValue, element,
+              initialCalculatedValue, calculatedState, calculatedDisplayValue);
 
-
-          final expectedState = _getActionResult(a1, initialState);
-
-          expect(calculatedState, expectedState);
-
-          final expectedCalculatedDisplay = _getExpectedCalculatedDisplay(tag, sheetStyle, inlineStyle, calculatedState, defaultTagValue);
-          expect(expectedCalculatedDisplay, isNot(''), reason: 'calculated display should never be empty string');
-          expect(calculatedDisplayValue, expectedCalculatedDisplay, reason: 'The calculated display value is off');
-
-          final localDisplay = element.style.display;
-          final expectedLocalDisplay = _getExpectedLocalDisplay(tag, sheetStyle, inlineStyle, calculatedState, defaultTagValue,
-              initialCalculatedValue);
-          expect(localDisplay, expectedLocalDisplay, reason: 'The local display value is off');
         });
 
       });
+
+      for(final a2 in actions) {
+        test('$a1 then $a2', () {
+          final element = query('.sample');
+          final action = _getAction(a1);
+          final action2 = _getAction(a2);
+
+          String initialCalculatedValue;
+
+          final futureTuple = element.getComputedStyle('')
+              .chain((css) {
+                initialCalculatedValue = css.display;
+                return action(element);
+              })
+              .chain((_) => action2(element))
+              .chain((_) => _getValues(tag, sheetStyle, inlineStyle, element));
+
+          expectFutureComplete(futureTuple, (Tuple3<String, String, ShowHideState> tuple) {
+            final defaultTagValue = tuple.item1;
+            final calculatedDisplayValue = tuple.item2;
+
+            final calculatedState = tuple.item3;
+
+            _verifyState([a1, a2], tag, sheetStyle, inlineStyle, defaultTagValue, element,
+                initialCalculatedValue, calculatedState, calculatedDisplayValue);
+
+          });
+        });
+      }
     }
   });
+}
+
+void _verifyState(List<String> actionNames, String tag, String sheetStyle, String inlineStyle,
+                  String defaultTagValue,
+                  Element element, String initialCalculatedValue,
+                  ShowHideState calculatedState, String calculatedDisplayValue) {
+  final initialDisplayValue = _getExpectedInitialCalculatedValue(defaultTagValue, sheetStyle, inlineStyle);
+  final initialState = _getState(initialDisplayValue);
+
+  ShowHideState expectedState = initialState;
+  for(final theAction in actionNames) {
+    expectedState = _getActionResult(theAction, expectedState);
+  }
+
+  expect(calculatedState, expectedState, reason: 'The calculated state did not match the expected state');
+
+  final expectedCalculatedDisplay = _getExpectedCalculatedDisplay(tag, sheetStyle, inlineStyle, calculatedState, defaultTagValue);
+  expect(expectedCalculatedDisplay, isNot(''), reason: 'calculated display should never be empty string');
+  expect(calculatedDisplayValue, expectedCalculatedDisplay, reason: 'The calculated display value is off');
+
+  final localDisplay = element.style.display;
+  final expectedLocalDisplay = _getExpectedLocalDisplay(tag, sheetStyle, inlineStyle, calculatedState, defaultTagValue,
+      initialCalculatedValue);
+  expect(localDisplay, expectedLocalDisplay, reason: 'The local display value is off');
 }
 
 String _getExpectedLocalDisplay(String tag, String sheetStyle, String inlineStyle, ShowHideState state, String tagDefault, String initialCalculatedValue) {
