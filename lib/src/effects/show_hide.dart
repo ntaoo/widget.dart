@@ -16,19 +16,19 @@ class ShowHide {
 
   static const ShowHide instance = const ShowHide();
 
-  Future show(Element element) {
+  Future<ShowHideState> show(Element element) {
     assert(element != null);
     return getState(element)
         .transform((oldState) => _setState(element, oldState, ShowHideState.SHOWING));
   }
 
-  Future hide(Element element) {
+  Future<ShowHideState> hide(Element element) {
     assert(element != null);
     return getState(element)
         .transform((oldState) => _setState(element, oldState, ShowHideState.HIDING));
   }
 
-  Future toggle(Element element) {
+  Future<ShowHideState> toggle(Element element) {
     assert(element != null);
     return getState(element)
         .transform((oldState) => _toggleState(element, oldState));
@@ -61,7 +61,7 @@ class ShowHide {
     }
   }
 
-  static void _toggleState(Element element, ShowHideState oldState) {
+  static ShowHideState _toggleState(Element element, ShowHideState oldState) {
     ShowHideState newState;
     if(oldState == ShowHideState.HIDDEN || oldState == ShowHideState.HIDING) {
       newState = ShowHideState.SHOWING;
@@ -71,21 +71,19 @@ class ShowHide {
       throw 'provided oldState - $oldState - is not understood';
     }
     assert(newState != null);
-    _setState(element, oldState, newState);
+    return _setState(element, oldState, newState);
   }
 
-  static void _setState(Element element, ShowHideState oldState, ShowHideState newState) {
+  static ShowHideState _setState(Element element, ShowHideState oldState, ShowHideState newState) {
     assert(newState == ShowHideState.HIDING || newState == ShowHideState.SHOWING);
 
     switch(newState) {
       case ShowHideState.HIDING:
-        _values[element].currentState = ShowHideState.HIDDEN;
         element.style.display = 'none';
-        break;
+        return _values[element].currentState = ShowHideState.HIDDEN;
       case ShowHideState.SHOWING:
-        _values[element].currentState = ShowHideState.SHOWN;
         element.style.display = _getShowDisplayValue(element);
-        break;
+        return _values[element].currentState = ShowHideState.SHOWN;
       default:
         throw 'provided state - $newState - not supported';
     }
