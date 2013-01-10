@@ -13,17 +13,14 @@ void main() {
 final _showHide = new ShowHide();
 
 void _show(args) {
-  print('show');
   _forAllContent(_showHide.show);
 }
 
 void _hide(args) {
-  print('hide');
   _forAllContent(_showHide.hide);
 }
 
 void _toggle(args) {
-  print('toggle');
   _forAllContent(_showHide.toggle);
 }
 
@@ -32,9 +29,6 @@ void _forAllContent(Func1<Element, Future> action) {
 }
 
 void _applyAnimation(Element element, Func1<Element, Future> action) {
-  print('starting the thing');
-
   action(element)
-    ..transform((foo) => print(foo))
     ..transformException((foo) => print(foo));
 }
