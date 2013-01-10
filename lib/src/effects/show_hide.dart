@@ -45,7 +45,7 @@ class ShowHide {
     _defaultDisplays.putIfAbsent(element.tagName, () => tagDefaultDisplay);
 
     //
-    // Storing some initial values -- allows us to know how to accurately show/hide
+    // Storing some initial values -- allows us return element to original state
     //
     var values = _values[element];
     if(values == null) {
@@ -62,16 +62,22 @@ class ShowHide {
   }
 
   static ShowHideState _toggleState(Element element, ShowHideState oldState) {
-    ShowHideState newState;
-    if(oldState == ShowHideState.HIDDEN || oldState == ShowHideState.HIDING) {
-      newState = ShowHideState.SHOWING;
-    } else if(oldState == ShowHideState.SHOWING || oldState == ShowHideState.SHOWN) {
-      newState = ShowHideState.HIDING;
-    } else {
-      throw 'provided oldState - $oldState - is not understood';
-    }
+    final newState = _getToggleState(oldState);
     assert(newState != null);
     return _setState(element, oldState, newState);
+  }
+
+  static ShowHideState _getToggleState(ShowHideState state) {
+    switch(state) {
+      case ShowHideState.HIDDEN:
+      case ShowHideState.HIDING:
+        return ShowHideState.SHOWING;
+      case ShowHideState.SHOWING:
+      case ShowHideState.SHOWN:
+        return ShowHideState.HIDING;
+      default:
+        throw new DetailedArgumentError('state', 'Value of $state is not supported');
+    }
   }
 
   static ShowHideState _setState(Element element, ShowHideState oldState, ShowHideState newState) {
