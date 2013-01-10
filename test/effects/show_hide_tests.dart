@@ -146,7 +146,11 @@ String _getExpectedLocalDisplay(String tag, String sheetStyle, String inlineStyl
       } else if(inlineStyle == '' && sheetStyle == 'none') {
         return tagDefault;
       } else if(inlineStyle == 'inherit') {
-        return initialCalculatedValue;
+        if(initialCalculatedValue != 'none') {
+          return inlineStyle;
+        } else {
+          return initialCalculatedValue;
+        }
       } else if(inlineStyle != '') {
         return inlineStyle;
       }

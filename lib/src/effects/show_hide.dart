@@ -200,7 +200,9 @@ class ShowHide {
         assert(_AnimatingValues.isAnimating(element));
         return new Future.immediate(true);
       case ShowHideState.HIDDEN:
-        // no op. If shown leave it.
+        // it's possible we're here because the inferred calculated value is 'none'
+        // this hard-wires the local display value to 'none'...just to be clear
+        _finishHide(element);
         return new Future.immediate(true);
       case ShowHideState.SHOWING:
         _AnimatingValues.cancelAnimation(element);
@@ -243,10 +245,10 @@ class ShowHide {
       assert(tagDefault != null);
       return tagDefault;
     } else {
-      if(values.initialLocalDisplay == '') {
+      if(values.initialLocalDisplay == '' || values.initialLocalDisplay == 'inherit') {
         // it was originally visible and the local value was empty
         // so returning the local value to '' should ensure it's visible
-        return '';
+        return values.initialLocalDisplay;
       } else {
         // it was initially visible, cool
         return values.initialComputedDisplay;
