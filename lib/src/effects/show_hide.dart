@@ -37,28 +37,31 @@ class ShowHide {
   static Future<ShowHideState> getState(Element element) {
     assert(element != null);
 
-    return Futures.wait([element.getComputedStyle(''), Tools.getDefaultDisplay(element.tagName)])
-        .transform((List items) => _getStateSync(element, items[0], items[1]));
+    final values = _values[element];
+    if(values == null) {
+      return _populateState(element);
+    } else {
+      return new Future.immediate(values.currentState);
+    }
   }
 
-  static ShowHideState _getStateSync(Element element, CssStyleDeclaration computedCss, String tagDefaultDisplay) {
-    _defaultDisplays.putIfAbsent(element.tagName, () => tagDefaultDisplay);
+  static Future<ShowHideState> _populateState(Element element) {
+    assert(_values[element] == null);
 
-    //
-    // Storing some initial values -- allows us return element to original state
-    //
-    var values = _values[element];
-    if(values == null) {
-      final localDisplay = element.style.display;
-      final computedDisplay = computedCss.display;
+    return Futures.wait([element.getComputedStyle(''), Tools.getDefaultDisplay(element.tagName)])
+        .transform((List items) {
+          final computedStyle = items[0];
+          final tagDefaultDisplay = items[1];
 
-      final inferredState = computedDisplay == 'none' ? ShowHideState.HIDDEN : ShowHideState.SHOWN;
-      _values[element] = new _ShowHideValues(computedDisplay, localDisplay, inferredState);
-      return inferredState;
-    } else {
-      // TODO: could provide some asserts here around consistency...later
-      return values.currentState;
-    }
+          _defaultDisplays.putIfAbsent(element.tagName, () => tagDefaultDisplay);
+
+          final localDisplay = element.style.display;
+          final computedDisplay = computedStyle.display;
+
+          final inferredState = computedDisplay == 'none' ? ShowHideState.HIDDEN : ShowHideState.SHOWN;
+          _values[element] = new _ShowHideValues(computedDisplay, localDisplay, inferredState);
+          return inferredState;
+        });
   }
 
   static ShowHideState _toggleState(Element element, ShowHideState oldState) {
