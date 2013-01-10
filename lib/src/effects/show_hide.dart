@@ -8,13 +8,77 @@ class _ShowHideValues {
   _ShowHideValues(this.initialComputedDisplay, this.initialLocalDisplay, this.currentState);
 }
 
+class _AnimatingValues {
+  static final Expando<_AnimatingValues> _aniValues = new Expando<_AnimatingValues>('_AnimatingValues');
+
+  final Element _element;
+  final Action1<Element> _cleanupAction;
+  final Action1<Element> _finishFunc;
+  final Completer<bool> _completer = new Completer<bool>();
+
+  int _setTimeoutHandle;
+
+  _AnimatingValues._internal(this._element, this._cleanupAction, this._finishFunc) {
+    assert(_aniValues[_element] == null);
+    _aniValues[_element] = this;
+  }
+
+  Future<bool> _start(int durationMS) {
+    assert(durationMS > 0);
+    assert(_setTimeoutHandle == null);
+    _setTimeoutHandle = window.setTimeout(_complete, durationMS);
+    return _completer.future;
+  }
+
+  void _cancel() {
+    assert(_setTimeoutHandle != null);
+    window.clearTimeout(_setTimeoutHandle);
+    _cleanup();
+    _completer.complete(false);
+  }
+
+  void _complete() {
+    _cleanup();
+    _finishFunc(_element);
+    _completer.complete(true);
+  }
+
+  void _cleanup() {
+    assert(_aniValues[_element] != null);
+    _cleanupAction(_element);
+    _aniValues[_element] = null;
+  }
+
+  static bool isAnimating(Element element) {
+    final values = _aniValues[element];
+    return values != null;
+  }
+
+  static void cancelAnimation(Element element) {
+    final values = _aniValues[element];
+    assert(values != null);
+    values._cancel();
+  }
+
+  static Future<bool> scheduleCleanup(int durationMS, Element element,
+                              Action1<Element> cleanupAction,
+                              Action1<Element> finishAction) {
+
+    final value = new _AnimatingValues._internal(element, cleanupAction, finishAction);
+    return value._start(durationMS);
+  }
+}
+
 class ShowHide {
   static final Map<String, String> _defaultDisplays = new Map<String, String>();
   static final Expando<_ShowHideValues> _values = new Expando<_ShowHideValues>('_ShowHideValues');
 
-  const ShowHide();
+  final ShowHideEffect _effect;
 
-  static const ShowHide instance = const ShowHide();
+  ShowHide([ShowHideEffect effect]) :
+    _effect = (effect == null) ? new ShowHideEffect() : effect;
+
+  static final ShowHide instance = new ShowHide();
 
   static Future<ShowHideState> getState(Element element) {
     assert(element != null);
@@ -27,22 +91,26 @@ class ShowHide {
     }
   }
 
-  Future<ShowHideState> show(Element element) {
-    assert(element != null);
+  Future<bool> show(Element element) {
     return getState(element)
-        .transform((oldState) => _setState(element, oldState, ShowHideState.SHOWING));
+        .chain((_) => _requestShow(element));
   }
 
-  Future<ShowHideState> hide(Element element) {
-    assert(element != null);
+  Future<bool> hide(Element element) {
     return getState(element)
-        .transform((oldState) => _setState(element, oldState, ShowHideState.HIDING));
+        .chain((_) => _requestHide(element));
   }
 
-  Future<ShowHideState> toggle(Element element) {
-    assert(element != null);
+  Future<bool> toggle(Element element) {
     return getState(element)
-        .transform((oldState) => _toggleState(element, oldState));
+        .transform(((oldState) => _getToggleState(oldState)))
+        .chain((bool doShow) {
+          if(doShow) {
+            return _requestShow(element);
+          } else {
+            return _requestHide(element);
+          }
+        });
   }
 
   static Future<ShowHideState> _populateState(Element element) {
@@ -64,38 +132,103 @@ class ShowHide {
         });
   }
 
-  static ShowHideState _toggleState(Element element, ShowHideState oldState) {
-    final newState = _getToggleState(oldState);
-    assert(newState != null);
-    return _setState(element, oldState, newState);
-  }
-
-  static ShowHideState _getToggleState(ShowHideState state) {
+  static bool _getToggleState(ShowHideState state) {
+    // true for show
+    // false for hide
     switch(state) {
       case ShowHideState.HIDDEN:
       case ShowHideState.HIDING:
-        return ShowHideState.SHOWING;
+        return true;
       case ShowHideState.SHOWING:
       case ShowHideState.SHOWN:
-        return ShowHideState.HIDING;
+        return false;
       default:
         throw new DetailedArgumentError('state', 'Value of $state is not supported');
     }
   }
 
-  static ShowHideState _setState(Element element, ShowHideState oldState, ShowHideState newState) {
-    assert(newState == ShowHideState.HIDING || newState == ShowHideState.SHOWING);
+  Future<bool> _requestShow(Element element) {
+    final values = _values[element];
 
-    switch(newState) {
-      case ShowHideState.HIDING:
-        element.style.display = 'none';
-        return _values[element].currentState = ShowHideState.HIDDEN;
+    switch(values.currentState) {
       case ShowHideState.SHOWING:
-        element.style.display = _getShowDisplayValue(element);
-        return _values[element].currentState = ShowHideState.SHOWN;
+        // no op - let the current animation finish
+        assert(_AnimatingValues.isAnimating(element));
+        return new Future.immediate(true);
+      case ShowHideState.SHOWN:
+        // no op. If shown leave it.
+        assert(!_AnimatingValues.isAnimating(element));
+        return new Future.immediate(true);
+      case ShowHideState.HIDING:
+        _AnimatingValues.cancelAnimation(element);
+        break;
+      case ShowHideState.HIDDEN:
+        // handeled below with a fall-through
+        break;
       default:
-        throw 'provided state - $newState - not supported';
+        throw new DetailedArgumentError('oldState', 'the provided value ${values.currentState} is not supported');
     }
+
+    assert(!_AnimatingValues.isAnimating(element));
+    _finishShow(element);
+    final durationMS = _effect.startShow(element);
+    if(durationMS > 0) {
+
+      // _finishShow sets the currentState to shown, but we know better since we're animating
+      assert(values.currentState == ShowHideState.SHOWN);
+      values.currentState = ShowHideState.SHOWING;
+      return _AnimatingValues.scheduleCleanup(durationMS, element, _effect.clearAnimation, _finishShow);
+    } else {
+      assert(values.currentState == ShowHideState.SHOWN);
+    }
+    return new Future.immediate(true);
+  }
+
+  static void _finishShow(Element element) {
+    final values = _values[element];
+    assert(!_AnimatingValues.isAnimating(element));
+    element.style.display = _getShowDisplayValue(element);
+    values.currentState = ShowHideState.SHOWN;
+  }
+
+  Future<bool> _requestHide(Element element) {
+    final values = _values[element];
+
+    switch(values.currentState) {
+      case ShowHideState.HIDING:
+        // no op - let the current animation finish
+        assert(_AnimatingValues.isAnimating(element));
+        return new Future.immediate(true);
+      case ShowHideState.HIDDEN:
+        // no op. If shown leave it.
+        return new Future.immediate(true);
+      case ShowHideState.SHOWING:
+        _AnimatingValues.cancelAnimation(element);
+        break;
+      case ShowHideState.SHOWN:
+        // handeled below with a fall-through
+        break;
+      default:
+        throw new DetailedArgumentError('oldState', 'the provided value ${values.currentState} is not supported');
+    }
+
+    assert(!_AnimatingValues.isAnimating(element));
+    final durationMS = _effect.startHide(element);
+    if(durationMS > 0) {
+      _values[element].currentState = ShowHideState.HIDING;
+      return _AnimatingValues.scheduleCleanup(durationMS, element, _effect.clearAnimation, _finishHide);
+    } else {
+      _finishHide(element);
+      assert(values.currentState == ShowHideState.HIDDEN);
+    }
+    return new Future.immediate(true);
+  }
+
+  static void _finishHide(Element element) {
+    final values = _values[element];
+    assert(!_AnimatingValues.isAnimating(element));
+    element.style.display = 'none';
+    values.currentState = ShowHideState.HIDDEN;
   }
 
   static String _getShowDisplayValue(Element element) {
