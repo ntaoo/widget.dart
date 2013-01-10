@@ -16,6 +16,17 @@ class ShowHide {
 
   static const ShowHide instance = const ShowHide();
 
+  static Future<ShowHideState> getState(Element element) {
+    assert(element != null);
+
+    final values = _values[element];
+    if(values == null) {
+      return _populateState(element);
+    } else {
+      return new Future.immediate(values.currentState);
+    }
+  }
+
   Future<ShowHideState> show(Element element) {
     assert(element != null);
     return getState(element)
@@ -32,17 +43,6 @@ class ShowHide {
     assert(element != null);
     return getState(element)
         .transform((oldState) => _toggleState(element, oldState));
-  }
-
-  static Future<ShowHideState> getState(Element element) {
-    assert(element != null);
-
-    final values = _values[element];
-    if(values == null) {
-      return _populateState(element);
-    } else {
-      return new Future.immediate(values.currentState);
-    }
   }
 
   static Future<ShowHideState> _populateState(Element element) {
@@ -102,16 +102,22 @@ class ShowHide {
     final values = _values[element];
 
     if(values.initialComputedDisplay == 'none') {
+      // if the element was initially invisible, it's tough to know "why"
+      // even if the element has a local display value of 'none' it still
+      // might have inherited it from a style sheet
+      // so we play say and set the local value to the tag default
       final tagDefault = _defaultDisplays[element.tagName];
       assert(tagDefault != null);
       return tagDefault;
     } else {
       if(values.initialLocalDisplay == '') {
+        // it was originally visible and the local value was empty
+        // so returning the local value to '' should ensure it's visible
         return '';
+      } else {
+        // it was initially visible, cool
+        return values.initialComputedDisplay;
       }
-
-      // it was initially visible, cool
-      return values.initialComputedDisplay;
     }
   }
 }
