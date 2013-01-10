@@ -30,5 +30,11 @@ void _forAllContent(Func1<Element, Future> action) {
 
 void _applyAnimation(Element element, Func1<Element, Future> action) {
   action(element)
-    ..transformException((foo) => print(foo));
+    ..then((value) {
+      if(value == null) {
+        value = '~null~';
+      }
+      query('#lastValue').innerHtml = value.toString();
+    })
+    ..transformException((ex) => print(ex));
 }
