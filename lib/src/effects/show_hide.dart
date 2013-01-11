@@ -1,74 +1,5 @@
 part of effects;
 
-class _ShowHideValues {
-  final String initialComputedDisplay;
-  final String initialLocalDisplay;
-  ShowHideState currentState;
-
-  _ShowHideValues(this.initialComputedDisplay, this.initialLocalDisplay, this.currentState);
-}
-
-class _AnimatingValues {
-  static final Expando<_AnimatingValues> _aniValues = new Expando<_AnimatingValues>('_AnimatingValues');
-
-  final Element _element;
-  final Action1<Element> _cleanupAction;
-  final Action1<Element> _finishFunc;
-  final Completer<bool> _completer = new Completer<bool>();
-
-  int _setTimeoutHandle;
-
-  _AnimatingValues._internal(this._element, this._cleanupAction, this._finishFunc) {
-    assert(_aniValues[_element] == null);
-    _aniValues[_element] = this;
-  }
-
-  Future<bool> _start(int durationMS) {
-    assert(durationMS > 0);
-    assert(_setTimeoutHandle == null);
-    _setTimeoutHandle = window.setTimeout(_complete, durationMS);
-    return _completer.future;
-  }
-
-  void _cancel() {
-    assert(_setTimeoutHandle != null);
-    window.clearTimeout(_setTimeoutHandle);
-    _cleanup();
-    _completer.complete(false);
-  }
-
-  void _complete() {
-    _cleanup();
-    _finishFunc(_element);
-    _completer.complete(true);
-  }
-
-  void _cleanup() {
-    assert(_aniValues[_element] != null);
-    _cleanupAction(_element);
-    _aniValues[_element] = null;
-  }
-
-  static bool isAnimating(Element element) {
-    final values = _aniValues[element];
-    return values != null;
-  }
-
-  static void cancelAnimation(Element element) {
-    final values = _aniValues[element];
-    assert(values != null);
-    values._cancel();
-  }
-
-  static Future<bool> scheduleCleanup(int durationMS, Element element,
-                              Action1<Element> cleanupAction,
-                              Action1<Element> finishAction) {
-
-    final value = new _AnimatingValues._internal(element, cleanupAction, finishAction);
-    return value._start(durationMS);
-  }
-}
-
 class ShowHide {
   static const int _defaultDuration = 400;
   static final Map<String, String> _defaultDisplays = new Map<String, String>();
@@ -255,5 +186,74 @@ class ShowHide {
         return values.initialComputedDisplay;
       }
     }
+  }
+}
+
+class _ShowHideValues {
+  final String initialComputedDisplay;
+  final String initialLocalDisplay;
+  ShowHideState currentState;
+
+  _ShowHideValues(this.initialComputedDisplay, this.initialLocalDisplay, this.currentState);
+}
+
+class _AnimatingValues {
+  static final Expando<_AnimatingValues> _aniValues = new Expando<_AnimatingValues>('_AnimatingValues');
+
+  final Element _element;
+  final Action1<Element> _cleanupAction;
+  final Action1<Element> _finishFunc;
+  final Completer<bool> _completer = new Completer<bool>();
+
+  int _setTimeoutHandle;
+
+  _AnimatingValues._internal(this._element, this._cleanupAction, this._finishFunc) {
+    assert(_aniValues[_element] == null);
+    _aniValues[_element] = this;
+  }
+
+  Future<bool> _start(int durationMS) {
+    assert(durationMS > 0);
+    assert(_setTimeoutHandle == null);
+    _setTimeoutHandle = window.setTimeout(_complete, durationMS);
+    return _completer.future;
+  }
+
+  void _cancel() {
+    assert(_setTimeoutHandle != null);
+    window.clearTimeout(_setTimeoutHandle);
+    _cleanup();
+    _completer.complete(false);
+  }
+
+  void _complete() {
+    _cleanup();
+    _finishFunc(_element);
+    _completer.complete(true);
+  }
+
+  void _cleanup() {
+    assert(_aniValues[_element] != null);
+    _cleanupAction(_element);
+    _aniValues[_element] = null;
+  }
+
+  static bool isAnimating(Element element) {
+    final values = _aniValues[element];
+    return values != null;
+  }
+
+  static void cancelAnimation(Element element) {
+    final values = _aniValues[element];
+    assert(values != null);
+    values._cancel();
+  }
+
+  static Future<bool> scheduleCleanup(int durationMS, Element element,
+                              Action1<Element> cleanupAction,
+                              Action1<Element> finishAction) {
+
+    final value = new _AnimatingValues._internal(element, cleanupAction, finishAction);
+    return value._start(durationMS);
   }
 }
