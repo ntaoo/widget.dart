@@ -1,17 +1,7 @@
 .container {
+  margin-top: 10px;
   width: 600px;
-}
-
-#effects {
-  float: left;
-}
-
-.btn-group {
-  margin: 10px;
-}
-
-.btn {
-  width: 100%;
+  text-align: center;
 }
 
 #demo {
@@ -24,15 +14,8 @@
   height: 250px;
 }
 
-#textParagraph {
-  text-align:justify;
-  margin: 10px;
-  width: 300px;
-  background: lightgray;
-  padding: 3px;
-}
-
 iframe {
+  width: 140px;
   margin: 0 auto;
   display: block;
 }
