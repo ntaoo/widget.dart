@@ -14,6 +14,12 @@ void main() {
 
   addTask('example_dart2js', createDart2JsTask(['example/show_hide_example.dart']));
 
+  //
+  // gh_pages
+  //
+  addAsyncTask('pages', (ctx) =>
+      branchForDir(ctx, 'master', 'example', 'gh-pages'));
+
   runHopCore();
 }
 
