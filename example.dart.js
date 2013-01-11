@@ -548,14 +548,14 @@ $$._CompleterImpl = {"":"Object;_futureImpl",
 
 $$._HashMapImpl = {"":"Object;_keys>,_values,_loadLimit,_numberOfEntries,_numberOfDeleted",
  _probeForAdding$1: function(key) {
-  var t1, hash, numberOfProbes, insertionIndex, existingKey, numberOfProbes0;
+  var t1, hash, insertionIndex, numberOfProbes, existingKey, numberOfProbes0;
   if (key == null)
     throw $.$$throw($.ArgumentError$(null));
   t1 = $.getInterceptor(key).get$hashCode(key);
   if (t1 !== (t1 | 0))
     return this._probeForAdding$1$bailout(1, key, t1);
   hash = (t1 & this._keys.length - 1) >>> 0;
-  for (numberOfProbes = 1, insertionIndex = -1; true; numberOfProbes = numberOfProbes0) {
+  for (insertionIndex = -1, numberOfProbes = 1; true; numberOfProbes = numberOfProbes0) {
     t1 = this._keys;
     if (hash < 0 || hash >= t1.length)
       throw $.ioore(hash);
@@ -595,10 +595,10 @@ $$._HashMapImpl = {"":"Object;_keys>,_values,_loadLimit,_numberOfEntries,_number
     case 1:
       state0 = 0;
       hash = $.and(t1, this._keys.length - 1);
-      numberOfProbes = 1;
       insertionIndex = -1;
+      numberOfProbes = 1;
     case 2:
-      var t1, key, hash, numberOfProbes, insertionIndex, existingKey, numberOfProbes0;
+      var t1, key, hash, insertionIndex, numberOfProbes, existingKey, numberOfProbes0;
       L0:
         while (true)
           switch (state0) {
@@ -2456,6 +2456,9 @@ $$.ScaleEffect = {"":"Css3TransitionEffect;_property,_hideValue,_showValue,_anim
 $$.SpinEffect = {"":"Css3TransitionEffect;_property,_hideValue,_showValue,_animatingOverrides"
 };
 
+$$.DoorEffect = {"":"Css3TransitionEffect;_property,_hideValue,_showValue,_animatingOverrides"
+};
+
 $$._css3TransitionEffectValues = {"":"Object;element>,originalValues,timeoutHandle<",
  _cleanup$0: function() {
   if (!(this.timeoutHandle == null)) {
@@ -2894,7 +2897,7 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":"Closure;findSlot_5
             t3.call$2(slot, copy0);
           }
           if (typeof copy0 !== 'object' || copy0 === null || (copy0.constructor !== Array || !!copy0.immutable$list) && !copy0.is$JavaScriptIndexingBehavior())
-            return this.call$1$bailout(3, e, t3, elementCopy, $.CONSTANT0, length$, copy0, slot, t2, i, copy);
+            return this.call$1$bailout(3, e, t3, elementCopy, $.CONSTANT0, length$, i, copy0, slot, t2, copy);
           for (t1 = e.length, t2 = copy0.length, j = 0; j < i; ++j) {
             if (j >= t1)
               throw $.ioore(j);
@@ -2921,7 +2924,7 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":"Closure;findSlot_5
       i = 0;
     }
     if (typeof copy !== 'object' || copy === null || (copy.constructor !== Array || !!copy.immutable$list) && !copy.is$JavaScriptIndexingBehavior())
-      return this.call$1$bailout(4, e, length$, copy, i, $.CONSTANT0);
+      return this.call$1$bailout(4, e, copy, i, length$, $.CONSTANT0);
     for (; i < length$; ++i) {
       if (i >= e.length)
         throw $.ioore(i);
@@ -2946,10 +2949,10 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":"Closure;findSlot_5
       break;
     case 3:
       copy = env9;
-      i = env8;
-      t4 = env7;
-      slot = env6;
-      copy0 = env5;
+      t4 = env8;
+      slot = env7;
+      copy0 = env6;
+      i = env5;
       length$ = env4;
       t2 = env3;
       elementCopy = env2;
@@ -2958,9 +2961,9 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":"Closure;findSlot_5
       break;
     case 4:
       t2 = env4;
-      i = env3;
-      copy = env2;
-      length$ = env1;
+      length$ = env3;
+      i = env2;
+      copy = env1;
       e = env0;
       break;
   }
@@ -3218,7 +3221,7 @@ $$.BoundClosure1 = {"":"Closure;self,target", call$2: function(p0, p1) {
 };
 $.main = function() {
   var effects, effectsDiv;
-  effects = $.makeLiteralMap(["Default", null, "Fade", $.FadeEffect$(), "Scale", $.ScaleEffect$(), "Shrink", $.ShrinkEffect$(), "Spin", $.SpinEffect$()]);
+  effects = $.makeLiteralMap(["Default", null, "Door", $.DoorEffect$(), "Fade", $.FadeEffect$(), "Scale", $.ScaleEffect$(), "Shrink", $.ShrinkEffect$(), "Spin", $.SpinEffect$()]);
   effectsDiv = $.query("#effects");
   $.getInterceptor$JSArray(effects).forEach$1(effects, new $.main_anon(effectsDiv));
 };
@@ -3282,6 +3285,15 @@ $.SpinEffect$ = function() {
   t1 = new $.SpinEffect("-webkit-transform", "perspective(600px) rotateX(90deg)", "perspective(600px) rotateX(0deg)", t1);
   t1.Css3TransitionEffect$4("-webkit-transform", "perspective(600px) rotateX(90deg)", "perspective(600px) rotateX(0deg)", null);
   return t1;
+};
+
+$.DoorEffect$ = function() {
+  var t1, t2;
+  t1 = $.makeLiteralMap(["-webkit-transform-origin", "0% 50%"]);
+  t2 = t1 == null ? $.Map_Map() : $.Map_Map$from(t1);
+  t2 = new $.DoorEffect("-webkit-transform", "perspective(1000px) rotateY(90deg)", "perspective(1000px) rotateY(0deg)", t2);
+  t2.Css3TransitionEffect$4("-webkit-transform", "perspective(1000px) rotateY(90deg)", "perspective(1000px) rotateY(0deg)", t1);
+  return t2;
 };
 
 $._css3TransitionEffectValues$ = function(element, originalValues) {
@@ -5075,8 +5087,8 @@ $.CONSTANT4 = new Isolate.$isolateProperties.JSNumber();
 $._getTypeNameOf = null;
 $.Tools__iframe = null;
 $.ShowHide__defaultDuration = 400;
-$.Expando__EXPANDO_PROPERTY_NAME = "expando$values";
 $.Expando__KEY_PROPERTY_NAME = "expando$key";
+$.Expando__EXPANDO_PROPERTY_NAME = "expando$values";
 $.Expando__keyCount = 0;
 $._cachedBrowserPrefix = null;
 $.ShowHideState_SHOWN = Isolate.$isolateProperties.CONSTANT9;
@@ -5132,6 +5144,9 @@ $.getInterceptor$JSArray = function(receiver) {
     return $.JSArray.prototype;
   return $.ObjectInterceptor.prototype;
 };
+Isolate.$lazy($, '_values', 'ShowHide__values', 'get$ShowHide__values', function() {
+  return $.Expando$("_ShowHideValues");
+});
 Isolate.$lazy($, '_values', '_css3TransitionEffectValues__values', 'get$_css3TransitionEffectValues__values', function() {
   return $.Expando$("_css3TransitionEffectValues");
 });
@@ -5146,9 +5161,6 @@ Isolate.$lazy($, '_elemDisplay', 'Tools__elemDisplay', 'get$Tools__elemDisplay',
 });
 Isolate.$lazy($, '_defaultDisplays', 'ShowHide__defaultDisplays', 'get$ShowHide__defaultDisplays', function() {
   return $.Map_Map();
-});
-Isolate.$lazy($, '_values', 'ShowHide__values', 'get$ShowHide__values', function() {
-  return $.Expando$("_ShowHideValues");
 });
 var $ = null;
 Isolate.$finishClasses($$);
