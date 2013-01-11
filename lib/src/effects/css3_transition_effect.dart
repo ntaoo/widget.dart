@@ -76,6 +76,10 @@ class ScaleEffect extends Css3TransitionEffect {
   ScaleEffect() : super('-webkit-transform', 'scale(0, 0)', 'scale(1, 1)');
 }
 
+class SpinEffect extends Css3TransitionEffect {
+  SpinEffect() : super('-webkit-transform', 'perspective(600px) rotateX(90deg)', 'perspective(600px) rotateX(0deg)');
+}
+
 // TODO: this also needs overflow: hidden to be set
 // Perhaps some other model for 'helper' properties to be set? Hmm...
 class VerticalScaleEffect extends Css3TransitionEffect {
