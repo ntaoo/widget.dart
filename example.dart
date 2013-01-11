@@ -1,10 +1,11 @@
 library hide_show;
 
 import 'dart:html';
-import '../packages/bot/bot.dart';
-import '../lib/effects.dart';
+import 'package:bot/bot.dart';
+import 'package:widget/effects.dart';
 
 const int _duration = null;
+final EffectTiming _timing = null;
 
 void main() {
   final effects =
@@ -31,6 +32,6 @@ final ShowHideEffect _effect = new ScaleEffect();
 
 void _toggle(ShowHideEffect effect) {
   queryAll('.content').forEach((Element e) {
-    ShowHide.toggle(e, effect: effect, duration: _duration);
+    ShowHide.toggle(e, effect: effect, duration: _duration, effectTiming: _timing);
   });
 }
