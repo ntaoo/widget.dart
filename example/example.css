@@ -1,6 +1,9 @@
+.container {
+  width: 600px;
+}
+
 #effects {
   float: left;
-  width: 100px;
 }
 
 .btn-group {
@@ -12,7 +15,8 @@
 }
 
 #demo {
-  float: left;
+  display: inline-block;
+  width: 400px;
 }
 
 #textParagraph {
@@ -21,4 +25,9 @@
   width: 300px;
   background: lightgray;
   padding: 3px;
+}
+
+iframe {
+  margin: 0 auto;
+  display: block;
 }
