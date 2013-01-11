@@ -1,20 +1,14 @@
 #effects {
   float: left;
+  width: 100px;
 }
 
-#effects .btn-group {
-  padding: 10px;
-  position: static;
-  margin: 0;
+.btn-group {
+  margin: 10px;
 }
 
-#effects div span {
-  text-align: right;
-  padding: 2px;
-  font-weight: bold;
-  display: inline-block;
-  width: 75px;
-  font-size: 14px;
+.btn {
+  width: 100%;
 }
 
 #demo {
