@@ -548,14 +548,14 @@ $$._CompleterImpl = {"":"Object;_futureImpl",
 
 $$._HashMapImpl = {"":"Object;_keys>,_values,_loadLimit,_numberOfEntries,_numberOfDeleted",
  _probeForAdding$1: function(key) {
-  var t1, hash, insertionIndex, numberOfProbes, existingKey, numberOfProbes0;
+  var t1, hash, numberOfProbes, insertionIndex, existingKey, numberOfProbes0;
   if (key == null)
     throw $.$$throw($.ArgumentError$(null));
   t1 = $.getInterceptor(key).get$hashCode(key);
   if (t1 !== (t1 | 0))
     return this._probeForAdding$1$bailout(1, key, t1);
   hash = (t1 & this._keys.length - 1) >>> 0;
-  for (insertionIndex = -1, numberOfProbes = 1; true; numberOfProbes = numberOfProbes0) {
+  for (numberOfProbes = 1, insertionIndex = -1; true; numberOfProbes = numberOfProbes0) {
     t1 = this._keys;
     if (hash < 0 || hash >= t1.length)
       throw $.ioore(hash);
@@ -595,10 +595,10 @@ $$._HashMapImpl = {"":"Object;_keys>,_values,_loadLimit,_numberOfEntries,_number
     case 1:
       state0 = 0;
       hash = $.and(t1, this._keys.length - 1);
-      insertionIndex = -1;
       numberOfProbes = 1;
+      insertionIndex = -1;
     case 2:
-      var t1, key, hash, insertionIndex, numberOfProbes, existingKey, numberOfProbes0;
+      var t1, key, hash, numberOfProbes, insertionIndex, existingKey, numberOfProbes0;
       L0:
         while (true)
           switch (state0) {
@@ -2899,7 +2899,7 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":"Closure;findSlot_5
             t3.call$2(slot, copy0);
           }
           if (typeof copy0 !== 'object' || copy0 === null || (copy0.constructor !== Array || !!copy0.immutable$list) && !copy0.is$JavaScriptIndexingBehavior())
-            return this.call$1$bailout(3, e, t3, elementCopy, $.CONSTANT0, length$, copy0, slot, i, copy, t2);
+            return this.call$1$bailout(3, e, t3, elementCopy, $.CONSTANT0, length$, i, copy0, slot, t2, copy);
           for (t1 = e.length, t2 = copy0.length, j = 0; j < i; ++j) {
             if (j >= t1)
               throw $.ioore(j);
@@ -2926,7 +2926,7 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":"Closure;findSlot_5
       i = 0;
     }
     if (typeof copy !== 'object' || copy === null || (copy.constructor !== Array || !!copy.immutable$list) && !copy.is$JavaScriptIndexingBehavior())
-      return this.call$1$bailout(4, e, length$, copy, i, $.CONSTANT0);
+      return this.call$1$bailout(4, e, copy, i, length$, $.CONSTANT0);
     for (; i < length$; ++i) {
       if (i >= e.length)
         throw $.ioore(i);
@@ -2950,11 +2950,11 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":"Closure;findSlot_5
       e = env0;
       break;
     case 3:
-      t4 = env9;
-      copy = env8;
-      i = env7;
-      slot = env6;
-      copy0 = env5;
+      copy = env9;
+      t4 = env8;
+      slot = env7;
+      copy0 = env6;
+      i = env5;
       length$ = env4;
       t2 = env3;
       elementCopy = env2;
@@ -2963,9 +2963,9 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":"Closure;findSlot_5
       break;
     case 4:
       t2 = env4;
-      i = env3;
-      copy = env2;
-      length$ = env1;
+      length$ = env3;
+      i = env2;
+      copy = env1;
       e = env0;
       break;
   }
@@ -5103,10 +5103,9 @@ $.CONSTANT8 = new Isolate.$isolateProperties.ShowHideState("hidden");
 $.CONSTANT11 = new Isolate.$isolateProperties.ShowHideState("hidding");
 $.CONSTANT0 = new Isolate.$isolateProperties.JSArray();
 $.CONSTANT4 = new Isolate.$isolateProperties.JSNumber();
-$.Primitives_hashCodeSeed = 0;
+$.Expando__EXPANDO_PROPERTY_NAME = "expando$values";
 $.Primitives_DOLLAR_CHAR_VALUE = 36;
 $.Expando__KEY_PROPERTY_NAME = "expando$key";
-$.ShowHideState_HIDING = Isolate.$isolateProperties.CONSTANT11;
 $._HashMapImpl__DELETED_KEY = Isolate.$isolateProperties.CONSTANT3;
 $._HashMapImpl__INITIAL_CAPACITY = 8;
 $._getTypeNameOf = null;
@@ -5120,8 +5119,9 @@ $._measurementScheduler = null;
 $.ShowHideState_HIDDEN = Isolate.$isolateProperties.CONSTANT8;
 $.Expando__keyCount = 0;
 $._duration = null;
-$.Expando__EXPANDO_PROPERTY_NAME = "expando$values";
+$.ShowHideState_HIDING = Isolate.$isolateProperties.CONSTANT11;
 $.ShowHideState_SHOWING = Isolate.$isolateProperties.CONSTANT12;
+$.Primitives_hashCodeSeed = 0;
 $.getInterceptor$JSString = function(receiver) {
   if (typeof receiver == 'string')
     return $.JSString.prototype;
@@ -5163,9 +5163,6 @@ $.getInterceptor$JSArray = function(receiver) {
     return $.JSArray.prototype;
   return $.ObjectInterceptor.prototype;
 };
-Isolate.$lazy($, '_elemDisplay', 'Tools__elemDisplay', 'get$Tools__elemDisplay', function() {
-  return $.Map_Map();
-});
 Isolate.$lazy($, '_defaultDisplays', 'ShowHide__defaultDisplays', 'get$ShowHide__defaultDisplays', function() {
   return $.Map_Map();
 });
@@ -5183,6 +5180,9 @@ Isolate.$lazy($, 'quoteRegExp', 'quoteRegExp', 'get$quoteRegExp', function() {
 });
 Isolate.$lazy($, '_aniValues', '_AnimatingValues__aniValues', 'get$_AnimatingValues__aniValues', function() {
   return $.Expando$("_AnimatingValues");
+});
+Isolate.$lazy($, '_elemDisplay', 'Tools__elemDisplay', 'get$Tools__elemDisplay', function() {
+  return $.Map_Map();
 });
 var $ = null;
 Isolate.$finishClasses($$);
