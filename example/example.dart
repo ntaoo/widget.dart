@@ -28,8 +28,6 @@ void main() {
   });
 }
 
-final ShowHideEffect _effect = new ScaleEffect();
-
 void _toggle(ShowHideEffect effect) {
   queryAll('.content').forEach((Element e) {
     ShowHide.toggle(e, effect: effect, duration: _duration, effectTiming: _timing);
