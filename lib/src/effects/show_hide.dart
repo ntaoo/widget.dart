@@ -5,13 +5,6 @@ class ShowHide {
   static final Map<String, String> _defaultDisplays = new Map<String, String>();
   static final Expando<_ShowHideValues> _values = new Expando<_ShowHideValues>('_ShowHideValues');
 
-  final ShowHideEffect _effect;
-
-  ShowHide([ShowHideEffect effect]) :
-    _effect = (effect == null) ? new ShowHideEffect() : effect;
-
-  static final ShowHide instance = new ShowHide();
-
   static Future<ShowHideState> getState(Element element) {
     assert(element != null);
 
@@ -23,24 +16,24 @@ class ShowHide {
     }
   }
 
-  Future<bool> show(Element element, [int duration = _defaultDuration]) {
+  static Future<bool> show(Element element, {ShowHideEffect effect, int duration: _defaultDuration}) {
     return getState(element)
-        .chain((_) => _requestShow(element, duration));
+        .chain((_) => _requestShow(element, duration, effect));
   }
 
-  Future<bool> hide(Element element, [int duration = _defaultDuration]) {
+  static Future<bool> hide(Element element, {ShowHideEffect effect, int duration: _defaultDuration}) {
     return getState(element)
-        .chain((_) => _requestHide(element, duration));
+        .chain((_) => _requestHide(element, duration, effect));
   }
 
-  Future<bool> toggle(Element element, [int duration = _defaultDuration]) {
+  static Future<bool> toggle(Element element, {ShowHideEffect effect, int duration: _defaultDuration}) {
     return getState(element)
         .transform(((oldState) => _getToggleState(oldState)))
         .chain((bool doShow) {
           if(doShow) {
-            return _requestShow(element, duration);
+            return _requestShow(element, duration, effect);
           } else {
-            return _requestHide(element, duration);
+            return _requestHide(element, duration, effect);
           }
         });
   }
@@ -79,7 +72,8 @@ class ShowHide {
     }
   }
 
-  Future<bool> _requestShow(Element element, int desiredDuration) {
+  static Future<bool> _requestShow(Element element, int desiredDuration, ShowHideEffect effect) {
+    effect = ShowHideEffect._orDefault(effect);
     final values = _values[element];
 
     switch(values.currentState) {
@@ -103,13 +97,13 @@ class ShowHide {
 
     assert(!_AnimatingValues.isAnimating(element));
     _finishShow(element);
-    final durationMS = _effect.startShow(element, desiredDuration);
+    final durationMS = effect.startShow(element, desiredDuration);
     if(durationMS > 0) {
 
       // _finishShow sets the currentState to shown, but we know better since we're animating
       assert(values.currentState == ShowHideState.SHOWN);
       values.currentState = ShowHideState.SHOWING;
-      return _AnimatingValues.scheduleCleanup(durationMS, element, _effect.clearAnimation, _finishShow);
+      return _AnimatingValues.scheduleCleanup(durationMS, element, effect.clearAnimation, _finishShow);
     } else {
       assert(values.currentState == ShowHideState.SHOWN);
     }
@@ -123,7 +117,8 @@ class ShowHide {
     values.currentState = ShowHideState.SHOWN;
   }
 
-  Future<bool> _requestHide(Element element, int desiredDuration) {
+  static Future<bool> _requestHide(Element element, int desiredDuration, ShowHideEffect effect) {
+    effect = ShowHideEffect._orDefault(effect);
     final values = _values[element];
 
     switch(values.currentState) {
@@ -147,10 +142,10 @@ class ShowHide {
     }
 
     assert(!_AnimatingValues.isAnimating(element));
-    final durationMS = _effect.startHide(element, desiredDuration);
+    final durationMS = effect.startHide(element, desiredDuration);
     if(durationMS > 0) {
       _values[element].currentState = ShowHideState.HIDING;
-      return _AnimatingValues.scheduleCleanup(durationMS, element, _effect.clearAnimation, _finishHide);
+      return _AnimatingValues.scheduleCleanup(durationMS, element, effect.clearAnimation, _finishHide);
     } else {
       _finishHide(element);
       assert(values.currentState == ShowHideState.HIDDEN);

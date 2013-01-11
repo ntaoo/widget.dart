@@ -15,11 +15,11 @@ class Dropdown extends WebComponent {
     if(value != _isExpanded) {
       _isExpanded = value;
       if(_isExpanded) {
-        ShowHide.instance.show(_expanderDiv);
+        ShowHide.show(_expanderDiv);
         _expanderDiv.style.display = '';
         _headerElem.style.background = '#EEE';
       } else {
-        ShowHide.instance.hide(_expanderDiv);
+        ShowHide.hide(_expanderDiv);
         _headerElem.style.background = 'lightgray';
       }
     }
