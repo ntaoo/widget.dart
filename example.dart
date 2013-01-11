@@ -1,8 +1,8 @@
 library hide_show;
 
 import 'dart:html';
-import 'package:bot/bot.dart';
-import 'package:widget/effects.dart';
+import '../packages/bot/bot.dart';
+import '../lib/effects.dart';
 
 void main() {
   query('#show').on.click.add(_show);
