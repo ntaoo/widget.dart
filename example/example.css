@@ -19,6 +19,11 @@
   width: 400px;
 }
 
+#logo {
+  width: 333px;
+  height: 250px;
+}
+
 #textParagraph {
   text-align:justify;
   margin: 10px;
