@@ -271,13 +271,9 @@ void _createShowHidePlayground(String tag, String sheetStyle, String inlineStyle
   pg.style.background = 'pink';
   pg.style.display = _playgroundWrapperDisplay;
 
-  final styleElement = new StyleElement();
-  styleElement.type = 'text/css';
-  pg.append(styleElement);
-
-  final CssStyleSheet sheet = styleElement.sheet;
-  sheet.addRule('.sample', 'display: $sheetStyle;');
-
+  // While I'd love to use `StyleElement` here, seems FireFox doesn't like it
+  // so doing it by hand -- https://github.com/kevmoo/widget.dart/issues/8
+  pg.appendHtml('<style type="text/css"> .sample { display: $sheetStyle; }</style>');
 
   // text describing our story
   pg.appendHtml('<p>tag: $tag</p>');
