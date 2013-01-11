@@ -1423,8 +1423,8 @@ $$.JSString = {"":"Object;",
   return receiver;
 },
  get$hashCode: function(receiver) {
-  var hash, i, hash0, hash1;
-  for (hash = 0, i = 0; i < receiver.length; ++i, hash = hash1) {
+  var i, hash, hash0, hash1;
+  for (i = 0, hash = 0; i < receiver.length; ++i, hash = hash1) {
     hash0 = 536870911 & hash + receiver.charCodeAt(i);
     hash1 = 536870911 & hash0 + ((524287 & hash0) << 10 >>> 0);
     hash1 = hash1 ^ (hash1 >> 6);
@@ -2127,22 +2127,6 @@ $$.FilteredElementList = {"":"Object;_node,_childNodes",
  is$Collection: function() { return true; }
 };
 
-$$.DetailedArgumentError = {"":"Object;argument,details",
- get$message: function() {
-  return "Illegal argument: \"" + this.argument + "\" -- " + this.details;
-},
- toString$0: function() {
-  return this.get$message();
-},
- DetailedArgumentError$2: function(argument, details) {
-  $.requireArgumentNotNullOrEmpty(this.argument, "argument");
-  $.requireArgumentNotNullOrEmpty(this.details, "details");
-}
-};
-
-$$.InvalidOperationError = {"":"Object;message>"
-};
-
 $$._Enum = {"":"Object;",
  toString$0: function() {
   return this.name;
@@ -2260,6 +2244,22 @@ $$._css3TransitionEffectValues = {"":"Object;element>,originalValues,timeoutHand
 }
 };
 
+$$.DetailedArgumentError = {"":"Object;argument,details",
+ get$message: function() {
+  return "Illegal argument: \"" + this.argument + "\" -- " + this.details;
+},
+ toString$0: function() {
+  return this.get$message();
+},
+ DetailedArgumentError$2: function(argument, details) {
+  $.requireArgumentNotNullOrEmpty(this.argument, "argument");
+  $.requireArgumentNotNullOrEmpty(this.details, "details");
+}
+};
+
+$$.InvalidOperationError = {"":"Object;message>"
+};
+
 $$._toggle_anon = {"":"Closure;",
  call$1: function(e) {
   return $.ShowHide_toggle(e, null, $.get$_effect());
@@ -2299,13 +2299,13 @@ $$.ShowHide_toggle_anon0 = {"":"Closure;element_0,effect_1,duration_2",
  call$1: function(doShow) {
   var t1, t2, t3, t4;
   t1 = doShow === true;
-  t2 = this.element_0;
-  t3 = this.duration_2;
+  t2 = this.duration_2;
+  t3 = this.element_0;
   t4 = this.effect_1;
   if (t1)
-    return $.ShowHide__requestShow(t2, $.ShowHide__fixDuration(t3), t4);
+    return $.ShowHide__requestShow(t3, $.ShowHide__fixDuration(t2), t4);
   else
-    return $.ShowHide__requestHide(t2, $.ShowHide__fixDuration(t3), t4);
+    return $.ShowHide__requestHide(t3, $.ShowHide__fixDuration(t2), t4);
 }
 };
 
@@ -2607,7 +2607,7 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":"Closure;findSlot_5
             t3.call$2(slot, copy0);
           }
           if (typeof copy0 !== 'object' || copy0 === null || (copy0.constructor !== Array || !!copy0.immutable$list) && !copy0.is$JavaScriptIndexingBehavior())
-            return this.call$1$bailout(3, e, t3, elementCopy, $.CONSTANT1, length$, i, copy0, slot, t2, copy);
+            return this.call$1$bailout(3, e, t3, elementCopy, $.CONSTANT1, length$, copy0, slot, t2, i, copy);
           for (t1 = e.length, t2 = copy0.length, j = 0; j < i; ++j) {
             if (j >= t1)
               throw $.ioore(j);
@@ -2634,7 +2634,7 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":"Closure;findSlot_5
       i = 0;
     }
     if (typeof copy !== 'object' || copy === null || (copy.constructor !== Array || !!copy.immutable$list) && !copy.is$JavaScriptIndexingBehavior())
-      return this.call$1$bailout(4, e, copy, i, length$, $.CONSTANT1);
+      return this.call$1$bailout(4, e, length$, copy, i, $.CONSTANT1);
     for (; i < length$; ++i) {
       if (i >= e.length)
         throw $.ioore(i);
@@ -2659,10 +2659,10 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":"Closure;findSlot_5
       break;
     case 3:
       copy = env9;
-      t4 = env8;
-      slot = env7;
-      copy0 = env6;
-      i = env5;
+      i = env8;
+      t4 = env7;
+      slot = env6;
+      copy0 = env5;
       length$ = env4;
       t2 = env3;
       elementCopy = env2;
@@ -2671,9 +2671,9 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":"Closure;findSlot_5
       break;
     case 4:
       t2 = env4;
-      length$ = env3;
-      i = env2;
-      copy = env1;
+      i = env3;
+      copy = env2;
+      length$ = env1;
       e = env0;
       break;
   }
@@ -3023,6 +3023,252 @@ $._forAllContent = function(action) {
 
 $._applyAnimation = function(element, action) {
   action.call$1(element).transformException$1(new $._applyAnimation_anon());
+};
+
+$.Css3TransitionEffect__recordProperties = function(element, properties) {
+  var map, t1, t2, t3;
+  map = $.Map_Map();
+  if (typeof map !== 'object' || map === null || (map.constructor !== Array || !!map.immutable$list) && !map.is$JavaScriptIndexingBehavior())
+    return $.Css3TransitionEffect__recordProperties$bailout(1, element, properties, map);
+  for (t1 = $.CONSTANT1.iterator$0(properties); t1.get$hasNext() === true;) {
+    t2 = t1.next$0();
+    t3 = element.get$style().getPropertyValue$1(t2);
+    if (t2 !== (t2 | 0))
+      throw $.iae(t2);
+    if (t2 < 0 || t2 >= map.length)
+      throw $.ioore(t2);
+    map[t2] = t3;
+  }
+  return map;
+};
+
+$.Css3TransitionEffect__recordProperties$bailout = function(state0, element, properties, map) {
+  var t1, t2;
+  for (t1 = $.CONSTANT1.iterator$0(properties); t1.get$hasNext() === true;) {
+    t2 = t1.next$0();
+    $.indexSet(map, t2, element.get$style().getPropertyValue$1(t2));
+  }
+  return map;
+};
+
+$.ScaleEffect$ = function() {
+  var t1 = $.Map_Map();
+  t1 = new $.ScaleEffect("-webkit-transform", "scale(0, 0)", "scale(1, 1)", t1);
+  t1.Css3TransitionEffect$4("-webkit-transform", "scale(0, 0)", "scale(1, 1)", null);
+  return t1;
+};
+
+$._css3TransitionEffectValues$ = function(element, originalValues) {
+  return new $._css3TransitionEffectValues(element, originalValues, null);
+};
+
+$._css3TransitionEffectValues_delayStart = function(element, originalValues, action) {
+  var t1, value;
+  t1 = $.get$_css3TransitionEffectValues__values();
+  value = $._css3TransitionEffectValues$(element, originalValues);
+  $.indexSet(t1, element, value);
+  value.timeoutHandle = $.window().setTimeout$2(new $._css3TransitionEffectValues_delayStart_anon(action, value), 1);
+};
+
+$._css3TransitionEffectValues_cleanup = function(element) {
+  var t1, value;
+  t1 = $.get$_css3TransitionEffectValues__values();
+  value = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element);
+  $.indexSet($.get$_css3TransitionEffectValues__values(), element, null);
+  return value._cleanup$0();
+};
+
+$.ShowHide_getState = function(element) {
+  var t1, values;
+  t1 = $.get$ShowHide__values();
+  values = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element);
+  if (values == null)
+    return $.ShowHide__populateState(element);
+  else
+    return $.Future_Future$immediate(values.get$currentState());
+};
+
+$.ShowHide_show = function(element, duration, effect) {
+  return $.ShowHide_getState(element).chain$1(new $.ShowHide_show_anon(element, effect, duration));
+};
+
+$.ShowHide_hide = function(element, duration, effect) {
+  return $.ShowHide_getState(element).chain$1(new $.ShowHide_hide_anon(element, effect, duration));
+};
+
+$.ShowHide_toggle = function(element, duration, effect) {
+  return $.ShowHide_getState(element).transform$1(new $.ShowHide_toggle_anon()).chain$1(new $.ShowHide_toggle_anon0(element, effect, duration));
+};
+
+$.ShowHide__populateState = function(element) {
+  return $.Futures_wait([element.getComputedStyle$1(""), $.Tools_getDefaultDisplay(element.get$tagName())]).transform$1(new $.ShowHide__populateState_anon(element));
+};
+
+$.ShowHide__getToggleState = function(state) {
+  switch (state) {
+    case $.CONSTANT8:
+    case $.CONSTANT11:
+      return true;
+    case $.CONSTANT12:
+    case $.CONSTANT9:
+      return false;
+    default:
+      throw $.$$throw($.DetailedArgumentError$("state", "Value of " + $.S(state) + " is not supported"));
+  }
+};
+
+$.ShowHide__requestShow = function(element, desiredDuration, effect) {
+  var t1, values, durationMS;
+  if (effect == null)
+    effect = $.CONSTANT10;
+  t1 = $.get$ShowHide__values();
+  values = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element);
+  t1 = values.get$currentState();
+  switch (t1) {
+    case $.CONSTANT12:
+      return $.Future_Future$immediate(true);
+    case $.CONSTANT9:
+      return $.Future_Future$immediate(true);
+    case $.CONSTANT11:
+      $._AnimatingValues_cancelAnimation(element);
+      break;
+    case $.CONSTANT8:
+      break;
+    default:
+      throw $.$$throw($.DetailedArgumentError$("oldState", "the provided value " + $.S(t1) + " is not supported"));
+  }
+  $.ShowHide__finishShow(element);
+  durationMS = effect.startShow$2(element, desiredDuration);
+  if ($.gtB(durationMS, 0)) {
+    values.set$currentState($.CONSTANT12);
+    return $._AnimatingValues_scheduleCleanup(durationMS, element, effect.get$clearAnimation(), $.ShowHide__finishShow);
+  }
+  return $.Future_Future$immediate(true);
+};
+
+$.ShowHide__finishShow = function(element) {
+  var t1, values;
+  t1 = $.get$ShowHide__values();
+  values = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element);
+  t1 = $.ShowHide__getShowDisplayValue(element);
+  element.get$style().set$display(t1);
+  values.set$currentState($.CONSTANT9);
+};
+
+$.ShowHide__requestHide = function(element, desiredDuration, effect) {
+  var t1, t2, durationMS;
+  if (effect == null)
+    effect = $.CONSTANT10;
+  t1 = $.get$ShowHide__values();
+  t2 = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element).get$currentState();
+  switch (t2) {
+    case $.CONSTANT11:
+      return $.Future_Future$immediate(true);
+    case $.CONSTANT8:
+      $.ShowHide__finishHide(element);
+      return $.Future_Future$immediate(true);
+    case $.CONSTANT12:
+      $._AnimatingValues_cancelAnimation(element);
+      break;
+    case $.CONSTANT9:
+      break;
+    default:
+      throw $.$$throw($.DetailedArgumentError$("oldState", "the provided value " + $.S(t2) + " is not supported"));
+  }
+  durationMS = effect.startHide$2(element, desiredDuration);
+  if ($.gtB(durationMS, 0)) {
+    t1 = $.get$ShowHide__values();
+    $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element).set$currentState($.CONSTANT11);
+    return $._AnimatingValues_scheduleCleanup(durationMS, element, effect.get$clearAnimation(), $.ShowHide__finishHide);
+  } else
+    $.ShowHide__finishHide(element);
+  return $.Future_Future$immediate(true);
+};
+
+$.ShowHide__finishHide = function(element) {
+  var t1, values;
+  t1 = $.get$ShowHide__values();
+  values = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element);
+  element.get$style().set$display("none");
+  values.set$currentState($.CONSTANT8);
+};
+
+$.ShowHide__getShowDisplayValue = function(element) {
+  var t1, values;
+  t1 = $.get$ShowHide__values();
+  values = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element);
+  if ($.eqB(values.get$initialComputedDisplay(), "none")) {
+    t1 = $.get$ShowHide__defaultDisplays();
+    return $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element.get$tagName());
+  } else if ($.eqB(values.get$initialLocalDisplay(), "") || $.eqB(values.get$initialLocalDisplay(), "inherit"))
+    return values.get$initialLocalDisplay();
+  else
+    return values.get$initialComputedDisplay();
+};
+
+$.ShowHide__fixDuration = function(duration) {
+  if (duration == null)
+    return 400;
+  else if ($.ltB(duration, 0))
+    return 0;
+  else
+    return duration;
+};
+
+$._ShowHideValues$ = function(initialComputedDisplay, initialLocalDisplay, currentState) {
+  return new $._ShowHideValues(initialComputedDisplay, initialLocalDisplay, currentState);
+};
+
+$._AnimatingValues$_internal = function(_element, _cleanupAction, _finishFunc) {
+  var t1 = new $._AnimatingValues(_element, _cleanupAction, _finishFunc, $.Completer_Completer(), null);
+  t1._AnimatingValues$_internal$3(_element, _cleanupAction, _finishFunc);
+  return t1;
+};
+
+$._AnimatingValues_cancelAnimation = function(element) {
+  var t1 = $.get$_AnimatingValues__aniValues();
+  $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element)._cancel$0();
+};
+
+$._AnimatingValues_scheduleCleanup = function(durationMS, element, cleanupAction, finishAction) {
+  return $._AnimatingValues$_internal(element, cleanupAction, finishAction)._start$1(durationMS);
+};
+
+$.Tools_getDefaultDisplay = function(nodeName) {
+  var t1, storedValue;
+  t1 = $.get$Tools__elemDisplay();
+  storedValue = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, nodeName);
+  if (!(storedValue == null))
+    return $.Future_Future$immediate(storedValue);
+  else
+    return $.Tools__css_defaultDisplay(nodeName).chain$1(new $.Tools_getDefaultDisplay_anon(nodeName)).transform$1(new $.Tools_getDefaultDisplay_anon0());
+};
+
+$.Tools__css_defaultDisplay = function(nodeName) {
+  $.document();
+  return $.Tools__actualDisplay(nodeName, $.document());
+};
+
+$.Tools__defaultDisplayHard = function(nodeName) {
+  var t1;
+  if ($.Tools__iframe == null) {
+    t1 = $.Element_Element$tag("iframe");
+    $.indexSet(t1.get$attributes(), "frameborder", "0");
+    $.indexSet(t1.get$attributes(), "width", "0");
+    $.indexSet(t1.get$attributes(), "height", "0");
+    $.indexSet(t1.get$attributes(), "style", "display: block !important");
+    $.Tools__iframe = t1;
+  }
+  t1 = $.document().get$body().get$children();
+  $.getInterceptor$JSArray(t1).add$1(t1, $.Tools__iframe);
+  $.Tools__iframe.get$contentWindow();
+  throw $.$$throw("damn...");
+};
+
+$.Tools__actualDisplay = function(name$, doc) {
+  var elem = $.Element_Element$tag(name$);
+  doc.get$body().append$1(elem);
+  return elem.getComputedStyle$1("").transform$1(new $.Tools__actualDisplay_anon(elem));
 };
 
 $.Strings__toJsStringArray = function(strings) {
@@ -4528,258 +4774,16 @@ $._metaRequireArgumentNotNullOrEmpty = function(argName) {
     throw $.$$throw($.InvalidOperationError$("That's just sad. Give me a good argName"));
 };
 
-$.Css3TransitionEffect__recordProperties = function(element, properties) {
-  var map, t1, t2, t3;
-  map = $.Map_Map();
-  if (typeof map !== 'object' || map === null || (map.constructor !== Array || !!map.immutable$list) && !map.is$JavaScriptIndexingBehavior())
-    return $.Css3TransitionEffect__recordProperties$bailout(1, element, properties, map);
-  for (t1 = $.CONSTANT1.iterator$0(properties); t1.get$hasNext() === true;) {
-    t2 = t1.next$0();
-    t3 = element.get$style().getPropertyValue$1(t2);
-    if (t2 !== (t2 | 0))
-      throw $.iae(t2);
-    if (t2 < 0 || t2 >= map.length)
-      throw $.ioore(t2);
-    map[t2] = t3;
-  }
-  return map;
-};
-
-$.Css3TransitionEffect__recordProperties$bailout = function(state0, element, properties, map) {
-  var t1, t2;
-  for (t1 = $.CONSTANT1.iterator$0(properties); t1.get$hasNext() === true;) {
-    t2 = t1.next$0();
-    $.indexSet(map, t2, element.get$style().getPropertyValue$1(t2));
-  }
-  return map;
-};
-
-$.ScaleEffect$ = function() {
-  var t1 = $.Map_Map();
-  t1 = new $.ScaleEffect("-webkit-transform", "scale(0, 0)", "scale(1, 1)", t1);
-  t1.Css3TransitionEffect$4("-webkit-transform", "scale(0, 0)", "scale(1, 1)", null);
-  return t1;
-};
-
-$._css3TransitionEffectValues$ = function(element, originalValues) {
-  return new $._css3TransitionEffectValues(element, originalValues, null);
-};
-
-$._css3TransitionEffectValues_delayStart = function(element, originalValues, action) {
-  var t1, value;
-  t1 = $.get$_css3TransitionEffectValues__values();
-  value = $._css3TransitionEffectValues$(element, originalValues);
-  $.indexSet(t1, element, value);
-  value.timeoutHandle = $.window().setTimeout$2(new $._css3TransitionEffectValues_delayStart_anon(action, value), 1);
-};
-
-$._css3TransitionEffectValues_cleanup = function(element) {
-  var t1, value;
-  t1 = $.get$_css3TransitionEffectValues__values();
-  value = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element);
-  $.indexSet($.get$_css3TransitionEffectValues__values(), element, null);
-  return value._cleanup$0();
-};
-
-$.ShowHide_getState = function(element) {
-  var t1, values;
-  t1 = $.get$ShowHide__values();
-  values = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element);
-  if (values == null)
-    return $.ShowHide__populateState(element);
-  else
-    return $.Future_Future$immediate(values.get$currentState());
-};
-
-$.ShowHide_show = function(element, duration, effect) {
-  return $.ShowHide_getState(element).chain$1(new $.ShowHide_show_anon(element, effect, duration));
-};
-
-$.ShowHide_hide = function(element, duration, effect) {
-  return $.ShowHide_getState(element).chain$1(new $.ShowHide_hide_anon(element, effect, duration));
-};
-
-$.ShowHide_toggle = function(element, duration, effect) {
-  return $.ShowHide_getState(element).transform$1(new $.ShowHide_toggle_anon()).chain$1(new $.ShowHide_toggle_anon0(element, effect, duration));
-};
-
-$.ShowHide__populateState = function(element) {
-  return $.Futures_wait([element.getComputedStyle$1(""), $.Tools_getDefaultDisplay(element.get$tagName())]).transform$1(new $.ShowHide__populateState_anon(element));
-};
-
-$.ShowHide__getToggleState = function(state) {
-  switch (state) {
-    case $.CONSTANT8:
-    case $.CONSTANT11:
-      return true;
-    case $.CONSTANT12:
-    case $.CONSTANT9:
-      return false;
-    default:
-      throw $.$$throw($.DetailedArgumentError$("state", "Value of " + $.S(state) + " is not supported"));
-  }
-};
-
-$.ShowHide__requestShow = function(element, desiredDuration, effect) {
-  var t1, values, durationMS;
-  if (effect == null)
-    effect = $.CONSTANT10;
-  t1 = $.get$ShowHide__values();
-  values = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element);
-  t1 = values.get$currentState();
-  switch (t1) {
-    case $.CONSTANT12:
-      return $.Future_Future$immediate(true);
-    case $.CONSTANT9:
-      return $.Future_Future$immediate(true);
-    case $.CONSTANT11:
-      $._AnimatingValues_cancelAnimation(element);
-      break;
-    case $.CONSTANT8:
-      break;
-    default:
-      throw $.$$throw($.DetailedArgumentError$("oldState", "the provided value " + $.S(t1) + " is not supported"));
-  }
-  $.ShowHide__finishShow(element);
-  durationMS = effect.startShow$2(element, desiredDuration);
-  if ($.gtB(durationMS, 0)) {
-    values.set$currentState($.CONSTANT12);
-    return $._AnimatingValues_scheduleCleanup(durationMS, element, effect.get$clearAnimation(), $.ShowHide__finishShow);
-  }
-  return $.Future_Future$immediate(true);
-};
-
-$.ShowHide__finishShow = function(element) {
-  var t1, values;
-  t1 = $.get$ShowHide__values();
-  values = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element);
-  t1 = $.ShowHide__getShowDisplayValue(element);
-  element.get$style().set$display(t1);
-  values.set$currentState($.CONSTANT9);
-};
-
-$.ShowHide__requestHide = function(element, desiredDuration, effect) {
-  var t1, t2, durationMS;
-  if (effect == null)
-    effect = $.CONSTANT10;
-  t1 = $.get$ShowHide__values();
-  t2 = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element).get$currentState();
-  switch (t2) {
-    case $.CONSTANT11:
-      return $.Future_Future$immediate(true);
-    case $.CONSTANT8:
-      $.ShowHide__finishHide(element);
-      return $.Future_Future$immediate(true);
-    case $.CONSTANT12:
-      $._AnimatingValues_cancelAnimation(element);
-      break;
-    case $.CONSTANT9:
-      break;
-    default:
-      throw $.$$throw($.DetailedArgumentError$("oldState", "the provided value " + $.S(t2) + " is not supported"));
-  }
-  durationMS = effect.startHide$2(element, desiredDuration);
-  if ($.gtB(durationMS, 0)) {
-    t1 = $.get$ShowHide__values();
-    $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element).set$currentState($.CONSTANT11);
-    return $._AnimatingValues_scheduleCleanup(durationMS, element, effect.get$clearAnimation(), $.ShowHide__finishHide);
-  } else
-    $.ShowHide__finishHide(element);
-  return $.Future_Future$immediate(true);
-};
-
-$.ShowHide__finishHide = function(element) {
-  var t1, values;
-  t1 = $.get$ShowHide__values();
-  values = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element);
-  element.get$style().set$display("none");
-  values.set$currentState($.CONSTANT8);
-};
-
-$.ShowHide__getShowDisplayValue = function(element) {
-  var t1, values;
-  t1 = $.get$ShowHide__values();
-  values = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element);
-  if ($.eqB(values.get$initialComputedDisplay(), "none")) {
-    t1 = $.get$ShowHide__defaultDisplays();
-    return $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element.get$tagName());
-  } else if ($.eqB(values.get$initialLocalDisplay(), "") || $.eqB(values.get$initialLocalDisplay(), "inherit"))
-    return values.get$initialLocalDisplay();
-  else
-    return values.get$initialComputedDisplay();
-};
-
-$.ShowHide__fixDuration = function(duration) {
-  if (duration == null)
-    return 400;
-  else if ($.ltB(duration, 0))
-    return 0;
-  else
-    return duration;
-};
-
-$._ShowHideValues$ = function(initialComputedDisplay, initialLocalDisplay, currentState) {
-  return new $._ShowHideValues(initialComputedDisplay, initialLocalDisplay, currentState);
-};
-
-$._AnimatingValues$_internal = function(_element, _cleanupAction, _finishFunc) {
-  var t1 = new $._AnimatingValues(_element, _cleanupAction, _finishFunc, $.Completer_Completer(), null);
-  t1._AnimatingValues$_internal$3(_element, _cleanupAction, _finishFunc);
-  return t1;
-};
-
-$._AnimatingValues_cancelAnimation = function(element) {
-  var t1 = $.get$_AnimatingValues__aniValues();
-  $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element)._cancel$0();
-};
-
-$._AnimatingValues_scheduleCleanup = function(durationMS, element, cleanupAction, finishAction) {
-  return $._AnimatingValues$_internal(element, cleanupAction, finishAction)._start$1(durationMS);
-};
-
-$.Tools_getDefaultDisplay = function(nodeName) {
-  var t1, storedValue;
-  t1 = $.get$Tools__elemDisplay();
-  storedValue = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, nodeName);
-  if (!(storedValue == null))
-    return $.Future_Future$immediate(storedValue);
-  else
-    return $.Tools__css_defaultDisplay(nodeName).chain$1(new $.Tools_getDefaultDisplay_anon(nodeName)).transform$1(new $.Tools_getDefaultDisplay_anon0());
-};
-
-$.Tools__css_defaultDisplay = function(nodeName) {
-  $.document();
-  return $.Tools__actualDisplay(nodeName, $.document());
-};
-
-$.Tools__defaultDisplayHard = function(nodeName) {
-  var t1;
-  if ($.Tools__iframe == null) {
-    t1 = $.Element_Element$tag("iframe");
-    $.indexSet(t1.get$attributes(), "frameborder", "0");
-    $.indexSet(t1.get$attributes(), "width", "0");
-    $.indexSet(t1.get$attributes(), "height", "0");
-    $.indexSet(t1.get$attributes(), "style", "display: block !important");
-    $.Tools__iframe = t1;
-  }
-  t1 = $.document().get$body().get$children();
-  $.getInterceptor$JSArray(t1).add$1(t1, $.Tools__iframe);
-  $.Tools__iframe.get$contentWindow();
-  throw $.$$throw("damn...");
-};
-
-$.Tools__actualDisplay = function(name$, doc) {
-  var elem = $.Element_Element$tag(name$);
-  doc.get$body().append$1(elem);
-  return elem.getComputedStyle$1("").transform$1(new $.Tools__actualDisplay_anon(elem));
-};
-
 $._show.call$1 = $._show;
 $._show.$name = "_show";
 $._hide.call$1 = $._hide;
 $._hide.$name = "_hide";
 $._toggle.call$1 = $._toggle;
 $._toggle.$name = "_toggle";
+$.ShowHide__finishShow.call$1 = $.ShowHide__finishShow;
+$.ShowHide__finishShow.$name = "ShowHide__finishShow";
+$.ShowHide__finishHide.call$1 = $.ShowHide__finishHide;
+$.ShowHide__finishHide.$name = "ShowHide__finishHide";
 $.toStringWrapper.call$0 = $.toStringWrapper;
 $.toStringWrapper.$name = "toStringWrapper";
 $.invokeClosure.call$5 = $.invokeClosure;
@@ -4800,10 +4804,6 @@ $.dynamicBind.call$4 = $.dynamicBind;
 $.dynamicBind.$name = "dynamicBind";
 $._completeMeasurementFutures.call$0 = $._completeMeasurementFutures;
 $._completeMeasurementFutures.$name = "_completeMeasurementFutures";
-$.ShowHide__finishShow.call$1 = $.ShowHide__finishShow;
-$.ShowHide__finishShow.$name = "ShowHide__finishShow";
-$.ShowHide__finishHide.call$1 = $.ShowHide__finishHide;
-$.ShowHide__finishHide.$name = "ShowHide__finishHide";
 Isolate.$finishClasses($$);
 $$ = {};
 $.$int = {builtin$cls: '$int'};
@@ -4839,23 +4839,23 @@ $.ShowHideState_HIDDEN = Isolate.$isolateProperties.CONSTANT8;
 $.ShowHideState_SHOWN = Isolate.$isolateProperties.CONSTANT9;
 $.ShowHideState_SHOWING = Isolate.$isolateProperties.CONSTANT12;
 $.ShowHideState_HIDING = Isolate.$isolateProperties.CONSTANT11;
-$._getTypeNameOf = null;
 $._HashMapImpl__DELETED_KEY = Isolate.$isolateProperties.CONSTANT;
+$._getTypeNameOf = null;
 $._HashMapImpl__INITIAL_CAPACITY = 8;
 $.Tools__iframe = null;
-$._cachedBrowserPrefix = null;
 $.Primitives_hashCodeSeed = 0;
-$.Primitives_DOLLAR_CHAR_VALUE = 36;
-$.Primitives_mirrorsEnabled = false;
-$.MIRROR_OPT_IN_MESSAGE = "\nThis program is using an experimental feature called \"mirrors\".  As\ncurrently implemented, mirrors do not work with minification, and will\ncause spurious errors depending on how code was optimized.\n\nThe authors of this program are aware of these problems and have\ndecided the thrill of using an experimental feature is outweighing the\nrisks.  Furthermore, the authors of this program understand that\nlong-term, to fix the problems mentioned above, mirrors may have\nnegative impact on size and performance of Dart programs compiled to\nJavaScript.\n";
 $.ShowHide__defaultDuration = 400;
+$.Primitives_DOLLAR_CHAR_VALUE = 36;
+$._cachedBrowserPrefix = null;
+$.MIRROR_OPT_IN_MESSAGE = "\nThis program is using an experimental feature called \"mirrors\".  As\ncurrently implemented, mirrors do not work with minification, and will\ncause spurious errors depending on how code was optimized.\n\nThe authors of this program are aware of these problems and have\ndecided the thrill of using an experimental feature is outweighing the\nrisks.  Furthermore, the authors of this program understand that\nlong-term, to fix the problems mentioned above, mirrors may have\nnegative impact on size and performance of Dart programs compiled to\nJavaScript.\n";
+$.Primitives_mirrorsEnabled = false;
 $._pendingRequests = null;
-$._measurementScheduler = null;
 $._pendingMeasurementFrameCallbacks = null;
-$._duration = null;
 $.Expando__EXPANDO_PROPERTY_NAME = "expando$values";
-$.Expando__KEY_PROPERTY_NAME = "expando$key";
+$._measurementScheduler = null;
 $.Expando__keyCount = 0;
+$.Expando__KEY_PROPERTY_NAME = "expando$key";
+$._duration = null;
 $.getInterceptor$JSString = function(receiver) {
   if (typeof receiver == 'string')
     return $.JSString.prototype;
@@ -4906,17 +4906,17 @@ Isolate.$lazy($, '_elemDisplay', 'Tools__elemDisplay', 'get$Tools__elemDisplay',
 Isolate.$lazy($, '_defaultDisplays', 'ShowHide__defaultDisplays', 'get$ShowHide__defaultDisplays', function() {
   return $.Map_Map();
 });
-Isolate.$lazy($, '_values', 'ShowHide__values', 'get$ShowHide__values', function() {
-  return $.Expando$("_ShowHideValues");
-});
-Isolate.$lazy($, '_aniValues', '_AnimatingValues__aniValues', 'get$_AnimatingValues__aniValues', function() {
-  return $.Expando$("_AnimatingValues");
-});
 Isolate.$lazy($, 'quoteRegExp', 'quoteRegExp', 'get$quoteRegExp', function() {
   return $.JSSyntaxRegExp$("[-[\\]{}()*+?.,\\\\^$|#\\s]", false, false);
 });
+Isolate.$lazy($, '_values', 'ShowHide__values', 'get$ShowHide__values', function() {
+  return $.Expando$("_ShowHideValues");
+});
 Isolate.$lazy($, '_effect', '_effect', 'get$_effect', function() {
   return $.ScaleEffect$();
+});
+Isolate.$lazy($, '_aniValues', '_AnimatingValues__aniValues', 'get$_AnimatingValues__aniValues', function() {
+  return $.Expando$("_AnimatingValues");
 });
 var $ = null;
 Isolate.$finishClasses($$);
@@ -6134,4 +6134,4 @@ Isolate.$finishIsolateConstructor = function(oldIsolate) {
 };
 }
 
-//@ sourceMappingURL=show_hide_example.dart.js.map
+//@ sourceMappingURL=example.dart.js.map
