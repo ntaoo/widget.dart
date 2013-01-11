@@ -19,26 +19,23 @@ class ShowHide {
   static Future<bool> show(Element element,
       {ShowHideEffect effect, int duration, EffectTiming effectTiming}) {
     return getState(element)
-        .chain((_) => _requestShow(element, _fixDuration(duration), _fixEffect(effect), _fixTiming(effectTiming)));
+        .chain((_) =>
+            _requestEffect(true, element, duration, effect, effectTiming));
   }
 
   static Future<bool> hide(Element element,
       {ShowHideEffect effect, int duration, EffectTiming effectTiming}) {
     return getState(element)
-        .chain((_) => _requestHide(element, _fixDuration(duration), _fixEffect(effect), _fixTiming(effectTiming)));
+        .chain((_) =>
+            _requestEffect(false, element, duration, effect, effectTiming));
   }
 
   static Future<bool> toggle(Element element,
       {ShowHideEffect effect, int duration, EffectTiming effectTiming}) {
     return getState(element)
         .transform(((oldState) => _getToggleState(oldState)))
-        .chain((bool doShow) {
-          if(doShow) {
-            return _requestShow(element, _fixDuration(duration), _fixEffect(effect), _fixTiming(effectTiming));
-          } else {
-            return _requestHide(element, _fixDuration(duration), _fixEffect(effect), _fixTiming(effectTiming));
-          }
-        });
+        .chain((bool doShow) =>
+            _requestEffect(doShow, element, duration, effect, effectTiming));
   }
 
   static Future<ShowHideState> _populateState(Element element) {
@@ -72,6 +69,34 @@ class ShowHide {
         return false;
       default:
         throw new DetailedArgumentError('state', 'Value of $state is not supported');
+    }
+  }
+
+  static Future<bool> _requestEffect(bool doShow, Element element, int desiredDuration,
+      ShowHideEffect effect, EffectTiming effectTiming) {
+
+    //
+    // clean up possible null or invalid values
+    //
+    if(desiredDuration == null) {
+      desiredDuration = _defaultDuration;
+    } else if(desiredDuration < 0) {
+      desiredDuration = 0;
+    }
+
+    effect = ShowHideEffect._orDefault(effect);
+
+    if(effectTiming == null) {
+      effectTiming = EffectTiming.defaultTiming;
+    }
+
+    //
+    // do the transform
+    //
+    if(doShow) {
+      return _requestShow(element, desiredDuration, effect, effectTiming);
+    } else {
+      return _requestHide(element, desiredDuration, effect, effectTiming);
     }
   }
 
@@ -191,28 +216,6 @@ class ShowHide {
         // it was initially visible, cool
         return values.initialComputedDisplay;
       }
-    }
-  }
-
-  static int _fixDuration(int duration) {
-    if(duration == null) {
-      return _defaultDuration;
-    } else if(duration < 0) {
-      return 0;
-    } else {
-      return duration;
-    }
-  }
-
-  static ShowHideEffect _fixEffect(ShowHideEffect effect) {
-    return ShowHideEffect._orDefault(effect);
-  }
-
-  static EffectTiming _fixTiming(EffectTiming timing) {
-    if(timing == null) {
-      return EffectTiming.defaultTiming;
-    } else {
-      return timing;
     }
   }
 }
