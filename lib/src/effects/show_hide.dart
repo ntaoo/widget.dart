@@ -31,7 +31,7 @@ class ShowHide {
         .transform(((oldState) => _getToggleState(oldState)))
         .chain((bool doShow) {
           if(doShow) {
-            return _requestShow(element, duration, effect);
+            return _requestShow(element, _fixDuration(duration), effect);
           } else {
             return _requestHide(element, _fixDuration(duration), effect);
           }
