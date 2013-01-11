@@ -4,13 +4,54 @@ import 'dart:html';
 import '../packages/bot/bot.dart';
 import '../lib/effects.dart';
 
+const int _duration = null;
+
+final element = query('.content');
+
+final actions = {
+  'Show': (Element element, ShowHideEffect effect, int duration) => ShowHide.show(element, effect: effect, duration: duration),
+  'Hide': (Element element, ShowHideEffect effect, int duration) => ShowHide.hide(element, effect: effect, duration: duration),
+  'Toggle': (Element element, ShowHideEffect effect, int duration) => ShowHide.toggle(element, effect: effect, duration: duration)
+};
+
 void main() {
-  query('#show').on.click.add(_show);
-  query('#hide').on.click.add(_hide);
-  query('#toggle').on.click.add(_toggle);
+  final effects =
+    {
+     'Default' : null,
+     'Fade': new FadeEffect(),
+     'Scale': new ScaleEffect(),
+     'Spin': new SpinEffect()
+  };
+
+  final effectsDiv = query('#effects');
+  effects.forEach((name, effect) {
+    effectsDiv.append(_createEffectDiv(name, effect));
+  });
 }
 
-const int _duration = null;
+Element _createEffectDiv(String name, ShowHideEffect effect) {
+  final row = new DivElement();
+  row.append(new SpanElement()..appendText(name));
+
+
+  final div = new DivElement()
+    ..classes.add('btn-group');
+
+  actions.forEach((actionName, action) {
+    final button = new ButtonElement()
+      ..appendText(actionName)
+      ..classes.add('btn')
+      ..on.click.add((_) => action(element, effect, _duration));
+
+    div.append(button);
+  });
+
+  row.append(div);
+
+  return row;
+
+}
+
 final ShowHideEffect _effect = new ScaleEffect();
 
 void _show(args) {
