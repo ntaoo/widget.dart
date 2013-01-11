@@ -4,12 +4,45 @@ class FadeEffect extends Css3TransitionEffect {
   FadeEffect() : super('opacity', '0', '1');
 }
 
+// TODO: orientation
 class ShrinkEffect extends Css3TransitionEffect {
   ShrinkEffect() : super('max-height', '0', '500px', {'overflow': 'hidden'});
 }
 
+// TODO: scale to corner
 class ScaleEffect extends Css3TransitionEffect {
-  ScaleEffect() : super('-webkit-transform', 'scale(0, 0)', 'scale(1, 1)');
+
+  factory ScaleEffect({Orientation orientation, HorizontalAlignment xOffset, VerticalAlignment yOffset}) {
+    String hideValue;
+    switch(orientation) {
+      case Orientation.VERTICAL:
+        hideValue = 'scale(1, 0)';
+        break;
+      case Orientation.HORIZONTAL:
+        hideValue = 'scale(0, 1)';
+        break;
+      default:
+        hideValue = 'scale(0, 0)';
+        break;
+    }
+
+    if(xOffset == null) {
+      xOffset = HorizontalAlignment.CENTER;
+    }
+    final xoValue = xOffset.name;
+
+    if(yOffset == null) {
+      yOffset = VerticalAlignment.MIDDLE;
+    }
+    final yoValue = (yOffset == VerticalAlignment.MIDDLE) ? 'center' : yOffset.name;
+
+    final map = {'-webkit-transform-origin' : '$xoValue $yoValue'};
+
+    return new ScaleEffect._internal(hideValue, 'scale(1, 1)', map);
+  }
+
+  ScaleEffect._internal(String hideValue, String showValue, Map<String, String> values) :
+    super('-webkit-transform', hideValue, showValue, values);
 }
 
 class SpinEffect extends Css3TransitionEffect {

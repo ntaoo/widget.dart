@@ -3,6 +3,16 @@ part of effects;
 // TODO: move the corresponding classes in bot_retained to bot core and
 // use them here, too
 
+class Orientation extends _Enum {
+  static const Orientation HORIZONTAL =
+      const Orientation._internal('horizontal');
+
+  static const Orientation VERTICAL =
+      const Orientation._internal('vertical');
+
+  const Orientation._internal(String name) : super(name);
+}
+
 class HorizontalAlignment extends _Enum {
   static const HorizontalAlignment LEFT =
       const HorizontalAlignment._internal('left');

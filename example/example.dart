@@ -14,6 +14,8 @@ void main() {
      'Door': new DoorEffect(),
      'Fade': new FadeEffect(),
      'Scale': new ScaleEffect(),
+     'Scale [roll up]': new ScaleEffect(orientation: Orientation.VERTICAL, yOffset: VerticalAlignment.TOP),
+     'Scale [corner]': new ScaleEffect(yOffset: VerticalAlignment.TOP, xOffset: HorizontalAlignment.LEFT),
      'Shrink': new ShrinkEffect(),
      'Spin': new SpinEffect()
   };
