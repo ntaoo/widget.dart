@@ -4,6 +4,7 @@ import 'package:widget/effects.dart';
 
 class Expander extends WebComponent {
   const String _expanderDivSelector = '#-x-expander-container';
+  static final ShowHideEffect _effect = new ShrinkEffect();
 
   bool _isExpanded = true;
   DivElement _expanderDiv;
@@ -30,9 +31,9 @@ class Expander extends WebComponent {
   void _toggle() {
     assert(_expanderDiv != null);
     if(_isExpanded) {
-      ShowHide.hide(_expanderDiv);
+      ShowHide.hide(_expanderDiv, effect: _effect);
     } else {
-      ShowHide.show(_expanderDiv);
+      ShowHide.show(_expanderDiv, effect: _effect);
     }
     _isExpanded = !_isExpanded;
   }

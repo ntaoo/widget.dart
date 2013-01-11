@@ -4,6 +4,8 @@ import 'package:widget/effects.dart';
 
 class Dropdown extends WebComponent {
   const String _dropdownDivSelector = '#-x-dropdown-container';
+  static final ShowHideEffect _effect = new FadeEffect();
+  static const int _duration = 100;
 
   bool _isExpanded = false;
   DivElement _expanderDiv;
@@ -15,11 +17,11 @@ class Dropdown extends WebComponent {
     if(value != _isExpanded) {
       _isExpanded = value;
       if(_isExpanded) {
-        ShowHide.show(_expanderDiv);
+        ShowHide.show(_expanderDiv, effect: _effect, duration: _duration);
         _expanderDiv.style.display = '';
         _headerElem.style.background = '#EEE';
       } else {
-        ShowHide.hide(_expanderDiv);
+        ShowHide.hide(_expanderDiv, effect: _effect, duration: _duration);
         _headerElem.style.background = 'lightgray';
       }
     }
