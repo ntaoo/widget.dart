@@ -12,6 +12,7 @@ void main() {
      'Default' : null,
      'Fade': new FadeEffect(),
      'Scale': new ScaleEffect(),
+     'Shrink': new ShrinkEffect(),
      'Spin': new SpinEffect()
   };
 

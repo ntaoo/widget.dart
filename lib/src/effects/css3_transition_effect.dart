@@ -72,6 +72,10 @@ class FadeEffect extends Css3TransitionEffect {
   FadeEffect() : super('opacity', '0', '1');
 }
 
+class ShrinkEffect extends Css3TransitionEffect {
+  ShrinkEffect() : super('max-height', '0', '500px', {'overflow': 'hidden'});
+}
+
 class ScaleEffect extends Css3TransitionEffect {
   ScaleEffect() : super('-webkit-transform', 'scale(0, 0)', 'scale(1, 1)');
 }
