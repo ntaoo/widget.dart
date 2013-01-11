@@ -16,24 +16,24 @@ class ShowHide {
     }
   }
 
-  static Future<bool> show(Element element, {ShowHideEffect effect, int duration: _defaultDuration}) {
+  static Future<bool> show(Element element, {ShowHideEffect effect, int duration}) {
     return getState(element)
-        .chain((_) => _requestShow(element, duration, effect));
+        .chain((_) => _requestShow(element, _fixDuration(duration), effect));
   }
 
-  static Future<bool> hide(Element element, {ShowHideEffect effect, int duration: _defaultDuration}) {
+  static Future<bool> hide(Element element, {ShowHideEffect effect, int duration}) {
     return getState(element)
-        .chain((_) => _requestHide(element, duration, effect));
+        .chain((_) => _requestHide(element, _fixDuration(duration), effect));
   }
 
-  static Future<bool> toggle(Element element, {ShowHideEffect effect, int duration: _defaultDuration}) {
+  static Future<bool> toggle(Element element, {ShowHideEffect effect, int duration}) {
     return getState(element)
         .transform(((oldState) => _getToggleState(oldState)))
         .chain((bool doShow) {
           if(doShow) {
             return _requestShow(element, duration, effect);
           } else {
-            return _requestHide(element, duration, effect);
+            return _requestHide(element, _fixDuration(duration), effect);
           }
         });
   }
@@ -180,6 +180,16 @@ class ShowHide {
         // it was initially visible, cool
         return values.initialComputedDisplay;
       }
+    }
+  }
+
+  static int _fixDuration(int duration) {
+    if(duration == null) {
+      return _defaultDuration;
+    } else if(duration < 0) {
+      return 0;
+    } else {
+      return duration;
     }
   }
 }
