@@ -17,3 +17,4 @@ part 'src/effects/effect_timing.dart';
 part 'src/effects/show_hide.dart';
 part 'src/effects/show_hide_effect.dart';
 part 'src/effects/show_hide_state.dart';
+part 'src/effects/alignment.dart';
