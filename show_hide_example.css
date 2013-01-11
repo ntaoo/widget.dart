@@ -1,0 +1,7 @@
+#textParagraph {
+  text-align:justify;
+  margin: 10px;
+  width: 300px;
+  background: lightgray;
+  padding: 3px;
+}
