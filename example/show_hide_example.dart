@@ -30,15 +30,6 @@ void _forAllContent(Func1<Element, Future> action) {
 }
 
 void _applyAnimation(Element element, Func1<Element, Future> action) {
-  _updateThing('starting...');
   action(element)
-    ..then(_updateThing)
     ..transformException((ex) => print(ex));
-}
-
-void _updateThing(value) {
-  if(value == null) {
-    value = '~null~';
-  }
-  query('#lastValue').innerHtml = value.toString();
 }
