@@ -14,11 +14,6 @@ part 'show_hide_tests.dart';
 
 void main() {
   group('effects', () {
-    test('asserts should be enabled', () {
-      expect(() { assert(false); }, throwsAssertionError);
-      expect(() { assert(true); }, returnsNormally);
-    });
-
     registerAnimationCoreTests();
     registerElementAnimationTests();
     registerShowHideTests();
