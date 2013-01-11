@@ -1285,6 +1285,9 @@ $$.ObjectInterceptor = {"":"Object;",
  endsWith$1: function(receiver, a0) {
   return receiver.endsWith$1(a0);
 },
+ substring$2: function(receiver, a0, a1) {
+  return receiver.substring$2(a0, a1);
+},
  trim$0: function(receiver) {
   return receiver.trim$0();
 },
@@ -1303,8 +1306,8 @@ $$.ObjectInterceptor = {"":"Object;",
  toLowerCase$0: function(receiver) {
   return receiver.toLowerCase$0();
 },
- split$1: function(receiver, a0) {
-  return receiver.split$1(a0);
+ addAll$1: function(receiver, a0) {
+  return receiver.addAll$1(a0);
 },
  ceil$0: function(receiver) {
   return receiver.ceil$0();
@@ -1315,8 +1318,8 @@ $$.ObjectInterceptor = {"":"Object;",
  get$last: function(receiver) {
   return receiver.get$last();
 },
- addAll$1: function(receiver, a0) {
-  return receiver.addAll$1(a0);
+ split$1: function(receiver, a0) {
+  return receiver.split$1(a0);
 }
 };
 
@@ -2315,10 +2318,10 @@ $$.FilteredElementList = {"":"Object;_node,_childNodes",
  is$Collection: function() { return true; }
 };
 
-$$._AttributeClassSet = {"":"CssClassSet;_liblib2$_element>",
+$$._AttributeClassSet = {"":"CssClassSet;_liblib1$_element>",
  readClasses$0: function() {
   var t1, classname, s, t2, t3, trimmed;
-  t1 = this._liblib2$_element.get$attributes();
+  t1 = this._liblib1$_element.get$attributes();
   classname = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, "class");
   s = $.Set_Set();
   if (classname == null)
@@ -2333,7 +2336,7 @@ $$._AttributeClassSet = {"":"CssClassSet;_liblib2$_element>",
 },
  writeClasses$1: function(s) {
   var list = $.List_List$from(s);
-  $.indexSet(this._liblib2$_element.get$attributes(), "class", $.Strings_join(list, " "));
+  $.indexSet(this._liblib1$_element.get$attributes(), "class", $.Strings_join(list, " "));
 }
 };
 
@@ -2346,7 +2349,7 @@ $$._Enum = {"":"Object;",
 $$._ShowHideValues = {"":"Object;initialComputedDisplay>,initialLocalDisplay>,currentState="
 };
 
-$$._AnimatingValues = {"":"Object;_liblib1$_element>,_cleanupAction,_finishFunc,_completer,_setTimeoutHandle",
+$$._AnimatingValues = {"":"Object;_liblib2$_element>,_cleanupAction,_finishFunc,_completer,_setTimeoutHandle",
  _cleanupAction$1: function(arg0) {
   return this._cleanupAction.call$1(arg0);
 },
@@ -2354,33 +2357,33 @@ $$._AnimatingValues = {"":"Object;_liblib1$_element>,_cleanupAction,_finishFunc,
   return this._finishFunc.call$1(arg0);
 },
  _start$1: function(durationMS) {
-  this._setTimeoutHandle = $.window().setTimeout$2(this.get$_liblib1$_complete(), durationMS);
+  this._setTimeoutHandle = $.window().setTimeout$2(this.get$_liblib2$_complete(), durationMS);
   return this._completer.get$future();
 },
  _cancel$0: function() {
   $.window().clearTimeout$1(this._setTimeoutHandle);
-  var t1 = this._liblib1$_element;
+  var t1 = this._liblib2$_element;
   this._cleanupAction$1(t1);
   $.indexSet($.get$_AnimatingValues__aniValues(), t1, null);
   this._completer.complete$1(false);
 },
- _liblib1$_complete$0: function() {
-  var t1 = this._liblib1$_element;
+ _liblib2$_complete$0: function() {
+  var t1 = this._liblib2$_element;
   this._cleanupAction$1(t1);
   $.indexSet($.get$_AnimatingValues__aniValues(), t1, null);
   this._finishFunc$1(t1);
   this._completer.complete$1(true);
 },
- get$_liblib1$_complete: function() {
-  return new $.BoundClosure(this, '_liblib1$_complete$0');
+ get$_liblib2$_complete: function() {
+  return new $.BoundClosure(this, '_liblib2$_complete$0');
 },
  _cleanup$0: function() {
-  var t1 = this._liblib1$_element;
+  var t1 = this._liblib2$_element;
   this._cleanupAction$1(t1);
   $.indexSet($.get$_AnimatingValues__aniValues(), t1, null);
 },
  _AnimatingValues$_internal$3: function(_element, _cleanupAction, _finishFunc) {
-  $.indexSet($.get$_AnimatingValues__aniValues(), this._liblib1$_element, this);
+  $.indexSet($.get$_AnimatingValues__aniValues(), this._liblib2$_element, this);
 }
 };
 
@@ -2444,6 +2447,9 @@ $$.Css3TransitionEffect = {"":"ShowHideEffect;",
 $$.FadeEffect = {"":"Css3TransitionEffect;_property,_hideValue,_showValue,_animatingOverrides"
 };
 
+$$.ShrinkEffect = {"":"Css3TransitionEffect;_property,_hideValue,_showValue,_animatingOverrides"
+};
+
 $$.ScaleEffect = {"":"Css3TransitionEffect;_property,_hideValue,_showValue,_animatingOverrides"
 };
 
@@ -2478,7 +2484,20 @@ $$.InvalidOperationError = {"":"Object;message>"
 
 $$.main_anon = {"":"Closure;effectsDiv_0",
  call$2: function(name$, effect) {
-  this.effectsDiv_0.append$1($._createEffectDiv(name$, effect));
+  var button, t1;
+  button = $.ButtonElement_ButtonElement();
+  button.appendText$1(name$);
+  t1 = button.get$classes();
+  $.getInterceptor$JSArray(t1).add$1(t1, "btn");
+  t1 = button.get$on().get$click();
+  $.getInterceptor$JSArray(t1).add$1(t1, new $.main__anon(effect));
+  this.effectsDiv_0.append$1(button);
+}
+};
+
+$$.main__anon = {"":"Closure;effect_1",
+ call$1: function(_) {
+  return $._toggle(this.effect_1);
 }
 };
 
@@ -2530,6 +2549,12 @@ $$.NoSuchMethodError_toString_anon = {"":"Closure;box_0",
 }
 };
 
+$$._HashMapImpl__HashMapImpl$from_anon = {"":"Closure;result_0",
+ call$2: function(key, value) {
+  $.indexSet(this.result_0, key, value);
+}
+};
+
 $$.FilteredElementList__filtered_anon = {"":"Closure;",
  call$1: function(n) {
   return typeof n === 'object' && n !== null && n.is$Element();
@@ -2552,40 +2577,55 @@ $$.FilteredElementList_removeRange_anon = {"":"Closure;",
 }
 };
 
-$$._createEffectDiv_anon = {"":"Closure;effect_0,div_1",
- call$2: function(actionName, action) {
-  var button, t1;
-  button = $.ButtonElement_ButtonElement();
-  button.appendText$1(actionName);
-  t1 = button.get$classes();
-  $.getInterceptor$JSArray(t1).add$1(t1, "btn");
-  t1 = button.get$on().get$click();
-  $.getInterceptor$JSArray(t1).add$1(t1, new $._createEffectDiv__anon(this.effect_0, action));
-  this.div_1.append$1(button);
+$$.invokeClosure_anon = {"":"Closure;closure_0",
+ call$0: function() {
+  return this.closure_0.call$0();
 }
 };
 
-$$._createEffectDiv__anon = {"":"Closure;effect_2,action_3",
- call$1: function(_) {
-  return this.action_3.call$3($.get$element(), this.effect_2, null);
+$$.invokeClosure_anon0 = {"":"Closure;closure_1,arg1_2",
+ call$0: function() {
+  return this.closure_1.call$1(this.arg1_2);
 }
 };
 
-$$.anon = {"":"Closure;",
- call$3: function(element, effect, duration) {
-  return $.ShowHide_show(element, duration, effect);
+$$.invokeClosure_anon1 = {"":"Closure;closure_3,arg1_4,arg2_5",
+ call$0: function() {
+  return this.closure_3.call$2(this.arg1_4, this.arg2_5);
 }
 };
 
-$$.anon0 = {"":"Closure;",
- call$3: function(element, effect, duration) {
-  return $.ShowHide_hide(element, duration, effect);
+$$.CssClassSet_clear_anon = {"":"Closure;",
+ call$1: function(s) {
+  return $.getInterceptor$JSArray(s).clear$0(s);
 }
 };
 
-$$.anon1 = {"":"Closure;",
- call$3: function(element, effect, duration) {
-  return $.ShowHide_toggle(element, duration, effect);
+$$._HashSetImpl_filter_anon = {"":"Closure;f_0,result_1",
+ call$2: function(key, value) {
+  var t1;
+  if (this.f_0.call$1(key) === true) {
+    t1 = this.result_1;
+    $.getInterceptor$JSArray(t1).add$1(t1, key);
+  }
+}
+};
+
+$$._HashSetImpl_forEach_anon = {"":"Closure;f_0",
+ call$2: function(key, value) {
+  this.f_0.call$1(key);
+}
+};
+
+$$.CssClassSet_add_anon = {"":"Closure;value_0",
+ call$1: function(s) {
+  return $.getInterceptor$JSArray(s).add$1(s, this.value_0);
+}
+};
+
+$$._toggle_anon = {"":"Closure;effect_0",
+ call$1: function(e) {
+  $.ShowHide_toggle(e, null, this.effect_0);
 }
 };
 
@@ -2710,24 +2750,6 @@ $$.ConstantMap_forEach_anon = {"":"Closure;this_0,f_1",
 $$.Element_getComputedStyle_anon = {"":"Closure;this_0,pseudoElement_1",
  call$0: function() {
   return $.window().$$dom_getComputedStyle$2(this.this_0, this.pseudoElement_1);
-}
-};
-
-$$.invokeClosure_anon = {"":"Closure;closure_0",
- call$0: function() {
-  return this.closure_0.call$0();
-}
-};
-
-$$.invokeClosure_anon0 = {"":"Closure;closure_1,arg1_2",
- call$0: function() {
-  return this.closure_1.call$1(this.arg1_2);
-}
-};
-
-$$.invokeClosure_anon1 = {"":"Closure;closure_3,arg1_4,arg2_5",
- call$0: function() {
-  return this.closure_3.call$2(this.arg1_4, this.arg2_5);
 }
 };
 
@@ -3135,6 +3157,18 @@ $$._css3TransitionEffectValues_delayStart_anon = {"":"Closure;action_0,value_1",
 }
 };
 
+$$.CssClassSet_addAll_anon = {"":"Closure;collection_0",
+ call$1: function(s) {
+  return $.getInterceptor$JSArray(s).addAll$1(s, this.collection_0);
+}
+};
+
+$$._HashSetImpl_addAll_anon = {"":"Closure;this_0",
+ call$1: function(value) {
+  $.indexSet(this.this_0.get$_backingMap(), value, value);
+}
+};
+
 $$.Storage_keys_anon = {"":"Closure;keys_0",
  call$2: function(k, v) {
   var t1 = this.keys_0;
@@ -3164,58 +3198,6 @@ $$._HashMapImpl_keys_anon = {"":"Closure;box_0,list_1",
 }
 };
 
-$$.ShowHide_hide_anon = {"":"Closure;element_0,effect_1,duration_2",
- call$1: function(_) {
-  return $.ShowHide__requestHide(this.element_0, $.ShowHide__fixDuration(this.duration_2), this.effect_1);
-}
-};
-
-$$.ShowHide_show_anon = {"":"Closure;element_0,effect_1,duration_2",
- call$1: function(_) {
-  return $.ShowHide__requestShow(this.element_0, $.ShowHide__fixDuration(this.duration_2), this.effect_1);
-}
-};
-
-$$.CssClassSet_clear_anon = {"":"Closure;",
- call$1: function(s) {
-  return $.getInterceptor$JSArray(s).clear$0(s);
-}
-};
-
-$$._HashSetImpl_filter_anon = {"":"Closure;f_0,result_1",
- call$2: function(key, value) {
-  var t1;
-  if (this.f_0.call$1(key) === true) {
-    t1 = this.result_1;
-    $.getInterceptor$JSArray(t1).add$1(t1, key);
-  }
-}
-};
-
-$$._HashSetImpl_forEach_anon = {"":"Closure;f_0",
- call$2: function(key, value) {
-  this.f_0.call$1(key);
-}
-};
-
-$$._HashSetImpl_addAll_anon = {"":"Closure;this_0",
- call$1: function(value) {
-  $.indexSet(this.this_0.get$_backingMap(), value, value);
-}
-};
-
-$$.CssClassSet_addAll_anon = {"":"Closure;collection_0",
- call$1: function(s) {
-  return $.getInterceptor$JSArray(s).addAll$1(s, this.collection_0);
-}
-};
-
-$$.CssClassSet_add_anon = {"":"Closure;value_0",
- call$1: function(s) {
-  return $.getInterceptor$JSArray(s).add$1(s, this.value_0);
-}
-};
-
 $$.Closure = {"":"Object;",
  toString$0: function() {
   return "Closure";
@@ -3236,24 +3218,14 @@ $$.BoundClosure1 = {"":"Closure;self,target", call$2: function(p0, p1) {
 };
 $.main = function() {
   var effects, effectsDiv;
-  effects = $.makeLiteralMap(["Default", null, "Fade", $.FadeEffect$(), "Scale", $.ScaleEffect$(), "Spin", $.SpinEffect$()]);
+  effects = $.makeLiteralMap(["Default", null, "Fade", $.FadeEffect$(), "Scale", $.ScaleEffect$(), "Shrink", $.ShrinkEffect$(), "Spin", $.SpinEffect$()]);
   effectsDiv = $.query("#effects");
   $.getInterceptor$JSArray(effects).forEach$1(effects, new $.main_anon(effectsDiv));
 };
 
-$._createEffectDiv = function(name$, effect) {
-  var row, t1, div;
-  row = $.DivElement_DivElement();
-  t1 = $.SpanElement_SpanElement();
-  t1.appendText$1(name$);
-  row.append$1(t1);
-  div = $.DivElement_DivElement();
-  t1 = div.get$classes();
-  $.getInterceptor$JSArray(t1).add$1(t1, "btn-group");
-  t1 = $.get$actions();
-  $.getInterceptor$JSArray(t1).forEach$1(t1, new $._createEffectDiv_anon(effect, div));
-  row.append$1(div);
-  return row;
+$._toggle = function(effect) {
+  var t1 = $.queryAll(".content");
+  $.getInterceptor$JSArray(t1).forEach$1(t1, new $._toggle_anon(effect));
 };
 
 $.Css3TransitionEffect__recordProperties = function(element, properties) {
@@ -3287,6 +3259,15 @@ $.FadeEffect$ = function() {
   t1 = new $.FadeEffect("opacity", "0", "1", t1);
   t1.Css3TransitionEffect$4("opacity", "0", "1", null);
   return t1;
+};
+
+$.ShrinkEffect$ = function() {
+  var t1, t2;
+  t1 = $.makeLiteralMap(["overflow", "hidden"]);
+  t2 = t1 == null ? $.Map_Map() : $.Map_Map$from(t1);
+  t2 = new $.ShrinkEffect("max-height", "0", "500px", t2);
+  t2.Css3TransitionEffect$4("max-height", "0", "500px", t1);
+  return t2;
 };
 
 $.ScaleEffect$ = function() {
@@ -3331,14 +3312,6 @@ $.ShowHide_getState = function(element) {
     return $.ShowHide__populateState(element);
   else
     return $.Future_Future$immediate(values.get$currentState());
-};
-
-$.ShowHide_show = function(element, duration, effect) {
-  return $.ShowHide_getState(element).chain$1(new $.ShowHide_show_anon(element, effect, duration));
-};
-
-$.ShowHide_hide = function(element, duration, effect) {
-  return $.ShowHide_getState(element).chain$1(new $.ShowHide_hide_anon(element, effect, duration));
 };
 
 $.ShowHide_toggle = function(element, duration, effect) {
@@ -4565,6 +4538,10 @@ $.Map_Map = function() {
   return $._HashMapImpl$();
 };
 
+$.Map_Map$from = function(other) {
+  return $._HashMapImpl__HashMapImpl$from(other);
+};
+
 $.HashMap_HashMap = function() {
   return $._HashMapImpl$();
 };
@@ -4577,6 +4554,12 @@ $._HashMapImpl$ = function() {
   var t1 = new $._HashMapImpl(null, null, null, null, null);
   t1._HashMapImpl$0();
   return t1;
+};
+
+$._HashMapImpl__HashMapImpl$from = function(other) {
+  var result = $._HashMapImpl$();
+  $.getInterceptor$JSArray(other).forEach$1(other, new $._HashMapImpl__HashMapImpl$from_anon(result));
+  return result;
 };
 
 $._HashMapImpl__computeLoadLimit = function(capacity) {
@@ -4677,6 +4660,10 @@ $.query = function(selector) {
   return $.document().query$1(selector);
 };
 
+$.queryAll = function(selector) {
+  return $.document().queryAll$1(selector);
+};
+
 $.BodyElementEvents$ = function(_ptr) {
   return new $.BodyElementEvents(_ptr);
 };
@@ -4773,10 +4760,6 @@ $.MutationObserver_supported = function() {
 
 $._ChildNodeListLazy$ = function(_this) {
   return new $._ChildNodeListLazy(_this);
-};
-
-$.SpanElement_SpanElement = function() {
-  return $.document().$$dom_createElement$1("span");
 };
 
 $.Text_Text = function(data) {
@@ -5063,6 +5046,7 @@ $$ = {};
 $.$int = {builtin$cls: '$int'};
 $.String = {builtin$cls: 'String'};
 $.List = {builtin$cls: 'List'};
+$.Element = {builtin$cls: 'Element'};
 $.Node = {builtin$cls: 'Node'};
 $.CssStyleDeclaration = {builtin$cls: 'CssStyleDeclaration'};
 $.bool = {builtin$cls: 'bool'};
@@ -5088,20 +5072,20 @@ $.CONSTANT8 = new Isolate.$isolateProperties.ShowHideState("hidden");
 $.CONSTANT11 = new Isolate.$isolateProperties.ShowHideState("hidding");
 $.CONSTANT0 = new Isolate.$isolateProperties.JSArray();
 $.CONSTANT4 = new Isolate.$isolateProperties.JSNumber();
-$.Tools__iframe = null;
 $._getTypeNameOf = null;
+$.Tools__iframe = null;
 $.ShowHide__defaultDuration = 400;
-$._HashMapImpl__DELETED_KEY = Isolate.$isolateProperties.CONSTANT3;
-$._HashMapImpl__INITIAL_CAPACITY = 8;
-$._cachedBrowserPrefix = null;
-$.Primitives_hashCodeSeed = 0;
 $.Expando__EXPANDO_PROPERTY_NAME = "expando$values";
-$.Expando__keyCount = 0;
 $.Expando__KEY_PROPERTY_NAME = "expando$key";
-$.Primitives_DOLLAR_CHAR_VALUE = 36;
+$.Expando__keyCount = 0;
+$._cachedBrowserPrefix = null;
 $.ShowHideState_SHOWN = Isolate.$isolateProperties.CONSTANT9;
 $.ShowHideState_HIDDEN = Isolate.$isolateProperties.CONSTANT8;
 $.ShowHideState_SHOWING = Isolate.$isolateProperties.CONSTANT12;
+$._HashMapImpl__DELETED_KEY = Isolate.$isolateProperties.CONSTANT3;
+$._HashMapImpl__INITIAL_CAPACITY = 8;
+$.Primitives_hashCodeSeed = 0;
+$.Primitives_DOLLAR_CHAR_VALUE = 36;
 $.ShowHideState_HIDING = Isolate.$isolateProperties.CONSTANT11;
 $._pendingRequests = null;
 $._pendingMeasurementFrameCallbacks = null;
@@ -5148,29 +5132,23 @@ $.getInterceptor$JSArray = function(receiver) {
     return $.JSArray.prototype;
   return $.ObjectInterceptor.prototype;
 };
-Isolate.$lazy($, '_elemDisplay', 'Tools__elemDisplay', 'get$Tools__elemDisplay', function() {
-  return $.Map_Map();
-});
 Isolate.$lazy($, '_values', '_css3TransitionEffectValues__values', 'get$_css3TransitionEffectValues__values', function() {
   return $.Expando$("_css3TransitionEffectValues");
 });
 Isolate.$lazy($, '_aniValues', '_AnimatingValues__aniValues', 'get$_AnimatingValues__aniValues', function() {
   return $.Expando$("_AnimatingValues");
 });
-Isolate.$lazy($, '_defaultDisplays', 'ShowHide__defaultDisplays', 'get$ShowHide__defaultDisplays', function() {
-  return $.Map_Map();
-});
 Isolate.$lazy($, 'quoteRegExp', 'quoteRegExp', 'get$quoteRegExp', function() {
   return $.JSSyntaxRegExp$("[-[\\]{}()*+?.,\\\\^$|#\\s]", false, false);
 });
+Isolate.$lazy($, '_elemDisplay', 'Tools__elemDisplay', 'get$Tools__elemDisplay', function() {
+  return $.Map_Map();
+});
+Isolate.$lazy($, '_defaultDisplays', 'ShowHide__defaultDisplays', 'get$ShowHide__defaultDisplays', function() {
+  return $.Map_Map();
+});
 Isolate.$lazy($, '_values', 'ShowHide__values', 'get$ShowHide__values', function() {
   return $.Expando$("_ShowHideValues");
-});
-Isolate.$lazy($, 'element', 'element', 'get$element', function() {
-  return $.query(".content");
-});
-Isolate.$lazy($, 'actions', 'actions', 'get$actions', function() {
-  return $.makeLiteralMap(["Show", new $.anon(), "Hide", new $.anon0(), "Toggle", new $.anon1()]);
 });
 var $ = null;
 Isolate.$finishClasses($$);
@@ -5305,13 +5283,123 @@ $.$defineNativeClass('Document', {"":"$$dom_body:body~",
  $$dom_getElementById$1: function(elementId) {
   return this.getElementById(elementId);
 },
+ $$dom_getElementsByName$1: function(elementName) {
+  return this.getElementsByName(elementName);
+},
+ $$dom_getElementsByTagName$1: function(tagname) {
+  return this.getElementsByTagName(tagname);
+},
  $$dom_querySelector$1: function(selectors) {
   return this.querySelector(selectors);
+},
+ $$dom_querySelectorAll$1: function(selectors) {
+  return this.querySelectorAll(selectors);
 },
  query$1: function(selectors) {
   if ($.RegExp_RegExp("^#[_a-zA-Z]\\w*$", false, false).hasMatch$1(selectors) === true)
     return this.$$dom_getElementById$1($.CONSTANT1.substring$1(selectors, 1));
   return this.$$dom_querySelector$1(selectors);
+},
+ queryAll$1: function(selectors) {
+  var mutableMatches, t2, len, copyOfMatches, t1, i;
+  if ($.RegExp_RegExp("^\\[name=[\"'][^'\"]+['\"]\\]$", false, false).hasMatch$1(selectors) === true) {
+    mutableMatches = this.$$dom_getElementsByName$1($.CONSTANT1.substring$2(selectors, 7, selectors.length - 2));
+    if (typeof mutableMatches !== 'string' && (typeof mutableMatches !== 'object' || mutableMatches === null || mutableMatches.constructor !== Array && !mutableMatches.is$JavaScriptIndexingBehavior()))
+      return this.queryAll$1$bailout(1, mutableMatches);
+    t2 = $.getInterceptor$JSStringJSArray(mutableMatches);
+    len = mutableMatches.length;
+    copyOfMatches = $.List_List(len);
+    for (t1 = mutableMatches.length, i = 0; i < len; ++i) {
+      if (i >= t1)
+        throw $.ioore(i);
+      copyOfMatches[i] = mutableMatches[i];
+    }
+    return $._FrozenElementList$_wrap(copyOfMatches);
+  } else if ($.RegExp_RegExp("^[*a-zA-Z0-9]+$", false, false).hasMatch$1(selectors) === true) {
+    mutableMatches = this.$$dom_getElementsByTagName$1(selectors);
+    if (typeof mutableMatches !== 'string' && (typeof mutableMatches !== 'object' || mutableMatches === null || mutableMatches.constructor !== Array && !mutableMatches.is$JavaScriptIndexingBehavior()))
+      return this.queryAll$1$bailout(3, mutableMatches);
+    t2 = $.getInterceptor$JSStringJSArray(mutableMatches);
+    len = mutableMatches.length;
+    copyOfMatches = $.List_List(len);
+    for (t1 = mutableMatches.length, i = 0; i < len; ++i) {
+      if (i >= t1)
+        throw $.ioore(i);
+      copyOfMatches[i] = mutableMatches[i];
+    }
+    return $._FrozenElementList$_wrap(copyOfMatches);
+  } else
+    return $._FrozenElementList$_wrap(this.$$dom_querySelectorAll$1(selectors));
+},
+ queryAll$1$bailout: function(state0, env0, env1, env2) {
+  switch (state0) {
+    case 1:
+      mutableMatches = env0;
+      break;
+    case 2:
+      len = env2;
+      t2 = env1;
+      mutableMatches = env0;
+      break;
+    case 3:
+      mutableMatches = env0;
+      break;
+    case 4:
+      mutableMatches = env2;
+      len = env1;
+      t2 = env0;
+      break;
+  }
+  switch (state0) {
+    case 0:
+    default:
+      var mutableMatches, t2, len, copyOfMatches, i, t1;
+      if (state0 === 2 || state0 === 1 || state0 === 0 && $.RegExp_RegExp("^\\[name=[\"'][^'\"]+['\"]\\]$", false, false).hasMatch$1(selectors) === true)
+        switch (state0) {
+          case 0:
+            mutableMatches = this.$$dom_getElementsByName$1($.CONSTANT1.substring$2(selectors, 7, selectors.length - 2));
+          case 1:
+            state0 = 0;
+            t2 = $.getInterceptor$JSStringJSArray(mutableMatches);
+            len = t2.get$length(mutableMatches);
+          case 2:
+            state0 = 0;
+            copyOfMatches = $.List_List(len);
+            for (i = 0; $.ltB(i, len); ++i) {
+              t1 = t2.operator$index$1(mutableMatches, i);
+              if (i >= copyOfMatches.length)
+                throw $.ioore(i);
+              copyOfMatches[i] = t1;
+            }
+            return $._FrozenElementList$_wrap(copyOfMatches);
+        }
+      else
+        switch (state0) {
+          case 0:
+          default:
+            if (state0 === 4 || state0 === 3 || state0 === 0 && $.RegExp_RegExp("^[*a-zA-Z0-9]+$", false, false).hasMatch$1(selectors) === true)
+              switch (state0) {
+                case 0:
+                  mutableMatches = this.$$dom_getElementsByTagName$1(selectors);
+                case 3:
+                  state0 = 0;
+                  t2 = $.getInterceptor$JSStringJSArray(mutableMatches);
+                  len = t2.get$length(mutableMatches);
+                case 4:
+                  state0 = 0;
+                  copyOfMatches = $.List_List(len);
+                  for (i = 0; $.ltB(i, len); ++i) {
+                    t1 = t2.operator$index$1(mutableMatches, i);
+                    if (i >= copyOfMatches.length)
+                      throw $.ioore(i);
+                    copyOfMatches[i] = t1;
+                  }
+                  return $._FrozenElementList$_wrap(copyOfMatches);
+              }
+            else
+              return $._FrozenElementList$_wrap(this.$$dom_querySelectorAll$1(selectors));
+        }
+  }
 }
 });
 
@@ -5323,6 +5411,9 @@ $.$defineNativeClass('DocumentFragment', {
 },
  query$1: function(selectors) {
   return this.$$dom_querySelector$1(selectors);
+},
+ queryAll$1: function(selectors) {
+  return $._FrozenElementList$_wrap(this.$$dom_querySelectorAll$1(selectors));
 },
  _insertAdjacentNode$2: function(where, node) {
   var t1, first;
@@ -5389,6 +5480,9 @@ $.$defineNativeClass('DocumentFragment', {
 },
  $$dom_querySelector$1: function(selectors) {
   return this.querySelector(selectors);
+},
+ $$dom_querySelectorAll$1: function(selectors) {
+  return this.querySelectorAll(selectors);
 }
 });
 
@@ -5417,6 +5511,9 @@ $.$defineNativeClass('Element', {"":"$$dom_children:children~,hidden=,$$dom_clas
 },
  query$1: function(selectors) {
   return this.$$dom_querySelector$1(selectors);
+},
+ queryAll$1: function(selectors) {
+  return $._FrozenElementList$_wrap(this.$$dom_querySelectorAll$1(selectors));
 },
  get$classes: function() {
   if (Object.getPrototypeOf(this).hasOwnProperty('get$classes')) {
@@ -5499,6 +5596,9 @@ $.$defineNativeClass('Element', {"":"$$dom_children:children~,hidden=,$$dom_clas
 },
  $$dom_querySelector$1: function(selectors) {
   return this.querySelector(selectors);
+},
+ $$dom_querySelectorAll$1: function(selectors) {
+  return this.querySelectorAll(selectors);
 },
  $$dom_removeAttribute$1: function(name) {
   return this.removeAttribute(name);
@@ -6180,7 +6280,7 @@ $.$defineNativeClass('SVGUseElement', {
 // 201 classes
 // 18 !leaf
 (function() {
-  var v0_MediaElement = 'HTMLMediaElement|HTMLVideoElement|HTMLAudioElement', v1_SvgElement = 'SVGElement|SVGAElement|SVGAltGlyphDefElement|SVGTextContentElement|SVGTextPositioningElement|SVGAltGlyphElement|SVGTRefElement|SVGTSpanElement|SVGTextElement|SVGTextPathElement|SVGAltGlyphItemElement|SVGAnimationElement|SVGAnimateColorElement|SVGAnimateElement|SVGAnimateMotionElement|SVGAnimateTransformElement|SVGSetElement|SVGCircleElement|SVGClipPathElement|SVGComponentTransferFunctionElement|SVGFEFuncGElement|SVGFEFuncRElement|SVGFEFuncAElement|SVGFEFuncBElement|SVGDefsElement|SVGDescElement|SVGCursorElement|SVGEllipseElement|SVGFEBlendElement|SVGFECompositeElement|SVGFEColorMatrixElement|SVGFEComponentTransferElement|SVGFEDisplacementMapElement|SVGFEDiffuseLightingElement|SVGFEDistantLightElement|SVGFEMergeElement|SVGFEDropShadowElement|SVGFEMorphologyElement|SVGFESpotLightElement|SVGFEFloodElement|SVGFEImageElement|SVGFEMergeNodeElement|SVGFontElement|SVGFEGaussianBlurElement|SVGFEPointLightElement|SVGFESpecularLightingElement|SVGFontFaceSrcElement|SVGFETileElement|SVGFontFaceNameElement|SVGFilterElement|SVGGlyphElement|SVGForeignObjectElement|SVGGradientElement|SVGLinearGradientElement|SVGRadialGradientElement|SVGImageElement|SVGHKernElement|SVGFontFaceUriElement|SVGFontFaceElement|SVGFETurbulenceElement|SVGMPathElement|SVGMaskElement|SVGGElement|SVGMetadataElement|SVGMissingGlyphElement|SVGFEOffsetElement|SVGPathElement|SVGFontFaceFormatElement|SVGFEConvolveMatrixElement|SVGMarkerElement|SVGLineElement|SVGGlyphRefElement|SVGPatternElement|SVGPolygonElement|SVGPolylineElement|SVGRectElement|SVGScriptElement|SVGStopElement|SVGStyleElement|SVGSVGElement|SVGSymbolElement|SVGTitleElement|SVGSwitchElement|SVGUseElement|SVGVKernElement|SVGViewElement', v2_Element = [v0_MediaElement, v1_SvgElement, 'Element|HTMLUListElement|HTMLUnknownElement|HTMLElement|HTMLAnchorElement|HTMLAppletElement|HTMLAreaElement|HTMLBRElement|HTMLBaseElement|HTMLBaseFontElement|HTMLBodyElement|HTMLButtonElement|HTMLCanvasElement|HTMLContentElement|HTMLDListElement|HTMLDataListElement|HTMLDetailsElement|HTMLDirectoryElement|HTMLDivElement|HTMLEmbedElement|HTMLFieldSetElement|HTMLFontElement|HTMLFormElement|HTMLFrameElement|HTMLFrameSetElement|HTMLHRElement|HTMLHeadElement|HTMLHeadingElement|HTMLHtmlElement|HTMLIFrameElement|HTMLImageElement|HTMLInputElement|HTMLKeygenElement|HTMLLIElement|HTMLLabelElement|HTMLLegendElement|HTMLLinkElement|HTMLMapElement|HTMLMarqueeElement|HTMLMenuElement|HTMLMetaElement|HTMLMeterElement|HTMLModElement|HTMLOListElement|HTMLObjectElement|HTMLOptGroupElement|HTMLOptionElement|HTMLOutputElement|HTMLParagraphElement|HTMLParamElement|HTMLPreElement|HTMLProgressElement|HTMLQuoteElement|HTMLScriptElement|HTMLSelectElement|HTMLShadowElement|HTMLSourceElement|HTMLSpanElement|HTMLStyleElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableColElement|HTMLTableElement|HTMLTableRowElement|HTMLTableSectionElement|HTMLTextAreaElement|HTMLTitleElement|HTMLTrackElement'].join('|'), v3_CharacterData = 'CharacterData|Comment|Text|CDATASection', v4_Document = 'Document|SVGDocument|HTMLDocument', v5_DocumentFragment = 'DocumentFragment|ShadowRoot', v6_Node = [v2_Element, v3_CharacterData, v4_Document, v5_DocumentFragment, 'Node|Attr|DocumentType|EntityReference|Notation|ProcessingInstruction'].join('|'), v7_Uint8Array = 'Uint8Array|Uint8ClampedArray';
+  var v0_MediaElement = 'HTMLMediaElement|HTMLVideoElement|HTMLAudioElement', v1_SvgElement = 'SVGElement|SVGAElement|SVGAltGlyphDefElement|SVGTextContentElement|SVGTextPositioningElement|SVGAltGlyphElement|SVGTRefElement|SVGTSpanElement|SVGTextElement|SVGTextPathElement|SVGAltGlyphItemElement|SVGAnimationElement|SVGAnimateColorElement|SVGAnimateElement|SVGAnimateMotionElement|SVGAnimateTransformElement|SVGSetElement|SVGCircleElement|SVGClipPathElement|SVGComponentTransferFunctionElement|SVGFEFuncAElement|SVGFEFuncGElement|SVGFEFuncRElement|SVGFEFuncBElement|SVGDefsElement|SVGDescElement|SVGCursorElement|SVGEllipseElement|SVGFEBlendElement|SVGFECompositeElement|SVGFEColorMatrixElement|SVGFEDropShadowElement|SVGFEFloodElement|SVGFEDiffuseLightingElement|SVGFEComponentTransferElement|SVGFEDistantLightElement|SVGFEMergeElement|SVGFEGaussianBlurElement|SVGFEImageElement|SVGFESpecularLightingElement|SVGFEMorphologyElement|SVGFESpotLightElement|SVGFEDisplacementMapElement|SVGFEOffsetElement|SVGFEPointLightElement|SVGFontFaceNameElement|SVGFontFaceSrcElement|SVGFETurbulenceElement|SVGForeignObjectElement|SVGFontFaceFormatElement|SVGGlyphRefElement|SVGGradientElement|SVGLinearGradientElement|SVGRadialGradientElement|SVGFontFaceElement|SVGImageElement|SVGGlyphElement|SVGFontElement|SVGFETileElement|SVGFilterElement|SVGMPathElement|SVGMarkerElement|SVGMaskElement|SVGMetadataElement|SVGMissingGlyphElement|SVGFEMergeNodeElement|SVGPathElement|SVGFEConvolveMatrixElement|SVGFontFaceUriElement|SVGGElement|SVGHKernElement|SVGLineElement|SVGPatternElement|SVGPolygonElement|SVGPolylineElement|SVGRectElement|SVGScriptElement|SVGStopElement|SVGStyleElement|SVGSVGElement|SVGSymbolElement|SVGTitleElement|SVGSwitchElement|SVGUseElement|SVGViewElement|SVGVKernElement', v2_Element = [v0_MediaElement, v1_SvgElement, 'Element|HTMLUListElement|HTMLUnknownElement|HTMLElement|HTMLAnchorElement|HTMLAppletElement|HTMLAreaElement|HTMLBRElement|HTMLBaseElement|HTMLBaseFontElement|HTMLBodyElement|HTMLCanvasElement|HTMLButtonElement|HTMLContentElement|HTMLDListElement|HTMLDataListElement|HTMLDetailsElement|HTMLDirectoryElement|HTMLDivElement|HTMLEmbedElement|HTMLFieldSetElement|HTMLFontElement|HTMLFormElement|HTMLFrameElement|HTMLFrameSetElement|HTMLHRElement|HTMLHeadElement|HTMLHeadingElement|HTMLHtmlElement|HTMLIFrameElement|HTMLImageElement|HTMLInputElement|HTMLKeygenElement|HTMLLIElement|HTMLLabelElement|HTMLLegendElement|HTMLLinkElement|HTMLMapElement|HTMLMarqueeElement|HTMLMenuElement|HTMLMetaElement|HTMLMeterElement|HTMLModElement|HTMLOListElement|HTMLObjectElement|HTMLOptGroupElement|HTMLOptionElement|HTMLOutputElement|HTMLParagraphElement|HTMLParamElement|HTMLPreElement|HTMLProgressElement|HTMLQuoteElement|HTMLScriptElement|HTMLSelectElement|HTMLShadowElement|HTMLSourceElement|HTMLSpanElement|HTMLStyleElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableColElement|HTMLTableElement|HTMLTableRowElement|HTMLTableSectionElement|HTMLTextAreaElement|HTMLTitleElement|HTMLTrackElement'].join('|'), v3_CharacterData = 'CharacterData|Comment|Text|CDATASection', v4_Document = 'Document|SVGDocument|HTMLDocument', v5_DocumentFragment = 'DocumentFragment|ShadowRoot', v6_Node = [v2_Element, v3_CharacterData, v4_Document, v5_DocumentFragment, 'Node|Attr|DocumentType|EntityReference|Notation|ProcessingInstruction'].join('|'), v7_Uint8Array = 'Uint8Array|Uint8ClampedArray';
   $.dynamicSetMetadata([['Uint8Array', v7_Uint8Array], ['HTMLMediaElement', v0_MediaElement], ['SVGElement', v1_SvgElement], ['Element', v2_Element], ['CharacterData', v3_CharacterData], ['Document', v4_Document], ['DocumentFragment', v5_DocumentFragment], ['Node', v6_Node], ['EventTarget', [v6_Node, 'EventTarget|DOMWindow'].join('|')], ['NodeList', 'NodeList|RadioNodeList'], ['ArrayBufferView', [v7_Uint8Array, 'ArrayBufferView'].join('|')], ['HTMLCollection', 'HTMLCollection|HTMLFormControlsCollection|HTMLOptionsCollection']]);
 })();
 
