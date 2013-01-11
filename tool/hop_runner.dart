@@ -12,6 +12,8 @@ void main() {
   final paths = ['web/out/index.html_bootstrap.dart'];
   addTask('dart2js', createDart2JsTask(paths));
 
+  addTask('example_dart2js', createDart2JsTask(['example/show_hide_example.dart']));
+
   runHopCore();
 }
 
