@@ -14,6 +14,8 @@ void main() {
 
   addTask('example_dart2js', createDart2JsTask(['example/example.dart']));
 
+  addTask('test_dart2js', createDart2JsTask(['test/browser_test_harness.dart']));
+
   //
   // gh_pages
   //
