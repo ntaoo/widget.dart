@@ -219,11 +219,11 @@ Future<Tuple3<String, String, ShowHideState>> _getValues(String tag, String shee
 Func1<Element, Future> _getAction(String action) {
   switch(action) {
     case 'show':
-      return ShowHide.instance.show;
+      return (e) => ShowHide.instance.show(e);
     case 'hide':
-      return ShowHide.instance.hide;
+      return (e) => ShowHide.instance.hide(e);
     case 'toggle':
-      return ShowHide.instance.toggle;
+      return (e) => ShowHide.instance.toggle(e);
     default:
       throw 'action "$action" is not supported';
   }

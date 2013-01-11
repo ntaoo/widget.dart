@@ -14,4 +14,4 @@ part 'src/effects/tools.dart';
 part 'src/effects/show_hide.dart';
 part 'src/effects/show_hide_effect.dart';
 part 'src/effects/show_hide_state.dart';
-part 'src/effects/fade_effect.dart';
+part 'src/effects/css3_transition_effect.dart';

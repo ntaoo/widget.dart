@@ -10,18 +10,20 @@ void main() {
   query('#toggle').on.click.add(_toggle);
 }
 
-final _showHide = new ShowHide(new FadeEffect());
+final _showHide = new ShowHide(new VerticalScaleEffect());
+
+const int _duration = 1000;
 
 void _show(args) {
-  _forAllContent(_showHide.show);
+  _forAllContent((e) => _showHide.show(e, _duration));
 }
 
 void _hide(args) {
-  _forAllContent(_showHide.hide);
+  _forAllContent((e) => _showHide.hide(e, _duration));
 }
 
 void _toggle(args) {
-  _forAllContent(_showHide.toggle);
+  _forAllContent((e) => _showHide.toggle(e, _duration));
 }
 
 void _forAllContent(Func1<Element, Future> action) {

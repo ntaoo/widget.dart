@@ -70,6 +70,7 @@ class _AnimatingValues {
 }
 
 class ShowHide {
+  static const int _defaultDuration = 400;
   static final Map<String, String> _defaultDisplays = new Map<String, String>();
   static final Expando<_ShowHideValues> _values = new Expando<_ShowHideValues>('_ShowHideValues');
 
@@ -91,24 +92,24 @@ class ShowHide {
     }
   }
 
-  Future<bool> show(Element element) {
+  Future<bool> show(Element element, [int duration = _defaultDuration]) {
     return getState(element)
-        .chain((_) => _requestShow(element));
+        .chain((_) => _requestShow(element, duration));
   }
 
-  Future<bool> hide(Element element) {
+  Future<bool> hide(Element element, [int duration = _defaultDuration]) {
     return getState(element)
-        .chain((_) => _requestHide(element));
+        .chain((_) => _requestHide(element, duration));
   }
 
-  Future<bool> toggle(Element element) {
+  Future<bool> toggle(Element element, [int duration = _defaultDuration]) {
     return getState(element)
         .transform(((oldState) => _getToggleState(oldState)))
         .chain((bool doShow) {
           if(doShow) {
-            return _requestShow(element);
+            return _requestShow(element, duration);
           } else {
-            return _requestHide(element);
+            return _requestHide(element, duration);
           }
         });
   }
@@ -147,7 +148,7 @@ class ShowHide {
     }
   }
 
-  Future<bool> _requestShow(Element element) {
+  Future<bool> _requestShow(Element element, int desiredDuration) {
     final values = _values[element];
 
     switch(values.currentState) {
@@ -171,7 +172,7 @@ class ShowHide {
 
     assert(!_AnimatingValues.isAnimating(element));
     _finishShow(element);
-    final durationMS = _effect.startShow(element);
+    final durationMS = _effect.startShow(element, desiredDuration);
     if(durationMS > 0) {
 
       // _finishShow sets the currentState to shown, but we know better since we're animating
@@ -191,7 +192,7 @@ class ShowHide {
     values.currentState = ShowHideState.SHOWN;
   }
 
-  Future<bool> _requestHide(Element element) {
+  Future<bool> _requestHide(Element element, int desiredDuration) {
     final values = _values[element];
 
     switch(values.currentState) {
@@ -215,7 +216,7 @@ class ShowHide {
     }
 
     assert(!_AnimatingValues.isAnimating(element));
-    final durationMS = _effect.startHide(element);
+    final durationMS = _effect.startHide(element, desiredDuration);
     if(durationMS > 0) {
       _values[element].currentState = ShowHideState.HIDING;
       return _AnimatingValues.scheduleCleanup(durationMS, element, _effect.clearAnimation, _finishHide);
