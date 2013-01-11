@@ -1,8 +1,8 @@
 library hide_show;
 
 import 'dart:html';
-import '../packages/bot/bot.dart';
-import '../lib/effects.dart';
+import 'package:bot/bot.dart';
+import 'package:widget/effects.dart';
 
 const int _duration = null;
 final EffectTiming _timing = null;
