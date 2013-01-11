@@ -10,6 +10,7 @@ void main() {
   final effects =
     {
      'Default' : null,
+     'Door': new DoorEffect(),
      'Fade': new FadeEffect(),
      'Scale': new ScaleEffect(),
      'Shrink': new ShrinkEffect(),
