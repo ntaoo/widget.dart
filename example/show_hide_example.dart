@@ -10,8 +10,8 @@ void main() {
   query('#toggle').on.click.add(_toggle);
 }
 
-const int _duration = 400;
-final ShowHideEffect _effect = new SpinEffect();
+const int _duration = null;
+final ShowHideEffect _effect = new ScaleEffect();
 
 void _show(args) {
   _forAllContent((e) => ShowHide.show(e, duration: _duration, effect: _effect));
