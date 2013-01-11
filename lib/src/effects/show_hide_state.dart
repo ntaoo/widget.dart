@@ -7,7 +7,7 @@ class ShowHideState extends _Enum {
   static const ShowHideState HIDING = const ShowHideState._internal('hidding');
 
   static ShowHideState byName(String name) {
-    return $([SHOWN, HIDDEN, SHOWING, HIDING]).singleOrDefault((shs) => shs.name == name);
+    return $([SHOWN, HIDDEN, SHOWING, HIDING]).singleOrDefault((shs) => shs.cssName == name);
   }
 
   const ShowHideState._internal(String name) : super(name);

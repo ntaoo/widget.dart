@@ -5,12 +5,12 @@ class ShowHideEffect {
   const ShowHideEffect();
 
   @protected
-  int startShow(Element element, int desiredDuration) {
+  int startShow(Element element, int desiredDuration, EffectTiming timing) {
     return 0;
   }
 
   @protected
-  int startHide(Element element, int desiredDuration) {
+  int startHide(Element element, int desiredDuration, EffectTiming timing) {
     return 0;
   }
 

@@ -11,8 +11,9 @@ part 'src/effects/time_manager.dart';
 part 'src/effects/_enum.dart';
 part 'src/effects/tools.dart';
 
+part 'src/effects/css3_transition_effect.dart';
+part 'src/effects/css3_transition_effects.dart';
+part 'src/effects/effect_timing.dart';
 part 'src/effects/show_hide.dart';
 part 'src/effects/show_hide_effect.dart';
 part 'src/effects/show_hide_state.dart';
-part 'src/effects/css3_transition_effect.dart';
-part 'src/effects/css3_transition_effects.dart';

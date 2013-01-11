@@ -13,16 +13,18 @@ class Css3TransitionEffect extends ShowHideEffect {
     assert(_reservedProperties.every((p) => !_animatingOverrides.containsKey(p)));
   }
 
-  int startShow(Element element, int desiredDuration) {
-    return _startAnimation(element, desiredDuration, _hideValue, _showValue);
+  int startShow(Element element, int desiredDuration, EffectTiming timing) {
+    return _startAnimation(element, desiredDuration, _hideValue, _showValue, timing);
   }
 
-  int startHide(Element element, int desiredDuration) {
-    return _startAnimation(element, desiredDuration, _showValue, _hideValue);
+  int startHide(Element element, int desiredDuration, EffectTiming timing) {
+    return _startAnimation(element, desiredDuration, _showValue, _hideValue, timing);
   }
 
-  int _startAnimation(Element element, int desiredDuration, String startValue, String endValue) {
+  int _startAnimation(Element element, int desiredDuration,
+                      String startValue, String endValue, EffectTiming timing) {
     assert(desiredDuration > 0);
+    assert(timing != null);
 
     final localPropsToKeep = [_property];
     localPropsToKeep.addAll(_animatingOverrides.keys);
@@ -35,13 +37,14 @@ class Css3TransitionEffect extends ShowHideEffect {
 
     element.style.setProperty(_property, startValue);
     _css3TransitionEffectValues.delayStart(element, localValues,
-        () => _setShowValue(element, endValue, desiredDuration));
+        () => _setShowValue(element, endValue, desiredDuration, timing));
     return desiredDuration;
   }
 
   void clearAnimation(Element element) {
     final restorValues = _css3TransitionEffectValues.cleanup(element);
 
+    element.style.transitionTimingFunction = '';
     element.style.transitionProperty = '';
     element.style.transitionDuration = '';
 
@@ -50,7 +53,10 @@ class Css3TransitionEffect extends ShowHideEffect {
     });
   }
 
-  void _setShowValue(Element element, String value, int desiredDuration) {
+  void _setShowValue(Element element, String value, int desiredDuration, EffectTiming timing) {
+    final cssTimingValue = CssEffectTiming._getCssValue(timing);
+
+    element.style.transitionTimingFunction = cssTimingValue;
     element.style.transitionProperty = _property;
     element.style.transitionDuration = '${desiredDuration}ms';
     element.style.setProperty(_property, value);
