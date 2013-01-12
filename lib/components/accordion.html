@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <element name="x-accordion" extends="div">
+      <template>
+        <style type='text/css' scoped>
+          .accordion-group-x {
+            margin-bottom: 2px;
+            border: 1px solid #e5e5e5;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+          }
+          .accordion-heading-x {
+          }
+          .accordion-toggle-x {
+            display: block;
+            padding: 8px 15px;
+            cursor: pointer;
+          }
+          .accordion-body-x {
+            display: none;
+            border-top: 1px solid #e5e5e5;
+          }
+          </style>
+        <content></content>
+      </template>
+      <script type="application/dart" src='accordion.dart'></script>
+    </element>
+  </body>
+</html>

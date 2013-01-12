@@ -4,6 +4,7 @@
   <head>
     <meta charset="utf-8">
     <title>Dart Widgets</title>
+    <link rel="components" href="packages/widget/components/accordion.html">
     <link rel="components" href="packages/widget/components/headered_content.html">
     <link rel="components" href="packages/widget/components/expander.html">
     <link rel="components" href="packages/widget/components/dropdown.html">
@@ -12,6 +13,29 @@
   </head>
 
   <body style='font-family: Helvetica, Open Sans, sans-serif;'>
+    <x-headered-content header="Accordion">
+      <x-accordion>
+        <item header='Item 1'>
+          <ul>
+            <li>Item 1 content</li>
+            <li>Some more item 1 content</li>
+          </ul>
+        </item>
+        <item header='Item 2'>
+          <ul>
+            <li>Item 2 content</li>
+            <li>Some more item 2 content</li>
+          </ul>
+        </item>
+        <item header='Item 3'>
+          <ul>
+            <li>Item 3 content</li>
+            <li>Some more item 3 content</li>
+          </ul>
+        </item>
+      </x-accordion>
+    </x-headered-content>
+
     <x-headered-content header="HeaderedContent">
       <x-headered-content header='This is the header'>
         <ul>
