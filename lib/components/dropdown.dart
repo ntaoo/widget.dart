@@ -4,6 +4,8 @@ import 'package:widget/effects.dart';
 
 class Dropdown extends WebComponent {
   const String _dropdownDivSelector = '#dropdown-content-x';
+  const String _headerOpenClass = 'dropdown-toggle-x';
+
   static final ShowHideEffect _effect = new FadeEffect();
   static const int _duration = 100;
 
@@ -19,9 +21,9 @@ class Dropdown extends WebComponent {
       final action = _isExpanded ? ShowHideAction.SHOW : ShowHideAction.HIDE;
 
       if(_isExpanded) {
-        _headerElem.style.background = '#EEE';
+        _headerElem.classes.add(_headerOpenClass);
       } else {
-        _headerElem.style.background = 'lightgray';
+        _headerElem.classes.remove(_headerOpenClass);
       }
 
       ShowHide.begin(action, _expanderDiv, effect: _effect);
