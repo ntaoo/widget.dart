@@ -30,11 +30,8 @@ class Expander extends WebComponent {
 
   void _toggle() {
     assert(_expanderDiv != null);
-    if(_isExpanded) {
-      ShowHide.hide(_expanderDiv, effect: _effect);
-    } else {
-      ShowHide.show(_expanderDiv, effect: _effect);
-    }
+    final action = _isExpanded ? ShowHideAction.HIDE : ShowHideAction.SHOW;
+    ShowHide.begin(action, _expanderDiv, effect: _effect);
     _isExpanded = !_isExpanded;
   }
 }

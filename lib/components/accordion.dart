@@ -36,11 +36,8 @@ class Accordion extends WebComponent {
     final bodies = this.queryAll('.$_bodyClass');
     bodies.forEach((Element e) {
       final localId = int.parse(e.dataAttributes[_groupIdKey]);
-      if(localId == groupId) {
-        ShowHide.show(e, effect: _effect);
-      } else {
-        ShowHide.hide(e, effect: _effect);
-      }
+      final action = (localId == groupId) ? ShowHideAction.SHOW: ShowHideAction.HIDE;
+      ShowHide.begin(action, e, effect: _effect);
     });
   }
 
