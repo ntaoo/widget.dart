@@ -35,17 +35,14 @@ class Dropdown extends WebComponent {
     isExpanded = !isExpanded;
   }
 
-  String get header => attributes['header'];
-
-  void set header(String value) {
-    attributes['header'] = value;
-  }
-
   void inserted() {
     assert(_expanderDiv == null);
     assert(_headerElem == null);
     _expanderDiv = this.query(_dropdownDivSelector);
     _headerElem = this.query('header');
+    if(_headerElem != null) {
+      _headerElem.on.click.add((_) => toggle());
+    }
     assert(_expanderDiv != null);
     assert(_headerElem != null);
   }

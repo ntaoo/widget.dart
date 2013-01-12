@@ -9,7 +9,8 @@
             border-radius: 10px;
             margin: 10px;
           }
-          #expander-header-x {
+
+          #expander-container-x header {
             cursor: pointer;
             color: #333;
             background: lightgray;
@@ -22,7 +23,7 @@
           }
         </style>
         <div id='expander-container-x'>
-          <header id='expander-header-x' on-click="_toggle()">{{header}}</header>
+          <content select='header'></content>
           <div id='expander-content-x'>
             <content></content>
           </div>

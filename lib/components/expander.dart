@@ -8,24 +8,28 @@ class Expander extends WebComponent {
 
   bool _isExpanded = true;
   DivElement _expanderDiv;
+  Element _header;
 
   bool get isExpanded => _isExpanded;
-
-  String get header => attributes['header'];
-
-  void set header(String value) {
-    attributes['header'] = value;
-  }
 
   void inserted() {
     assert(_expanderDiv == null);
     _expanderDiv = this.query(_expanderDivSelector);
     assert(_expanderDiv != null);
+
+    assert(_header == null);
+    _header = this.query('header');
+    if(_header != null) {
+      _header.on.click.add((_) => _toggle());
+    }
   }
 
   void removed() {
     assert(_expanderDiv != null);
     _expanderDiv = null;
+
+    // TODO: some how remove the click handler?
+    _header = null;
   }
 
   void _toggle() {
