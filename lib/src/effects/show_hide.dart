@@ -1,5 +1,13 @@
 part of effects;
 
+class ShowHideAction extends _Enum {
+  static const ShowHideAction SHOW = const ShowHideAction._internal("show");
+  static const ShowHideAction HIDE = const ShowHideAction._internal('hide');
+  static const ShowHideAction TOGGLE = const ShowHideAction._internal('toggle');
+
+  const ShowHideAction._internal(String name) : super(name);
+}
+
 class ShowHide {
   static const int _defaultDuration = 400;
   static final Map<String, String> _defaultDisplays = new Map<String, String>();
@@ -18,22 +26,25 @@ class ShowHide {
 
   static Future<bool> show(Element element,
       {ShowHideEffect effect, int duration, EffectTiming effectTiming}) {
-    return getState(element)
-        .chain((_) =>
-            _requestEffect(true, element, duration, effect, effectTiming));
+    return begin(ShowHideAction.SHOW, element, effect: effect, duration: duration, effectTiming: effectTiming);
   }
 
   static Future<bool> hide(Element element,
       {ShowHideEffect effect, int duration, EffectTiming effectTiming}) {
-    return getState(element)
-        .chain((_) =>
-            _requestEffect(false, element, duration, effect, effectTiming));
+    return begin(ShowHideAction.HIDE, element, effect: effect, duration: duration, effectTiming: effectTiming);
   }
 
   static Future<bool> toggle(Element element,
       {ShowHideEffect effect, int duration, EffectTiming effectTiming}) {
+    return begin(ShowHideAction.TOGGLE, element, effect: effect, duration: duration, effectTiming: effectTiming);
+  }
+
+  static Future<bool> begin(ShowHideAction action, Element element,
+      {ShowHideEffect effect, int duration, EffectTiming effectTiming}) {
+    assert(action != null);
+    assert(element != null);
     return getState(element)
-        .transform(((oldState) => _getToggleState(oldState)))
+        .transform(((oldState) => _getToggleState(action, oldState)))
         .chain((bool doShow) =>
             _requestEffect(doShow, element, duration, effect, effectTiming));
   }
@@ -57,18 +68,26 @@ class ShowHide {
         });
   }
 
-  static bool _getToggleState(ShowHideState state) {
-    // true for show
-    // false for hide
-    switch(state) {
-      case ShowHideState.HIDDEN:
-      case ShowHideState.HIDING:
+  static bool _getToggleState(ShowHideAction action, ShowHideState state) {
+    switch(action) {
+      case ShowHideAction.SHOW:
         return true;
-      case ShowHideState.SHOWING:
-      case ShowHideState.SHOWN:
+      case ShowHideAction.HIDE:
         return false;
+      case ShowHideAction.TOGGLE:
+        switch(state) {
+          case ShowHideState.HIDDEN:
+          case ShowHideState.HIDING:
+            return true;
+          case ShowHideState.SHOWING:
+          case ShowHideState.SHOWN:
+            return false;
+          default:
+            throw new DetailedArgumentError('state', 'Value of $state is not supported');
+        }
+        break;
       default:
-        throw new DetailedArgumentError('state', 'Value of $state is not supported');
+        throw new DetailedArgumentError('action', 'Value of $action is not supported');
     }
   }
 
