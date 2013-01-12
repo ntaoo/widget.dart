@@ -3,7 +3,7 @@ import 'package:web_ui/web_ui.dart';
 import 'package:widget/effects.dart';
 
 class Expander extends WebComponent {
-  const String _expanderDivSelector = '#-x-expander-container';
+  const String _expanderDivSelector = '#expander-content-x';
   static final ShowHideEffect _effect = new ShrinkEffect();
 
   bool _isExpanded = true;

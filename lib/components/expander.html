@@ -3,9 +3,27 @@
   <body>
     <element name="x-expander" extends="div">
       <template>
-        <div style='border: 1px lightgray solid; border-radius: 10px; margin: 10px;'>
-          <header on-click="_toggle()" style='cursor: pointer; color: #333; background: lightgray; margin: -1px; border: 1px lightgray solid; border-radius: 10px 10px 0 0; padding: 15px; display: block;'>{{header}}</header>
-          <div id='-x-expander-container' style='padding: 5px;'>
+        <style type='text/css' scoped>
+          #expander-container-x {
+            border: 1px lightgray solid;
+            border-radius: 10px;
+            margin: 10px;
+          }
+          #expander-header-x {
+            cursor: pointer;
+            color: #333;
+            background: lightgray;
+            margin: -1px;
+            border: 1px lightgray solid;
+            border-radius: 10px 10px 0 0; padding: 15px; display: block;
+          }
+          #expander-content-x {
+            padding: 5px;
+          }
+        </style>
+        <div id='expander-container-x'>
+          <header id='expander-header-x' on-click="_toggle()">{{header}}</header>
+          <div id='expander-content-x'>
             <content></content>
           </div>
         </div>

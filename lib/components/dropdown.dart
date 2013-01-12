@@ -3,7 +3,7 @@ import 'package:web_ui/web_ui.dart';
 import 'package:widget/effects.dart';
 
 class Dropdown extends WebComponent {
-  const String _dropdownDivSelector = '#-x-dropdown-container';
+  const String _dropdownDivSelector = '#dropdown-content-x';
   static final ShowHideEffect _effect = new FadeEffect();
   static const int _duration = 100;
 
