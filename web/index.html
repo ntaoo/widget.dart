@@ -13,7 +13,8 @@
   </head>
 
   <body style='font-family: Helvetica, Open Sans, sans-serif;'>
-    <x-headered-content header="Accordion">
+    <x-headered-content>
+      <header>Accordion</header>
       <x-accordion>
         <item header='Item 1'>
           <ul>
@@ -36,8 +37,10 @@
       </x-accordion>
     </x-headered-content>
 
-    <x-headered-content header="HeaderedContent">
-      <x-headered-content header='This is the header'>
+    <x-headered-content>
+      <header>HeaderedContent</header>
+      <x-headered-content>
+        <header>This is the header</header>
         <ul>
           <li>This is some</li>
           <li>content</li>
@@ -45,7 +48,8 @@
       </x-headered-content>
     </x-headered-content>
 
-    <x-headered-content header="Expander">
+    <x-headered-content>
+      <header>Expander</header>
       <x-expander>
         <header>Click to toggle expand/collapse</header>
         <ul>
@@ -55,7 +59,8 @@
       </x-expander>
     </x-headered-content>
 
-    <x-headered-content header="Dropdown">
+    <x-headered-content>
+      <header>Dropdown</header>
       <x-dropdown>
         <header>Click me!</header>
         <ul>

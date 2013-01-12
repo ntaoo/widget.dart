@@ -3,9 +3,27 @@
   <body>
     <element name="x-headered-content" extends="div">
       <template>
-        <div style='border: 1px lightgray solid; border-radius: 10px; margin: 10px;'>
-          <header style='font-weight: bold; color: #333; background: lightgray; margin: -1px 0 0 -1px; border: 1px lightgray solid; border-radius: 10px 0 10px 0; padding: 15px; display: inline-block;'>{{header}}</header>
-          <div style='padding: 5px;'>
+        <style type='text/css' scoped>
+          .headered-content-container-x {
+            border: 1px lightgray solid; border-radius: 10px; margin: 10px;
+          }
+          .headered-content-container-x header {
+            font-weight: bold;
+            color: #333;
+            background: lightgray;
+            margin: -1px 0 0 -1px;
+            border: 1px lightgray solid;
+            border-radius: 10px 0 10px 0;
+            padding: 15px;
+            display: inline-block;
+          }
+          .headered-content-content {
+            padding: 5px;
+          }
+        </style>
+        <div class='headered-content-container-x'>
+          <content select='header'></content>
+          <div class='headered-content-content'>
             <content></content>
           </div>
         </div>
