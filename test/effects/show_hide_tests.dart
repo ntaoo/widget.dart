@@ -50,20 +50,19 @@ void _registerTest(String tag, String sheetStyle, String inlineStyle) {
       });
     });
 
-    final actions = ['show', 'hide', 'toggle'];
+    final actions = [ShowHideAction.SHOW, ShowHideAction.HIDE, ShowHideAction.TOGGLE];
 
     for(final a1 in actions) {
 
-      test(a1, () {
+      test(a1.name, () {
         final element = query('.sample');
-        final action = _getAction(a1);
 
         String initialCalculatedValue;
 
         final futureTuple = element.getComputedStyle('')
             .chain((css) {
               initialCalculatedValue = css.display;
-              return action(element);
+              return ShowHide.begin(a1, element);
             })
             .chain((_) => _getValues(tag, sheetStyle, inlineStyle, element));
 
@@ -83,17 +82,15 @@ void _registerTest(String tag, String sheetStyle, String inlineStyle) {
       for(final a2 in actions) {
         test('$a1 then $a2', () {
           final element = query('.sample');
-          final action = _getAction(a1);
-          final action2 = _getAction(a2);
 
           String initialCalculatedValue;
 
           final futureTuple = element.getComputedStyle('')
               .chain((css) {
                 initialCalculatedValue = css.display;
-                return action(element);
+                return ShowHide.begin(a1, element);
               })
-              .chain((_) => action2(element))
+              .chain((_) => ShowHide.begin(a2, element))
               .chain((_) => _getValues(tag, sheetStyle, inlineStyle, element));
 
           expectFutureComplete(futureTuple, (Tuple3<String, String, ShowHideState> tuple) {
@@ -183,13 +180,13 @@ String _getExpectedCalculatedDisplay(String tag, String sheetStyle, String inlin
   }
 }
 
-ShowHideState _getActionResult(String action, ShowHideState initial) {
+ShowHideState _getActionResult(ShowHideAction action, ShowHideState initial) {
   switch(action) {
-    case 'show':
+    case ShowHideAction.SHOW:
       return ShowHideState.SHOWN;
-    case 'hide':
+    case ShowHideAction.HIDE:
       return ShowHideState.HIDDEN;
-    case 'toggle':
+    case ShowHideAction.TOGGLE:
       switch(initial) {
         case ShowHideState.HIDDEN:
           return ShowHideState.SHOWN;
@@ -214,19 +211,6 @@ Future<Tuple3<String, String, ShowHideState>> _getValues(String tag, String shee
 
   return Futures.wait([futureDefaultDisplay, futureCalculatedDisplayValue, futureShowHide])
       .transform((list) => new Tuple3(list[0], list[1], list[2]));
-}
-
-Func1<Element, Future> _getAction(String action) {
-  switch(action) {
-    case 'show':
-      return (e) => ShowHide.show(e);
-    case 'hide':
-      return (e) => ShowHide.hide(e);
-    case 'toggle':
-      return (e) => ShowHide.toggle(e);
-    default:
-      throw 'action "$action" is not supported';
-  }
 }
 
 ShowHideState _getState(String calculatedDisplay) {
