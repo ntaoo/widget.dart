@@ -3,7 +3,7 @@ import 'package:web_ui/web_ui.dart';
 import 'package:widget/effects.dart';
 
 class Dropdown extends WebComponent {
-  const String _dropdownDivSelector = '#dropdown-content-x';
+  const String _dropdownDivSelector = '.dropdown-content-x';
   const String _headerOpenClass = 'dropdown-toggle-x';
 
   static final ShowHideEffect _effect = new FadeEffect();
@@ -39,7 +39,7 @@ class Dropdown extends WebComponent {
     assert(_expanderDiv == null);
     assert(_headerElem == null);
     _expanderDiv = this.query(_dropdownDivSelector);
-    _headerElem = this.query('header');
+    _headerElem = this.query('x-dropdown > button');
     if(_headerElem != null) {
       _headerElem.on.click.add((_) => toggle());
     }

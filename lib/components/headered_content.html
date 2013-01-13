@@ -4,10 +4,11 @@
     <element name="x-headered-content" extends="div">
       <template>
         <style type='text/css' scoped>
-          .headered-content-container-x {
+          x-headered-content {
+            display: block;
             border: 1px lightgray solid; border-radius: 10px; margin: 10px;
           }
-          .headered-content-container-x > header {
+          x-headered-content > header {
             font-weight: bold;
             color: #333;
             background: lightgray;
@@ -21,11 +22,9 @@
             padding: 5px;
           }
         </style>
-        <div class='headered-content-container-x'>
-          <content select='header'></content>
-          <div class='headered-content-content'>
-            <content></content>
-          </div>
+        <content select='header'></content>
+        <div class='headered-content-content'>
+          <content></content>
         </div>
       </template>
       <script type="application/dart" src='headered_content.dart'></script>
