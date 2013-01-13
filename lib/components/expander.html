@@ -4,29 +4,32 @@
     <element name="x-expander" extends="div">
       <template>
         <style type='text/css' scoped>
-          #expander-container-x {
-            border: 1px lightgray solid;
-            border-radius: 10px;
-            margin: 10px;
+          x-expander {
+            display: block;
+            margin-bottom: 2px;
+            border: 1px solid #e5e5e5;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
           }
 
-          #expander-container-x header {
+          x-expander > header {
+            padding: 8px 15px;
             cursor: pointer;
-            color: #333;
-            background: lightgray;
-            margin: -1px;
-            border: 1px lightgray solid;
-            border-radius: 10px 10px 0 0; padding: 15px; display: block;
           }
+
+          x-expander > header:hover {
+            text-decoration: underline;
+          }
+
           #expander-content-x {
-            padding: 5px;
+            padding: 9px 15px;
+            border-top: 1px solid #e5e5e5;
           }
         </style>
-        <div id='expander-container-x'>
-          <content select='header'></content>
-          <div id='expander-content-x'>
-            <content></content>
-          </div>
+        <content select='header'></content>
+        <div id='expander-content-x'>
+          <content></content>
         </div>
       </template>
       <script type="application/dart" src='expander.dart'></script>
