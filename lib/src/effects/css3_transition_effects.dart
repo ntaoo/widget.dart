@@ -7,9 +7,17 @@ class FadeEffect extends Css3TransitionEffect {
 // TODO: orientation
 class ShrinkEffect extends Css3TransitionEffect {
   ShrinkEffect() : super('max-height', '0', '500px', {'overflow': 'hidden'});
+
+  @protected
+  String overrideStartEndValues(bool showValue, String property, String originalValue, Size size) {
+    if(property == 'max-height' && showValue) {
+      return '${size.height.toInt()}px';
+    } else {
+      return originalValue;
+    }
+  }
 }
 
-// TODO: scale to corner
 class ScaleEffect extends Css3TransitionEffect {
 
   factory ScaleEffect({Orientation orientation, HorizontalAlignment xOffset, VerticalAlignment yOffset}) {

@@ -15,13 +15,7 @@ class ShowHide {
 
   static Future<ShowHideState> getState(Element element) {
     assert(element != null);
-
-    final values = _values[element];
-    if(values == null) {
-      return _populateState(element);
-    } else {
-      return new Future.immediate(values.currentState);
-    }
+    return _populateState(element);
   }
 
   static Future<bool> show(Element element,
@@ -50,7 +44,12 @@ class ShowHide {
   }
 
   static Future<ShowHideState> _populateState(Element element) {
-    assert(_values[element] == null);
+    final currentValues = _values[element];
+
+    if(currentValues != null) {
+      return _updateCachedSize(element)
+          .transform((_) => currentValues.currentState);
+    }
 
     return Futures.wait([element.getComputedStyle(''), Tools.getDefaultDisplay(element.tagName)])
         .transform((List items) {
@@ -61,11 +60,36 @@ class ShowHide {
 
           final localDisplay = element.style.display;
           final computedDisplay = computedStyle.display;
-
           final inferredState = computedDisplay == 'none' ? ShowHideState.HIDDEN : ShowHideState.SHOWN;
-          _values[element] = new _ShowHideValues(computedDisplay, localDisplay, inferredState);
+          final size = getSize(computedStyle);
+
+          _values[element] = new _ShowHideValues(computedDisplay, localDisplay, inferredState, size);
           return inferredState;
         });
+  }
+
+  static Future<Size> _updateCachedSize(Element element) {
+    final values = _values[element];
+    assert(values != null);
+    return element.getComputedStyle('')
+        .transform(getSize)
+        .transform((Size size) {
+          return values.cachedSize = size;
+        });
+  }
+
+  static Size getSize(CssStyleDeclaration css) {
+    assert(css != null);
+    return new Size(_getPixelCount(css.width), _getPixelCount(css.height));
+  }
+
+  static int _getPixelCount(String cssDimension) {
+    if(cssDimension == 'auto') {
+      return null;
+    } else {
+      assert(cssDimension.endsWith('px'));
+      return int.parse(cssDimension.substring(0, cssDimension.length-2));
+    }
   }
 
   static bool _getToggleState(ShowHideAction action, ShowHideState state) {
@@ -109,18 +133,20 @@ class ShowHide {
       effectTiming = EffectTiming.defaultTiming;
     }
 
+    final size = _values[element].cachedSize;
+
     //
     // do the transform
     //
     if(doShow) {
-      return _requestShow(element, desiredDuration, effect, effectTiming);
+      return _requestShow(element, desiredDuration, effect, effectTiming, size);
     } else {
-      return _requestHide(element, desiredDuration, effect, effectTiming);
+      return _requestHide(element, desiredDuration, effect, effectTiming, size);
     }
   }
 
   static Future<bool> _requestShow(Element element, int desiredDuration,
-      ShowHideEffect effect, EffectTiming effectTiming) {
+      ShowHideEffect effect, EffectTiming effectTiming, Size size) {
     assert(element != null);
     assert(desiredDuration != null);
     assert(effect != null);
@@ -148,7 +174,7 @@ class ShowHide {
 
     assert(!_AnimatingValues.isAnimating(element));
     _finishShow(element);
-    final durationMS = effect.startShow(element, desiredDuration, effectTiming);
+    final durationMS = effect.startShow(element, desiredDuration, effectTiming, size);
     if(durationMS > 0) {
 
       // _finishShow sets the currentState to shown, but we know better since we're animating
@@ -169,7 +195,7 @@ class ShowHide {
   }
 
   static Future<bool> _requestHide(Element element, int desiredDuration,
-      ShowHideEffect effect, EffectTiming effectTiming) {
+      ShowHideEffect effect, EffectTiming effectTiming, Size size) {
     assert(element != null);
     assert(desiredDuration != null);
     assert(effect != null);
@@ -197,7 +223,7 @@ class ShowHide {
     }
 
     assert(!_AnimatingValues.isAnimating(element));
-    final durationMS = effect.startHide(element, desiredDuration, effectTiming);
+    final durationMS = effect.startHide(element, desiredDuration, effectTiming, size);
     if(durationMS > 0) {
       _values[element].currentState = ShowHideState.HIDING;
       return _AnimatingValues.scheduleCleanup(durationMS, element, effect.clearAnimation, _finishHide);
@@ -243,8 +269,18 @@ class _ShowHideValues {
   final String initialComputedDisplay;
   final String initialLocalDisplay;
   ShowHideState currentState;
+  Size _cachedSize;
 
-  _ShowHideValues(this.initialComputedDisplay, this.initialLocalDisplay, this.currentState);
+  Size get cachedSize => _cachedSize;
+
+  void set cachedSize(Size value) {
+    if(value.isValid) {
+      _cachedSize = value;
+    }
+  }
+
+  _ShowHideValues(this.initialComputedDisplay, this.initialLocalDisplay,
+      this.currentState, this._cachedSize);
 }
 
 class _AnimatingValues {
