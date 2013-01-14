@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <element name="x-tabs" extends="div">
+      <template>
+        <style type='text/css' scoped>
+          x-tabs > .tabs {
+            border-bottom: 1px solid black;
+          }
+          x-tabs > .tabs > x-tab {
+            border: 1px solid transparent;
+            display: inline-block;
+            padding: 8px;
+            margin-bottom: -1px;
+          }
+          x-tabs > .tabs > x-tab[active] {
+            border: 1px solid black;
+            border-bottom: 1px solid white;
+            -webkit-border-radius: 4px 4px 0 0;
+            -moz-border-radius: 4px 4px 0 0;
+            border-radius: 4px 4px 0 0;
+          }
+        </style>
+        <div class='tabs'>
+          <content select='x-tab'></content>
+        </div>
+        <content></content>
+      </template>
+      <script type="application/dart" src='tabs.dart'></script>
+    </element>
+  </body>
+</html>
