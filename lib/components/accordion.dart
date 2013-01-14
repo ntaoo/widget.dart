@@ -28,7 +28,7 @@ class Accordion extends WebComponent {
   }
 
   void _onExpanderOpen(dynamic expander) {
-    this.queryAll('x-expander')
+    this.queryAll('x-accordion > x-expander')
     .map((Element e) => e.xtag)
     .filter((e) => e != expander)
     .forEach((e) {
