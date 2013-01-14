@@ -5,9 +5,62 @@ class Tools {
 
   static final Map<String, String> _elemDisplay = new Map<String, String>();
 
+  static Size getSize(CssStyleDeclaration css) {
+    assert(css != null);
+    final width = _getPixelCount(css.width);
+    final height = _getPixelCount(css.height);
+    return new Size(width, height);
+  }
+
+  static Size getOuterSize(CssStyleDeclaration css) {
+    assert(css != null);
+
+    final outerWidth = getOuterWidth(css);
+    final outerHeight = getOuterHeight(css);
+    return new Size(outerWidth, outerHeight);
+  }
+
+  static double getOuterHeight(CssStyleDeclaration computedStyle) {
+    final height = _getPixelCount(computedStyle.height);
+
+    if(height == null) {
+      return null;
+    }
+
+    final borderTop = _getPixelCount(computedStyle.borderTopWidth);
+    final borderBottom = _getPixelCount(computedStyle.borderBottomWidth);
+    final paddingTop = _getPixelCount(computedStyle.paddingTop);
+    final paddingBottom = _getPixelCount(computedStyle.paddingBottom);
+
+    return n$([borderTop, borderBottom, paddingTop, paddingBottom, height]).sum();
+  }
+
+  static double getOuterWidth(CssStyleDeclaration computedStyle) {
+    final width = _getPixelCount(computedStyle.width);
+
+    if(width == null) {
+      return null;
+    }
+
+    final borderLeft = _getPixelCount(computedStyle.borderLeftWidth);
+    final borderRight = _getPixelCount(computedStyle.borderRightWidth);
+    final paddingLeft = _getPixelCount(computedStyle.paddingLeft);
+    final paddingRight = _getPixelCount(computedStyle.paddingRight);
+
+    return n$([borderLeft, borderRight, paddingLeft, paddingRight, width]).sum();
+  }
+
+  static double _getPixelCount(String cssDimension) {
+    if(cssDimension == 'auto') {
+      return null;
+    } else {
+      assert(cssDimension.endsWith('px'));
+      return double.parse(cssDimension.substring(0, cssDimension.length-2));
+    }
+  }
+
   // borrowing from here:
   // https://github.com/jquery/jquery/blob/054daa20afc0e2c84e66f450b155d0253a62aedb/src/css.js#L428
-
   // Try to determine the default display value of an element
   static Future<String> getDefaultDisplay(String nodeName ) {
     final storedValue = _elemDisplay[nodeName];
