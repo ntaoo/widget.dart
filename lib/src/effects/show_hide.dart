@@ -61,7 +61,7 @@ class ShowHide {
           final localDisplay = element.style.display;
           final computedDisplay = computedStyle.display;
           final inferredState = computedDisplay == 'none' ? ShowHideState.HIDDEN : ShowHideState.SHOWN;
-          final size = getSize(computedStyle);
+          final size = Tools.getSize(computedStyle);
 
           _values[element] = new _ShowHideValues(computedDisplay, localDisplay, inferredState, size);
           return inferredState;
@@ -72,24 +72,10 @@ class ShowHide {
     final values = _values[element];
     assert(values != null);
     return element.getComputedStyle('')
-        .transform(getSize)
+        .transform(Tools.getSize)
         .transform((Size size) {
           return values.cachedSize = size;
         });
-  }
-
-  static Size getSize(CssStyleDeclaration css) {
-    assert(css != null);
-    return new Size(_getPixelCount(css.width), _getPixelCount(css.height));
-  }
-
-  static int _getPixelCount(String cssDimension) {
-    if(cssDimension == 'auto') {
-      return null;
-    } else {
-      assert(cssDimension.endsWith('px'));
-      return int.parse(cssDimension.substring(0, cssDimension.length-2));
-    }
   }
 
   static bool _getToggleState(ShowHideAction action, ShowHideState state) {
