@@ -109,7 +109,7 @@ void _registerTest(String tag, String sheetStyle, String inlineStyle) {
   });
 }
 
-void _verifyState(List<String> actionNames, String tag, String sheetStyle, String inlineStyle,
+void _verifyState(List<ShowHideAction> actions, String tag, String sheetStyle, String inlineStyle,
                   String defaultTagValue,
                   Element element, String initialCalculatedValue,
                   ShowHideState calculatedState, String calculatedDisplayValue) {
@@ -117,7 +117,7 @@ void _verifyState(List<String> actionNames, String tag, String sheetStyle, Strin
   final initialState = _getState(initialDisplayValue);
 
   ShowHideState expectedState = initialState;
-  for(final theAction in actionNames) {
+  for(final theAction in actions) {
     expectedState = _getActionResult(theAction, expectedState);
   }
 
