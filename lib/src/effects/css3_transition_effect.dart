@@ -31,6 +31,18 @@ class Css3TransitionEffect extends ShowHideEffect {
     return originalValue;
   }
 
+  void clearAnimation(Element element) {
+    final restoreValues = _css3TransitionEffectValues.cleanup(element);
+
+    element.style.transitionTimingFunction = '';
+    element.style.transitionProperty = '';
+    element.style.transitionDuration = '';
+
+    restoreValues.forEach((p, v) {
+      element.style.setProperty(p, v);
+    });
+  }
+
   int _startAnimation(bool doingShow, Element element, int desiredDuration,
                       String startValue, String endValue, EffectTiming timing, Size size) {
     assert(desiredDuration > 0);
@@ -54,18 +66,6 @@ class Css3TransitionEffect extends ShowHideEffect {
     _css3TransitionEffectValues.delayStart(element, localValues,
         () => _setShowValue(element, endValue, desiredDuration, timing));
     return desiredDuration;
-  }
-
-  void clearAnimation(Element element) {
-    final restorValues = _css3TransitionEffectValues.cleanup(element);
-
-    element.style.transitionTimingFunction = '';
-    element.style.transitionProperty = '';
-    element.style.transitionDuration = '';
-
-    restorValues.forEach((p, v) {
-      element.style.setProperty(p, v);
-    });
   }
 
   void _setShowValue(Element element, String value, int desiredDuration, EffectTiming timing) {
