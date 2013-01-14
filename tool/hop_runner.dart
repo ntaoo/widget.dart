@@ -22,6 +22,11 @@ void main() {
   addAsyncTask('pages', (ctx) =>
       branchForDir(ctx, 'master', 'example', 'gh-pages'));
 
+  //
+  // populate components into example dir
+  //
+  addAsyncTask('copy_components', (ctx) => startProcess(ctx, './bin/copy_out.sh'));
+
   runHopCore();
 }
 
