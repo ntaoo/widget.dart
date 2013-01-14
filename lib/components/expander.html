@@ -22,14 +22,16 @@
             text-decoration: underline;
           }
 
-          #expander-content-x {
+          x-expander > .expander-body-x > .expander-inner-x {
             padding: 9px 15px;
             border-top: 1px solid #e5e5e5;
           }
         </style>
         <content select='header'></content>
-        <div id='expander-content-x'>
-          <content></content>
+        <div class='expander-body-x'>
+          <div class='expander-inner-x'>
+            <content></content>
+          </div>
         </div>
       </template>
       <script type="application/dart" src='expander.dart'></script>

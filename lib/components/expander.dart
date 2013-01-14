@@ -5,7 +5,7 @@ import 'package:widget/effects.dart';
 
 class Expander extends WebComponent {
   static const String _openName = 'open';
-  static const String _expanderDivSelector = '#expander-content-x';
+  static const String _expanderDivSelector = '.expander-body-x';
   static final ShowHideEffect _effect = new ShrinkEffect();
 
   EventListenerList _onOpen;
