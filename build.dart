@@ -10,12 +10,12 @@ void main() {
 
   _transform(input, output).then((bool value) {
     if(value) {
-      print('doing build');
-      build(new Options().arguments, [output]);
+      print('updated $output');
     } else {
-      print('nothing changed');
+      print('no change to $output');
     }
   });
+  build(new Options().arguments, [output]);
 }
 
 Future<bool> _transform(String input, String output) {
