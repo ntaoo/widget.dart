@@ -8,28 +8,42 @@
     
     
     
+    
     <script type="text/javascript" src="../dart.js"></script>
   </head>
 
   <body style="font-family: Helvetica, Open Sans, sans-serif;">
-    <x-headered-content id="__e-4">
+    <x-headered-content id="__e-1">
+      <header>Tabs</header>
+      <x-tabs id="__e-0">
+        <x-tab target="tab1">Tab 1</x-tab>
+        <x-tab target="tab2">Tab 2</x-tab>
+        <x-tab target="tab3">Tab 3</x-tab>
+
+        <p id="tab1">Tab 1 content - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p id="tab2">Tab 2 content - Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p id="tab3">Tab 3 content - Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </x-tabs>
+    </x-headered-content>
+
+    <x-headered-content id="__e-6">
       <header>Accordion</header>
-      <x-accordion id="__e-3">
-        <x-expander id="__e-0">
+      <x-accordion id="__e-5">
+        <x-expander id="__e-2">
           <header>Item 1</header>
           <ul>
             <li>Item 1 content</li>
             <li>Some more item 1 content</li>
           </ul>
         </x-expander>
-        <x-expander id="__e-1">
+        <x-expander id="__e-3">
           <header>Item 2</header>
           <ul>
             <li>Item 2 content</li>
             <li>Some more item 2 content</li>
           </ul>
         </x-expander>
-        <x-expander id="__e-2">
+        <x-expander id="__e-4">
           <header>Item 3</header>
           <ul>
             <li>Item 3 content</li>
@@ -39,9 +53,9 @@
       </x-accordion>
     </x-headered-content>
 
-    <x-headered-content id="__e-6">
+    <x-headered-content id="__e-8">
       <header>HeaderedContent</header>
-      <x-headered-content id="__e-5">
+      <x-headered-content id="__e-7">
         <header>This is the header</header>
         <ul>
           <li>This is some</li>
@@ -50,9 +64,9 @@
       </x-headered-content>
     </x-headered-content>
 
-    <x-headered-content id="__e-8">
+    <x-headered-content id="__e-10">
       <header>Expander</header>
-      <x-expander id="__e-7">
+      <x-expander id="__e-9">
         <header>Click to toggle expand/collapse</header>
         <ul>
           <li>This is some</li>
@@ -61,9 +75,9 @@
       </x-expander>
     </x-headered-content>
 
-    <x-headered-content id="__e-10">
+    <x-headered-content id="__e-12">
       <header>Dropdown</header>
-      <x-dropdown id="__e-9">
+      <x-dropdown id="__e-11">
         <button>Click me!</button>
         <ul>
           <li>This is some</li>
