@@ -12,8 +12,42 @@ class Tabs extends WebComponent {
   static const String _targetAttribute = 'target';
 
   @protected
+  void created() {
+    this.on.click.add(_clickListener);
+  }
+
+  @protected
   void inserted() {
     _ensureAtMostOneTabActive();
+  }
+
+  void _clickListener(MouseEvent e) {
+    if(e.target is Element) {
+      final Element target = e.target;
+      if(target.tagName.toLowerCase() == 'x-tab') {
+        _tabClick(target);
+      }
+    }
+  }
+
+  void _tabClick(Element tabElement) {
+    assert(tabElement.tagName.toLowerCase() == 'x-tab');
+
+    // it's possible that a nested tab was clicked, which we want to ignore
+    // so we're going to go through our 'known' tabs and pick it that way
+    final tabs = this.queryAll('x-tabs > .tabs > x-tab');
+
+    final matchingTabs = tabs.filter((e) => e == tabElement);
+    assert(matchingTabs.length <= 1);
+    if(matchingTabs.length == 1) {
+      tabs
+        .filter((e) => e != tabElement)
+        .forEach((e) {
+          e.attributes.remove(_activeTabAttribute);
+        });
+      tabElement.attributes[_activeTabAttribute] = _activeTabAttribute;
+      _updateContentForTab(tabElement);
+    }
   }
 
   void _ensureAtMostOneTabActive() {
@@ -34,6 +68,10 @@ class Tabs extends WebComponent {
       activeTab.attributes[_activeTabAttribute] = _activeTabAttribute;
     }
 
+    _updateContentForTab(activeTab);
+  }
+
+  void _updateContentForTab(Element activeTab) {
     String target = null;
     if(activeTab != null && activeTab.attributes.containsKey(_targetAttribute)) {
       target = activeTab.attributes[_targetAttribute];

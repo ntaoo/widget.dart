@@ -13,11 +13,16 @@
             padding: 8px;
             margin-bottom: -1px;
             cursor: pointer;
+            color: #666;
           }
           x-tabs > .tabs > x-tab:hover {
             text-decoration: underline;
+            color: #999;
           }
           x-tabs > .tabs > x-tab[active] {
+            cursor: inherit;
+            color: black;
+            text-decoration: none;
             border: 1px solid #ddd;
             border-bottom: 1px solid white;
             -webkit-border-radius: 4px 4px 0 0;
