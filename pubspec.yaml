@@ -7,3 +7,4 @@ dependencies:
   unittest: '>=0.2.9 <2.10.0'
   web_ui: '>=0.2.11 <0.2.12'
   bot: 0.10.0
+  html5lib: '0.2.2+1'
