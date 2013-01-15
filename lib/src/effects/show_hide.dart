@@ -95,6 +95,10 @@ class ShowHide {
           default:
             throw new DetailedArgumentError('state', 'Value of $state is not supported');
         }
+
+        // DARTBUG: http://code.google.com/p/dart/issues/detail?id=6563
+        // dart2js knows this break is not needed, but the analyzer hasn't
+        // caught up yet
         break;
       default:
         throw new DetailedArgumentError('action', 'Value of $action is not supported');
