@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <element name="x-carousel" extends="div">
+      <template>
+        <style type='text/css' scoped>
+          x-carousel > .content {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            background: black;
+          }
+          x-carousel > .content > * {
+            display: none;
+          }
+          x-carousel > .content > a.carousel-control {
+            display: block;
+            position: absolute;
+            top: 40%;
+            left: 15px;
+            width: 40px;
+            height: 40px;
+            margin-top: -20px;
+            font-size: 60px;
+            font-weight: 100;
+            line-height: 30px;
+            color: #ffffff;
+            text-align: center;
+            background: #222222;
+            border: 3px solid #ffffff;
+            border-radius: 23px;
+            opacity: 0.5;
+            cursor: pointer;
+          }
+          x-carousel > .content > .carousel-control.right {
+            right: 15px;
+            left: auto;
+          }
+          x-carousel > .content > .carousel-control:hover {
+            color: #ffffff;
+            text-decoration: none;
+            opacity: 0.9;
+          }
+          x-carousel > .content > figure.active {
+            display: block;
+          }
+          x-carousel > .content > figure > figcaption {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            padding: 15px;
+            color: white;
+            background: #333333;
+            background: rgba(0, 0, 0, 0.75);
+          }
+        </style>
+        <div class='content'>
+          <content></content>
+          <a class="left carousel-control">&lsaquo;</a>
+          <a class="right carousel-control">&rsaquo;</a>
+        </div>
+      </template>
+      <script type="application/dart" src='carousel.dart'></script>
+    </element>
+  </body>
+</html>

@@ -2,6 +2,7 @@
     <meta charset="utf-8">
     <title>Dart Widgets</title>
     <link rel="components" href="packages/widget/components/accordion.html">
+    <link rel="components" href="packages/widget/components/carousel.html">
     <link rel="components" href="packages/widget/components/dropdown.html">
     <link rel="components" href="packages/widget/components/expander.html">
     <link rel="components" href="packages/widget/components/headered_content.html">
@@ -77,6 +78,45 @@
     &lt;p&gt;Item 3 content - Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
   &lt;/x-expander&gt;
 &lt;/x-accordion&gt;</pre>
+      </section>
+
+      <section class="component">
+        <h2>Carousel - work in progress</h2>
+
+        <div class="demo">
+          <x-carousel>
+            <figure class="active">
+              <img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg">
+              <figcaption>A description of the first image.</figcaption>
+            </figure>
+
+            <figure>
+              <img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-02.jpg">
+              <figcaption>A description of the second image.</figcaption>
+            </figure>
+
+            <figure>
+              <img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-03.jpg">
+              <figcaption>A description of the third image.</figcaption>
+            </figure>
+
+          </x-carousel>
+        </div>
+
+        <pre class="code">&lt;x-carousel&gt;
+  &lt;figure class="active"&gt;
+    &lt;img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg"&gt;
+    &lt;figcaption&gt;A description of the first image.&lt;/figcaption&gt;
+  &lt;/figure&gt;
+  &lt;figure&gt;
+    &lt;img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-02.jpg"&gt;
+    &lt;figcaption&gt;A description of the second image.&lt;/figcaption&gt;
+  &lt;/figure&gt;
+  &lt;figure&gt;
+    &lt;img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-03.jpg"&gt;
+    &lt;figcaption&gt;A description of the third image.&lt;/figcaption&gt;
+  &lt;/figure&gt;
+&lt;/x-carousel&gt;</pre>
       </section>
 
       <section class="component">
