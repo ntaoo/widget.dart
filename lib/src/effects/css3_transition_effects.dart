@@ -61,3 +61,40 @@ class DoorEffect extends Css3TransitionEffect {
   DoorEffect() : super('-webkit-transform', 'perspective(1000px) rotateY(90deg)', 'perspective(1000px) rotateY(0deg)',
       {'-webkit-transform-origin': '0% 50%'} );
 }
+
+class SlideEffect extends Css3TransitionEffect {
+  factory SlideEffect({HorizontalAlignment xStart, VerticalAlignment yStart}) {
+    String xComponent;
+    switch(xStart) {
+      case HorizontalAlignment.LEFT:
+        xComponent = '-100%';
+        break;
+      case HorizontalAlignment.RIGHT:
+        xComponent = '100%';
+        break;
+      case HorizontalAlignment.CENTER:
+      default:
+        xComponent = '0';
+        break;
+    }
+
+    String yComponent;
+    switch(yStart) {
+      case VerticalAlignment.TOP:
+        yComponent = '-100%';
+        break;
+      case VerticalAlignment.BOTTOM:
+        yComponent = '100%';
+        break;
+      case VerticalAlignment.MIDDLE:
+      default:
+        yComponent = '0';
+        break;
+    }
+
+    return new SlideEffect._internal('translate($xComponent, $yComponent)');
+  }
+
+  SlideEffect._internal(String hideValue) :
+    super('-webkit-transform', hideValue, 'translate(0)');
+}
