@@ -46,11 +46,11 @@ class ScaleEffect extends Css3TransitionEffect {
 
     final map = {'-webkit-transform-origin' : '$xoValue $yoValue'};
 
-    return new ScaleEffect._internal(hideValue, 'scale(1, 1)', map);
+    return new ScaleEffect._internal(hideValue, map);
   }
 
-  ScaleEffect._internal(String hideValue, String showValue, Map<String, String> values) :
-    super('-webkit-transform', hideValue, showValue, values);
+  ScaleEffect._internal(String hideValue, Map<String, String> values) :
+    super('-webkit-transform', hideValue, 'scale(1, 1)', values);
 }
 
 class SpinEffect extends Css3TransitionEffect {
