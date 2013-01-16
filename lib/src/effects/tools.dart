@@ -51,7 +51,7 @@ class Tools {
   }
 
   static double _getPixelCount(String cssDimension) {
-    if(cssDimension == 'auto') {
+    if(cssDimension == 'auto' || cssDimension.endsWith('%')) {
       return null;
     } else {
       assert(cssDimension.endsWith('px'));
