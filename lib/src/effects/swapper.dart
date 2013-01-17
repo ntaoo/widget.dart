@@ -1,7 +1,6 @@
 part of effects;
 
 // TODO: magic to ensure one and only one item is shown at the begining of a swap
-// TODO: remove support for adding new items. Too crazy when you talk about pending swaps
 // TODO: support pending swaps: swap 2 will 'wait' till swap 1 is done.
 // TODO: ponder SwapResult enum: failed due to element states, swallowed by a
 //       swap that started before the requested one finished, etc
@@ -19,11 +18,6 @@ class Swapper {
 
     if(?effect && !?hideEffect) {
       hideEffect = effect;
-    }
-
-    // we will host a child provided with no existing parent
-    if(child.parent == null) {
-      host.children.add(child);
     }
 
     // we will not steal an element from another parent
