@@ -13,10 +13,25 @@
     <script type="text/javascript" src="../dart.js"></script>
 
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap-responsive.css" rel="stylesheet">
     <style type="text/css">
       /* putting styles inline do to tool limitations */
       ul, ol {
         margin: 0 0 3px 25px;
+      }
+      ul.nav-list {
+        margin-top: 20px;
+      }
+      ul.nav-list > li {
+        border: 1px solid #ddd;
+        padding: 3px 15px;
+        margin-bottom: -1px;
+      }
+      ul.nav-list > li:first-child {
+        border-radius: 6px 6px 0 0;
+      }
+      ul.nav-list > li:last-child {
+        border-radius: 0 0 6px 6px;
       }
       pre.code {
         margin: 25px;
@@ -47,10 +62,22 @@
     </style>
   </head>
   <body>
-
     <div class="container">
+      <header class="subhead">
+        <a name="__the_top__"></a>
+        <h1>Dart Widgets</h1>
+        <a href="https://github.com/kevmoo/widget.dart">https://github.com/kevmoo/widget.dart</a>
+      </header>
+      <div class="row">
+        <div class="span3">
+          <ul class="nav nav-list affix">
+            <li><a href="#__the_top__">Dart Widgets</a></li>
+          <li><a href="#Accordion">Accordion</a></li><li><a href="#Carousel">Carousel</a></li><li><a href="#Dropdown">Dropdown</a></li><li><a href="#Expander">Expander</a></li><li><a href="#HeaderedContent">HeaderedContent</a></li><li><a href="#Tabs">Tabs</a></li></ul>
+        </div>
+
+    <div class="span9">
       <section class="component">
-        <h2>Accordion</h2>
+        <a name="Accordion"></a><h2>Accordion</h2>
 
         <div class="demo">
           <x-accordion id="__e-3">
@@ -86,7 +113,7 @@
       </section>
 
       <section class="component">
-        <h2>Carousel</h2>
+        <a name="Carousel"></a><h2>Carousel</h2>
 
         <div class="demo">
           <x-carousel id="__e-4">
@@ -125,7 +152,7 @@
       </section>
 
       <section class="component">
-        <h2>Dropdown</h2>
+        <a name="Dropdown"></a><h2>Dropdown</h2>
 
         <div class="demo">
           <x-dropdown id="__e-5">
@@ -147,7 +174,7 @@
       </section>
 
       <section class="component">
-        <h2>Expander</h2>
+        <a name="Expander"></a><h2>Expander</h2>
 
         <div class="demo">
           <x-expander id="__e-6">
@@ -169,7 +196,7 @@
       </section>
 
       <section class="component">
-        <h2>HeaderedContent</h2>
+        <a name="HeaderedContent"></a><h2>HeaderedContent</h2>
 
         <div class="demo">
           <x-headered-content id="__e-7">
@@ -191,7 +218,7 @@
       </section>
 
       <section class="component">
-        <h2>Tabs</h2>
+        <a name="Tabs"></a><h2>Tabs</h2>
 
         <div class="demo">
           <x-tabs id="__e-8">
@@ -215,6 +242,8 @@
 &lt;/x-tabs&gt;</pre>
 
       </section>
+    </div>
+      </div>
     </div>
 
   
