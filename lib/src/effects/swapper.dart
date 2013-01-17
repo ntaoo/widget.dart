@@ -1,11 +1,10 @@
 part of effects;
 
-// TODO: support pending swaps: swap 2 will 'wait' till swap 1 is done.
 // TODO: ponder SwapResult enum: failed due to element states, swallowed by a
 //       swap that started before the requested one finished, etc
 
 /**
- * If [effect] is used as the [hideEffect] unless [hideEffect] is provided.
+ * [effect] is used as the [hideEffect] unless [hideEffect] is provided.
  */
 class Swapper {
 
