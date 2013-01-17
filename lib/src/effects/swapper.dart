@@ -25,42 +25,43 @@ class Swapper {
 
     // ensure at most one child of the host is visible before beginning
     return _ensureOneShown(host)
-        .chain((bool shouldContinue) {
-          if(!shouldContinue) {
+        .chain((Element currentlyVisible) {
+          if(currentlyVisible == null) {
             return new Future.immediate(false);
+          } else if(currentlyVisible == child) {
+            // target element is already shown
+            return new Future.immediate(true);
           }
 
-          final futures = host.children.map((Element e) {
-            var action = ShowHideAction.HIDE;
-            var zIndex = 1;
-            var theEffect = hideEffect;
+          child.style.zIndex = '2';
+          final showFuture = ShowHide.show(child, effect: effect, duration: duration, effectTiming: effectTiming);
 
-            if(e == child) {
-              action = ShowHideAction.SHOW;
-              zIndex = 2;
-              theEffect = effect;
-            }
+          currentlyVisible.style.zIndex = '1';
+          final hideFuture = ShowHide.hide(currentlyVisible, effect: hideEffect, duration: duration, effectTiming: effectTiming);
 
-            e.style.zIndex = zIndex.toString();
-            return ShowHide.begin(action, e, effect: theEffect, duration: duration, effectTiming: effectTiming)
-                .transform((bool done) {
-                  e.style.zIndex = '';
-                  return done;
-                });
-          });
-
-          return Futures.wait(futures)
-              .transform((List<bool> results) => results.every((a) => a));
+          return Futures.wait([showFuture, hideFuture])
+              .transform((List<bool> results) {
+                [child, currentlyVisible].forEach((e) => e.style.zIndex = '');
+                return results.every((a) => a);
+              });
         });
   }
 
-  static Future<bool> _ensureOneShown(Element host) {
+  static Future<Element> _ensureOneShown(Element host) {
     assert(host != null);
     if(host.children.length == 0) {
-      return new Future.immediate(false);
+      // no elements to show
+      return new Future.immediate(null);
     } else if(host.children.length == 1) {
       final child = host.children[0];
-      return ShowHide.show(child);
+      return ShowHide.show(child)
+          .transform((bool success) {
+            if(success) {
+              return child;
+            } else {
+              return null;
+            }
+          });
     }
     // NOTE: there is *no* way, with async computerStyle APis, to do this
     // in a way that ensures the host child collection doesn't change while
@@ -69,6 +70,8 @@ class Swapper {
     // 1 - get states of all children
     final futures = host.children
         .map(ShowHide.getState);
+
+    int shownIndex = null;
 
     return Futures.wait(futures)
         .chain((List<ShowHideState> states) {
@@ -86,17 +89,30 @@ class Swapper {
 
           if(showIndicies.length == 0) {
             // show last item -> likely the visible one
-            return ShowHide.show(host.children[host.children.length-1]);
+            shownIndex = host.children.length-1;
+
+            return ShowHide.show(host.children[shownIndex]);
           } else if(showIndicies.length > 1) {
             // if more than one is shown, hide all but the last one
             final toHide = showIndicies
                 .getRange(0, showIndicies.length - 1)
                 .map((int index) => host.children[index]);
+            shownIndex = showIndicies[showIndicies.length - 1];
             return _hideAll(toHide);
           } else {
             assert(showIndicies.length == 1);
-            // only one is shown...so...
+            shownIndex = showIndicies[0];
+            // only one is shown...so...leave it
             return new Future.immediate(true);
+          }
+        })
+        .transform((bool success) {
+          assert(success == true || success == false);
+          assert(shownIndex != null);
+          if(success) {
+            return host.children[shownIndex];
+          } else {
+            return null;
           }
         });
   }
