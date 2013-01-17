@@ -141,6 +141,7 @@ class ShowHide {
     assert(desiredDuration != null);
     assert(effect != null);
     assert(effectTiming != null);
+    assert(size == null || (size.isValid && size.area > 0));
     final values = _values[element];
 
     switch(values.currentState) {
@@ -265,12 +266,16 @@ class _ShowHideValues {
 
   void set cachedSize(Size value) {
     if(value.isValid) {
+      // TODO: how to handle empty sizes? Code at the moment assumes size has some area
+      assert(value.area > 0);
       _cachedSize = value;
     }
   }
 
   _ShowHideValues(this.initialComputedDisplay, this.initialLocalDisplay,
-      this.currentState, this._cachedSize);
+      this.currentState, Size size) {
+    cachedSize = size;
+  }
 }
 
 class _AnimatingValues {
