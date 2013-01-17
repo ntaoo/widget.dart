@@ -1,5 +1,8 @@
 part of effects_tests;
 
+// TODO: support case where many children, but invalid child called to show
+//       need to specify that all of the original children will still be shown
+
 void registerSwapperTests() {
   group('Swapper', () {
     tearDown(_cleanUpPlayground);
@@ -7,6 +10,9 @@ void registerSwapperTests() {
     _swapperTest(1, [], 0, true, 0);
     _swapperTest(0, [], -1, false, null);
     _swapperTest(5, [], null, true, null);
+    _swapperTest(0, [], null, true, null);
+    _swapperTest(1, [], -1, false, 0);
+    _swapperTest(5, [], 3, true, 3);
   });
 }
 
