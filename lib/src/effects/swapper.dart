@@ -1,8 +1,5 @@
 part of effects;
 
-// TODO: ponder SwapResult enum: failed due to element states, swallowed by a
-//       swap that started before the requested one finished, etc
-
 /**
  * [effect] is used as the [hideEffect] unless [hideEffect] is provided.
  */
@@ -12,10 +9,16 @@ class Swapper {
       {ShowHideEffect effect, int duration, EffectTiming effectTiming, ShowHideEffect hideEffect}) {
 
     assert(host != null);
-    assert(child != null);
 
     if(?effect && !?hideEffect) {
       hideEffect = effect;
+    }
+
+    if(child == null) {
+      // hide everything
+      // NOTE: all visible items will have the same animation run, which might be weird
+      //       hmm...
+      return _hideEverything(host, hideEffect, duration, effectTiming);
     }
 
     if(child.parent != host) {
@@ -44,6 +47,14 @@ class Swapper {
                 [child, currentlyVisible].forEach((e) => e.style.zIndex = '');
                 return results.every((a) => a);
               });
+        });
+  }
+
+  static Future<bool> _hideEverything(Element host, ShowHideEffect effect, int duration, EffectTiming effectTiming) {
+    final futures = host.children.map((e) => ShowHide.hide(e, effect: effect, duration: duration, effectTiming: effectTiming));
+    return Futures.wait(futures)
+        .transform((List<bool> successList) {
+          return successList.every((v) => v);
         });
   }
 

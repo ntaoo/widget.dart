@@ -6,6 +6,7 @@ void registerSwapperTests() {
 
     _swapperTest(1, [], 0, true, 0);
     _swapperTest(0, [], -1, false, null);
+    _swapperTest(5, [], null, true, null);
   });
 }
 
@@ -44,14 +45,14 @@ void _swapperTest(int childCount,
     buffer.add(' hidden children at indicies $hiddenIndicies,');
   }
 
-  buffer.add(' trying to show');
+  buffer.add(' trying to');
 
   if(childIndexToShow == null) {
-    buffer.add(' a null element,');
+    buffer.add(' hide all of the elements,');
   } else if(childIndexToShow < 0) {
-    buffer.add(' an element not in the host,');
+    buffer.add(' show an element not in the host,');
   } else {
-    buffer.add(' the child element at index $childIndexToShow,');
+    buffer.add(' show the child element at index $childIndexToShow,');
   }
 
   buffer.add(' should');
@@ -63,7 +64,7 @@ void _swapperTest(int childCount,
 
   buffer.add(' with a final shown item');
   if(expectedDisplayed == null) {
-    buffer.add(' of nothing, since there are no children');
+    buffer.add(' of nothing');
   } else {
     buffer.add(' at index $expectedDisplayed');
   }
@@ -80,7 +81,9 @@ void _swapperTest(int childCount,
     }
 
     Element toShowElement = null;
-    if(childIndexToShow < 0) {
+    if(childIndexToShow == null) {
+      // no op
+    } else if(childIndexToShow < 0) {
       toShowElement = new DivElement();
     } else {
       toShowElement = pg.children[childIndexToShow];
@@ -98,7 +101,12 @@ void _swapperTest(int childCount,
           expect(displayedIndicies.length, 1, reason: 'there should only be one displayed item');
           expect(displayedIndicies[0], expectedDisplayed);
         }
-      }));
+      }))
+      .onComplete((future) {
+        if(!future.hasValue) {
+          registerException(future.exception, future.stackTrace);
+        }
+      });
   });
 }
 
