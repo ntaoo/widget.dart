@@ -39,6 +39,9 @@
         color: #666;
         border-radius: 4px 0 4px 0;
       }
+      .demo figure {
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -81,16 +84,16 @@
       </section>
 
       <section class="component">
-        <h2>Carousel - work in progress</h2>
+        <h2>Carousel</h2>
 
         <div class="demo">
           <x-carousel>
-            <figure class="active">
+            <figure>
               <img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg">
               <figcaption>A description of the first image.</figcaption>
             </figure>
 
-            <figure>
+            <figure class="active">
               <img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-02.jpg">
               <figcaption>A description of the second image.</figcaption>
             </figure>
@@ -104,11 +107,11 @@
         </div>
 
         <pre class="code">&lt;x-carousel&gt;
-  &lt;figure class="active"&gt;
+  &lt;figure&gt;
     &lt;img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg"&gt;
     &lt;figcaption&gt;A description of the first image.&lt;/figcaption&gt;
   &lt;/figure&gt;
-  &lt;figure&gt;
+  &lt;figure class="active"&gt;
     &lt;img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-02.jpg"&gt;
     &lt;figcaption&gt;A description of the second image.&lt;/figcaption&gt;
   &lt;/figure&gt;

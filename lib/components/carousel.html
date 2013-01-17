@@ -4,16 +4,45 @@
     <element name="x-carousel" extends="div">
       <template>
         <style type='text/css' scoped>
-          x-carousel > .content {
+          x-carousel {
             position: relative;
+            display: block;
+          }
+          x-carousel > .content {
             width: 100%;
-            overflow: hidden;
             background: black;
+            position: relative;
+            overflow: hidden;
           }
           x-carousel > .content > * {
+            position: absolute;
+            top: 0;
+            left: 0;
             display: none;
           }
-          x-carousel > .content > a.carousel-control {
+          x-carousel > .content > figure {
+            margin: 0 auto;
+            width: 100%;
+          }
+          x-carousel > .content > figure.active {
+            position: relative;
+            left: 0;
+            display: block;
+          }
+          x-carousel > .content > figure.prev {
+            display: block;
+          }
+          x-carousel > .content > figure > figcaption {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            padding: 15px;
+            color: white;
+            background: #333333;
+            background: rgba(0, 0, 0, 0.75);
+          }
+          x-carousel > a.carousel-control {
             display: block;
             position: absolute;
             top: 40%;
@@ -31,35 +60,26 @@
             border-radius: 23px;
             opacity: 0.5;
             cursor: pointer;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            z-index: 5;
           }
-          x-carousel > .content > .carousel-control.right {
+          x-carousel > .carousel-control.right {
             right: 15px;
             left: auto;
           }
-          x-carousel > .content > .carousel-control:hover {
+          x-carousel > .carousel-control:hover {
             color: #ffffff;
             text-decoration: none;
             opacity: 0.9;
           }
-          x-carousel > .content > figure.active {
-            display: block;
-          }
-          x-carousel > .content > figure > figcaption {
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            padding: 15px;
-            color: white;
-            background: #333333;
-            background: rgba(0, 0, 0, 0.75);
-          }
         </style>
         <div class='content'>
           <content></content>
-          <a class="left carousel-control">&lsaquo;</a>
-          <a class="right carousel-control">&rsaquo;</a>
         </div>
+        <a class="left carousel-control">&lsaquo;</a>
+        <a class="right carousel-control">&rsaquo;</a>
       </template>
       <script type="application/dart" src='carousel.dart'></script>
     </element>
