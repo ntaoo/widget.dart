@@ -72,8 +72,11 @@ class Swapper {
 
     return Futures.wait(futures)
         .chain((List<ShowHideState> states) {
+          // paranoid sanity check that at lesat the count of items
+          // before and after haven't changed
           assert(states.length == host.children.length);
 
+          // See how many of the items are actually shown
           final showIndicies = new List<int>();
           for(int i=0; i<states.length;i++) {
             if(states[i].isShow) {
@@ -82,16 +85,17 @@ class Swapper {
           }
 
           if(showIndicies.length == 0) {
-            // show last item -> top of the z-order
+            // show last item -> likely the visible one
             return ShowHide.show(host.children[host.children.length-1]);
           } else if(showIndicies.length > 1) {
+            // if more than one is shown, hide all but the last one
             final toHide = showIndicies
                 .getRange(0, showIndicies.length - 1)
                 .map((int index) => host.children[index]);
             return _hideAll(toHide);
           } else {
             assert(showIndicies.length == 1);
-            // we're all good
+            // only one is shown...so...
             return new Future.immediate(true);
           }
         });
