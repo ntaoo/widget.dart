@@ -36,7 +36,7 @@ void _clickButton(int index) {
 
 Element _makeButtonElement(int index) {
   final button = new ButtonElement()
-    ..text = index.toString()
+    ..text = (index+1).toString()
     ..style.padding = '5px 12px'
     ..style.margin = '3px 8px'
     ..style.fontSize = '100%';
