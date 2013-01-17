@@ -3,6 +3,7 @@ import 'package:html5lib/dom.dart';
 import 'package:html5lib/parser.dart';
 import 'package:html5lib/dom_parsing.dart';
 import 'package:web_ui/component_build.dart';
+import 'package:bot/bot.dart';
 
 void main() {
   final input = 'web/index_source.html';
@@ -52,11 +53,49 @@ Future<bool> _updateIfChanged(String filePath, String newContent) {
 
 void _tweakDocument(Document document) {
   assert(document.body.elements.length == 1);
-  final container = document.body.elements[0];
-  final componentDivs = container.elements.filter((Element e) {
-    return e.tagName == 'section' && e.attributes['class'] == 'component';
+
+  final sectionHeaders = new List<Element>();
+
+  document.body.queryAll('section')
+      .filter((s) => s.attributes['class'] == 'component')
+      .forEach((s) {
+        _tweakComponentSection(s);
+
+        final headers = s.queryAll('h2');
+        assert(headers.length <= 1);
+        if(headers.length == 1) {
+          sectionHeaders.add(headers[0]);
+        }
+
+      });
+
+  //
+  // TOC fun!
+  //
+  final tocUls = document.queryAll('ul')
+      .filter((e) => e.attributes['class'] != null && e.attributes['class'].contains('nav-list'));
+
+  assert(tocUls.length == 1);
+  final Element tocUl = $(tocUls).first();
+
+  sectionHeaders.forEach((h) {
+    final headerText = htmlSerializeEscape(h.innerHTML);
+    // TODO: eliminate spaces?
+
+    final link = new Element.tag('a')
+      ..attributes['href'] = '#$headerText'
+      ..innerHTML = headerText;
+
+    final li = new Element.tag('li')
+      ..elements.add(link);
+
+    tocUl.elements.add(li);
+
+    final anchor = new Element.tag('a')
+      ..attributes['name'] = headerText;
+
+    h.parent.insertBefore(anchor, h);
   });
-  componentDivs.forEach(_tweakComponentSection);
 }
 
 void _tweakComponentSection(Element element) {
