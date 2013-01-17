@@ -3,6 +3,9 @@ import 'package:bot/bot.dart';
 import 'package:web_ui/web_ui.dart';
 import 'package:widget/effects.dart';
 
+// TODO: instead of wiring click to the header element, listen for all clicks and
+//       match the source element w/ our header
+
 class Expander extends WebComponent {
   static const String _openName = 'open';
   static const String _expanderDivSelector = '.expander-body-x';
@@ -49,7 +52,7 @@ class Expander extends WebComponent {
     assert(_header == null);
     _header = this.query('header');
     if(_header != null) {
-      _header.on.click.add((_) => toggle());
+      _header.on.click.add(_onHeaderClick);
     }
   }
 
@@ -59,7 +62,17 @@ class Expander extends WebComponent {
     _expanderDiv = null;
 
     // TODO: some how remove the click handler?
+    if(_header != null) {
+      _header.on.click.remove(_onHeaderClick);
+    }
     _header = null;
+  }
+
+  void _onHeaderClick(MouseEvent e) {
+    if(!e.defaultPrevented) {
+      toggle();
+      e.preventDefault();
+    }
   }
 
   // DARTBUG:

@@ -7,6 +7,8 @@ import 'package:bot/bot.dart';
 // TODO:TEST: 2+ active tabs -> all but first is active
 // TODO:TEST: no tabs -> no crash
 
+// TODO: be more careful that the source tab is actually 'ours'
+
 class Tabs extends WebComponent {
   static const String _activeTabAttribute = 'active';
   static const String _targetAttribute = 'target';
@@ -22,15 +24,18 @@ class Tabs extends WebComponent {
   }
 
   void _clickListener(MouseEvent e) {
-    if(e.target is Element) {
+    if(!e.defaultPrevented && e.target is Element) {
       final Element target = e.target;
       if(target.tagName.toLowerCase() == 'x-tab') {
-        _tabClick(target);
+        final completed = _tabClick(target);
+        if(completed) {
+          e.preventDefault();
+        }
       }
     }
   }
 
-  void _tabClick(Element tabElement) {
+  bool _tabClick(Element tabElement) {
     assert(tabElement.tagName.toLowerCase() == 'x-tab');
 
     // it's possible that a nested tab was clicked, which we want to ignore
@@ -47,7 +52,9 @@ class Tabs extends WebComponent {
         });
       tabElement.attributes[_activeTabAttribute] = _activeTabAttribute;
       _updateContentForTab(tabElement);
+      return true;
     }
+    return false;
   }
 
   void _ensureAtMostOneTabActive() {
