@@ -11,4 +11,8 @@ class ShowHideState extends _Enum {
   }
 
   const ShowHideState._internal(String name) : super(name);
+
+  bool get isFinished => this == HIDDEN || this == SHOWN;
+
+  bool get isShow => this == SHOWN || this == SHOWING;
 }
