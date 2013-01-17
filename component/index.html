@@ -9,10 +9,12 @@
     
     
     
+    
     <script type="text/javascript" src="../dart.js"></script>
 
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
+      /* putting styles inline do to tool limitations */
       ul, ol {
         margin: 0 0 3px 25px;
       }
@@ -39,9 +41,11 @@
         color: #666;
         border-radius: 4px 0 4px 0;
       }
+      .demo figure {
+        text-align: center;
+      }
     </style>
   </head>
-
   <body>
 
     <div class="container">
@@ -82,10 +86,49 @@
       </section>
 
       <section class="component">
+        <h2>Carousel</h2>
+
+        <div class="demo">
+          <x-carousel id="__e-4">
+            <figure>
+              <img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg">
+              <figcaption>A description of the first image.</figcaption>
+            </figure>
+
+            <figure class="active">
+              <img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-02.jpg">
+              <figcaption>A description of the second image.</figcaption>
+            </figure>
+
+            <figure>
+              <img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-03.jpg">
+              <figcaption>A description of the third image.</figcaption>
+            </figure>
+
+          </x-carousel>
+        </div>
+
+        <pre class="code">&lt;x-carousel&gt;
+  &lt;figure&gt;
+    &lt;img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg"&gt;
+    &lt;figcaption&gt;A description of the first image.&lt;/figcaption&gt;
+  &lt;/figure&gt;
+  &lt;figure class="active"&gt;
+    &lt;img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-02.jpg"&gt;
+    &lt;figcaption&gt;A description of the second image.&lt;/figcaption&gt;
+  &lt;/figure&gt;
+  &lt;figure&gt;
+    &lt;img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-03.jpg"&gt;
+    &lt;figcaption&gt;A description of the third image.&lt;/figcaption&gt;
+  &lt;/figure&gt;
+&lt;/x-carousel&gt;</pre>
+      </section>
+
+      <section class="component">
         <h2>Dropdown</h2>
 
         <div class="demo">
-          <x-dropdown id="__e-4">
+          <x-dropdown id="__e-5">
             <button>Click me!</button>
             <ul>
               <li>This is some</li>
@@ -107,7 +150,7 @@
         <h2>Expander</h2>
 
         <div class="demo">
-          <x-expander id="__e-5">
+          <x-expander id="__e-6">
             <header>Click to toggle expand/collapse</header>
             <ul>
               <li>This is some</li>
@@ -129,7 +172,7 @@
         <h2>HeaderedContent</h2>
 
         <div class="demo">
-          <x-headered-content id="__e-6">
+          <x-headered-content id="__e-7">
             <header>This is the header</header>
             <ul>
               <li>This is some</li>
@@ -151,7 +194,7 @@
         <h2>Tabs</h2>
 
         <div class="demo">
-          <x-tabs id="__e-7">
+          <x-tabs id="__e-8">
             <x-tab target="tab1">Tab 1</x-tab>
             <x-tab target="tab2">Tab 2</x-tab>
             <x-tab target="tab3">Tab 3</x-tab>
