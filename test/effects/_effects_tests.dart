@@ -10,15 +10,17 @@ import 'package:bot/bot_test.dart';
 part 'animation_core_tests.dart';
 part 'element_animation_tests.dart';
 part 'test_time_manager.dart';
-part 'show_hide_tests.dart';
 part 'tools_tests.dart';
+part 'show_hide_tests.dart';
+part 'swapper_tests.dart';
 
 void main() {
   group('effects', () {
     registerAnimationCoreTests();
     registerElementAnimationTests();
-    registerShowHideTests();
     registerToolsTests();
+    registerShowHideTests();
+    registerSwapperTests();
   });
 }
 
