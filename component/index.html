@@ -20,6 +20,8 @@
         margin: 0 0 3px 25px;
       }
       ul.nav-list {
+        padding: 0;
+        width: 228px;
         margin-top: 20px;
       }
       ul.nav-list > li {
@@ -33,6 +35,38 @@
       ul.nav-list > li:last-child {
         border-radius: 0 0 6px 6px;
       }
+      ul.nav-list > li > a.h1 {
+        font-weight: bold;
+      }
+      ul.nav-list > li > a.h2 {
+        padding-left: 25px;
+      }
+
+      /* Desktop large
+      ------------------------- */
+      @media (min-width: 1200px) {
+        ul.nav-list { width: 258px; }
+      }
+
+      /* Tablet to desktop
+      ------------------------- */
+      @media (min-width: 768px) and (max-width: 979px) {
+        ul.nav-list { width: 166px; }
+      }
+
+      /* Tablet
+      ------------------------- */
+      @media (max-width: 767px) {
+        ul.nav-list {
+          position: static;
+          width: auto;
+        }
+      }
+
+      blockquote p {
+        margin-bottom: 2ex;
+      }
+
       pre.code {
         margin: 25px;
         padding-top: 30px;
@@ -59,25 +93,64 @@
       .demo figure {
         text-align: center;
       }
+      .demo figure > figcaption {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 15px;
+        color: white;
+        background: #333333;
+        background: rgba(0, 0, 0, 0.75);
+      }
+      .demo p {
+        margin: 5px 0;
+      }
+
+      .highlighted {
+        -webkit-animation-name: invert;
+        -webkit-animation-duration: 1s;
+      }
+
+      @-webkit-keyframes invert {
+        50% {
+          color: white;
+          text-shadow: black 0 0 5px;
+        }
+      }
     </style>
   </head>
   <body>
-    <a name="__the_top__"></a>
     <div class="container">
       <header class="subhead">
-        <h1>Dart Widgets</h1>
+        <h1 id="dart_widgets">Dart Widgets</h1>
         <a href="https://github.com/kevmoo/widget.dart">https://github.com/kevmoo/widget.dart</a>
       </header>
       <div class="row">
         <div class="span3">
           <ul class="nav nav-list affix">
-            <li><a href="#__the_top__">Dart Widgets</a></li>
-          <li><a href="#Accordion">Accordion</a></li><li><a href="#Carousel">Carousel</a></li><li><a href="#Dropdown">Dropdown</a></li><li><a href="#Expander">Expander</a></li><li><a href="#HeaderedContent">HeaderedContent</a></li><li><a href="#Tabs">Tabs</a></li></ul>
+          <li><a href="#dart_widgets" class="h1">Dart Widgets</a></li><li><a href="#helpers" class="h1">Helpers</a></li><li><a href="#showhide" class="h2">ShowHide</a></li><li><a href="#swapper" class="h2">Swapper</a></li><li><a href="#components" class="h1">Components</a></li><li><a href="#accordion" class="h2">Accordion</a></li><li><a href="#carousel" class="h2">Carousel</a></li><li><a href="#dropdown" class="h2">Dropdown</a></li><li><a href="#expander" class="h2">Expander</a></li><li><a href="#headeredcontent" class="h2">HeaderedContent</a></li><li><a href="#swap" class="h2">Swap</a></li><li><a href="#tabs" class="h2">Tabs</a></li></ul>
         </div>
 
     <div class="span9">
+      <header>
+        <h1 id="helpers">Helpers</h1>
+      </header>
+      <section class="demo">
+        <h2 id="showhide">ShowHide</h2>
+        <em>Todo...</em>
+      </section>
+      <section class="demo">
+        <h2 id="swapper">Swapper</h2>
+        <em>Todo...</em>
+      </section>
+      
+      <header>
+        <h1 id="components">Components</h1>
+        <blockquote>Reusable elements. Based on the <a href="https://github.com/dart-lang/web-ui">web-ui library</a> sponsored by the <a href="http://www.dartlang.org/">Dart team</a>.</blockquote>
+      </header>
       <section class="component">
-        <a name="Accordion"></a><h2>Accordion</h2>
+        <h2 id="accordion">Accordion</h2>
 
         <div class="demo">
           <x-accordion id="__e-3">
@@ -113,7 +186,7 @@
       </section>
 
       <section class="component">
-        <a name="Carousel"></a><h2>Carousel</h2>
+        <h2 id="carousel">Carousel</h2>
 
         <div class="demo">
           <x-carousel id="__e-4">
@@ -152,7 +225,7 @@
       </section>
 
       <section class="component">
-        <a name="Dropdown"></a><h2>Dropdown</h2>
+        <h2 id="dropdown">Dropdown</h2>
 
         <div class="demo">
           <x-dropdown id="__e-5">
@@ -174,7 +247,7 @@
       </section>
 
       <section class="component">
-        <a name="Expander"></a><h2>Expander</h2>
+        <h2 id="expander">Expander</h2>
 
         <div class="demo">
           <x-expander id="__e-6">
@@ -196,7 +269,7 @@
       </section>
 
       <section class="component">
-        <a name="HeaderedContent"></a><h2>HeaderedContent</h2>
+        <h2 id="headeredcontent">HeaderedContent</h2>
 
         <div class="demo">
           <x-headered-content id="__e-7">
@@ -218,7 +291,16 @@
       </section>
 
       <section class="component">
-        <a name="Tabs"></a><h2>Tabs</h2>
+        <h2 id="swap">Swap</h2>
+        <blockquote>
+          <p><strong>Swap</strong> is a low-level component that is designed to be composed by other components.
+          It exposes the functionality of the <a href="#swapper">Swapper</a> helper as a simple container element with corresponding methods to
+          'swap' between child elements via code.</p>
+          <p><a href="#tabs">Tabs</a> and <a href="#carousel">Carousel</a> both use this component.</p></blockquote>
+      </section>
+
+      <section class="component">
+        <h2 id="tabs">Tabs</h2>
 
         <div class="demo">
           <x-tabs id="__e-8">
