@@ -100,3 +100,20 @@ pre.code::after {
     text-shadow: black 0 0 5px;
   }
 }
+
+
+/* ShowHide Styles */
+.demo.showhide {
+  text-align: center;
+}
+
+.demo.showhide .logo_wrapper {
+  margin: 0 auto;
+  width: 333px;
+  height: 250px;
+}
+
+.demo.showhide .logo_wrapper img {
+  width: 333px;
+  height: 250px;
+}
