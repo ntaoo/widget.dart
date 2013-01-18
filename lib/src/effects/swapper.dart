@@ -43,9 +43,9 @@ class Swapper {
           final hideFuture = ShowHide.hide(currentlyVisible, effect: hideEffect, duration: duration, effectTiming: effectTiming);
 
           return Futures.wait([showFuture, hideFuture])
-              .transform((List<bool> results) {
+              .transform((List<ShowHideResult> results) {
                 [child, currentlyVisible].forEach((e) => e.style.zIndex = '');
-                return results.every((a) => a);
+                return results.every((a) => a.isSuccess);
               });
         });
   }
@@ -53,8 +53,8 @@ class Swapper {
   static Future<bool> _hideEverything(Element host, ShowHideEffect effect, int duration, EffectTiming effectTiming) {
     final futures = host.children.map((e) => ShowHide.hide(e, effect: effect, duration: duration, effectTiming: effectTiming));
     return Futures.wait(futures)
-        .transform((List<bool> successList) {
-          return successList.every((v) => v);
+        .transform((List<ShowHideResult> successList) {
+          return successList.every((v) => v.isSuccess);
         });
   }
 
@@ -66,8 +66,8 @@ class Swapper {
     } else if(host.children.length == 1) {
       final child = host.children[0];
       return ShowHide.show(child)
-          .transform((bool success) {
-            if(success) {
+          .transform((ShowHideResult result) {
+            if(result.isSuccess) {
               return child;
             } else {
               return null;
@@ -131,6 +131,6 @@ class Swapper {
   static Future<bool> _hideAll(List<Element> elements) {
     final futures = elements.map((Element e) => ShowHide.hide(e));
     return Futures.wait(futures)
-        .transform((List<bool> successValues) => successValues.every((v) => v));
+        .transform((List<ShowHideResult> successValues) => successValues.every((v) => v.isSuccess));
   }
 }

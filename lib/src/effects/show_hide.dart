@@ -8,6 +8,17 @@ class ShowHideAction extends _Enum {
   const ShowHideAction._internal(String name) : super(name);
 }
 
+class ShowHideResult extends _Enum {
+  static const ShowHideResult ANIMATED = const ShowHideResult._internal("animated");
+  static const ShowHideResult NOOP = const ShowHideResult._internal("no-op");
+  static const ShowHideResult IMMEDIATE = const ShowHideResult._internal("immediate");
+  static const ShowHideResult CANCELED = const ShowHideResult._internal("canceled");
+
+  const ShowHideResult._internal(String name) : super(name);
+
+  bool get isSuccess => this != CANCELED;
+}
+
 class ShowHide {
   static const int _defaultDuration = 400;
   static final Map<String, String> _defaultDisplays = new Map<String, String>();
@@ -18,22 +29,22 @@ class ShowHide {
     return _populateState(element);
   }
 
-  static Future<bool> show(Element element,
+  static Future<ShowHideResult> show(Element element,
       {ShowHideEffect effect, int duration, EffectTiming effectTiming}) {
     return begin(ShowHideAction.SHOW, element, effect: effect, duration: duration, effectTiming: effectTiming);
   }
 
-  static Future<bool> hide(Element element,
+  static Future<ShowHideResult> hide(Element element,
       {ShowHideEffect effect, int duration, EffectTiming effectTiming}) {
     return begin(ShowHideAction.HIDE, element, effect: effect, duration: duration, effectTiming: effectTiming);
   }
 
-  static Future<bool> toggle(Element element,
+  static Future<ShowHideResult> toggle(Element element,
       {ShowHideEffect effect, int duration, EffectTiming effectTiming}) {
     return begin(ShowHideAction.TOGGLE, element, effect: effect, duration: duration, effectTiming: effectTiming);
   }
 
-  static Future<bool> begin(ShowHideAction action, Element element,
+  static Future<ShowHideResult> begin(ShowHideAction action, Element element,
       {ShowHideEffect effect, int duration, EffectTiming effectTiming}) {
     assert(action != null);
     assert(element != null);
@@ -105,7 +116,7 @@ class ShowHide {
     }
   }
 
-  static Future<bool> _requestEffect(bool doShow, Element element, int desiredDuration,
+  static Future<ShowHideResult> _requestEffect(bool doShow, Element element, int desiredDuration,
       ShowHideEffect effect, EffectTiming effectTiming) {
 
     //
@@ -135,7 +146,7 @@ class ShowHide {
     }
   }
 
-  static Future<bool> _requestShow(Element element, int desiredDuration,
+  static Future<ShowHideResult> _requestShow(Element element, int desiredDuration,
       ShowHideEffect effect, EffectTiming effectTiming, Size size) {
     assert(element != null);
     assert(desiredDuration != null);
@@ -148,11 +159,11 @@ class ShowHide {
       case ShowHideState.SHOWING:
         // no op - let the current animation finish
         assert(_AnimatingValues.isAnimating(element));
-        return new Future.immediate(true);
+        return new Future.immediate(ShowHideResult.NOOP);
       case ShowHideState.SHOWN:
         // no op. If shown leave it.
         assert(!_AnimatingValues.isAnimating(element));
-        return new Future.immediate(true);
+        return new Future.immediate(ShowHideResult.NOOP);
       case ShowHideState.HIDING:
         _AnimatingValues.cancelAnimation(element);
         break;
@@ -174,8 +185,8 @@ class ShowHide {
       return _AnimatingValues.scheduleCleanup(durationMS, element, effect.clearAnimation, _finishShow);
     } else {
       assert(values.currentState == ShowHideState.SHOWN);
+      return new Future.immediate(ShowHideResult.IMMEDIATE);
     }
-    return new Future.immediate(true);
   }
 
   static void _finishShow(Element element) {
@@ -185,7 +196,7 @@ class ShowHide {
     values.currentState = ShowHideState.SHOWN;
   }
 
-  static Future<bool> _requestHide(Element element, int desiredDuration,
+  static Future<ShowHideResult> _requestHide(Element element, int desiredDuration,
       ShowHideEffect effect, EffectTiming effectTiming, Size size) {
     assert(element != null);
     assert(desiredDuration != null);
@@ -197,12 +208,12 @@ class ShowHide {
       case ShowHideState.HIDING:
         // no op - let the current animation finish
         assert(_AnimatingValues.isAnimating(element));
-        return new Future.immediate(true);
+        return new Future.immediate(ShowHideResult.NOOP);
       case ShowHideState.HIDDEN:
         // it's possible we're here because the inferred calculated value is 'none'
         // this hard-wires the local display value to 'none'...just to be clear
         _finishHide(element);
-        return new Future.immediate(true);
+        return new Future.immediate(ShowHideResult.NOOP);
       case ShowHideState.SHOWING:
         _AnimatingValues.cancelAnimation(element);
         break;
@@ -221,8 +232,8 @@ class ShowHide {
     } else {
       _finishHide(element);
       assert(values.currentState == ShowHideState.HIDDEN);
+      return new Future.immediate(ShowHideResult.IMMEDIATE);
     }
-    return new Future.immediate(true);
   }
 
   static void _finishHide(Element element) {
@@ -284,7 +295,7 @@ class _AnimatingValues {
   final Element _element;
   final Action1<Element> _cleanupAction;
   final Action1<Element> _finishFunc;
-  final Completer<bool> _completer = new Completer<bool>();
+  final Completer<ShowHideResult> _completer = new Completer<ShowHideResult>();
 
   int _setTimeoutHandle;
 
@@ -293,7 +304,7 @@ class _AnimatingValues {
     _aniValues[_element] = this;
   }
 
-  Future<bool> _start(int durationMS) {
+  Future<ShowHideResult> _start(int durationMS) {
     assert(durationMS > 0);
     assert(_setTimeoutHandle == null);
     _setTimeoutHandle = window.setTimeout(_complete, durationMS);
@@ -304,13 +315,13 @@ class _AnimatingValues {
     assert(_setTimeoutHandle != null);
     window.clearTimeout(_setTimeoutHandle);
     _cleanup();
-    _completer.complete(false);
+    _completer.complete(ShowHideResult.CANCELED);
   }
 
   void _complete() {
     _cleanup();
     _finishFunc(_element);
-    _completer.complete(true);
+    _completer.complete(ShowHideResult.ANIMATED);
   }
 
   void _cleanup() {
@@ -330,7 +341,7 @@ class _AnimatingValues {
     values._cancel();
   }
 
-  static Future<bool> scheduleCleanup(int durationMS, Element element,
+  static Future<ShowHideResult> scheduleCleanup(int durationMS, Element element,
                               Action1<Element> cleanupAction,
                               Action1<Element> finishAction) {
 
