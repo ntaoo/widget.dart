@@ -57,7 +57,7 @@ $$.CastErrorImplementation = {"":"Object;actualType,expectedType",
 }
 };
 
-$$.ConstantMap = {"":"Object;length>,_jsObject,_liblib2$_keys>",
+$$.ConstantMap = {"":"Object;length>,_jsObject,_liblib1$_keys>",
  containsKey$1: function(key) {
   if ($.eqB(key, "__proto__"))
     return false;
@@ -69,11 +69,11 @@ $$.ConstantMap = {"":"Object;length>,_jsObject,_liblib2$_keys>",
   return this._jsObject[key];
 },
  forEach$1: function(f) {
-  var t1 = this._liblib2$_keys;
+  var t1 = this._liblib1$_keys;
   $.getInterceptor$JSArray(t1).forEach$1(t1, new $.ConstantMap_forEach_anon(this, f));
 },
  get$keys: function() {
-  return this._liblib2$_keys;
+  return this._liblib1$_keys;
 },
  get$isEmpty: function() {
   return $.eq(this.length, 0);
@@ -102,7 +102,7 @@ $$.ConstantMap = {"":"Object;length>,_jsObject,_liblib2$_keys>",
 $$.MetaInfo = {"":"Object;_tag>,_tags,_set>"
 };
 
-$$.JSSyntaxRegExp = {"":"Object;_pattern,_multiLine,_ignoreCase",
+$$.JSSyntaxRegExp = {"":"Object;_liblib1$_pattern,_multiLine,_ignoreCase",
  firstMatch$1: function(str) {
   var m, matchStart, t1, matchEnd;
   m = $.regExpExec(this, $.checkString(str));
@@ -124,7 +124,7 @@ $$.JSSyntaxRegExp = {"":"Object;_pattern,_multiLine,_ignoreCase",
   return $._AllMatchesIterable$(this, str);
 },
  get$pattern: function() {
-  return this._pattern;
+  return this._liblib1$_pattern;
 },
  get$multiLine: function() {
   return this._multiLine;
@@ -143,6 +143,15 @@ $$._MatchImplementation = {"":"Object;pattern>,str,start,end,_groups",
 },
  operator$index$1: function(index) {
   var t1 = this._groups;
+  if (typeof t1 !== 'string' && (typeof t1 !== 'object' || t1 === null || t1.constructor !== Array && !t1.is$JavaScriptIndexingBehavior()))
+    return this.operator$index$1$bailout1(1, index, t1);
+  if (index !== (index | 0))
+    throw $.iae(index);
+  if (index < 0 || index >= t1.length)
+    throw $.ioore(index);
+  return t1[index];
+},
+ operator$index$1$bailout1: function(state0, index, t1) {
   return $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, index);
 }
 };
@@ -153,21 +162,21 @@ $$._AllMatchesIterable = {"":"Object;_re,_str",
 }
 };
 
-$$._AllMatchesIterator = {"":"Object;_re,_str,_liblib2$_next=,_done",
+$$._AllMatchesIterator = {"":"Object;_re,_str,_liblib1$_next=,_done",
  next$0: function() {
   if (this.get$hasNext() !== true)
     throw $.$$throw($.StateError$("No more elements"));
-  var next = this._liblib2$_next;
-  this._liblib2$_next = null;
+  var next = this._liblib1$_next;
+  this._liblib1$_next = null;
   return next;
 },
  get$hasNext: function() {
   if (this._done)
     return false;
-  else if (!(this._liblib2$_next == null))
+  else if (!(this._liblib1$_next == null))
     return true;
-  this._liblib2$_next = this._re.firstMatch$1(this._str);
-  if (this._liblib2$_next == null) {
+  this._liblib1$_next = this._re.firstMatch$1(this._str);
+  if (this._liblib1$_next == null) {
     this._done = true;
     return false;
   } else
@@ -358,13 +367,13 @@ $$.FormatException = {"":"Object;message>",
 }
 };
 
-$$.IllegalJSRegExpException = {"":"Object;_liblib$_pattern,_errmsg",
+$$.IllegalJSRegExpException = {"":"Object;_pattern,_errmsg",
  toString$0: function() {
-  return "IllegalJSRegExpException: '" + $.S(this._liblib$_pattern) + "' '" + this._errmsg + "'";
+  return "IllegalJSRegExpException: '" + $.S(this._pattern) + "' '" + this._errmsg + "'";
 }
 };
 
-$$.Expando = {"":"Object;name",
+$$.Expando = {"":"Object;name>",
  toString$0: function() {
   return "Expando:" + $.S(this.name);
 },
@@ -484,7 +493,7 @@ $$._FutureImpl = {"":"Object;_isComplete,_value,_exception,_stackTrace,_exceptio
   this._isComplete = true;
   try {
     if (!(this._exception == null))
-      for (t1 = $.CONSTANT1.iterator$0(this._exceptionHandlers); t1.get$hasNext() === true;) {
+      for (t1 = $.CONSTANT3.iterator$0(this._exceptionHandlers); t1.get$hasNext() === true;) {
         handler = t1.next$0();
         if ($.eqB(handler.call$1(this._exception), true)) {
           this._exceptionHandled = true;
@@ -492,14 +501,14 @@ $$._FutureImpl = {"":"Object;_isComplete,_value,_exception,_stackTrace,_exceptio
         }
       }
     if (this.get$hasValue() === true)
-      for (t1 = $.CONSTANT1.iterator$0(this._successListeners); t1.get$hasNext() === true;) {
+      for (t1 = $.CONSTANT3.iterator$0(this._successListeners); t1.get$hasNext() === true;) {
         listener = t1.next$0();
         listener.call$1(this.get$value());
       }
     else if (this._exceptionHandled !== true && this._throwOnException)
       throw $.$$throw($.FutureUnhandledException$(this._exception, this.get$stackTrace()));
   } finally {
-    for (t1 = $.CONSTANT1.iterator$0(this._completionListeners); t1.get$hasNext() === true;) {
+    for (t1 = $.CONSTANT3.iterator$0(this._completionListeners); t1.get$hasNext() === true;) {
       listener0 = t1.next$0();
       try {
         listener0.call$1(this);
@@ -569,14 +578,14 @@ $$._CompleterImpl = {"":"Object;_futureImpl",
 
 $$._HashMapImpl = {"":"Object;_keys>,_values,_loadLimit,_numberOfEntries,_numberOfDeleted",
  _probeForAdding$1: function(key) {
-  var t1, hash, insertionIndex, numberOfProbes, existingKey, numberOfProbes0;
+  var t1, hash, numberOfProbes, insertionIndex, existingKey, numberOfProbes0;
   if (key == null)
     throw $.$$throw($.ArgumentError$(null));
   t1 = $.getInterceptor(key).get$hashCode(key);
   if (t1 !== (t1 | 0))
     return this._probeForAdding$1$bailout(1, key, t1);
   hash = (t1 & this._keys.length - 1) >>> 0;
-  for (insertionIndex = -1, numberOfProbes = 1; true; numberOfProbes = numberOfProbes0) {
+  for (numberOfProbes = 1, insertionIndex = -1; true; numberOfProbes = numberOfProbes0) {
     t1 = this._keys;
     if (hash < 0 || hash >= t1.length)
       throw $.ioore(hash);
@@ -587,7 +596,7 @@ $$._HashMapImpl = {"":"Object;_keys>,_values,_loadLimit,_numberOfEntries,_number
       return insertionIndex;
     } else if ($.eqB(existingKey, key))
       return hash;
-    else if (insertionIndex < 0 && existingKey === $.CONSTANT3)
+    else if (insertionIndex < 0 && existingKey === $.CONSTANT6)
       insertionIndex = hash;
     numberOfProbes0 = numberOfProbes + 1;
     hash = $._HashMapImpl__nextProbe(hash, numberOfProbes, this._keys.length);
@@ -616,10 +625,10 @@ $$._HashMapImpl = {"":"Object;_keys>,_values,_loadLimit,_numberOfEntries,_number
     case 1:
       state0 = 0;
       hash = $.and(t1, this._keys.length - 1);
-      insertionIndex = -1;
       numberOfProbes = 1;
+      insertionIndex = -1;
     case 2:
-      var t1, key, hash, insertionIndex, numberOfProbes, existingKey, numberOfProbes0;
+      var t1, key, hash, numberOfProbes, insertionIndex, existingKey, numberOfProbes0;
       L0:
         while (true)
           switch (state0) {
@@ -638,7 +647,7 @@ $$._HashMapImpl = {"":"Object;_keys>,_values,_loadLimit,_numberOfEntries,_number
                 return insertionIndex;
               } else if ($.eqB(existingKey, key))
                 return hash;
-              else if (insertionIndex < 0 && existingKey === $.CONSTANT3)
+              else if (insertionIndex < 0 && existingKey === $.CONSTANT6)
                 insertionIndex = hash;
               numberOfProbes0 = numberOfProbes + 1;
               hash = $._HashMapImpl__nextProbe(hash, numberOfProbes, this._keys.length);
@@ -714,7 +723,7 @@ $$._HashMapImpl = {"":"Object;_keys>,_values,_loadLimit,_numberOfEntries,_number
     if (i >= oldKeys.length)
       throw $.ioore(i);
     key = oldKeys[i];
-    if (key == null || key === $.CONSTANT3)
+    if (key == null || key === $.CONSTANT6)
       continue;
     if (i >= oldValues.length)
       throw $.ioore(i);
@@ -756,7 +765,7 @@ $$._HashMapImpl = {"":"Object;_keys>,_values,_loadLimit,_numberOfEntries,_number
   if (index < 0 || index >= t1.length)
     throw $.ioore(index);
   t1 = t1[index];
-  if (t1 == null || t1 === $.CONSTANT3)
+  if (t1 == null || t1 === $.CONSTANT6)
     this._numberOfEntries = $.add(this._numberOfEntries, 1);
   t1 = this._keys;
   if (index >= t1.length)
@@ -771,7 +780,7 @@ $$._HashMapImpl = {"":"Object;_keys>,_values,_loadLimit,_numberOfEntries,_number
   var index, t1;
   index = this._probeForLookup$1(key);
   if (typeof index !== 'number')
-    return this.operator$index$1$bailout(1, index);
+    return this.operator$index$1$bailout0(1, index);
   if (index < 0)
     return;
   t1 = this._values;
@@ -781,7 +790,7 @@ $$._HashMapImpl = {"":"Object;_keys>,_values,_loadLimit,_numberOfEntries,_number
     throw $.ioore(index);
   return t1[index];
 },
- operator$index$1$bailout: function(state0, index) {
+ operator$index$1$bailout0: function(state0, index) {
   var t1;
   if ($.ltB(index, 0))
     return;
@@ -838,7 +847,7 @@ $$._HashMapImpl = {"":"Object;_keys>,_values,_loadLimit,_numberOfEntries,_number
     t1 = this._keys;
     if (index >= t1.length)
       throw $.ioore(index);
-    t1[index] = $.CONSTANT3;
+    t1[index] = $.CONSTANT6;
     this._numberOfDeleted = this._numberOfDeleted + 1;
     return value;
   }
@@ -858,7 +867,7 @@ $$._HashMapImpl = {"":"Object;_keys>,_values,_loadLimit,_numberOfEntries,_number
     if (i >= t1.length)
       throw $.ioore(i);
     key = t1[i];
-    if (!(key == null) && !(key === $.CONSTANT3)) {
+    if (!(key == null) && !(key === $.CONSTANT6)) {
       t1 = this._values;
       if (i >= t1.length)
         throw $.ioore(i);
@@ -910,7 +919,19 @@ $$._LinkedHashMapImpl = {"":"Object;_list,_map",
  operator$index$1: function(key) {
   var t1, entry;
   t1 = this._map;
-  entry = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, key);
+  if (typeof t1 !== 'string' && (typeof t1 !== 'object' || t1 === null || t1.constructor !== Array && !t1.is$JavaScriptIndexingBehavior()))
+    return this.operator$index$1$bailout(1, key, t1);
+  if (key !== (key | 0))
+    throw $.iae(key);
+  if (key < 0 || key >= t1.length)
+    throw $.ioore(key);
+  entry = t1[key];
+  if (entry == null)
+    return;
+  return entry.get$element().get$value();
+},
+ operator$index$1$bailout: function(state0, key, t1) {
+  var entry = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, key);
   if (entry == null)
     return;
   return entry.get$element().get$value();
@@ -978,7 +999,7 @@ $$.Object = {"":";",
 }
 };
 
-$$.DoubleLinkedQueueEntry = {"":"Object;_previous=,_next=,_liblib$_element>",
+$$.DoubleLinkedQueueEntry = {"":"Object;_previous=,_next=,_element>",
  _link$2: function(p, n) {
   this._next = n;
   this._previous = p;
@@ -998,7 +1019,7 @@ $$.DoubleLinkedQueueEntry = {"":"Object;_previous=,_next=,_liblib$_element>",
   this._next.set$_previous(t1);
   this._next = null;
   this._previous = null;
-  return this._liblib$_element;
+  return this._element;
 },
  _asNonSentinelEntry$0: function() {
   return this;
@@ -1007,14 +1028,14 @@ $$.DoubleLinkedQueueEntry = {"":"Object;_previous=,_next=,_liblib$_element>",
   return this._previous._asNonSentinelEntry$0();
 },
  get$element: function() {
-  return this._liblib$_element;
+  return this._element;
 },
  DoubleLinkedQueueEntry$1: function(e) {
-  this._liblib$_element = e;
+  this._element = e;
 }
 };
 
-$$._DoubleLinkedQueueEntrySentinel = {"":"DoubleLinkedQueueEntry;_previous,_next,_liblib$_element",
+$$._DoubleLinkedQueueEntrySentinel = {"":"DoubleLinkedQueueEntry;_previous,_next,_element",
  remove$0: function() {
   throw $.$$throw($.StateError$("Empty queue"));
 },
@@ -1073,7 +1094,7 @@ $$.DoubleLinkedQueue = {"":"Object;_sentinel",
   entry = this._sentinel._next;
   for (; !(entry === this._sentinel); entry = nextEntry) {
     nextEntry = entry.get$_next();
-    f.call$1(entry.get$_liblib$_element());
+    f.call$1(entry.get$_element());
   }
 },
  every$1: function(f) {
@@ -1081,7 +1102,7 @@ $$.DoubleLinkedQueue = {"":"Object;_sentinel",
   entry = this._sentinel._next;
   for (; !(entry === this._sentinel); entry = nextEntry) {
     nextEntry = entry.get$_next();
-    if (f.call$1(entry.get$_liblib$_element()) !== true)
+    if (f.call$1(entry.get$_element()) !== true)
       return false;
   }
   return true;
@@ -1091,7 +1112,7 @@ $$.DoubleLinkedQueue = {"":"Object;_sentinel",
   entry = this._sentinel._next;
   for (; !(entry === this._sentinel); entry = nextEntry) {
     nextEntry = entry.get$_next();
-    if (f.call$1(entry.get$_liblib$_element()) === true)
+    if (f.call$1(entry.get$_element()) === true)
       return true;
   }
   return false;
@@ -1102,7 +1123,7 @@ $$.DoubleLinkedQueue = {"":"Object;_sentinel",
   entry = this._sentinel._next;
   for (t1 = $.getInterceptor$JSArray(other); !(entry === this._sentinel); entry = nextEntry) {
     nextEntry = entry.get$_next();
-    t1.addLast$1(other, f.call$1(entry.get$_liblib$_element()));
+    t1.addLast$1(other, f.call$1(entry.get$_element()));
   }
   return other;
 },
@@ -1112,8 +1133,8 @@ $$.DoubleLinkedQueue = {"":"Object;_sentinel",
   entry = this._sentinel._next;
   for (t1 = $.getInterceptor$JSArray(other); !(entry === this._sentinel); entry = nextEntry) {
     nextEntry = entry.get$_next();
-    if (f.call$1(entry.get$_liblib$_element()) === true)
-      t1.addLast$1(other, entry.get$_liblib$_element());
+    if (f.call$1(entry.get$_element()) === true)
+      t1.addLast$1(other, entry.get$_element());
   }
   return other;
 },
@@ -1215,7 +1236,7 @@ $$._HashSetIterator = {"":"Object;_entries,_nextValidIndex",
   t3 = $.getInterceptor$JSStringJSArray(t2);
   if ($.geB(t1, t3.get$length(t2)))
     return false;
-  if (t3.operator$index$1(t2, this._nextValidIndex) === $.CONSTANT3)
+  if (t3.operator$index$1(t2, this._nextValidIndex) === $.CONSTANT6)
     this._advance$0();
   return $.lt(this._nextValidIndex, t3.get$length(t2));
 },
@@ -1254,7 +1275,7 @@ $$._HashSetIterator = {"":"Object;_entries,_nextValidIndex",
     if (t2 < 0 || t2 >= t1.length)
       throw $.ioore(t2);
     entry = t1[t2];
-  } while (entry == null || entry === $.CONSTANT3);
+  } while (entry == null || entry === $.CONSTANT6);
 },
  _advance$0$bailout: function(state0, env0, env1, env2) {
   switch (state0) {
@@ -1283,7 +1304,7 @@ $$._HashSetIterator = {"":"Object;_entries,_nextValidIndex",
         if ($.geB(t2, length$))
           break;
         entry = t3.operator$index$1(t1, this._nextValidIndex);
-      } while (entry == null || entry === $.CONSTANT3);
+      } while (entry == null || entry === $.CONSTANT6);
   }
 },
  _HashSetIterator$1: function(set_) {
@@ -1303,7 +1324,7 @@ $$._StringBufferImpl = {"":"Object;_buffer,_length",
   str = $.getInterceptor(obj).toString$0(obj);
   if (!(typeof str === 'string'))
     throw $.$$throw($.ArgumentError$("toString() did not return a string"));
-  if ($.CONSTANT0.get$isEmpty(str) === true)
+  if ($.CONSTANT4.get$isEmpty(str) === true)
     return;
   t1 = this._buffer;
   $.getInterceptor$JSArray(t1).add$1(t1, str);
@@ -1348,20 +1369,20 @@ $$._StringBufferImpl = {"":"Object;_buffer,_length",
 };
 
 $$.ObjectInterceptor = {"":"Object;",
- toString$0: function(receiver) {
-  return receiver.toString$0();
+ get$length: function(receiver) {
+  return receiver.get$length();
 },
  add$1: function(receiver, a0) {
   return receiver.add$1(a0);
 },
+ forEach$1: function(receiver, a0) {
+  return receiver.forEach$1(a0);
+},
+ toString$0: function(receiver) {
+  return receiver.toString$0();
+},
  charCodeAt$1: function(receiver, a0) {
   return receiver.charCodeAt$1(a0);
-},
- get$length: function(receiver) {
-  return receiver.get$length();
-},
- substring$1: function(receiver, a0) {
-  return receiver.substring$1(a0);
 },
  replaceAll$2: function(receiver, a0, a1) {
   return receiver.replaceAll$2(a0, a1);
@@ -1369,8 +1390,8 @@ $$.ObjectInterceptor = {"":"Object;",
  iterator$0: function(receiver) {
   return receiver.iterator$0();
 },
- operator$index$1: function(receiver, a0) {
-  return receiver.operator$index$1(a0);
+ substring$1: function(receiver, a0) {
+  return receiver.substring$1(a0);
 },
  contains$2: function(receiver, a0, a1) {
   return receiver.contains$2(a0, a1);
@@ -1378,20 +1399,20 @@ $$.ObjectInterceptor = {"":"Object;",
  some$1: function(receiver, a0) {
   return receiver.some$1(a0);
 },
- clear$0: function(receiver) {
-  return receiver.clear$0();
+ get$last: function(receiver) {
+  return receiver.get$last();
 },
- endsWith$1: function(receiver, a0) {
-  return receiver.endsWith$1(a0);
+ operator$index$1: function(receiver, a0) {
+  return receiver.operator$index$1(a0);
 },
  indexOf$2: function(receiver, a0, a1) {
   return receiver.indexOf$2(a0, a1);
 },
- get$hashCode: function(receiver) {
-  return receiver.get$hashCode();
+ trim$0: function(receiver) {
+  return receiver.trim$0();
 },
- truncate$0: function(receiver) {
-  return receiver.truncate$0();
+ clear$0: function(receiver) {
+  return receiver.clear$0();
 },
  set$length: function(receiver, value) {
   return receiver.set$length(value);
@@ -1399,29 +1420,47 @@ $$.ObjectInterceptor = {"":"Object;",
  getRange$2: function(receiver, a0, a1) {
   return receiver.getRange$2(a0, a1);
 },
- floor$0: function(receiver) {
-  return receiver.floor$0();
+ truncate$0: function(receiver) {
+  return receiver.truncate$0();
 },
- forEach$1: function(receiver, a0) {
-  return receiver.forEach$1(a0);
+ endsWith$1: function(receiver, a0) {
+  return receiver.endsWith$1(a0);
 },
  substring$2: function(receiver, a0, a1) {
   return receiver.substring$2(a0, a1);
 },
- get$isInfinite: function(receiver) {
-  return receiver.get$isInfinite();
+ get$isNaN: function(receiver) {
+  return receiver.get$isNaN();
 },
  contains$1: function(receiver, a0) {
   return receiver.contains$1(a0);
 },
- get$last: function(receiver) {
-  return receiver.get$last();
+ get$hashCode: function(receiver) {
+  return receiver.get$hashCode();
+},
+ floor$0: function(receiver) {
+  return receiver.floor$0();
+},
+ split$1: function(receiver, a0) {
+  return receiver.split$1(a0);
 },
  get$isEmpty: function(receiver) {
   return receiver.get$isEmpty();
 },
- split$1: function(receiver, a0) {
-  return receiver.split$1(a0);
+ filter$1: function(receiver, a0) {
+  return receiver.filter$1(a0);
+},
+ toLowerCase$0: function(receiver) {
+  return receiver.toLowerCase$0();
+},
+ addAll$1: function(receiver, a0) {
+  return receiver.addAll$1(a0);
+},
+ get$isInfinite: function(receiver) {
+  return receiver.get$isInfinite();
+},
+ every$1: function(receiver, a0) {
+  return receiver.every$1(a0);
 },
  removeLast$0: function(receiver) {
   return receiver.removeLast$0();
@@ -1429,35 +1468,17 @@ $$.ObjectInterceptor = {"":"Object;",
  addLast$1: function(receiver, a0) {
   return receiver.addLast$1(a0);
 },
- get$isNaN: function(receiver) {
-  return receiver.get$isNaN();
-},
- addAll$1: function(receiver, a0) {
-  return receiver.addAll$1(a0);
-},
- toInt$0: function(receiver) {
-  return receiver.toInt$0();
-},
- every$1: function(receiver, a0) {
-  return receiver.every$1(a0);
-},
  ceil$0: function(receiver) {
   return receiver.ceil$0();
 },
  allMatches$1: function(receiver, a0) {
   return receiver.allMatches$1(a0);
 },
- trim$0: function(receiver) {
-  return receiver.trim$0();
-},
- filter$1: function(receiver, a0) {
-  return receiver.filter$1(a0);
-},
  map$1: function(receiver, a0) {
   return receiver.map$1(a0);
 },
- toLowerCase$0: function(receiver) {
-  return receiver.toLowerCase$0();
+ toInt$0: function(receiver) {
+  return receiver.toInt$0();
 },
  indexOf$1: function(receiver, a0) {
   return receiver.indexOf$1(a0);
@@ -1506,7 +1527,7 @@ $$.JSArray = {"":"Object;",
  addAll$1: function(receiver, collection) {
   var t1;
   for (t1 = $.getInterceptor$JSArray(collection).iterator$0(collection); t1.get$hasNext() === true;)
-    $.CONSTANT1.add$1(receiver, t1.next$0());
+    $.CONSTANT3.add$1(receiver, t1.next$0());
 },
  addLast$1: function(receiver, value) {
   $.checkGrowable(receiver, "addLast");
@@ -1726,8 +1747,8 @@ $$.JSString = {"":"Object;",
   return receiver;
 },
  get$hashCode: function(receiver) {
-  var hash, i, hash0, hash1;
-  for (hash = 0, i = 0; i < receiver.length; ++i, hash = hash1) {
+  var i, hash, hash0, hash1;
+  for (i = 0, hash = 0; i < receiver.length; ++i, hash = hash1) {
     hash0 = 536870911 & hash + receiver.charCodeAt(i);
     hash1 = 536870911 & hash0 + ((524287 & hash0) << 10 >>> 0);
     hash1 = hash1 ^ (hash1 >> 6);
@@ -1770,7 +1791,7 @@ $$._FrozenCssClassSet = {"":"CssClassSet;",
 }
 };
 
-$$._ChildrenElementList = {"":"Object;_liblib0$_element>,_childElements",
+$$._ChildrenElementList = {"":"Object;_liblib$_element>,_childElements",
  _toList$0: function() {
   var t1, t3, t4, output, len, i, t2;
   t1 = this._childElements;
@@ -1861,7 +1882,7 @@ $$._ChildrenElementList = {"":"Object;_liblib0$_element>,_childElements",
   return out;
 },
  get$isEmpty: function() {
-  return this._liblib0$_element.firstElementChild == null;
+  return this._liblib$_element.firstElementChild == null;
 },
  get$length: function() {
   var t1 = this._childElements;
@@ -1870,19 +1891,19 @@ $$._ChildrenElementList = {"":"Object;_liblib0$_element>,_childElements",
  operator$index$1: function(index) {
   var t1 = this._childElements;
   if (typeof t1 !== 'string' && (typeof t1 !== 'object' || t1 === null || t1.constructor !== Array && !t1.is$JavaScriptIndexingBehavior()))
-    return this.operator$index$1$bailout0(1, t1, index);
+    return this.operator$index$1$bailout2(1, t1, index);
   if (index !== (index | 0))
     throw $.iae(index);
   if (index < 0 || index >= t1.length)
     throw $.ioore(index);
   return t1[index];
 },
- operator$index$1$bailout0: function(state0, t1, index) {
+ operator$index$1$bailout2: function(state0, t1, index) {
   return $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, index);
 },
  operator$indexSet$2: function(index, value) {
   var t1, t2;
-  t1 = this._liblib0$_element;
+  t1 = this._liblib$_element;
   t2 = this._childElements;
   t1.$$dom_replaceChild$2(value, $.getInterceptor$JSStringJSArray(t2).operator$index$1(t2, index));
 },
@@ -1890,11 +1911,11 @@ $$._ChildrenElementList = {"":"Object;_liblib0$_element>,_childElements",
   throw $.$$throw($.UnsupportedError$(""));
 },
  add$1: function(value) {
-  this._liblib0$_element.$$dom_appendChild$1(value);
+  this._liblib$_element.$$dom_appendChild$1(value);
   return value;
 },
  addLast$1: function(value) {
-  this._liblib0$_element.$$dom_appendChild$1(value);
+  this._liblib$_element.$$dom_appendChild$1(value);
   return value;
 },
  iterator$0: function() {
@@ -1903,7 +1924,7 @@ $$._ChildrenElementList = {"":"Object;_liblib0$_element>,_childElements",
 },
  addAll$1: function(collection) {
   var t1, t2;
-  for (t1 = $.getInterceptor$JSArray(collection).iterator$0(collection), t2 = this._liblib0$_element; t1.get$hasNext() === true;)
+  for (t1 = $.getInterceptor$JSArray(collection).iterator$0(collection), t2 = this._liblib$_element; t1.get$hasNext() === true;)
     t2.$$dom_appendChild$1(t1.next$0());
 },
  getRange$2: function(start, rangeLength) {
@@ -1916,16 +1937,16 @@ $$._ChildrenElementList = {"":"Object;_liblib0$_element>,_childElements",
   return this.indexOf$2(element, 0);
 },
  clear$0: function() {
-  this._liblib0$_element.textContent = "";
+  this._liblib$_element.textContent = "";
 },
  removeLast$0: function() {
   var result = $.getInterceptor$JSArray(this).get$last(this);
   if (!(result == null))
-    this._liblib0$_element.$$dom_removeChild$1(result);
+    this._liblib$_element.$$dom_removeChild$1(result);
   return result;
 },
  get$last: function() {
-  return this._liblib0$_element.lastElementChild;
+  return this._liblib$_element.lastElementChild;
 },
  is$List: function() { return true; },
  is$Collection: function() { return true; }
@@ -1986,14 +2007,14 @@ $$._FrozenElementList = {"":"Object;_nodeList",
  operator$index$1: function(index) {
   var t1 = this._nodeList;
   if (typeof t1 !== 'string' && (typeof t1 !== 'object' || t1 === null || t1.constructor !== Array && !t1.is$JavaScriptIndexingBehavior()))
-    return this.operator$index$1$bailout1(1, t1, index);
+    return this.operator$index$1$bailout3(1, t1, index);
   if (index !== (index | 0))
     throw $.iae(index);
   if (index < 0 || index >= t1.length)
     throw $.ioore(index);
   return t1[index];
 },
- operator$index$1$bailout1: function(state0, t1, index) {
+ operator$index$1$bailout3: function(state0, t1, index) {
   return $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, index);
 },
  operator$indexSet$2: function(index, value) {
@@ -2040,12 +2061,12 @@ $$._FrozenElementList = {"":"Object;_nodeList",
  is$Collection: function() { return true; }
 };
 
-$$._FrozenElementListIterator = {"":"Object;_liblib0$_list,_index",
+$$._FrozenElementListIterator = {"":"Object;_liblib$_list,_index",
  next$0: function() {
   var t1, t2;
   if (this.get$hasNext() !== true)
     throw $.$$throw($.StateError$("No more elements"));
-  t1 = this._liblib0$_list;
+  t1 = this._liblib$_list;
   t2 = this._index;
   if (typeof t2 !== 'number')
     return this.next$0$bailout2(1, t2, t1);
@@ -2059,16 +2080,16 @@ $$._FrozenElementListIterator = {"":"Object;_liblib0$_list,_index",
  get$hasNext: function() {
   var t1, t2;
   t1 = this._index;
-  t2 = this._liblib0$_list;
+  t2 = this._liblib$_list;
   return $.lt(t1, $.getInterceptor$JSStringJSArray(t2).get$length(t2));
 }
 };
 
-$$._ElementCssClassSet = {"":"CssClassSet;_liblib0$_element>",
+$$._ElementCssClassSet = {"":"CssClassSet;_liblib$_element>",
  readClasses$0: function() {
   var s, classname, t1, t2, t3, trimmed;
   s = $.Set_Set();
-  classname = this._liblib0$_element.className;
+  classname = this._liblib$_element.className;
   for (t1 = $.getInterceptor$JSString(classname).split$1(classname, " "), t1 = $.getInterceptor$JSArray(t1).iterator$0(t1), t2 = $.getInterceptor$JSArray(s); t1.get$hasNext() === true;) {
     t3 = t1.next$0();
     trimmed = $.getInterceptor$JSString(t3).trim$0(t3);
@@ -2079,7 +2100,7 @@ $$._ElementCssClassSet = {"":"CssClassSet;_liblib0$_element>",
 },
  writeClasses$1: function(s) {
   var t1 = $.Strings_join($.List_List$from(s), " ");
-  this._liblib0$_element.className = t1;
+  this._liblib$_element.className = t1;
 }
 };
 
@@ -2204,14 +2225,14 @@ $$._ChildNodeListLazy = {"":"Object;_this",
  operator$index$1: function(index) {
   var t1 = this._this.childNodes;
   if (typeof t1 !== 'string' && (typeof t1 !== 'object' || t1 === null || t1.constructor !== Array && !t1.is$JavaScriptIndexingBehavior()))
-    return this.operator$index$1$bailout3(1, index, t1);
+    return this.operator$index$1$bailout5(1, index, t1);
   if (index !== (index | 0))
     throw $.iae(index);
   if (index < 0 || index >= t1.length)
     throw $.ioore(index);
   return t1[index];
 },
- operator$index$1$bailout3: function(state0, index, t1) {
+ operator$index$1$bailout5: function(state0, index, t1) {
   return $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, index);
 },
  is$List: function() { return true; },
@@ -2233,7 +2254,7 @@ $$.WindowEvents = {"":"Events;_ptr",
 }
 };
 
-$$._AttributeMap = {"":"Object;_liblib0$_element>",
+$$._AttributeMap = {"":"Object;_liblib$_element>",
  putIfAbsent$2: function(key, ifAbsent) {
   if (this.containsKey$1(key) !== true)
     this.operator$indexSet$2(key, ifAbsent.call$0());
@@ -2252,7 +2273,7 @@ $$._AttributeMap = {"":"Object;_liblib0$_element>",
 },
  get$keys: function() {
   var attributes, keys, t1, len, i;
-  attributes = this._liblib0$_element.attributes;
+  attributes = this._liblib$_element.attributes;
   if (typeof attributes !== 'string' && (typeof attributes !== 'object' || attributes === null || attributes.constructor !== Array && !attributes.is$JavaScriptIndexingBehavior()))
     return this.get$keys$bailout(1, attributes);
   keys = $.List_List(null);
@@ -2284,7 +2305,7 @@ $$._AttributeMap = {"":"Object;_liblib0$_element>",
   }
   switch (state0) {
     case 0:
-      attributes = this._liblib0$_element.attributes;
+      attributes = this._liblib$_element.attributes;
     case 1:
       state0 = 0;
       keys = $.List_List(null);
@@ -2306,19 +2327,19 @@ $$._AttributeMap = {"":"Object;_liblib0$_element>",
  is$Map: function() { return true; }
 };
 
-$$._ElementAttributeMap = {"":"_AttributeMap;_liblib0$_element",
+$$._ElementAttributeMap = {"":"_AttributeMap;_liblib$_element",
  containsKey$1: function(key) {
-  return this._liblib0$_element.$$dom_hasAttribute$1(key);
+  return this._liblib$_element.$$dom_hasAttribute$1(key);
 },
  operator$index$1: function(key) {
-  return this._liblib0$_element.$$dom_getAttribute$1(key);
+  return this._liblib$_element.$$dom_getAttribute$1(key);
 },
  operator$indexSet$2: function(key, value) {
-  this._liblib0$_element.$$dom_setAttribute$2(key, $.S(value));
+  this._liblib$_element.$$dom_setAttribute$2(key, $.S(value));
 },
  remove$1: function(key) {
   var t1, value;
-  t1 = this._liblib0$_element;
+  t1 = this._liblib$_element;
   value = t1.$$dom_getAttribute$1(key);
   t1.$$dom_removeAttribute$1(key);
   return value;
@@ -2472,9 +2493,9 @@ $$._DOMWindowCrossFrame = {"":"Object;_window",
 }
 };
 
-$$.FixedSizeListIterator = {"":"_VariableSizeListIterator;_liblib0$_length,_array,_pos",
+$$.FixedSizeListIterator = {"":"_VariableSizeListIterator;_liblib$_length,_array,_pos",
  get$hasNext: function() {
-  return $.gt(this._liblib0$_length, this._pos);
+  return $.gt(this._liblib$_length, this._pos);
 }
 };
 
@@ -2610,14 +2631,14 @@ $$.FilteredElementList = {"":"Object;_node,_childNodes",
  operator$index$1: function(index) {
   var t1 = this.get$_filtered();
   if (typeof t1 !== 'string' && (typeof t1 !== 'object' || t1 === null || t1.constructor !== Array && !t1.is$JavaScriptIndexingBehavior()))
-    return this.operator$index$1$bailout2(1, index, t1);
+    return this.operator$index$1$bailout4(1, index, t1);
   if (index !== (index | 0))
     throw $.iae(index);
   if (index < 0 || index >= t1.length)
     throw $.ioore(index);
   return t1[index];
 },
- operator$index$1$bailout2: function(state0, index, t1) {
+ operator$index$1$bailout4: function(state0, index, t1) {
   return $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, index);
 },
  iterator$0: function() {
@@ -2643,10 +2664,10 @@ $$.FilteredElementList = {"":"Object;_node,_childNodes",
  is$Collection: function() { return true; }
 };
 
-$$._AttributeClassSet = {"":"CssClassSet;_liblib1$_element>",
+$$._AttributeClassSet = {"":"CssClassSet;_liblib2$_element>",
  readClasses$0: function() {
   var t1, classname, s, t2, t3, trimmed;
-  t1 = this._liblib1$_element.get$attributes();
+  t1 = this._liblib2$_element.get$attributes();
   classname = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, "class");
   s = $.Set_Set();
   if (classname == null)
@@ -2661,14 +2682,14 @@ $$._AttributeClassSet = {"":"CssClassSet;_liblib1$_element>",
 },
  writeClasses$1: function(s) {
   var list = $.List_List$from(s);
-  $.indexSet(this._liblib1$_element.get$attributes(), "class", $.Strings_join(list, " "));
+  $.indexSet(this._liblib2$_element.get$attributes(), "class", $.Strings_join(list, " "));
 }
 };
 
-$$.WebComponent = {"":"Object;_element>",
+$$.WebComponent = {"":"Object;_liblib0$_element>",
  createShadowRoot$0: function() {
   if ($._realShadowRoot() === true)
-    return this._element.createShadowRoot$0();
+    return this._liblib0$_element.createShadowRoot$0();
   if (this._shadowRoots == null)
     this._shadowRoots = [];
   var t1 = this._shadowRoots;
@@ -2735,7 +2756,7 @@ $$.WebComponent = {"":"Object;_element>",
       select = "*";
     matching = [];
     notMatching = [];
-    for (t3 = $.CONSTANT1.iterator$0(pool); t3.get$hasNext() === true;) {
+    for (t3 = $.CONSTANT3.iterator$0(pool); t3.get$hasNext() === true;) {
       t4 = t3.next$0();
       ($.WebComponent__matches(t4, select) === true ? matching : notMatching).push(t4);
     }
@@ -2818,367 +2839,159 @@ $$.WebComponent = {"":"Object;_element>",
   }
 },
  get$nodes: function() {
-  return this._element.get$nodes();
+  return this._liblib0$_element.get$nodes();
 },
  replaceWith$1: function(otherNode) {
-  this._element.replaceWith$1(otherNode);
+  this._liblib0$_element.replaceWith$1(otherNode);
 },
  remove$0: function() {
-  return this._element.remove$0();
+  return this._liblib0$_element.remove$0();
+},
+ get$nextNode: function() {
+  return this._liblib0$_element.get$nextNode();
 },
  set$text: function(v) {
-  this._element.set$text(v);
+  this._liblib0$_element.set$text(v);
 },
  contains$1: function(other) {
-  var t1 = this._element;
+  var t1 = this._liblib0$_element;
   return $.getInterceptor$JSStringJSArray(t1).contains$1(t1, other);
 },
  insertBefore$2: function(newChild, refChild) {
-  return this._element.insertBefore$2(newChild, refChild);
+  return this._liblib0$_element.insertBefore$2(newChild, refChild);
 },
  get$attributes: function() {
-  return this._element.get$attributes();
+  return this._liblib0$_element.get$attributes();
 },
  get$children: function() {
-  return this._element.get$children();
+  return this._liblib0$_element.get$children();
 },
  get$classes: function() {
-  return this._element.get$classes();
+  return this._liblib0$_element.get$classes();
 },
  getComputedStyle$1: function(pseudoElement) {
-  return this._element.getComputedStyle$1(pseudoElement);
+  return this._liblib0$_element.getComputedStyle$1(pseudoElement);
 },
  get$parent: function() {
-  return this._element.get$parent();
+  return this._liblib0$_element.get$parent();
 },
  get$parentNode: function() {
-  return this._element.get$parentNode();
+  return this._liblib0$_element.get$parentNode();
 },
  get$on: function() {
-  return this._element.get$on();
+  return this._liblib0$_element.get$on();
 },
  get$hidden: function() {
-  return this._element.get$hidden();
+  return this._liblib0$_element.get$hidden();
 },
  get$id: function() {
-  return this._element.get$id();
+  return this._liblib0$_element.get$id();
 },
  set$innerHtml: function(v) {
-  this._element.set$innerHtml(v);
+  this._liblib0$_element.set$innerHtml(v);
 },
  click$0: function() {
-  this._element.click$0();
+  this._liblib0$_element.click$0();
 },
  get$click: function() {
   return new $.BoundClosure(this, 'click$0');
 },
+ insertAdjacentText$2: function(where, text) {
+  this._liblib0$_element.insertAdjacentText$2(where, text);
+},
  get$style: function() {
-  return this._element.get$style();
+  return this._liblib0$_element.get$style();
 },
  get$tagName: function() {
-  return this._element.get$tagName();
+  return this._liblib0$_element.get$tagName();
 },
  query$1: function(selectors) {
-  return this._element.query$1(selectors);
+  return this._liblib0$_element.query$1(selectors);
 },
  queryAll$1: function(selectors) {
-  return this._element.queryAll$1(selectors);
+  return this._liblib0$_element.queryAll$1(selectors);
 },
  get$$$dom_children: function() {
-  return this._element.get$$$dom_children();
+  return this._liblib0$_element.get$$$dom_children();
 },
  get$$$dom_className: function() {
-  return this._element.get$$$dom_className();
+  return this._liblib0$_element.get$$$dom_className();
 },
  set$$$dom_className: function(value) {
-  this._element.set$$$dom_className(value);
+  this._liblib0$_element.set$$$dom_className(value);
 },
  get$$$dom_firstElementChild: function() {
-  return this._element.get$$$dom_firstElementChild();
+  return this._liblib0$_element.get$$$dom_firstElementChild();
 },
  get$$$dom_lastElementChild: function() {
-  return this._element.get$$$dom_lastElementChild();
+  return this._liblib0$_element.get$$$dom_lastElementChild();
 },
  $$dom_getAttribute$1: function(name$) {
-  return this._element.$$dom_getAttribute$1(name$);
+  return this._liblib0$_element.$$dom_getAttribute$1(name$);
 },
  $$dom_hasAttribute$1: function(name$) {
-  return this._element.$$dom_hasAttribute$1(name$);
+  return this._liblib0$_element.$$dom_hasAttribute$1(name$);
 },
  $$dom_querySelector$1: function(selectors) {
-  return this._element.$$dom_querySelector$1(selectors);
+  return this._liblib0$_element.$$dom_querySelector$1(selectors);
 },
  $$dom_querySelectorAll$1: function(selectors) {
-  return this._element.$$dom_querySelectorAll$1(selectors);
+  return this._liblib0$_element.$$dom_querySelectorAll$1(selectors);
 },
  $$dom_removeAttribute$1: function(name$) {
-  return this._element.$$dom_removeAttribute$1(name$);
+  return this._liblib0$_element.$$dom_removeAttribute$1(name$);
 },
  $$dom_setAttribute$2: function(name$, value) {
-  return this._element.$$dom_setAttribute$2(name$, value);
+  return this._liblib0$_element.$$dom_setAttribute$2(name$, value);
 },
  get$$$dom_attributes: function() {
-  return this._element.get$$$dom_attributes();
+  return this._liblib0$_element.get$$$dom_attributes();
 },
  get$$$dom_childNodes: function() {
-  return this._element.get$$$dom_childNodes();
+  return this._liblib0$_element.get$$$dom_childNodes();
 },
  get$$$dom_localName: function() {
-  return this._element.get$$$dom_localName();
+  return this._liblib0$_element.get$$$dom_localName();
 },
  get$$$dom_namespaceUri: function() {
-  return this._element.get$$$dom_namespaceUri();
+  return this._liblib0$_element.get$$$dom_namespaceUri();
 },
  $$dom_addEventListener$3: function(type, listener, useCapture) {
-  this._element.$$dom_addEventListener$3(type, listener, useCapture);
+  this._liblib0$_element.$$dom_addEventListener$3(type, listener, useCapture);
 },
  $$dom_appendChild$1: function(newChild) {
-  return this._element.$$dom_appendChild$1(newChild);
+  return this._liblib0$_element.$$dom_appendChild$1(newChild);
 },
  $$dom_dispatchEvent$1: function(event$) {
-  return this._element.$$dom_dispatchEvent$1(event$);
+  return this._liblib0$_element.$$dom_dispatchEvent$1(event$);
 },
  $$dom_removeChild$1: function(oldChild) {
-  return this._element.$$dom_removeChild$1(oldChild);
+  return this._liblib0$_element.$$dom_removeChild$1(oldChild);
 },
  $$dom_removeEventListener$3: function(type, listener, useCapture) {
-  this._element.$$dom_removeEventListener$3(type, listener, useCapture);
+  this._liblib0$_element.$$dom_removeEventListener$3(type, listener, useCapture);
 },
  $$dom_replaceChild$2: function(newChild, oldChild) {
-  return this._element.$$dom_replaceChild$2(newChild, oldChild);
+  return this._liblib0$_element.$$dom_replaceChild$2(newChild, oldChild);
 },
  get$xtag: function() {
-  return this._element.get$xtag();
+  return this._liblib0$_element.get$xtag();
 },
  set$xtag: function(value) {
-  this._element.set$xtag(value);
+  this._liblib0$_element.set$xtag(value);
 },
  append$1: function(e) {
-  return this._element.append$1(e);
+  return this._liblib0$_element.append$1(e);
+},
+ appendText$1: function(text) {
+  return this._liblib0$_element.appendText$1(text);
 },
  WebComponent$forElement$1: function(element) {
-  if (element == null || !(this._element.get$xtag() == null))
+  if (element == null || !(this._liblib0$_element.get$xtag() == null))
     throw $.$$throw($.ArgumentError$("element must be provided and not have its xtag property set"));
-  this._element.set$xtag(this);
+  this._liblib0$_element.set$xtag(this);
 },
  is$Element: function() { return true; }
-};
-
-$$.Accordion = {"":"WebComponent;_liblib11$_root,_element,_shadowRoots",
- created_autogenerated$0: function() {
-  this._liblib11$_root = this.createShadowRoot$0();
-  this._liblib11$_root.set$innerHtml("    \n    <style type=\"text/css\" scoped=\"\">\n    .accordion-group-x {\n      margin-bottom: 2px;\n      border: 1px solid #e5e5e5;\n      -webkit-border-radius: 4px;\n      -moz-border-radius: 4px;\n      border-radius: 4px;\n    }\n    .accordion-group-x > header {\n      display: block;\n      padding: 8px 15px;\n      cursor: pointer;\n    }\n    .accordion-body-x {\n      border-top: 1px solid #e5e5e5;\n    }\n    </style>\n    <content select=\"header\"></content>\n    <content></content>\n    ");
-},
- inserted_autogenerated$0: function() {
-},
- composeChildren$0: function() {
-  $.WebComponent.prototype.composeChildren$0.call(this);
-  var t1 = this._liblib11$_root;
-  if (!(typeof t1 === 'object' && t1 !== null && t1.is$ShadowRoot()))
-    this._liblib11$_root = this;
-},
- created$0: function() {
-  var t1 = this.get$on();
-  t1 = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, "open");
-  $.getInterceptor$JSArray(t1).add$1(t1, this.get$_liblib11$_onOpen());
-},
- inserted$0: function() {
-  var t1 = this.queryAll$1("x-expander");
-  t1 = $.getInterceptor$JSArray(t1).map$1(t1, new $.Accordion_inserted_anon());
-  $.getInterceptor$JSArray(t1).forEach$1(t1, new $.Accordion_inserted_anon0());
-},
- _liblib11$_onOpen$1: function(openEvent) {
-  var t1 = openEvent.get$target();
-  if (typeof t1 === 'object' && t1 !== null && t1.is$UnknownElement())
-    this._onExpanderOpen$1(openEvent.get$target().get$xtag());
-},
- get$_liblib11$_onOpen: function() {
-  return new $.BoundClosure0(this, '_liblib11$_onOpen$1');
-},
- _onExpanderOpen$1: function(expander) {
-  var t1 = this.queryAll$1("x-accordion > x-expander");
-  t1 = $.getInterceptor$JSArray(t1).map$1(t1, new $.Accordion__onExpanderOpen_anon());
-  t1 = $.getInterceptor$JSArray(t1).filter$1(t1, new $.Accordion__onExpanderOpen_anon0(expander));
-  $.getInterceptor$JSArray(t1).forEach$1(t1, new $.Accordion__onExpanderOpen_anon1());
-}
-};
-
-$$._Enum = {"":"Object;",
- toString$0: function() {
-  return this.name;
-}
-};
-
-$$.HorizontalAlignment = {"":"_Enum;name"
-};
-
-$$.VerticalAlignment = {"":"_Enum;name"
-};
-
-$$.Css3TransitionEffect = {"":"ShowHideEffect;",
- startShow$4: function(element, desiredDuration, timing, size) {
-  return this._startAnimation$7(true, element, desiredDuration, this._hideValue, this._showValue, timing, size);
-},
- startHide$4: function(element, desiredDuration, timing, size) {
-  return this._startAnimation$7(false, element, desiredDuration, this._showValue, this._hideValue, timing, size);
-},
- overrideStartEndValues$4: function(showValue, property, originalValue, size) {
-  return originalValue;
-},
- clearAnimation$1: function(element) {
-  var restoreValues = $._css3TransitionEffectValues_cleanup(element);
-  element.get$style().set$transitionTimingFunction("");
-  element.get$style().set$transitionProperty("");
-  element.get$style().set$transitionDuration("");
-  $.getInterceptor$JSArray(restoreValues).forEach$1(restoreValues, new $.Css3TransitionEffect_clearAnimation_anon(element));
-},
- get$clearAnimation: function() {
-  return new $.BoundClosure0(this, 'clearAnimation$1');
-},
- _startAnimation$7: function(doingShow, element, desiredDuration, startValue, endValue, timing, size) {
-  var t1, t2, localPropsToKeep, t3, localValues;
-  t1 = {};
-  t1.endValue_0 = endValue;
-  t2 = this._property;
-  localPropsToKeep = [t2];
-  t3 = this._animatingOverrides;
-  $.CONSTANT1.addAll$1(localPropsToKeep, t3.get$keys());
-  localValues = $.Css3TransitionEffect__recordProperties(element, localPropsToKeep);
-  $.getInterceptor$JSArray(t3).forEach$1(t3, new $.Css3TransitionEffect__startAnimation_anon(element));
-  if (!(size == null)) {
-    startValue = this.overrideStartEndValues$4(!doingShow, t2, startValue, size);
-    t1.endValue_0 = this.overrideStartEndValues$4(doingShow, t2, t1.endValue_0, size);
-  }
-  element.get$style().setProperty$2(t2, startValue);
-  $._css3TransitionEffectValues_delayStart(element, localValues, new $.Css3TransitionEffect__startAnimation_anon0(t1, this, element, desiredDuration, timing));
-  return desiredDuration;
-},
- _setShowValue$4: function(element, value, desiredDuration, timing) {
-  var cssTimingValue, t1, t2;
-  cssTimingValue = $.CssEffectTiming__getCssValue(timing);
-  element.get$style().set$transitionTimingFunction(cssTimingValue);
-  t1 = this._property;
-  element.get$style().set$transitionProperty(t1);
-  t2 = $.S(desiredDuration) + "ms";
-  element.get$style().set$transitionDuration(t2);
-  element.get$style().setProperty$2(t1, value);
-},
- Css3TransitionEffect$4: function(_property, _hideValue, _showValue, animatingOverrides) {
-}
-};
-
-$$._css3TransitionEffectValues = {"":"Object;element>,originalValues,timeoutHandle<",
- _cleanup$0: function() {
-  if (!(this.timeoutHandle == null)) {
-    $.window().clearTimeout$1(this.timeoutHandle);
-    this.timeoutHandle = null;
-  }
-  return this.originalValues;
-}
-};
-
-$$.FadeEffect = {"":"Css3TransitionEffect;_property,_hideValue,_showValue,_animatingOverrides"
-};
-
-$$.ShrinkEffect = {"":"Css3TransitionEffect;_property,_hideValue,_showValue,_animatingOverrides",
- overrideStartEndValues$4: function(showValue, property, originalValue, size) {
-  var t1;
-  if ($.eqB(property, "max-height") && showValue) {
-    t1 = size.get$height();
-    return $.S($.getInterceptor$JSNumber(t1).toInt$0(t1)) + "px";
-  } else
-    return originalValue;
-}
-};
-
-$$.SlideEffect = {"":"Css3TransitionEffect;_property,_hideValue,_showValue,_animatingOverrides"
-};
-
-$$.EffectTiming = {"":"Object;"
-};
-
-$$.CssEffectTiming = {"":"EffectTiming;cssName",
- is$CssEffectTiming: true
-};
-
-$$.ShowHideAction = {"":"_Enum;name"
-};
-
-$$.ShowHideResult = {"":"_Enum;name",
- get$isSuccess: function() {
-  return !$.eqB(this, $.CONSTANT17);
-}
-};
-
-$$._ShowHideValues = {"":"Object;initialComputedDisplay>,initialLocalDisplay>,currentState=,_cachedSize",
- get$cachedSize: function() {
-  return this._cachedSize;
-},
- set$cachedSize: function(value) {
-  if (value.get$isValid() === true)
-    this._cachedSize = value;
-},
- _ShowHideValues$4: function(initialComputedDisplay, initialLocalDisplay, currentState, size) {
-  this.set$cachedSize(size);
-}
-};
-
-$$._AnimatingValues = {"":"Object;_liblib3$_element>,_cleanupAction,_finishFunc,_completer,_setTimeoutHandle",
- _cleanupAction$1: function(arg0) {
-  return this._cleanupAction.call$1(arg0);
-},
- _finishFunc$1: function(arg0) {
-  return this._finishFunc.call$1(arg0);
-},
- _start$1: function(durationMS) {
-  this._setTimeoutHandle = $.window().setTimeout$2(this.get$_liblib3$_complete(), durationMS);
-  return this._completer.get$future();
-},
- _cancel$0: function() {
-  $.window().clearTimeout$1(this._setTimeoutHandle);
-  var t1 = this._liblib3$_element;
-  this._cleanupAction$1(t1);
-  $.indexSet($.get$_AnimatingValues__aniValues(), t1, null);
-  this._completer.complete$1($.CONSTANT17);
-},
- _liblib3$_complete$0: function() {
-  var t1 = this._liblib3$_element;
-  this._cleanupAction$1(t1);
-  $.indexSet($.get$_AnimatingValues__aniValues(), t1, null);
-  this._finishFunc$1(t1);
-  this._completer.complete$1($.CONSTANT16);
-},
- get$_liblib3$_complete: function() {
-  return new $.BoundClosure(this, '_liblib3$_complete$0');
-},
- _cleanup$0: function() {
-  var t1 = this._liblib3$_element;
-  this._cleanupAction$1(t1);
-  $.indexSet($.get$_AnimatingValues__aniValues(), t1, null);
-},
- _AnimatingValues$_internal$3: function(_element, _cleanupAction, _finishFunc) {
-  $.indexSet($.get$_AnimatingValues__aniValues(), this._liblib3$_element, this);
-}
-};
-
-$$.ShowHideEffect = {"":"Object;",
- startShow$4: function(element, desiredDuration, timing, size) {
-  return 0;
-},
- startHide$4: function(element, desiredDuration, timing, size) {
-  return 0;
-},
- clearAnimation$1: function(element) {
-},
- get$clearAnimation: function() {
-  return new $.BoundClosure0(this, 'clearAnimation$1');
-}
-};
-
-$$.ShowHideState = {"":"_Enum;name",
- get$isShow: function() {
-  return $.eqB(this, $.CONSTANT10) || $.eqB(this, $.CONSTANT14);
-}
 };
 
 $$.Enumerable = {"":"Object;",
@@ -3251,7 +3064,7 @@ $$.Enumerable = {"":"Object;",
     return defaultValue;
   value = iter.next$0();
   if (iter.get$hasNext() === true)
-    throw $.$$throw($.CONSTANT20);
+    throw $.$$throw($.CONSTANT26);
   return value;
 },
  singleOrDefault$1: function(f) {
@@ -3331,14 +3144,14 @@ $$.Grouping = {"":"Object;_liblib6$_values",
  operator$index$1: function(key) {
   var t1 = this._liblib6$_values;
   if (typeof t1 !== 'string' && (typeof t1 !== 'object' || t1 === null || t1.constructor !== Array && !t1.is$JavaScriptIndexingBehavior()))
-    return this.operator$index$1$bailout4(1, t1, key);
+    return this.operator$index$1$bailout6(1, t1, key);
   if (key !== (key | 0))
     throw $.iae(key);
   if (key < 0 || key >= t1.length)
     throw $.ioore(key);
   return t1[key];
 },
- operator$index$1$bailout4: function(state0, t1, key) {
+ operator$index$1$bailout6: function(state0, t1, key) {
   return $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, key);
 },
  forEach$1: function(f) {
@@ -3422,7 +3235,236 @@ $$.Size = {"":"Object;width>,height>",
 }
 };
 
-$$.Expander = {"":"WebComponent;_liblib9$_root,_onOpen>,_isExpanded,_element,_shadowRoots",
+$$._Enum = {"":"Object;name>",
+ toString$0: function() {
+  return this.name;
+}
+};
+
+$$.Orientation = {"":"_Enum;name"
+};
+
+$$.HorizontalAlignment = {"":"_Enum;name"
+};
+
+$$.VerticalAlignment = {"":"_Enum;name"
+};
+
+$$.Css3TransitionEffect = {"":"ShowHideEffect;",
+ startShow$4: function(element, desiredDuration, timing, size) {
+  return this._startAnimation$7(true, element, desiredDuration, this._hideValue, this._showValue, timing, size);
+},
+ startHide$4: function(element, desiredDuration, timing, size) {
+  return this._startAnimation$7(false, element, desiredDuration, this._showValue, this._hideValue, timing, size);
+},
+ overrideStartEndValues$4: function(showValue, property, originalValue, size) {
+  return originalValue;
+},
+ clearAnimation$1: function(element) {
+  var restoreValues = $._css3TransitionEffectValues_cleanup(element);
+  element.get$style().set$transitionTimingFunction("");
+  element.get$style().set$transitionProperty("");
+  element.get$style().set$transitionDuration("");
+  $.getInterceptor$JSArray(restoreValues).forEach$1(restoreValues, new $.Css3TransitionEffect_clearAnimation_anon(element));
+},
+ get$clearAnimation: function() {
+  return new $.BoundClosure0(this, 'clearAnimation$1');
+},
+ _startAnimation$7: function(doingShow, element, desiredDuration, startValue, endValue, timing, size) {
+  var t1, t2, localPropsToKeep, t3, localValues;
+  t1 = {};
+  t1.endValue_0 = endValue;
+  t2 = this._property;
+  localPropsToKeep = [t2];
+  t3 = this._animatingOverrides;
+  $.CONSTANT3.addAll$1(localPropsToKeep, t3.get$keys());
+  localValues = $.Css3TransitionEffect__recordProperties(element, localPropsToKeep);
+  $.getInterceptor$JSArray(t3).forEach$1(t3, new $.Css3TransitionEffect__startAnimation_anon(element));
+  if (!(size == null)) {
+    startValue = this.overrideStartEndValues$4(!doingShow, t2, startValue, size);
+    t1.endValue_0 = this.overrideStartEndValues$4(doingShow, t2, t1.endValue_0, size);
+  }
+  element.get$style().setProperty$2(t2, startValue);
+  $._css3TransitionEffectValues_delayStart(element, localValues, new $.Css3TransitionEffect__startAnimation_anon0(t1, this, element, desiredDuration, timing));
+  return desiredDuration;
+},
+ _setShowValue$4: function(element, value, desiredDuration, timing) {
+  var cssTimingValue, t1, t2;
+  cssTimingValue = $.CssEffectTiming__getCssValue(timing);
+  element.get$style().set$transitionTimingFunction(cssTimingValue);
+  t1 = this._property;
+  element.get$style().set$transitionProperty(t1);
+  t2 = $.S(desiredDuration) + "ms";
+  element.get$style().set$transitionDuration(t2);
+  element.get$style().setProperty$2(t1, value);
+},
+ Css3TransitionEffect$4: function(_property, _hideValue, _showValue, animatingOverrides) {
+}
+};
+
+$$._css3TransitionEffectValues = {"":"Object;element>,originalValues,timeoutHandle<",
+ _cleanup$0: function() {
+  if (!(this.timeoutHandle == null)) {
+    $.window().clearTimeout$1(this.timeoutHandle);
+    this.timeoutHandle = null;
+  }
+  return this.originalValues;
+}
+};
+
+$$.FadeEffect = {"":"Css3TransitionEffect;_property,_hideValue,_showValue,_animatingOverrides"
+};
+
+$$.ShrinkEffect = {"":"Css3TransitionEffect;_property,_hideValue,_showValue,_animatingOverrides",
+ overrideStartEndValues$4: function(showValue, property, originalValue, size) {
+  var t1;
+  if (property === "max-height" && showValue) {
+    t1 = size.get$height();
+    return $.S($.getInterceptor$JSNumber(t1).toInt$0(t1)) + "px";
+  } else
+    return originalValue;
+}
+};
+
+$$.ScaleEffect = {"":"Css3TransitionEffect;_property,_hideValue,_showValue,_animatingOverrides"
+};
+
+$$.SpinEffect = {"":"Css3TransitionEffect;_property,_hideValue,_showValue,_animatingOverrides"
+};
+
+$$.DoorEffect = {"":"Css3TransitionEffect;_property,_hideValue,_showValue,_animatingOverrides"
+};
+
+$$.SlideEffect = {"":"Css3TransitionEffect;_property,_hideValue,_showValue,_animatingOverrides"
+};
+
+$$.EffectTiming = {"":"Object;"
+};
+
+$$.CssEffectTiming = {"":"EffectTiming;cssName",
+ is$CssEffectTiming: true
+};
+
+$$.ShowHideAction = {"":"_Enum;name"
+};
+
+$$.ShowHideResult = {"":"_Enum;name",
+ get$isSuccess: function() {
+  return !$.eqB(this, $.CONSTANT22);
+}
+};
+
+$$._ShowHideValues = {"":"Object;initialComputedDisplay>,initialLocalDisplay>,currentState=,_cachedSize",
+ get$cachedSize: function() {
+  return this._cachedSize;
+},
+ set$cachedSize: function(value) {
+  if (value.get$isValid() === true)
+    this._cachedSize = value;
+},
+ _ShowHideValues$4: function(initialComputedDisplay, initialLocalDisplay, currentState, size) {
+  this.set$cachedSize(size);
+}
+};
+
+$$._AnimatingValues = {"":"Object;_liblib3$_element>,_cleanupAction,_finishFunc,_completer,_setTimeoutHandle",
+ _cleanupAction$1: function(arg0) {
+  return this._cleanupAction.call$1(arg0);
+},
+ _finishFunc$1: function(arg0) {
+  return this._finishFunc.call$1(arg0);
+},
+ _start$1: function(durationMS) {
+  this._setTimeoutHandle = $.window().setTimeout$2(this.get$_liblib3$_complete(), durationMS);
+  return this._completer.get$future();
+},
+ _cancel$0: function() {
+  $.window().clearTimeout$1(this._setTimeoutHandle);
+  var t1 = this._liblib3$_element;
+  this._cleanupAction$1(t1);
+  $.indexSet($.get$_AnimatingValues__aniValues(), t1, null);
+  this._completer.complete$1($.CONSTANT22);
+},
+ _liblib3$_complete$0: function() {
+  var t1 = this._liblib3$_element;
+  this._cleanupAction$1(t1);
+  $.indexSet($.get$_AnimatingValues__aniValues(), t1, null);
+  this._finishFunc$1(t1);
+  this._completer.complete$1($.CONSTANT21);
+},
+ get$_liblib3$_complete: function() {
+  return new $.BoundClosure(this, '_liblib3$_complete$0');
+},
+ _cleanup$0: function() {
+  var t1 = this._liblib3$_element;
+  this._cleanupAction$1(t1);
+  $.indexSet($.get$_AnimatingValues__aniValues(), t1, null);
+},
+ _AnimatingValues$_internal$3: function(_element, _cleanupAction, _finishFunc) {
+  $.indexSet($.get$_AnimatingValues__aniValues(), this._liblib3$_element, this);
+}
+};
+
+$$.ShowHideEffect = {"":"Object;",
+ startShow$4: function(element, desiredDuration, timing, size) {
+  return 0;
+},
+ startHide$4: function(element, desiredDuration, timing, size) {
+  return 0;
+},
+ clearAnimation$1: function(element) {
+},
+ get$clearAnimation: function() {
+  return new $.BoundClosure0(this, 'clearAnimation$1');
+}
+};
+
+$$.ShowHideState = {"":"_Enum;name",
+ get$isShow: function() {
+  return $.eqB(this, $.CONSTANT15) || $.eqB(this, $.CONSTANT19);
+}
+};
+
+$$.Accordion = {"":"WebComponent;_liblib11$_root,_liblib0$_element,_shadowRoots",
+ created_autogenerated$0: function() {
+  this._liblib11$_root = this.createShadowRoot$0();
+  this._liblib11$_root.set$innerHtml("    \n    <style type=\"text/css\" scoped=\"\">\n    .accordion-group-x {\n      margin-bottom: 2px;\n      border: 1px solid #e5e5e5;\n      -webkit-border-radius: 4px;\n      -moz-border-radius: 4px;\n      border-radius: 4px;\n    }\n    .accordion-group-x > header {\n      display: block;\n      padding: 8px 15px;\n      cursor: pointer;\n    }\n    .accordion-body-x {\n      border-top: 1px solid #e5e5e5;\n    }\n    </style>\n    <content select=\"header\"></content>\n    <content></content>\n    ");
+},
+ inserted_autogenerated$0: function() {
+},
+ composeChildren$0: function() {
+  $.WebComponent.prototype.composeChildren$0.call(this);
+  var t1 = this._liblib11$_root;
+  if (!(typeof t1 === 'object' && t1 !== null && t1.is$ShadowRoot()))
+    this._liblib11$_root = this;
+},
+ created$0: function() {
+  var t1 = this.get$on();
+  t1 = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, "open");
+  $.getInterceptor$JSArray(t1).add$1(t1, this.get$_liblib11$_onOpen());
+},
+ inserted$0: function() {
+  var t1 = this.queryAll$1("x-expander");
+  t1 = $.getInterceptor$JSArray(t1).map$1(t1, new $.Accordion_inserted_anon());
+  $.getInterceptor$JSArray(t1).forEach$1(t1, new $.Accordion_inserted_anon0());
+},
+ _liblib11$_onOpen$1: function(openEvent) {
+  var t1 = openEvent.get$target();
+  if (typeof t1 === 'object' && t1 !== null && t1.is$UnknownElement())
+    this._onExpanderOpen$1(openEvent.get$target().get$xtag());
+},
+ get$_liblib11$_onOpen: function() {
+  return new $.BoundClosure0(this, '_liblib11$_onOpen$1');
+},
+ _onExpanderOpen$1: function(expander) {
+  var t1 = this.queryAll$1("x-accordion > x-expander");
+  t1 = $.getInterceptor$JSArray(t1).map$1(t1, new $.Accordion__onExpanderOpen_anon());
+  t1 = $.getInterceptor$JSArray(t1).filter$1(t1, new $.Accordion__onExpanderOpen_anon0(expander));
+  $.getInterceptor$JSArray(t1).forEach$1(t1, new $.Accordion__onExpanderOpen_anon1());
+}
+};
+
+$$.Expander = {"":"WebComponent;_liblib9$_root,_onOpen>,_isExpanded,_liblib0$_element,_shadowRoots",
  created_autogenerated$0: function() {
   this._liblib9$_root = this.createShadowRoot$0();
   this._liblib9$_root.set$innerHtml("    \n    <style type=\"text/css\" scoped=\"\">\n    x-expander {\n      display: block;\n      margin-bottom: 2px;\n      border: 1px solid #e5e5e5;\n      -webkit-border-radius: 4px;\n      -moz-border-radius: 4px;\n      border-radius: 4px;\n    }\n    \n    x-expander > header {\n      padding: 8px 15px;\n      cursor: pointer;\n    }\n    \n    x-expander > header:hover {\n      text-decoration: underline;\n    }\n    \n    x-expander > .expander-body-x > .expander-inner-x {\n      padding: 9px 15px;\n      border-top: 1px solid #e5e5e5;\n    }\n    </style>\n    <content select=\"header\"></content>\n    <div class=\"expander-body-x\">\n    <div class=\"expander-inner-x\">\n    <content></content>\n    </div>\n    </div>\n    ");
@@ -3477,7 +3519,7 @@ $$.Expander = {"":"WebComponent;_liblib9$_root,_onOpen>,_isExpanded,_element,_sh
   var expanderDiv, action, effect;
   expanderDiv = this.query$1(".expander-body-x");
   if (!(expanderDiv == null)) {
-    action = this._isExpanded ? $.CONSTANT5 : $.CONSTANT6;
+    action = this._isExpanded ? $.CONSTANT23 : $.CONSTANT24;
     effect = skipAnimation === true ? null : $.get$Expander__effect();
     $.ShowHide_begin(action, expanderDiv, null, effect, null);
   }
@@ -3487,7 +3529,7 @@ $$.Expander = {"":"WebComponent;_liblib9$_root,_onOpen>,_isExpanded,_element,_sh
 }
 };
 
-$$.Carousel = {"":"WebComponent;_liblib10$_root,__e9,__e10,__listener__e10_click_1,__e11,__listener__e11_click_2,_fromTheLeft,_fromTheRight,_element,_shadowRoots",
+$$.Carousel = {"":"WebComponent;_liblib10$_root,__e9,__e10,__listener__e10_click_1,__e11,__listener__e11_click_2,_fromTheLeft,_fromTheRight,_liblib0$_element,_shadowRoots",
  created_autogenerated$0: function() {
   this._liblib10$_root = this.createShadowRoot$0();
   this._liblib10$_root.set$innerHtml("    \n    <style type=\"text/css\" scoped=\"\">\n    x-carousel {\n      position: relative;\n      display: block;\n    }\n    x-carousel > a.carousel-control {\n      display: block;\n      position: absolute;\n      top: 40%;\n      left: 15px;\n      width: 40px;\n      height: 40px;\n      margin-top: -20px;\n      font-size: 60px;\n      font-weight: 100;\n      line-height: 30px;\n      color: #ffffff;\n      text-align: center;\n      background: #222222;\n      border: 3px solid #ffffff;\n      border-radius: 23px;\n      opacity: 0.5;\n      cursor: pointer;\n      -moz-user-select: none;\n      -webkit-user-select: none;\n      -ms-user-select: none;\n      z-index: 5;\n    }\n    x-carousel > .carousel-control.right {\n      right: 15px;\n      left: auto;\n    }\n    x-carousel > .carousel-control:hover {\n      color: #ffffff;\n      text-decoration: none;\n      opacity: 0.9;\n    }\n    </style>\n    <x-swap id=\"__e-9\">\n    <content></content>\n    </x-swap>\n    <a class=\"left carousel-control\" id=\"__e-10\">\u2039</a>\n    <a class=\"right carousel-control\" id=\"__e-11\">\u203a</a>\n    ");
@@ -3533,9 +3575,9 @@ $$.Carousel = {"":"WebComponent;_liblib10$_root,__e9,__e10,__listener__e10_click
   if (doNext)
     ;
   else {
-    t0 = showEffect;
-    showEffect = hideEffect;
-    hideEffect = t0;
+    t0 = hideEffect;
+    hideEffect = showEffect;
+    showEffect = t0;
   }
   t1 = $.add(this.get$_swap().get$activeItemIndex(), delta);
   t2 = this.get$_swap().get$items();
@@ -3544,7 +3586,7 @@ $$.Carousel = {"":"WebComponent;_liblib10$_root,__e9,__e10,__listener__e10_click
 }
 };
 
-$$.Swap = {"":"WebComponent;_liblib7$_root,_contentElementField,_element,_shadowRoots",
+$$.Swap = {"":"WebComponent;_liblib7$_root,_contentElementField,_liblib0$_element,_shadowRoots",
  created_autogenerated$0: function() {
   this._liblib7$_root = this.createShadowRoot$0();
   this._liblib7$_root.set$innerHtml("    \n    <style type=\"text/css\" scoped=\"\">\n    x-swap {\n      display: block;\n    }\n    x-swap > .content {\n      position: relative;\n      overflow: hidden;\n    }\n    x-swap > .content > * {\n      position: absolute;\n      top: 0;\n      left: 0;\n      display: none;\n      margin: 0 auto;\n      width: 100%;\n    }\n    x-swap > .content > .active {\n      position: relative;\n      display: block;\n    }\n    x-swap > .content > .prev {\n      display: block;\n    }\n    </style>\n    <div class=\"content\">\n    <content></content>\n    </div>\n    ");
@@ -3579,7 +3621,7 @@ $$.Swap = {"":"WebComponent;_liblib7$_root,_contentElementField,_element,_shadow
   oldActiveChild = this.get$activeItem();
   if ($.eqB(oldActiveChild, item))
     return $.Future_Future$immediate(true);
-  $.CONSTANT1.forEach$1([oldActiveChild, item], new $.Swap_showItem_anon());
+  $.CONSTANT3.forEach$1([oldActiveChild, item], new $.Swap_showItem_anon());
   oldActiveChild.get$classes().remove$1("active");
   t1 = oldActiveChild.get$classes();
   $.getInterceptor$JSArray(t1).add$1(t1, "prev");
@@ -3616,7 +3658,7 @@ $$.Swap = {"":"WebComponent;_liblib7$_root,_contentElementField,_element,_shadow
         $.getInterceptor$JSArray(t2).add$1(t2, "active");
       }
     } else {
-      t3 = $.CONSTANT1.getRange$2(activeFigures, 1, t2 - 1);
+      t3 = $.CONSTANT3.getRange$2(activeFigures, 1, t2 - 1);
       $.getInterceptor$JSArray(t3).forEach$1(t3, new $.Swap__initialize_anon0());
     }
     t1.forEach$1(theItems, new $.Swap__initialize_anon1());
@@ -3624,7 +3666,7 @@ $$.Swap = {"":"WebComponent;_liblib7$_root,_contentElementField,_element,_shadow
 }
 };
 
-$$.Dropdown = {"":"WebComponent;_liblib4$_root,_dropdownDivSelector,_headerOpenClass,_liblib4$_isExpanded,_expanderDiv,_headerElem,_element,_shadowRoots",
+$$.Dropdown = {"":"WebComponent;_liblib4$_root,_dropdownDivSelector,_headerOpenClass,_liblib4$_isExpanded,_expanderDiv,_headerElem,_liblib0$_element,_shadowRoots",
  created_autogenerated$0: function() {
   this._liblib4$_root = this.createShadowRoot$0();
   this._liblib4$_root.set$innerHtml("    \n    <style type=\"text/css\" scoped=\"\">\n    x-dropdown {\n      position: relative;\n    }\n    x-dropdown > button {\n    }\n    .dropdown-toggle-x {\n    }\n    .dropdown-content-x {\n      position: absolute;\n      top: 100%;\n      left: 0;\n      z-index: 1000;\n      display: none;\n      float: left;\n      min-width: 160px;\n      padding: 5px 0;\n      margin: 2px 0 0;\n      list-style: none;\n      background-color: #ffffff;\n      border: 1px solid #ccc;\n      border: 1px solid rgba(0, 0, 0, 0.2);\n      -webkit-border-radius: 6px;\n      -moz-border-radius: 6px;\n      border-radius: 6px;\n      -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);\n      -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);\n      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);\n      -webkit-background-clip: padding-box;\n      -moz-background-clip: padding;\n      background-clip: padding-box;\n    }\n    </style>\n    <content select=\"button\"></content>\n    <div class=\"dropdown-content-x\">\n    <content></content>\n    </div>\n    ");
@@ -3645,7 +3687,7 @@ $$.Dropdown = {"":"WebComponent;_liblib4$_root,_dropdownDivSelector,_headerOpenC
   if (!$.eqB(value, this._liblib4$_isExpanded)) {
     this._liblib4$_isExpanded = value;
     t1 = this._liblib4$_isExpanded === true;
-    action = t1 ? $.CONSTANT5 : $.CONSTANT6;
+    action = t1 ? $.CONSTANT23 : $.CONSTANT24;
     t2 = this._headerElem;
     t3 = this._headerOpenClass;
     if (t1) {
@@ -3668,7 +3710,7 @@ $$.Dropdown = {"":"WebComponent;_liblib4$_root,_dropdownDivSelector,_headerOpenC
 }
 };
 
-$$.HeaderedContent = {"":"WebComponent;_liblib8$_root,_element,_shadowRoots",
+$$.HeaderedContent = {"":"WebComponent;_liblib8$_root,_liblib0$_element,_shadowRoots",
  created_autogenerated$0: function() {
   this._liblib8$_root = this.createShadowRoot$0();
   this._liblib8$_root.set$innerHtml("    \n    <style type=\"text/css\" scoped=\"\">\n    x-headered-content {\n      display: block;\n      border: 1px lightgray solid;\n      border-radius: 4px;\n    }\n    x-headered-content > header {\n      font-weight: bold;\n      color: #333;\n      background: lightgray;\n      margin: -1px 0 0 -1px;\n      border: 1px lightgray solid;\n      border-radius: 4px 0 4px 0;\n      padding: 8px;\n      display: inline-block;\n    }\n    .headered-content-content {\n      padding: 5px;\n    }\n    </style>\n    <content select=\"header\"></content>\n    <div class=\"headered-content-content\">\n    <content></content>\n    </div>\n    ");
@@ -3683,7 +3725,7 @@ $$.HeaderedContent = {"":"WebComponent;_liblib8$_root,_element,_shadowRoots",
 }
 };
 
-$$.Tabs = {"":"WebComponent;_root,__e12,_element,_shadowRoots",
+$$.Tabs = {"":"WebComponent;_root,__e12,_liblib0$_element,_shadowRoots",
  created_autogenerated$0: function() {
   this._root = this.createShadowRoot$0();
   this._root.set$innerHtml("    \n    <style type=\"text/css\" scoped=\"\">\n    x-tabs > .tabs {\n      border-bottom: 1px solid #ddd;\n    }\n    x-tabs > .tabs > x-tab {\n      border: 1px solid transparent;\n      display: inline-block;\n      padding: 8px;\n      margin-bottom: -1px;\n      cursor: pointer;\n      color: #666;\n    }\n    x-tabs > .tabs > x-tab:hover {\n      text-decoration: underline;\n      color: #999;\n    }\n    x-tabs > .tabs > x-tab[active] {\n      cursor: inherit;\n      color: black;\n      text-decoration: none;\n      border: 1px solid #ddd;\n      border-bottom: 1px solid white;\n      -webkit-border-radius: 4px 4px 0 0;\n      -moz-border-radius: 4px 4px 0 0;\n      border-radius: 4px 4px 0 0;\n    }\n    x-tabs > .content {\n      padding: 0 8px;\n    }\n    </style>\n    <div class=\"tabs\">\n    <content select=\"x-tab\"></content>\n    </div>\n    <x-swap id=\"__e-12\">\n    <content></content>\n    </x-swap>\n    ");
@@ -3772,9 +3814,22 @@ $$.Tabs = {"":"WebComponent;_root,__e12,_element,_shadowRoots",
 }
 };
 
-$$._flashElement_anon = {"":"Closure;element_0",
- call$0: function() {
-  return this.element_0.get$classes().remove$1("highlighted");
+$$.main_anon = {"":"Closure;effectsDiv_0",
+ call$2: function(name$, effect) {
+  var button, t1;
+  button = $.ButtonElement_ButtonElement();
+  button.appendText$1(name$);
+  t1 = button.get$classes();
+  $.getInterceptor$JSArray(t1).add$1(t1, "btn");
+  t1 = button.get$on().get$click();
+  $.getInterceptor$JSArray(t1).add$1(t1, new $.main__anon(effect));
+  this.effectsDiv_0.append$1(button);
+}
+};
+
+$$.main__anon = {"":"Closure;effect_1",
+ call$1: function(_) {
+  return $._showHideDemo_toggle(this.effect_1);
 }
 };
 
@@ -3826,6 +3881,18 @@ $$.NoSuchMethodError_toString_anon = {"":"Closure;box_0",
 }
 };
 
+$$._HashMapImpl__HashMapImpl$from_anon = {"":"Closure;result_0",
+ call$2: function(key, value) {
+  $.indexSet(this.result_0, key, value);
+}
+};
+
+$$._flashElement_anon = {"":"Closure;element_0",
+ call$0: function() {
+  return this.element_0.get$classes().remove$1("highlighted");
+}
+};
+
 $$.invokeClosure_anon = {"":"Closure;closure_0",
  call$0: function() {
   return this.closure_0.call$0();
@@ -3862,17 +3929,41 @@ $$.CssClassSet_add_anon = {"":"Closure;value_0",
 }
 };
 
-$$.Carousel_inserted_autogenerated_anon = {"":"Closure;this_0",
- call$1: function($$event) {
-  this.this_0._moveDelta$1(false);
-  $.dispatch();
+$$.FilteredElementList__filtered_anon = {"":"Closure;",
+ call$1: function(n) {
+  return typeof n === 'object' && n !== null && n.is$Element();
 }
 };
 
-$$.Carousel_inserted_autogenerated_anon0 = {"":"Closure;this_1",
- call$1: function($$event) {
-  this.this_1._moveDelta$1(true);
-  $.dispatch();
+$$._HashSetImpl_filter_anon = {"":"Closure;f_0,result_1",
+ call$2: function(key, value) {
+  var t1;
+  if (this.f_0.call$1(key) === true) {
+    t1 = this.result_1;
+    $.getInterceptor$JSArray(t1).add$1(t1, key);
+  }
+}
+};
+
+$$._ChildrenElementList_filter_anon = {"":"Closure;f_0,output_1",
+ call$1: function(element) {
+  var t1;
+  if (this.f_0.call$1(element) === true) {
+    t1 = this.output_1;
+    $.getInterceptor$JSArray(t1).add$1(t1, element);
+  }
+}
+};
+
+$$.FilteredElementList_removeRange_anon = {"":"Closure;",
+ call$1: function(el) {
+  return el.remove$0();
+}
+};
+
+$$._showHideDemo_toggle_anon = {"":"Closure;effect_0",
+ call$1: function(e) {
+  $.ShowHide_toggle(e, null, this.effect_0, null);
 }
 };
 
@@ -3948,7 +4039,7 @@ $$.ShowHide__populateState_anon0 = {"":"Closure;element_1",
   t1.putIfAbsent$2(t2.get$tagName(), new $.ShowHide__populateState__anon(tagDefaultDisplay));
   localDisplay = t2.get$style().get$display();
   computedDisplay = computedStyle.get$display();
-  inferredState = $.eqB(computedDisplay, "none") ? $.CONSTANT9 : $.CONSTANT10;
+  inferredState = $.eqB(computedDisplay, "none") ? $.CONSTANT14 : $.CONSTANT15;
   size = $.Tools_getSize(computedStyle);
   $.indexSet($.get$ShowHide__values(), t2, $._ShowHideValues$(computedDisplay, localDisplay, inferredState, size));
   return inferredState;
@@ -3981,38 +4072,6 @@ $$.Tools__actualDisplay_anon = {"":"Closure;elem_0",
   var value = css.get$display();
   this.elem_0.remove$0();
   return value;
-}
-};
-
-$$.FilteredElementList__filtered_anon = {"":"Closure;",
- call$1: function(n) {
-  return typeof n === 'object' && n !== null && n.is$Element();
-}
-};
-
-$$._HashSetImpl_filter_anon = {"":"Closure;f_0,result_1",
- call$2: function(key, value) {
-  var t1;
-  if (this.f_0.call$1(key) === true) {
-    t1 = this.result_1;
-    $.getInterceptor$JSArray(t1).add$1(t1, key);
-  }
-}
-};
-
-$$._ChildrenElementList_filter_anon = {"":"Closure;f_0,output_1",
- call$1: function(element) {
-  var t1;
-  if (this.f_0.call$1(element) === true) {
-    t1 = this.output_1;
-    $.getInterceptor$JSArray(t1).add$1(t1, element);
-  }
-}
-};
-
-$$.FilteredElementList_removeRange_anon = {"":"Closure;",
- call$1: function(el) {
-  return el.remove$0();
 }
 };
 
@@ -4163,7 +4222,7 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":"Closure;findSlot_5
             t3.call$2(slot, copy0);
           }
           if (typeof copy0 !== 'object' || copy0 === null || (copy0.constructor !== Array || !!copy0.immutable$list) && !copy0.is$JavaScriptIndexingBehavior())
-            return this.call$1$bailout(3, e, t3, elementCopy, $.CONSTANT1, length$, copy0, slot, i, copy, t2);
+            return this.call$1$bailout(3, e, t3, elementCopy, $.CONSTANT3, length$, copy0, slot, i, copy, t2);
           for (t1 = e.length, t2 = copy0.length, j = 0; j < i; ++j) {
             if (j >= t1)
               throw $.ioore(j);
@@ -4190,7 +4249,7 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":"Closure;findSlot_5
       i = 0;
     }
     if (typeof copy !== 'object' || copy === null || (copy.constructor !== Array || !!copy.immutable$list) && !copy.is$JavaScriptIndexingBehavior())
-      return this.call$1$bailout(4, e, length$, i, copy, $.CONSTANT1);
+      return this.call$1$bailout(4, e, length$, copy, i, $.CONSTANT3);
     for (; i < length$; ++i) {
       if (i >= e.length)
         throw $.ioore(i);
@@ -4227,8 +4286,8 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":"Closure;findSlot_5
       break;
     case 4:
       t2 = env4;
-      copy = env3;
-      i = env2;
+      i = env3;
+      copy = env2;
       length$ = env1;
       e = env0;
       break;
@@ -4358,7 +4417,7 @@ $$._convertDartToNative_PrepareForStructuredClone_walk_anon = {"":"Closure;box_0
 
 $$.MutationObserver_observe_anon = {"":"Closure;parsedOptions_0",
  call$2: function(k, v) {
-  if ($.CONSTANT7.containsKey$1(k) === true)
+  if ($.CONSTANT12.containsKey$1(k) === true)
     this.parsedOptions_0[k] = true === v;
   else if ($.eqB(k, "attributeFilter"))
     this.parsedOptions_0[k] = v;
@@ -4483,9 +4542,17 @@ $$._HashMapImpl_keys_anon = {"":"Closure;box_0,list_1",
 }
 };
 
-$$._HashMapImpl__HashMapImpl$from_anon = {"":"Closure;result_0",
- call$2: function(key, value) {
-  $.indexSet(this.result_0, key, value);
+$$.Carousel_inserted_autogenerated_anon = {"":"Closure;this_0",
+ call$1: function($$event) {
+  this.this_0._moveDelta$1(false);
+  $.dispatch();
+}
+};
+
+$$.Carousel_inserted_autogenerated_anon0 = {"":"Closure;this_1",
+ call$1: function($$event) {
+  this.this_1._moveDelta$1(true);
+  $.dispatch();
 }
 };
 
@@ -4644,7 +4711,7 @@ $$.Swapper_swap_anon = {"":"Closure;box_0,child_1,effect_2,duration_3,effectTimi
 
 $$.Swapper_swap__anon = {"":"Closure;child_5,currentlyVisible_6",
  call$1: function(results) {
-  $.CONSTANT1.forEach$1([this.child_5, this.currentlyVisible_6], new $.Swapper_swap___anon());
+  $.CONSTANT3.forEach$1([this.child_5, this.currentlyVisible_6], new $.Swapper_swap___anon());
   return $.getInterceptor$JSArray(results).every$1(results, new $.Swapper_swap___anon0());
 }
 };
@@ -4693,7 +4760,7 @@ $$.Swapper__ensureOneShown_anon0 = {"":"Closure;box_0,host_2",
     t2 = t1 > 1;
     t3 = this.box_0;
     if (t2) {
-      t2 = $.CONSTANT1.getRange$2(showIndicies, 0, t1 - 1);
+      t2 = $.CONSTANT3.getRange$2(showIndicies, 0, t1 - 1);
       toHide = $.getInterceptor$JSArray(t2).map$1(t2, new $.Swapper__ensureOneShown__anon(this.host_2));
       t2 = showIndicies.length;
       t4 = t2 - 1;
@@ -4726,7 +4793,7 @@ $$.Swapper__ensureOneShown_anon0 = {"":"Closure;box_0,host_2",
     t2 = t1 > 1;
     t3 = this.box_0;
     if (t2) {
-      t2 = $.CONSTANT1.getRange$2(showIndicies, 0, t1 - 1);
+      t2 = $.CONSTANT3.getRange$2(showIndicies, 0, t1 - 1);
       toHide = $.getInterceptor$JSArray(t2).map$1(t2, new $.Swapper__ensureOneShown__anon(this.host_2));
       t2 = showIndicies.length;
       t4 = t2 - 1;
@@ -4853,7 +4920,7 @@ $.Accordion$forElement = function(e) {
 };
 
 $.Carousel$forElement = function(e) {
-  var t1 = new $.Carousel(null, null, null, null, null, null, $.SlideEffect_SlideEffect($.CONSTANT22, null), $.SlideEffect_SlideEffect($.CONSTANT23, null), e, null);
+  var t1 = new $.Carousel(null, null, null, null, null, null, $.SlideEffect_SlideEffect($.CONSTANT1, null), $.SlideEffect_SlideEffect($.CONSTANT28, null), e, null);
   t1.WebComponent$forElement$1(e);
   return t1;
 };
@@ -4889,8 +4956,17 @@ $.Tabs$forElement = function(e) {
 };
 
 $.main = function() {
-  var t1 = $.window().get$on().get$hashChange();
+  var t1, effects, effectsDiv;
+  t1 = $.window().get$on().get$hashChange();
   $.getInterceptor$JSArray(t1).add$1(t1, $._onNavigate);
+  effects = $.makeLiteralMap(["Default", null, "Door", $.DoorEffect$(), "Fade", $.FadeEffect$(), "Scale", $.ScaleEffect_ScaleEffect(null, null, null), "Scale [roll up]", $.ScaleEffect_ScaleEffect($.CONSTANT, null, $.CONSTANT0), "Scale [corner]", $.ScaleEffect_ScaleEffect(null, $.CONSTANT1, $.CONSTANT0), "Shrink", $.ShrinkEffect$(), "Spin", $.SpinEffect$()]);
+  effectsDiv = $.query(".demo.showhide .effects");
+  $.getInterceptor$JSArray(effects).forEach$1(effects, new $.main_anon(effectsDiv));
+};
+
+$._showHideDemo_toggle = function(effect) {
+  var t1 = $.queryAll(".demo.showhide .logo_wrapper > img");
+  $.getInterceptor$JSArray(t1).forEach$1(t1, new $._showHideDemo_toggle_anon(effect));
 };
 
 $._onNavigate = function(e) {
@@ -5181,7 +5257,7 @@ $.mod = function(a, b) {
 
 $.tdiv = function(a, b) {
   if ($.checkNumbers(a, b))
-    return $.CONSTANT4.truncate$0(a / b);
+    return $.CONSTANT7.truncate$0(a / b);
   return a.operator$tdiv$1(b);
 };
 
@@ -5300,7 +5376,7 @@ $.Primitives_parseDouble = function(string) {
   if (!/^\s*(?:NaN|[+-]?(?:Infinity|(?:\.\d+|\d+(?:\.\d+)?)(?:[eE][+-]?\d+)?))\s*$/.test(string))
     throw $.$$throw($.FormatException$(string));
   result = parseFloat(string);
-  if ($.CONSTANT4.get$isNaN(result) === true && !$.eqB(string, "NaN"))
+  if ($.CONSTANT7.get$isNaN(result) === true && !$.eqB(string, "NaN"))
     throw $.$$throw($.FormatException$(string));
   return result;
 };
@@ -5373,7 +5449,7 @@ $.checkString = function(value) {
 $.$$throw = function(ex) {
   var jsError;
   if (ex == null)
-    ex = $.CONSTANT;
+    ex = $.CONSTANT2;
   jsError = new Error();
   jsError.name = ex;
   jsError.description = ex;
@@ -5402,7 +5478,7 @@ $.unwrapException = function(ex) {
     ieErrorCode = ex.number & 0xffff;
     ieFacilityNumber = ex.number>>16 & 0x1FFF;
     if (typeof message === 'string')
-      if ($.CONSTANT0.endsWith$1(message, "is null") === true || $.CONSTANT0.endsWith$1(message, "is undefined") === true || $.CONSTANT0.endsWith$1(message, "is null or undefined") === true || $.CONSTANT0.endsWith$1(message, "of null") === true)
+      if ($.CONSTANT4.endsWith$1(message, "is null") === true || $.CONSTANT4.endsWith$1(message, "is undefined") === true || $.CONSTANT4.endsWith$1(message, "is null or undefined") === true || $.CONSTANT4.endsWith$1(message, "of null") === true)
         return $.NoSuchMethodError$(null, "<unknown>", [], $.makeLiteralMap([]), null);
       else {
         if (message.indexOf(" has no method ") === -1)
@@ -5438,7 +5514,7 @@ $.StackTrace$ = function(stack) {
 
 $.makeLiteralMap = function(keyValuePairs) {
   var iterator, result;
-  iterator = $.CONSTANT1.iterator$0(keyValuePairs);
+  iterator = $.CONSTANT3.iterator$0(keyValuePairs);
   result = $.LinkedHashMap_LinkedHashMap();
   for (; iterator.get$hasNext() === true;)
     $.indexSet(result, iterator.next$0(), iterator.next$0());
@@ -5676,7 +5752,7 @@ $.dynamicBind = function(obj, name$, methods, arguments$) {
       method = $.dynamicBindLookup(hasOwnPropertyFunction, secondTag, methods);
   }
   if (method == null)
-    method = $.lookupDynamicClass(hasOwnPropertyFunction, methods, $.getTypeNameOf($.CONSTANT28));
+    method = $.lookupDynamicClass(hasOwnPropertyFunction, methods, $.getTypeNameOf($.CONSTANT30));
   proto = Object.getPrototypeOf(obj);
   if (method == null)
     method = function () {if (Object.getPrototypeOf(this) === proto) {throw new TypeError(name$ + " is not a function");} else {return Object.prototype[name$].apply(this, arguments);}};
@@ -5710,7 +5786,7 @@ $.dynamicFunction = function(name$) {
   if (!(f == null) && !!f.methods)
     return f.methods;
   methods = {};
-  dartMethod = Object.getPrototypeOf($.CONSTANT28)[name$];
+  dartMethod = Object.getPrototypeOf($.CONSTANT30)[name$];
   if (!(dartMethod == null))
     methods["Object"] = dartMethod;
   bind = function() {return $.dynamicBind.call$4(this, name$, methods, Array.prototype.slice.call(arguments));};
@@ -5855,11 +5931,11 @@ $.allMatchesInStringUnchecked = function(needle, haystack) {
 $.stringContainsUnchecked = function(receiver, other, startIndex) {
   var substr, t1;
   if (typeof other === 'string')
-    return !$.eqB($.CONSTANT0.indexOf$2(receiver, other, startIndex), -1);
+    return !$.eqB($.CONSTANT4.indexOf$2(receiver, other, startIndex), -1);
   else if (typeof other === 'object' && other !== null && !!other.is$JSSyntaxRegExp)
-    return other.hasMatch$1($.CONSTANT0.substring$1(receiver, startIndex));
+    return other.hasMatch$1($.CONSTANT4.substring$1(receiver, startIndex));
   else {
-    substr = $.CONSTANT0.substring$1(receiver, startIndex);
+    substr = $.CONSTANT4.substring$1(receiver, startIndex);
     t1 = $.getInterceptor$JSString(other).allMatches$1(other, substr);
     return $.getInterceptor$JSArray(t1).iterator$0(t1).get$hasNext();
   }
@@ -6035,7 +6111,7 @@ $.Error_safeToString = function(object) {
   if (typeof object === 'number' && Math.floor(object) === object || typeof object === 'number' || typeof object === 'boolean' || null == object)
     return $.getInterceptor(object).toString$0(object);
   if (typeof object === 'string') {
-    t1 = $.CONSTANT0.replaceAll$2(object, "\\", "\\\\");
+    t1 = $.CONSTANT4.replaceAll$2(object, "\\", "\\\\");
     t1 = $.getInterceptor$JSString(t1).replaceAll$2(t1, "\n", "\\n");
     t1 = $.getInterceptor$JSString(t1).replaceAll$2(t1, "\r", "\\r");
     return "\"" + $.S($.getInterceptor$JSString(t1).replaceAll$2(t1, "\"", "\\\"")) + "\"";
@@ -6121,7 +6197,7 @@ $.Futures_wait = function(futures) {
   if (typeof futures !== 'string' && (typeof futures !== 'object' || futures === null || futures.constructor !== Array && !futures.is$JavaScriptIndexingBehavior()))
     return $.Futures_wait$bailout(1, futures, t1);
   if ($.getInterceptor$JSStringJSArray(futures).get$isEmpty(futures) === true)
-    return $.Future_Future$immediate($.CONSTANT8);
+    return $.Future_Future$immediate($.CONSTANT13);
   completer = $.Completer_Completer();
   result = completer.get$future();
   t1.remaining_0 = futures.length;
@@ -6138,7 +6214,7 @@ $.Futures_wait$bailout = function(state0, futures, t1) {
   var t2, completer, result, values, i, future;
   t2 = $.getInterceptor$JSStringJSArray(futures);
   if (t2.get$isEmpty(futures) === true)
-    return $.Future_Future$immediate($.CONSTANT8);
+    return $.Future_Future$immediate($.CONSTANT13);
   completer = $.Completer_Completer();
   result = completer.get$future();
   t1.remaining_0 = t2.get$length(futures);
@@ -6307,8 +6383,16 @@ $.query = function(selector) {
   return $.document().query$1(selector);
 };
 
+$.queryAll = function(selector) {
+  return $.document().queryAll$1(selector);
+};
+
 $.BodyElementEvents$ = function(_ptr) {
   return new $.BodyElementEvents(_ptr);
+};
+
+$.ButtonElement_ButtonElement = function() {
+  return $.document().$$dom_createElement$1("button");
 };
 
 $._browserPrefix = function() {
@@ -6370,10 +6454,10 @@ $._ElementFactoryProvider_createElement_html = function(html) {
   if (!(match == null)) {
     t1 = match.group$1(1);
     tag = $.getInterceptor$JSString(t1).toLowerCase$0(t1);
-    parentTag = $.CONSTANT21.containsKey$1(tag) === true ? $.CONSTANT21.operator$index$1(tag) : "div";
+    parentTag = $.CONSTANT27.containsKey$1(tag) === true ? $.CONSTANT27.operator$index$1(tag) : "div";
   } else {
-    parentTag = "div";
     tag = null;
+    parentTag = "div";
   }
   temp = $.Element_Element$tag(parentTag);
   temp.set$innerHtml(html);
@@ -6448,6 +6532,10 @@ $._ChildNodeListLazy$ = function(_this) {
 
 $.ShadowRoot_supported = function() {
   return !!(Element.prototype.webkitCreateShadowRoot);
+};
+
+$.Text_Text = function(data) {
+  return document.createTextNode(data);
 };
 
 $.WindowEvents$ = function(_ptr) {
@@ -6827,7 +6915,7 @@ $.Css3TransitionEffect__recordProperties = function(element, properties) {
   map = $.Map_Map();
   if (typeof map !== 'object' || map === null || (map.constructor !== Array || !!map.immutable$list) && !map.is$JavaScriptIndexingBehavior())
     return $.Css3TransitionEffect__recordProperties$bailout(1, element, properties, map);
-  for (t1 = $.CONSTANT1.iterator$0(properties); t1.get$hasNext() === true;) {
+  for (t1 = $.CONSTANT3.iterator$0(properties); t1.get$hasNext() === true;) {
     t2 = t1.next$0();
     t3 = element.get$style().getPropertyValue$1(t2);
     if (t2 !== (t2 | 0))
@@ -6841,7 +6929,7 @@ $.Css3TransitionEffect__recordProperties = function(element, properties) {
 
 $.Css3TransitionEffect__recordProperties$bailout = function(state0, element, properties, map) {
   var t1, t2;
-  for (t1 = $.CONSTANT1.iterator$0(properties); t1.get$hasNext() === true;) {
+  for (t1 = $.CONSTANT3.iterator$0(properties); t1.get$hasNext() === true;) {
     t2 = t1.next$0();
     $.indexSet(map, t2, element.get$style().getPropertyValue$1(t2));
   }
@@ -6884,28 +6972,71 @@ $.ShrinkEffect$ = function() {
   return t2;
 };
 
+$.ScaleEffect_ScaleEffect = function(orientation, xOffset, yOffset) {
+  var hideValue, xoValue, yoValue;
+  switch (orientation) {
+    case $.CONSTANT:
+      hideValue = "scale(1, 0)";
+      break;
+    case $.CONSTANT8:
+      hideValue = "scale(0, 1)";
+      break;
+    default:
+      hideValue = "scale(0, 0)";
+      break;
+  }
+  xoValue = (xOffset == null ? $.CONSTANT9 : xOffset).get$name();
+  if (yOffset == null)
+    yOffset = $.CONSTANT10;
+  yoValue = $.eqB(yOffset, $.CONSTANT10) ? "center" : yOffset.get$name();
+  return $.ScaleEffect$_internal(hideValue, $.makeLiteralMap(["-webkit-transform-origin", $.S(xoValue) + " " + $.S(yoValue)]));
+};
+
+$.ScaleEffect$_internal = function(hideValue, values) {
+  var t1 = values == null ? $.Map_Map() : $.Map_Map$from(values);
+  t1 = new $.ScaleEffect("-webkit-transform", hideValue, "scale(1, 1)", t1);
+  t1.Css3TransitionEffect$4("-webkit-transform", hideValue, "scale(1, 1)", values);
+  return t1;
+};
+
+$.SpinEffect$ = function() {
+  var t1 = $.Map_Map();
+  t1 = new $.SpinEffect("-webkit-transform", "perspective(600px) rotateX(90deg)", "perspective(600px) rotateX(0deg)", t1);
+  t1.Css3TransitionEffect$4("-webkit-transform", "perspective(600px) rotateX(90deg)", "perspective(600px) rotateX(0deg)", null);
+  return t1;
+};
+
+$.DoorEffect$ = function() {
+  var t1, t2;
+  t1 = $.makeLiteralMap(["-webkit-transform-origin", "0% 50%"]);
+  t2 = t1 == null ? $.Map_Map() : $.Map_Map$from(t1);
+  t2 = new $.DoorEffect("-webkit-transform", "perspective(1000px) rotateY(90deg)", "perspective(1000px) rotateY(0deg)", t2);
+  t2.Css3TransitionEffect$4("-webkit-transform", "perspective(1000px) rotateY(90deg)", "perspective(1000px) rotateY(0deg)", t1);
+  return t2;
+};
+
 $.SlideEffect_SlideEffect = function(xStart, yStart) {
   var xComponent, yComponent;
   switch (xStart) {
-    case $.CONSTANT22:
+    case $.CONSTANT1:
       xComponent = "-100%";
       break;
-    case $.CONSTANT23:
+    case $.CONSTANT28:
       xComponent = "100%";
       break;
-    case $.CONSTANT24:
+    case $.CONSTANT9:
     default:
       xComponent = "0";
       break;
   }
   switch (yStart) {
-    case $.CONSTANT25:
+    case $.CONSTANT0:
       yComponent = "-100%";
       break;
-    case $.CONSTANT26:
+    case $.CONSTANT29:
       yComponent = "100%";
       break;
-    case $.CONSTANT27:
+    case $.CONSTANT10:
     default:
       yComponent = "0";
       break;
@@ -6940,11 +7071,15 @@ $.ShowHide_getState = function(element) {
 };
 
 $.ShowHide_show = function(element, duration, effect, effectTiming) {
-  return $.ShowHide_begin($.CONSTANT5, element, duration, effect, effectTiming);
+  return $.ShowHide_begin($.CONSTANT23, element, duration, effect, effectTiming);
 };
 
 $.ShowHide_hide = function(element, duration, effect, effectTiming) {
-  return $.ShowHide_begin($.CONSTANT6, element, duration, effect, effectTiming);
+  return $.ShowHide_begin($.CONSTANT24, element, duration, effect, effectTiming);
+};
+
+$.ShowHide_toggle = function(element, duration, effect, effectTiming) {
+  return $.ShowHide_begin($.CONSTANT11, element, duration, effect, effectTiming);
 };
 
 $.ShowHide_begin = function(action, element, duration, effect, effectTiming) {
@@ -6969,17 +7104,17 @@ $.ShowHide__updateCachedSize = function(element) {
 
 $.ShowHide__getToggleState = function(action, state) {
   switch (action) {
-    case $.CONSTANT5:
+    case $.CONSTANT23:
       return true;
-    case $.CONSTANT6:
+    case $.CONSTANT24:
       return false;
-    case $.CONSTANT18:
+    case $.CONSTANT11:
       switch (state) {
-        case $.CONSTANT9:
-        case $.CONSTANT12:
-          return true;
         case $.CONSTANT14:
-        case $.CONSTANT10:
+        case $.CONSTANT17:
+          return true;
+        case $.CONSTANT19:
+        case $.CONSTANT15:
           return false;
         default:
           throw $.$$throw($.DetailedArgumentError$("state", "Value of " + $.S(state) + " is not supported"));
@@ -6996,7 +7131,7 @@ $.ShowHide__requestEffect = function(doShow, element, desiredDuration, effect, e
   else if ($.ltB(desiredDuration, 0))
     desiredDuration = 0;
   if (effect == null)
-    effect = $.CONSTANT11;
+    effect = $.CONSTANT16;
   if (effectTiming == null)
     effectTiming = $.EffectTiming_defaultTiming();
   t1 = $.get$ShowHide__values();
@@ -7013,14 +7148,14 @@ $.ShowHide__requestShow = function(element, desiredDuration, effect, effectTimin
   values = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element);
   t1 = values.get$currentState();
   switch (t1) {
-    case $.CONSTANT14:
-      return $.Future_Future$immediate($.CONSTANT13);
-    case $.CONSTANT10:
-      return $.Future_Future$immediate($.CONSTANT13);
-    case $.CONSTANT12:
+    case $.CONSTANT19:
+      return $.Future_Future$immediate($.CONSTANT18);
+    case $.CONSTANT15:
+      return $.Future_Future$immediate($.CONSTANT18);
+    case $.CONSTANT17:
       $._AnimatingValues_cancelAnimation(element);
       break;
-    case $.CONSTANT9:
+    case $.CONSTANT14:
       break;
     default:
       throw $.$$throw($.DetailedArgumentError$("oldState", "the provided value " + $.S(t1) + " is not supported"));
@@ -7028,10 +7163,10 @@ $.ShowHide__requestShow = function(element, desiredDuration, effect, effectTimin
   $.ShowHide__finishShow(element);
   durationMS = effect.startShow$4(element, desiredDuration, effectTiming, size);
   if ($.gtB(durationMS, 0)) {
-    values.set$currentState($.CONSTANT14);
+    values.set$currentState($.CONSTANT19);
     return $._AnimatingValues_scheduleCleanup(durationMS, element, effect.get$clearAnimation(), $.ShowHide__finishShow);
   } else
-    return $.Future_Future$immediate($.CONSTANT15);
+    return $.Future_Future$immediate($.CONSTANT20);
 };
 
 $.ShowHide__finishShow = function(element) {
@@ -7040,7 +7175,7 @@ $.ShowHide__finishShow = function(element) {
   values = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element);
   t1 = $.ShowHide__getShowDisplayValue(element);
   element.get$style().set$display(t1);
-  values.set$currentState($.CONSTANT10);
+  values.set$currentState($.CONSTANT15);
 };
 
 $.ShowHide__requestHide = function(element, desiredDuration, effect, effectTiming, size) {
@@ -7048,15 +7183,15 @@ $.ShowHide__requestHide = function(element, desiredDuration, effect, effectTimin
   t1 = $.get$ShowHide__values();
   t2 = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element).get$currentState();
   switch (t2) {
-    case $.CONSTANT12:
-      return $.Future_Future$immediate($.CONSTANT13);
-    case $.CONSTANT9:
-      $.ShowHide__finishHide(element);
-      return $.Future_Future$immediate($.CONSTANT13);
+    case $.CONSTANT17:
+      return $.Future_Future$immediate($.CONSTANT18);
     case $.CONSTANT14:
+      $.ShowHide__finishHide(element);
+      return $.Future_Future$immediate($.CONSTANT18);
+    case $.CONSTANT19:
       $._AnimatingValues_cancelAnimation(element);
       break;
-    case $.CONSTANT10:
+    case $.CONSTANT15:
       break;
     default:
       throw $.$$throw($.DetailedArgumentError$("oldState", "the provided value " + $.S(t2) + " is not supported"));
@@ -7064,11 +7199,11 @@ $.ShowHide__requestHide = function(element, desiredDuration, effect, effectTimin
   durationMS = effect.startHide$4(element, desiredDuration, effectTiming, size);
   if ($.gtB(durationMS, 0)) {
     t1 = $.get$ShowHide__values();
-    $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element).set$currentState($.CONSTANT12);
+    $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element).set$currentState($.CONSTANT17);
     return $._AnimatingValues_scheduleCleanup(durationMS, element, effect.get$clearAnimation(), $.ShowHide__finishHide);
   } else {
     $.ShowHide__finishHide(element);
-    return $.Future_Future$immediate($.CONSTANT15);
+    return $.Future_Future$immediate($.CONSTANT20);
   }
 };
 
@@ -7077,7 +7212,7 @@ $.ShowHide__finishHide = function(element) {
   t1 = $.get$ShowHide__values();
   values = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, element);
   element.get$style().set$display("none");
-  values.set$currentState($.CONSTANT9);
+  values.set$currentState($.CONSTANT14);
 };
 
 $.ShowHide__getShowDisplayValue = function(element) {
@@ -7242,85 +7377,89 @@ $.Node = {builtin$cls: 'Node'};
 $.CssStyleDeclaration = {builtin$cls: 'CssStyleDeclaration'};
 $.bool = {builtin$cls: 'bool'};
 $.Match = {builtin$cls: 'Match'};
-$.CONSTANT2 = new Isolate.$isolateProperties.JSInt();
+$.CONSTANT5 = new Isolate.$isolateProperties.JSInt();
 Isolate.makeConstantList = function(list) {
   list.immutable$list = true;
   list.fixed$length = true;
   return list;
 };
-$.CONSTANT29 = Isolate.makeConstantList(["childList", "attributes", "characterData", "subtree", "attributeOldValue", "characterDataOldValue"]);
-$.CONSTANT7 = new Isolate.$isolateProperties.ConstantMap(6, {childList: true, attributes: true, characterData: true, subtree: true, attributeOldValue: true, characterDataOldValue: true}, Isolate.$isolateProperties.CONSTANT29);
-$.CONSTANT0 = new Isolate.$isolateProperties.JSString();
-$.CONSTANT17 = new Isolate.$isolateProperties.ShowHideResult("canceled");
-$.CONSTANT15 = new Isolate.$isolateProperties.ShowHideResult("immediate");
-$.CONSTANT20 = new Isolate.$isolateProperties.InvalidOperationError("The input sequence contains more than one element.");
-$.CONSTANT12 = new Isolate.$isolateProperties.ShowHideState("hidding");
-$.CONSTANT3 = new Isolate.$isolateProperties._DeletedKeySentinel();
-$.CONSTANT30 = Isolate.makeConstantList(["body", "head", "caption", "td", "colgroup", "col", "tr", "tbody", "tfoot", "thead", "track"]);
-$.CONSTANT21 = new Isolate.$isolateProperties.ConstantMap(11, {body: "html", head: "html", caption: "table", td: "tr", colgroup: "table", col: "colgroup", tr: "tbody", tbody: "table", tfoot: "table", thead: "table", track: "audio"}, Isolate.$isolateProperties.CONSTANT30);
-$.CONSTANT9 = new Isolate.$isolateProperties.ShowHideState("hidden");
-$.CONSTANT28 = new Isolate.$isolateProperties.Object();
-$.CONSTANT8 = Isolate.makeConstantList([]);
-$.CONSTANT10 = new Isolate.$isolateProperties.ShowHideState("shown");
-$.CONSTANT19 = new Isolate.$isolateProperties.ConstantMap(0, {}, Isolate.$isolateProperties.CONSTANT8);
-$.CONSTANT13 = new Isolate.$isolateProperties.ShowHideResult("no-op");
-$.CONSTANT26 = new Isolate.$isolateProperties.VerticalAlignment("bottom");
-$.CONSTANT14 = new Isolate.$isolateProperties.ShowHideState("showing");
-$.CONSTANT22 = new Isolate.$isolateProperties.HorizontalAlignment("left");
-$.CONSTANT = new Isolate.$isolateProperties.NullThrownError();
-$.CONSTANT23 = new Isolate.$isolateProperties.HorizontalAlignment("right");
-$.CONSTANT6 = new Isolate.$isolateProperties.ShowHideAction("hide");
-$.CONSTANT11 = new Isolate.$isolateProperties.ShowHideEffect();
-$.CONSTANT18 = new Isolate.$isolateProperties.ShowHideAction("toggle");
-$.CONSTANT27 = new Isolate.$isolateProperties.VerticalAlignment("middle");
-$.CONSTANT24 = new Isolate.$isolateProperties.HorizontalAlignment("center");
-$.CONSTANT5 = new Isolate.$isolateProperties.ShowHideAction("show");
-$.CONSTANT25 = new Isolate.$isolateProperties.VerticalAlignment("top");
-$.CONSTANT16 = new Isolate.$isolateProperties.ShowHideResult("animated");
-$.CONSTANT1 = new Isolate.$isolateProperties.JSArray();
-$.CONSTANT4 = new Isolate.$isolateProperties.JSNumber();
+$.CONSTANT31 = Isolate.makeConstantList(["childList", "attributes", "characterData", "subtree", "attributeOldValue", "characterDataOldValue"]);
+$.CONSTANT12 = new Isolate.$isolateProperties.ConstantMap(6, {childList: true, attributes: true, characterData: true, subtree: true, attributeOldValue: true, characterDataOldValue: true}, Isolate.$isolateProperties.CONSTANT31);
+$.CONSTANT4 = new Isolate.$isolateProperties.JSString();
+$.CONSTANT13 = Isolate.makeConstantList([]);
+$.CONSTANT10 = new Isolate.$isolateProperties.VerticalAlignment("middle");
+$.CONSTANT15 = new Isolate.$isolateProperties.ShowHideState("shown");
+$.CONSTANT11 = new Isolate.$isolateProperties.ShowHideAction("toggle");
+$.CONSTANT = new Isolate.$isolateProperties.Orientation("vertical");
+$.CONSTANT20 = new Isolate.$isolateProperties.ShowHideResult("immediate");
+$.CONSTANT6 = new Isolate.$isolateProperties._DeletedKeySentinel();
+$.CONSTANT19 = new Isolate.$isolateProperties.ShowHideState("showing");
+$.CONSTANT32 = Isolate.makeConstantList(["body", "head", "caption", "td", "colgroup", "col", "tr", "tbody", "tfoot", "thead", "track"]);
+$.CONSTANT27 = new Isolate.$isolateProperties.ConstantMap(11, {body: "html", head: "html", caption: "table", td: "tr", colgroup: "table", col: "colgroup", tr: "tbody", tbody: "table", tfoot: "table", thead: "table", track: "audio"}, Isolate.$isolateProperties.CONSTANT32);
+$.CONSTANT0 = new Isolate.$isolateProperties.VerticalAlignment("top");
+$.CONSTANT22 = new Isolate.$isolateProperties.ShowHideResult("canceled");
+$.CONSTANT23 = new Isolate.$isolateProperties.ShowHideAction("show");
+$.CONSTANT1 = new Isolate.$isolateProperties.HorizontalAlignment("left");
+$.CONSTANT30 = new Isolate.$isolateProperties.Object();
+$.CONSTANT25 = new Isolate.$isolateProperties.ConstantMap(0, {}, Isolate.$isolateProperties.CONSTANT13);
+$.CONSTANT14 = new Isolate.$isolateProperties.ShowHideState("hidden");
+$.CONSTANT24 = new Isolate.$isolateProperties.ShowHideAction("hide");
+$.CONSTANT18 = new Isolate.$isolateProperties.ShowHideResult("no-op");
+$.CONSTANT8 = new Isolate.$isolateProperties.Orientation("horizontal");
+$.CONSTANT17 = new Isolate.$isolateProperties.ShowHideState("hidding");
+$.CONSTANT29 = new Isolate.$isolateProperties.VerticalAlignment("bottom");
+$.CONSTANT2 = new Isolate.$isolateProperties.NullThrownError();
+$.CONSTANT16 = new Isolate.$isolateProperties.ShowHideEffect();
+$.CONSTANT26 = new Isolate.$isolateProperties.InvalidOperationError("The input sequence contains more than one element.");
+$.CONSTANT28 = new Isolate.$isolateProperties.HorizontalAlignment("right");
+$.CONSTANT21 = new Isolate.$isolateProperties.ShowHideResult("animated");
+$.CONSTANT9 = new Isolate.$isolateProperties.HorizontalAlignment("center");
+$.CONSTANT3 = new Isolate.$isolateProperties.JSArray();
+$.CONSTANT7 = new Isolate.$isolateProperties.JSNumber();
 $._highlightedClass = "highlighted";
-$._HashMapImpl__DELETED_KEY = Isolate.$isolateProperties.CONSTANT3;
+$._HashMapImpl__DELETED_KEY = Isolate.$isolateProperties.CONSTANT6;
 $._HashMapImpl__INITIAL_CAPACITY = 8;
-$.ShowHideResult_ANIMATED = Isolate.$isolateProperties.CONSTANT16;
-$.ShowHideResult_NOOP = Isolate.$isolateProperties.CONSTANT13;
-$.ShowHideResult_IMMEDIATE = Isolate.$isolateProperties.CONSTANT15;
-$.ShowHideResult_CANCELED = Isolate.$isolateProperties.CONSTANT17;
-$.ShowHideState_SHOWN = Isolate.$isolateProperties.CONSTANT10;
-$.ShowHideState_HIDDEN = Isolate.$isolateProperties.CONSTANT9;
-$.ShowHideState_SHOWING = Isolate.$isolateProperties.CONSTANT14;
-$.ShowHideState_HIDING = Isolate.$isolateProperties.CONSTANT12;
+$.ShowHide__defaultDuration = 400;
+$.ShowHideResult_ANIMATED = Isolate.$isolateProperties.CONSTANT21;
+$.ShowHideResult_NOOP = Isolate.$isolateProperties.CONSTANT18;
+$.ShowHideResult_IMMEDIATE = Isolate.$isolateProperties.CONSTANT20;
+$.ShowHideResult_CANCELED = Isolate.$isolateProperties.CONSTANT22;
+$.ShowHideState_SHOWN = Isolate.$isolateProperties.CONSTANT15;
+$.ShowHideState_HIDDEN = Isolate.$isolateProperties.CONSTANT14;
+$.ShowHideState_SHOWING = Isolate.$isolateProperties.CONSTANT19;
+$.ShowHideState_HIDING = Isolate.$isolateProperties.CONSTANT17;
 $.Tabs__activeTabAttribute = "active";
 $._cachedBrowserPrefix = null;
 $.Tabs__targetAttribute = "target";
 $.useShadowDom = false;
 $._watchers = null;
-$.HorizontalAlignment_LEFT = Isolate.$isolateProperties.CONSTANT22;
+$.HorizontalAlignment_LEFT = Isolate.$isolateProperties.CONSTANT1;
+$.HorizontalAlignment_CENTER = Isolate.$isolateProperties.CONSTANT9;
 $.Primitives_hashCodeSeed = 0;
+$.VerticalAlignment_TOP = Isolate.$isolateProperties.CONSTANT0;
 $.Primitives_mirrorsEnabled = false;
-$.VerticalAlignment_BOTTOM = Isolate.$isolateProperties.CONSTANT26;
+$.VerticalAlignment_MIDDLE = Isolate.$isolateProperties.CONSTANT10;
+$.VerticalAlignment_BOTTOM = Isolate.$isolateProperties.CONSTANT29;
 $.Primitives_DOLLAR_CHAR_VALUE = 36;
-$.HorizontalAlignment_CENTER = Isolate.$isolateProperties.CONSTANT24;
-$.VerticalAlignment_TOP = Isolate.$isolateProperties.CONSTANT25;
-$.HorizontalAlignment_RIGHT = Isolate.$isolateProperties.CONSTANT23;
-$.VerticalAlignment_MIDDLE = Isolate.$isolateProperties.CONSTANT27;
+$.HorizontalAlignment_RIGHT = Isolate.$isolateProperties.CONSTANT28;
 $._getTypeNameOf = null;
 $.Swap__activeClass = "active";
 $.Swap__dirClassPrev = "prev";
+$.Orientation_HORIZONTAL = Isolate.$isolateProperties.CONSTANT8;
 $.MIRROR_OPT_IN_MESSAGE = "\nThis program is using an experimental feature called \"mirrors\".  As\ncurrently implemented, mirrors do not work with minification, and will\ncause spurious errors depending on how code was optimized.\n\nThe authors of this program are aware of these problems and have\ndecided the thrill of using an experimental feature is outweighing the\nrisks.  Furthermore, the authors of this program understand that\nlong-term, to fix the problems mentioned above, mirrors may have\nnegative impact on size and performance of Dart programs compiled to\nJavaScript.\n";
+$.Orientation_VERTICAL = Isolate.$isolateProperties.CONSTANT;
 $.Expando__KEY_PROPERTY_NAME = "expando$key";
 $.Expando__EXPANDO_PROPERTY_NAME = "expando$values";
 $.Expando__keyCount = 0;
-$.ShowHideAction_SHOW = Isolate.$isolateProperties.CONSTANT5;
 $._pendingRequests = null;
-$.Expander__openName = "open";
-$.ShowHideAction_HIDE = Isolate.$isolateProperties.CONSTANT6;
-$.ShowHideAction_TOGGLE = Isolate.$isolateProperties.CONSTANT18;
-$.Expander__expanderDivSelector = ".expander-body-x";
 $._pendingMeasurementFrameCallbacks = null;
 $._measurementScheduler = null;
+$.ShowHideAction_TOGGLE = Isolate.$isolateProperties.CONSTANT11;
+$.ShowHideAction_HIDE = Isolate.$isolateProperties.CONSTANT24;
+$.Expander__expanderDivSelector = ".expander-body-x";
+$.Expander__openName = "open";
+$.ShowHideAction_SHOW = Isolate.$isolateProperties.CONSTANT23;
 $.Carousel__duration = 2000;
-$.ShowHide__defaultDuration = 400;
 $.getInterceptor$JSStringJSArray = function(receiver) {
   if (typeof receiver == 'string')
     return $.JSString.prototype;
@@ -7372,6 +7511,9 @@ $.getInterceptor$JSArray = function(receiver) {
 Isolate.$lazy($, '_values', '_css3TransitionEffectValues__values', 'get$_css3TransitionEffectValues__values', function() {
   return $.Expando$("_css3TransitionEffectValues");
 });
+Isolate.$lazy($, 'ease', 'EffectTiming_ease', 'get$EffectTiming_ease', function() {
+  return $.CssEffectTiming$_internal("ease");
+});
 Isolate.$lazy($, '_defaultDisplays', 'ShowHide__defaultDisplays', 'get$ShowHide__defaultDisplays', function() {
   return $.Map_Map();
 });
@@ -7384,23 +7526,20 @@ Isolate.$lazy($, '_values', 'ShowHide__values', 'get$ShowHide__values', function
 Isolate.$lazy($, '_effect', 'Expander__effect', 'get$Expander__effect', function() {
   return $.ShrinkEffect$();
 });
-Isolate.$lazy($, '_elemDisplay', 'Tools__elemDisplay', 'get$Tools__elemDisplay', function() {
-  return $.Map_Map();
-});
 Isolate.$lazy($, '_START_TAG_REGEXP', '_START_TAG_REGEXP', 'get$_START_TAG_REGEXP', function() {
   return $.RegExp_RegExp("<(\\w+)", false, false);
 });
 Isolate.$lazy($, 'quoteRegExp', 'quoteRegExp', 'get$quoteRegExp', function() {
   return $.JSSyntaxRegExp$("[-[\\]{}()*+?.,\\\\^$|#\\s]", false, false);
 });
+Isolate.$lazy($, '_elemDisplay', 'Tools__elemDisplay', 'get$Tools__elemDisplay', function() {
+  return $.Map_Map();
+});
 Isolate.$lazy($, '_effect', 'Dropdown__effect', 'get$Dropdown__effect', function() {
   return $.FadeEffect$();
 });
 Isolate.$lazy($, '_aniValues', '_AnimatingValues__aniValues', 'get$_AnimatingValues__aniValues', function() {
   return $.Expando$("_AnimatingValues");
-});
-Isolate.$lazy($, 'ease', 'EffectTiming_ease', 'get$EffectTiming_ease', function() {
-  return $.CssEffectTiming$_internal("ease");
 });
 var $ = null;
 Isolate.$finishClasses($$);
@@ -7445,13 +7584,13 @@ $.$defineNativeClass = function(cls, desc) {
  is$Element: function() { return false; }
 });
 
-$.$defineNativeClass('HTMLAnchorElement', {"":"target>",
+$.$defineNativeClass('HTMLAnchorElement', {"":"name>,target>",
  toString$0: function() {
   return this.toString();
 }
 });
 
-$.$defineNativeClass('HTMLAppletElement', {"":"height>,width>"
+$.$defineNativeClass('HTMLAppletElement', {"":"height>,name>,width>"
 });
 
 $.$defineNativeClass('HTMLAreaElement', {"":"target>"
@@ -7461,7 +7600,7 @@ $.$defineNativeClass('ArrayBufferView', {
  is$ArrayBufferView: function() { return true; }
 });
 
-$.$defineNativeClass('Attr', {"":"value="
+$.$defineNativeClass('Attr', {"":"name>,value="
 });
 
 $.$defineNativeClass('HTMLBaseElement', {"":"target>"
@@ -7473,7 +7612,7 @@ $.$defineNativeClass('HTMLBodyElement', {
 }
 });
 
-$.$defineNativeClass('HTMLButtonElement', {"":"value="
+$.$defineNativeClass('HTMLButtonElement', {"":"name>,value="
 });
 
 $.$defineNativeClass('HTMLCanvasElement', {"":"height>,width>"
@@ -7732,9 +7871,39 @@ $.$defineNativeClass('DocumentFragment', {
     return Object.prototype.set$innerHtml.call(this, value);
   }
 },
+ _insertAdjacentNode$2: function(where, node) {
+  var t1, first;
+  switch ($.CONSTANT4.toLowerCase$0(where)) {
+    case "beforebegin":
+      return;
+    case "afterend":
+      return;
+    case "afterbegin":
+      t1 = this.get$nodes();
+      if ($.gtB($.getInterceptor$JSStringJSArray(t1).get$length(t1), 0)) {
+        t1 = this.get$nodes();
+        first = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, 0);
+      } else
+        first = null;
+      this.insertBefore$2(node, first);
+      return node;
+    case "beforeend":
+      t1 = this.get$nodes();
+      $.getInterceptor$JSArray(t1).add$1(t1, node);
+      return node;
+    default:
+      throw $.$$throw($.ArgumentError$("Invalid position " + where));
+  }
+},
+ insertAdjacentText$2: function(where, text) {
+  this._insertAdjacentNode$2(where, $.Text_Text(text));
+},
  append$1: function(element) {
   var t1 = this.get$children();
   $.getInterceptor$JSArray(t1).add$1(t1, element);
+},
+ appendText$1: function(text) {
+  this.insertAdjacentText$2("beforeend", text);
 },
  get$hidden: function() {
   return false;
@@ -7749,7 +7918,7 @@ $.$defineNativeClass('DocumentFragment', {
   return;
 },
  get$attributes: function() {
-  return $.CONSTANT19;
+  return $.CONSTANT25;
 },
  get$classes: function() {
   return $._FrozenCssClassSet$();
@@ -7779,13 +7948,16 @@ $.$defineNativeClass('DocumentFragment', {
 }
 });
 
-$.$defineNativeClass('DocumentType', {
+$.$defineNativeClass('DocumentType', {"":"name>",
  remove$0: function() {
   return this.remove();
 }
 });
 
-$.$defineNativeClass('DOMException', {"":"message>",
+$.$defineNativeClass('DOMError', {"":"name>"
+});
+
+$.$defineNativeClass('DOMException', {"":"message>,name>",
  toString$0: function() {
   return this.toString();
 }
@@ -7834,6 +8006,48 @@ $.$defineNativeClass('Element', {"":"xtag=,$$dom_children:children~,hidden=,id>,
   var t1 = this.get$children();
   $.getInterceptor$JSArray(t1).add$1(t1, e);
 },
+ appendText$1: function(text) {
+  this.insertAdjacentText$2("beforeend", text);
+},
+ insertAdjacentText$2: function(where, text) {
+  if (Object.getPrototypeOf(this).hasOwnProperty('insertAdjacentText$2')) {
+    if (!!this.insertAdjacentText)
+      this._insertAdjacentText$2(where, text);
+    else
+      this._insertAdjacentNode$2(where, $.Text_Text(text));
+  } else {
+    return Object.prototype.insertAdjacentText$2.call(this, where, text);
+  }
+},
+ _insertAdjacentText$2: function(where, text) {
+  return this.insertAdjacentText(where,text);
+},
+ _insertAdjacentNode$2: function(where, node) {
+  var t1, first;
+  switch ($.CONSTANT4.toLowerCase$0(where)) {
+    case "beforebegin":
+      this.parentNode.insertBefore$2(node, this);
+      break;
+    case "afterbegin":
+      t1 = this.get$nodes();
+      if ($.gtB($.getInterceptor$JSStringJSArray(t1).get$length(t1), 0)) {
+        t1 = this.get$nodes();
+        first = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, 0);
+      } else
+        first = null;
+      this.insertBefore$2(node, first);
+      break;
+    case "beforeend":
+      t1 = this.get$nodes();
+      $.getInterceptor$JSArray(t1).add$1(t1, node);
+      break;
+    case "afterend":
+      this.parentNode.insertBefore$2(node, this.nextSibling);
+      break;
+    default:
+      throw $.$$throw($.ArgumentError$("Invalid position " + where));
+  }
+},
  get$on: function() {
   if (Object.getPrototypeOf(this).hasOwnProperty('get$on')) {
     return $.ElementEvents$(this);
@@ -7875,7 +8089,7 @@ $.$defineNativeClass('Element', {"":"xtag=,$$dom_children:children~,hidden=,id>,
  is$Element: function() { return true; }
 });
 
-$.$defineNativeClass('HTMLEmbedElement', {"":"height>,width>"
+$.$defineNativeClass('HTMLEmbedElement', {"":"height>,name>,width>"
 });
 
 $.$defineNativeClass('ErrorEvent', {"":"message>"
@@ -7893,7 +8107,7 @@ $.$defineNativeClass('Event', {"":"defaultPrevented>",
 }
 });
 
-$.$defineNativeClass('EventException', {"":"message>",
+$.$defineNativeClass('EventException', {"":"message>,name>",
  toString$0: function() {
   return this.toString();
 }
@@ -7930,16 +8144,19 @@ $.$defineNativeClass('EventTarget', {
 }
 });
 
-$.$defineNativeClass('FileException', {"":"message>",
+$.$defineNativeClass('HTMLFieldSetElement', {"":"name>"
+});
+
+$.$defineNativeClass('FileException', {"":"message>,name>",
  toString$0: function() {
   return this.toString();
 }
 });
 
-$.$defineNativeClass('HTMLFormElement', {"":"length>,target>"
+$.$defineNativeClass('HTMLFormElement', {"":"length>,name>,target>"
 });
 
-$.$defineNativeClass('HTMLFrameElement', {"":"height>,width>"
+$.$defineNativeClass('HTMLFrameElement', {"":"height>,name>,width>"
 });
 
 $.$defineNativeClass('HTMLFrameSetElement', {
@@ -8046,13 +8263,13 @@ $.$defineNativeClass('HTMLOptionsCollection', {
 }
 });
 
-$.$defineNativeClass('XMLHttpRequestException', {"":"message>",
+$.$defineNativeClass('XMLHttpRequestException', {"":"message>,name>",
  toString$0: function() {
   return this.toString();
 }
 });
 
-$.$defineNativeClass('HTMLIFrameElement', {"":"height>,width>"
+$.$defineNativeClass('HTMLIFrameElement', {"":"height>,name>,width>"
 });
 
 $.$defineNativeClass('HTMLImageElement', {"":"complete>,height>,width>",
@@ -8061,14 +8278,20 @@ $.$defineNativeClass('HTMLImageElement', {"":"complete>,height>,width>",
 }
 });
 
-$.$defineNativeClass('HTMLInputElement', {"":"height>,pattern>,value=,width>",
+$.$defineNativeClass('HTMLInputElement', {"":"height>,name>,pattern>,value=,width>",
  get$on: function() {
   return $.InputElementEvents$(this);
 },
  is$Element: function() { return true; }
 });
 
+$.$defineNativeClass('HTMLKeygenElement', {"":"name>"
+});
+
 $.$defineNativeClass('HTMLLIElement', {"":"value="
+});
+
+$.$defineNativeClass('HTMLMapElement', {"":"name>"
 });
 
 $.$defineNativeClass('HTMLMarqueeElement', {"":"height>,width>"
@@ -8081,6 +8304,9 @@ $.$defineNativeClass('HTMLMediaElement', {
 });
 
 $.$defineNativeClass('MediaKeyEvent', {"":"message>"
+});
+
+$.$defineNativeClass('HTMLMetaElement', {"":"name>"
 });
 
 $.$defineNativeClass('HTMLMeterElement', {"":"value="
@@ -8186,7 +8412,7 @@ $.$defineNativeClass('NamedNodeMap', {
 $.$defineNativeClass('Navigator', {"":"userAgent>"
 });
 
-$.$defineNativeClass('Node', {"":"$$dom_attributes:attributes~,$$dom_childNodes:childNodes~,$$dom_localName:localName~,$$dom_namespaceUri:namespaceURI~,parent:parentElement~,parentNode>,text:textContent|",
+$.$defineNativeClass('Node', {"":"$$dom_attributes:attributes~,$$dom_childNodes:childNodes~,$$dom_localName:localName~,$$dom_namespaceUri:namespaceURI~,nextNode:nextSibling~,parent:parentElement~,parentNode>,text:textContent|",
  get$nodes: function() {
   return $._ChildNodeListLazy$(this);
 },
@@ -8305,16 +8531,16 @@ $.$defineNativeClass('NodeList', {
  is$JavaScriptIndexingBehavior: function() { return true; }
 });
 
-$.$defineNativeClass('HTMLObjectElement', {"":"height>,width>"
+$.$defineNativeClass('HTMLObjectElement', {"":"height>,name>,width>"
 });
 
 $.$defineNativeClass('HTMLOptionElement', {"":"value="
 });
 
-$.$defineNativeClass('HTMLOutputElement', {"":"value="
+$.$defineNativeClass('HTMLOutputElement', {"":"name>,value="
 });
 
-$.$defineNativeClass('HTMLParamElement', {"":"value="
+$.$defineNativeClass('HTMLParamElement', {"":"name>,value="
 });
 
 $.$defineNativeClass('PositionError', {"":"message>"
@@ -8329,13 +8555,13 @@ $.$defineNativeClass('HTMLProgressElement', {"":"value="
 $.$defineNativeClass('RadioNodeList', {"":"value="
 });
 
-$.$defineNativeClass('RangeException', {"":"message>",
+$.$defineNativeClass('RangeException', {"":"message>,name>",
  toString$0: function() {
   return this.toString();
 }
 });
 
-$.$defineNativeClass('HTMLSelectElement', {"":"length=,value="
+$.$defineNativeClass('HTMLSelectElement', {"":"length=,name>,value="
 });
 
 $.$defineNativeClass('ShadowRoot', {"":"innerHtml:innerHTML|",
@@ -8419,7 +8645,7 @@ $.$defineNativeClass('Text', {
  is$Text: function() { return true; }
 });
 
-$.$defineNativeClass('HTMLTextAreaElement', {"":"value="
+$.$defineNativeClass('HTMLTextAreaElement', {"":"name>,value="
 });
 
 $.$defineNativeClass('Uint8Array', {
@@ -8498,7 +8724,7 @@ $.$defineNativeClass('HTMLUnknownElement', {
 $.$defineNativeClass('HTMLVideoElement', {"":"height>,width>"
 });
 
-$.$defineNativeClass('DOMWindow', {"":"navigator>",
+$.$defineNativeClass('DOMWindow', {"":"name>,navigator>",
  get$on: function() {
   return $.WindowEvents$(this);
 },
@@ -8553,7 +8779,7 @@ $.$defineNativeClass('DOMWindow', {"":"navigator>",
 }
 });
 
-$.$defineNativeClass('XPathException', {"":"message>",
+$.$defineNativeClass('XPathException', {"":"message>,name>",
  toString$0: function() {
   return this.toString();
 }
@@ -8726,6 +8952,9 @@ $.$defineNativeClass('SVGElement', {
   t1 = container.get$children();
   this.set$children($.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, 0).get$children());
 },
+ insertAdjacentText$2: function(where, text) {
+  throw $.$$throw($.UnsupportedError$("Cannot invoke insertAdjacentText on SVG."));
+},
  get$$$dom_children: function() {
   throw $.$$throw($.UnsupportedError$("Cannot get dom_children on SVG."));
 },
@@ -8740,7 +8969,7 @@ $.$defineNativeClass('SVGElement', {
 }
 });
 
-$.$defineNativeClass('SVGException', {"":"message>",
+$.$defineNativeClass('SVGException', {"":"message>,name>",
  toString$0: function() {
   return this.toString();
 }
@@ -8767,8 +8996,8 @@ $.$defineNativeClass('SVGUseElement', {"":"height>,width>",
 }
 });
 
-// 109 dynamic classes.
-// 240 classes
+// 114 dynamic classes.
+// 241 classes
 // 22 !leaf
 (function() {
   var v0_MediaElement = 'HTMLMediaElement|HTMLVideoElement|HTMLAudioElement', v1_SvgElement = 'SVGElement|SVGAElement|SVGAltGlyphDefElement|SVGTextContentElement|SVGTextPositioningElement|SVGAltGlyphElement|SVGTRefElement|SVGTSpanElement|SVGTextElement|SVGTextPathElement|SVGAltGlyphItemElement|SVGAnimationElement|SVGAnimateColorElement|SVGAnimateElement|SVGAnimateMotionElement|SVGAnimateTransformElement|SVGSetElement|SVGCircleElement|SVGClipPathElement|SVGComponentTransferFunctionElement|SVGFEFuncAElement|SVGFEFuncRElement|SVGFEFuncGElement|SVGFEFuncBElement|SVGDefsElement|SVGEllipseElement|SVGFEBlendElement|SVGFEComponentTransferElement|SVGFEConvolveMatrixElement|SVGFECompositeElement|SVGFEDistantLightElement|SVGDescElement|SVGFEDisplacementMapElement|SVGFEDiffuseLightingElement|SVGFEMergeElement|SVGFEDropShadowElement|SVGCursorElement|SVGFESpecularLightingElement|SVGFEMergeNodeElement|SVGFEImageElement|SVGFEMorphologyElement|SVGFEColorMatrixElement|SVGFEFloodElement|SVGFontFaceNameElement|SVGFontFaceElement|SVGFETileElement|SVGForeignObjectElement|SVGFEPointLightElement|SVGGElement|SVGFESpotLightElement|SVGGradientElement|SVGLinearGradientElement|SVGRadialGradientElement|SVGImageElement|SVGFEGaussianBlurElement|SVGFontElement|SVGLineElement|SVGFETurbulenceElement|SVGHKernElement|SVGMaskElement|SVGFontFaceFormatElement|SVGGlyphRefElement|SVGFilterElement|SVGFontFaceUriElement|SVGFEOffsetElement|SVGFontFaceSrcElement|SVGMetadataElement|SVGPathElement|SVGMarkerElement|SVGMissingGlyphElement|SVGMPathElement|SVGGlyphElement|SVGPatternElement|SVGPolygonElement|SVGPolylineElement|SVGRectElement|SVGScriptElement|SVGStopElement|SVGStyleElement|SVGSwitchElement|SVGSymbolElement|SVGSVGElement|SVGTitleElement|SVGUseElement|SVGVKernElement|SVGViewElement', v2_Text = 'Text|CDATASection', v3_Element = [v0_MediaElement, v1_SvgElement, 'Element|HTMLUListElement|HTMLUnknownElement|HTMLElement|HTMLAnchorElement|HTMLAppletElement|HTMLAreaElement|HTMLBRElement|HTMLBaseElement|HTMLBodyElement|HTMLBaseFontElement|HTMLButtonElement|HTMLCanvasElement|HTMLContentElement|HTMLDListElement|HTMLDataListElement|HTMLDetailsElement|HTMLDirectoryElement|HTMLDivElement|HTMLEmbedElement|HTMLFieldSetElement|HTMLFontElement|HTMLFormElement|HTMLFrameElement|HTMLFrameSetElement|HTMLHRElement|HTMLHeadElement|HTMLHeadingElement|HTMLHtmlElement|HTMLIFrameElement|HTMLImageElement|HTMLInputElement|HTMLKeygenElement|HTMLLIElement|HTMLLabelElement|HTMLLegendElement|HTMLLinkElement|HTMLMapElement|HTMLMarqueeElement|HTMLMenuElement|HTMLMetaElement|HTMLMeterElement|HTMLModElement|HTMLOListElement|HTMLObjectElement|HTMLOptGroupElement|HTMLOptionElement|HTMLOutputElement|HTMLParagraphElement|HTMLParamElement|HTMLPreElement|HTMLProgressElement|HTMLQuoteElement|HTMLScriptElement|HTMLSelectElement|HTMLShadowElement|HTMLSourceElement|HTMLSpanElement|HTMLStyleElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableColElement|HTMLTableElement|HTMLTableRowElement|HTMLTableSectionElement|HTMLTextAreaElement|HTMLTitleElement|HTMLTrackElement'].join('|'), v4_Document = 'Document|SVGDocument|HTMLDocument', v5_DocumentFragment = 'DocumentFragment|ShadowRoot', v6_CharacterData = [v2_Text, 'CharacterData|Comment'].join('|'), v7_Node = [v3_Element, v4_Document, v5_DocumentFragment, v6_CharacterData, 'Node|DocumentType|EntityReference|Attr|Notation|ProcessingInstruction'].join('|'), v8_Uint8Array = 'Uint8Array|Uint8ClampedArray';
