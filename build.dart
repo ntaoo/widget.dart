@@ -53,6 +53,22 @@ Future<bool> _updateIfChanged(String filePath, String newContent) {
       });
 }
 
+// TODO: crazy hack. Really need select recursive
+//       or propery query support...whichever
+List<Element> _findElements(Element element, Func1<Element, bool> predicate, [List<Element> target]) {
+  if(target == null) {
+    target = new List<Element>();
+  }
+
+  if(predicate(element)) {
+    target.add(element);
+  }
+
+  element.elements.forEach((e) => _findElements(e, predicate, target));
+
+  return target;
+}
+
 void _tweakDocument(Document document) {
   document.queryAll('section')
       .filter((s) => s.attributes['class'] == 'component')
@@ -60,9 +76,9 @@ void _tweakDocument(Document document) {
         _tweakComponentSection(s);
       });
 
-  final sectionHeaders = new List<Element>();
-  sectionHeaders.addAll(document.queryAll('h1'));
-  sectionHeaders.addAll(document.queryAll('h2'));
+  final sectionHeaders = _findElements(document.body, (e) {
+    return e.tagName == 'h1' || e.tagName == 'h2';
+  });
 
   //
   // TOC fun!
@@ -79,11 +95,8 @@ void _tweakDocument(Document document) {
 
     final link = new Element.tag('a')
       ..attributes['href'] = '#$headerId'
+      ..attributes['class'] = h.tagName
       ..innerHTML = headerText;
-
-    if(h.tagName.toLowerCase() == 'h1') {
-      link.attributes['class'] = 'h1';
-    }
 
     final li = new Element.tag('li')
       ..elements.add(link);
