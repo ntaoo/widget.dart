@@ -21,6 +21,8 @@
         margin: 0 0 3px 25px;
       }
       ul.nav-list {
+        padding: 0;
+        width: 228px;
         margin-top: 20px;
       }
       ul.nav-list > li {
@@ -37,6 +39,28 @@
       ul.nav-list > li > a.h1 {
         font-weight: bold;
       }
+
+      /* Desktop large
+      ------------------------- */
+      @media (min-width: 1200px) {
+        ul.nav-list { width: 258px; }
+      }
+
+      /* Tablet to desktop
+      ------------------------- */
+      @media (min-width: 768px) and (max-width: 979px) {
+        ul.nav-list { width: 166px; }
+      }
+
+      /* Tablet
+      ------------------------- */
+      @media (max-width: 767px) {
+        ul.nav-list {
+          position: static;
+          width: auto;
+        }
+      }
+
       pre.code {
         margin: 25px;
         padding-top: 30px;
