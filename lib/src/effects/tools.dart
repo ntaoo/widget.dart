@@ -1,8 +1,6 @@
 part of effects;
 
 class Tools {
-  static IFrameElement _iframe;
-
   static final Map<String, String> _elemDisplay = new Map<String, String>();
 
   static Size getSize(CssStyleDeclaration css) {
@@ -94,6 +92,14 @@ class Tools {
   }
 
   static Future<String> _defaultDisplayHard(String nodeName) {
+    throw 'Not sure how to calculate display of: $nodeName';
+
+    // TODO: can't make any progress here
+    // IFrameElement.contentWindow is a WindowBase
+    // which doesn't let me get to the doc.
+    // *sigh*
+
+    /*
     if(_iframe == null) {
       _iframe = new Element.tag('iframe')
       ..attributes['frameborder'] = '0'
@@ -105,13 +111,7 @@ class Tools {
     document.body.children.add(_iframe);
 
     final frameDoc = _iframe.contentWindow;
-
-    throw 'damn...';
-
-    // TODO: can't make any progress here
-    // IFrameElement.contentWindow is a WindowBase
-    // which doesn't let me get to the doc.
-    // *sigh*
+    */
   }
 
   static Future<String> _actualDisplay(String name, HtmlDocument doc) {
