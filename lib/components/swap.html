@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <element name="x-swap" extends="div">
+      <template>
+        <style type='text/css' scoped>
+          x-swap {
+            display: block;
+          }
+          x-swap > .content {
+            position: relative;
+            overflow: hidden;
+          }
+          x-swap > .content > * {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            margin: 0 auto;
+            width: 100%;
+          }
+          x-swap > .content > .active {
+            position: relative;
+            display: block;
+          }
+          x-swap > .content > .prev {
+            display: block;
+          }
+        </style>
+        <div class='content'>
+          <content></content>
+        </div>
+      </template>
+      <script type="application/dart" src='swap.dart'></script>
+    </element>
+  </body>
+</html>

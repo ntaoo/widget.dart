@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <link rel="components" href="swap.html">
+  </head>
   <body>
     <element name="x-carousel" extends="div">
       <template>
@@ -7,40 +10,6 @@
           x-carousel {
             position: relative;
             display: block;
-          }
-          x-carousel > .content {
-            width: 100%;
-            background: black;
-            position: relative;
-            overflow: hidden;
-          }
-          x-carousel > .content > * {
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: none;
-          }
-          x-carousel > .content > figure {
-            margin: 0 auto;
-            width: 100%;
-          }
-          x-carousel > .content > figure.active {
-            position: relative;
-            left: 0;
-            display: block;
-          }
-          x-carousel > .content > figure.prev {
-            display: block;
-          }
-          x-carousel > .content > figure > figcaption {
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            padding: 15px;
-            color: white;
-            background: #333333;
-            background: rgba(0, 0, 0, 0.75);
           }
           x-carousel > a.carousel-control {
             display: block;
@@ -75,9 +44,9 @@
             opacity: 0.9;
           }
         </style>
-        <div class='content'>
+        <x-swap>
           <content></content>
-        </div>
+        </x-swap>
         <a class="left carousel-control" on-click='previous()'>&lsaquo;</a>
         <a class="right carousel-control" on-click='next()'>&rsaquo;</a>
       </template>
