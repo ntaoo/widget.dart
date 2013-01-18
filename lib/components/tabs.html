@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <link rel="components" href="swap.html">
+  </head>
   <body>
     <element name="x-tabs" extends="div">
       <template>
@@ -32,19 +35,13 @@
           x-tabs > .content {
             padding: 0 8px;
           }
-          x-tabs > .content > * {
-            display: none;
-          }
-          x-tabs > .content > .active {
-            display: inherit;
-          }
         </style>
         <div class='tabs'>
           <content select='x-tab'></content>
         </div>
-        <div class='content'>
+        <x-swap>
           <content></content>
-        </div>
+        </x-swap>
       </template>
       <script type="application/dart" src='tabs.dart'></script>
     </element>

@@ -1,7 +1,8 @@
 import 'dart:html';
 import 'package:web_ui/web_ui.dart';
-import 'package:widget/effects.dart';
 import 'package:bot/bot.dart';
+import 'package:widget/effects.dart';
+import 'package:widget/widget.dart';
 
 // TODO:TEST: no active tabs -> first is active
 // TODO:TEST: 2+ active tabs -> all but first is active
@@ -40,11 +41,10 @@ class Tabs extends WebComponent {
 
     // it's possible that a nested tab was clicked, which we want to ignore
     // so we're going to go through our 'known' tabs and pick it that way
-    final tabs = this.queryAll('x-tabs > .tabs > x-tab');
+    final tabs = _getAllTabs();
 
-    final matchingTabs = tabs.filter((e) => e == tabElement);
-    assert(matchingTabs.length <= 1);
-    if(matchingTabs.length == 1) {
+    final matchingTab = $(tabs).singleOrDefault((e) => e == tabElement);
+    if(matchingTab != null) {
       tabs
         .filter((e) => e != tabElement)
         .forEach((e) {
@@ -57,8 +57,12 @@ class Tabs extends WebComponent {
     return false;
   }
 
+  List<Element> _getAllTabs() => this.queryAll('x-tabs > .tabs > x-tab');
+
+  SwapComponent get _swap => this.query('x-tabs > x-swap').xtag;
+
   void _ensureAtMostOneTabActive() {
-    final tabs = this.queryAll('x-tabs > .tabs > x-tab');
+    final tabs = _getAllTabs();
     Element activeTab = null;
     tabs.forEach((Element tab) {
       if(tab.attributes.containsKey(_activeTabAttribute)) {
@@ -87,16 +91,9 @@ class Tabs extends WebComponent {
   }
 
   void _updateContent(String target) {
-    final content = this.queryAll('x-tabs > .content > *');
+    final items = _swap.items;
 
-    Element targetContent = null;
-    content.forEach((Element contentElement) {
-      if(contentElement.id == target && targetContent == null) {
-        targetContent = contentElement;
-        targetContent.classes.add(_activeTabAttribute);
-      } else {
-        contentElement.classes.remove(_activeTabAttribute);
-      }
-    });
+    final targetItem = $(items).firstOrDefault((e) => e.id == target);
+    _swap.showItem(targetItem);
   }
 }
