@@ -3,9 +3,6 @@ import 'package:bot/bot.dart';
 import 'package:web_ui/web_ui.dart';
 import 'package:widget/effects.dart';
 
-// TODO: instead of wiring click to the header element, listen for all clicks and
-//       match the source element w/ our header
-
 class Expander extends WebComponent {
   static const String _openName = 'open';
   static const String _expanderDivSelector = '.expander-body-x';
@@ -14,8 +11,6 @@ class Expander extends WebComponent {
   EventListenerList _onOpen;
 
   bool _isExpanded = true;
-  DivElement _expanderDiv;
-  Element _header;
 
   bool get isExpanded => _isExpanded;
 
@@ -25,7 +20,7 @@ class Expander extends WebComponent {
       _updateElements();
 
       if(_isExpanded) {
-        _raiseOpen();
+        onOpen.dispatch(new Event(_openName));
       }
     }
   }
@@ -38,54 +33,35 @@ class Expander extends WebComponent {
   }
 
   void toggle() {
-    assert(_expanderDiv != null);
     isExpanded = !isExpanded;
   }
 
   @protected
-  void inserted() {
-    assert(_expanderDiv == null);
-    _expanderDiv = this.query(_expanderDivSelector);
-    assert(_expanderDiv != null);
-    _updateElements(true);
-
-    assert(_header == null);
-    _header = this.query('header');
-    if(_header != null) {
-      _header.on.click.add(_onHeaderClick);
-    }
+  void created() {
+    this.on.click.add(_onClick);
   }
 
   @protected
-  void removed() {
-    assert(_expanderDiv != null);
-    _expanderDiv = null;
-
-    // TODO: some how remove the click handler?
-    if(_header != null) {
-      _header.on.click.remove(_onHeaderClick);
-    }
-    _header = null;
+  void inserted() {
+    _updateElements(true);
   }
 
-  void _onHeaderClick(MouseEvent e) {
+  void _onClick(MouseEvent e) {
     if(!e.defaultPrevented) {
-      toggle();
-      e.preventDefault();
+      final header = this.query('x-expander > header');
+      if(e.target == header) {
+        toggle();
+        e.preventDefault();
+      }
     }
-  }
-
-  // DARTBUG:
-  // TODO: Need a way to dispatch my own events
-  void _raiseOpen() {
-    onOpen.dispatch(new Event(_openName));
   }
 
   void _updateElements([bool skipAnimation = false]) {
-    if(_expanderDiv != null) {
+    final expanderDiv = this.query(_expanderDivSelector);
+    if(expanderDiv != null) {
       final action = _isExpanded ? ShowHideAction.SHOW : ShowHideAction.HIDE;
       final effect = skipAnimation ? null : _effect;
-      ShowHide.begin(action, _expanderDiv, effect: effect);
+      ShowHide.begin(action, expanderDiv, effect: effect);
     }
   }
 }
