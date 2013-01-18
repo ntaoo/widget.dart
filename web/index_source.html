@@ -61,6 +61,10 @@
         }
       }
 
+      blockquote p {
+        margin-bottom: 2ex;
+      }
+
       pre.code {
         margin: 25px;
         padding-top: 30px;
@@ -129,7 +133,7 @@
       </header>
       <header>
         <h1>Components</h1>
-        <p>Reusable elements. Based on the <a href="https://github.com/dart-lang/web-ui">web-ui library</a> sponsored by the <a href='http://www.dartlang.org/'>Dart team</a>.</p>
+        <blockquote>Reusable elements. Based on the <a href="https://github.com/dart-lang/web-ui">web-ui library</a> sponsored by the <a href='http://www.dartlang.org/'>Dart team</a>.</blockquote>
       </header>
       <section class='component'>
         <h2>Accordion</h2>
@@ -226,6 +230,15 @@
         </div>
 
         <pre class='code'></pre>
+      </section>
+
+      <section class='component'>
+        <h2>Swap</h2>
+        <blockquote>
+          <p><strong>Swap</strong> is a low-level component that is designed to be composed by other components.
+          It exposes the functionality of the <a href='#swapper'>Swapper</a> helper as a simple container element with corresponding methods to
+          'swap' between child elements via code.</p>
+          <p><a href='#tabs'>Tabs</a> and <a href='#carousel'>Carousel</a> both use this component.</blockquote>
       </section>
 
       <section class='component'>

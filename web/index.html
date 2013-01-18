@@ -58,6 +58,10 @@
         }
       }
 
+      blockquote p {
+        margin-bottom: 2ex;
+      }
+
       pre.code {
         margin: 25px;
         padding-top: 30px;
@@ -108,7 +112,7 @@
       <div class="row">
         <div class="span3">
           <ul class="nav nav-list affix">
-          <li><a href="#dart_widgets" class="h1">Dart Widgets</a></li><li><a href="#helpers" class="h1">Helpers</a></li><li><a href="#components" class="h1">Components</a></li><li><a href="#showhide">ShowHide</a></li><li><a href="#swapper">Swapper</a></li><li><a href="#accordion">Accordion</a></li><li><a href="#carousel">Carousel</a></li><li><a href="#dropdown">Dropdown</a></li><li><a href="#expander">Expander</a></li><li><a href="#headeredcontent">HeaderedContent</a></li><li><a href="#tabs">Tabs</a></li></ul>
+          <li><a href="#dart_widgets" class="h1">Dart Widgets</a></li><li><a href="#helpers" class="h1">Helpers</a></li><li><a href="#components" class="h1">Components</a></li><li><a href="#showhide">ShowHide</a></li><li><a href="#swapper">Swapper</a></li><li><a href="#accordion">Accordion</a></li><li><a href="#carousel">Carousel</a></li><li><a href="#dropdown">Dropdown</a></li><li><a href="#expander">Expander</a></li><li><a href="#headeredcontent">HeaderedContent</a></li><li><a href="#swap">Swap</a></li><li><a href="#tabs">Tabs</a></li></ul>
         </div>
 
     <div class="span9">
@@ -126,7 +130,7 @@
       
       <header>
         <h1 id="components">Components</h1>
-        <p>Reusable elements. Based on the <a href="https://github.com/dart-lang/web-ui">web-ui library</a> sponsored by the <a href="http://www.dartlang.org/">Dart team</a>.</p>
+        <blockquote>Reusable elements. Based on the <a href="https://github.com/dart-lang/web-ui">web-ui library</a> sponsored by the <a href="http://www.dartlang.org/">Dart team</a>.</blockquote>
       </header>
       <section class="component">
         <h2 id="accordion">Accordion</h2>
@@ -267,6 +271,15 @@
     &lt;li&gt;content&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/x-headered-content&gt;</pre>
+      </section>
+
+      <section class="component">
+        <h2 id="swap">Swap</h2>
+        <blockquote>
+          <p><strong>Swap</strong> is a low-level component that is designed to be composed by other components.
+          It exposes the functionality of the <a href="#swapper">Swapper</a> helper as a simple container element with corresponding methods to
+          'swap' between child elements via code.</p>
+          <p><a href="#tabs">Tabs</a> and <a href="#carousel">Carousel</a> both use this component.</p></blockquote>
       </section>
 
       <section class="component">
