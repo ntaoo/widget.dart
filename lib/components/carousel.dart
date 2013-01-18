@@ -20,13 +20,9 @@ class Carousel extends WebComponent {
     _initialize();
   }
 
-  void created() {
-    this.on.click.add(_onClick);
-  }
+  Future<bool> next() => _moveDelta(true);
 
-  Future<bool> cycleNext() => _moveDelta(true);
-
-  Future<bool> cyclePrevious() => _moveDelta(false);
+  Future<bool> previous() => _moveDelta(false);
 
   Future<bool> _moveDelta(bool doNext) {
     assert(doNext != null);
@@ -77,22 +73,6 @@ class Carousel extends WebComponent {
     elements.forEach((e) {
       dirClasses.forEach(e.classes.remove);
     });
-  }
-
-  void _onClick(MouseEvent e) {
-    if(!e.defaultPrevented) {
-      final controls = this.queryAll(_controlsQuery);
-      if(controls.contains(e.target)) {
-        final Element control = e.target;
-        if(control.classes.contains('left')) {
-          cyclePrevious();
-          e.preventDefault();
-        } else if(control.classes.contains('right')) {
-          cycleNext();
-          e.preventDefault();
-        }
-      }
-    }
   }
 
   Element _getFigureHost() => this.query('x-carousel > .content');
