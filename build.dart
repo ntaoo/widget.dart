@@ -19,6 +19,16 @@ void main() {
     }
   });
   build(new Options().arguments, [output]);
+
+  Process.run('./bin/copy_assets.sh', [])
+    .transform((ProcessResult pr) {
+      if(pr.exitCode == 0) {
+        print('copy of pngs worked');
+      } else {
+        print(pr.stderr);
+      }
+    });
+
 }
 
 Future<bool> _transform(String input, String output) {
