@@ -5,6 +5,8 @@ import 'package:html5lib/dom_parsing.dart';
 import 'package:web_ui/component_build.dart';
 import 'package:bot/bot.dart';
 
+final _whitespaceRegex = new RegExp(r'\s+');
+
 void main() {
   final input = 'web/index_source.html';
   final output = 'web/index.html';
@@ -52,22 +54,15 @@ Future<bool> _updateIfChanged(String filePath, String newContent) {
 }
 
 void _tweakDocument(Document document) {
-  assert(document.body.elements.length == 1);
-
-  final sectionHeaders = new List<Element>();
-
-  document.body.queryAll('section')
+  document.queryAll('section')
       .filter((s) => s.attributes['class'] == 'component')
       .forEach((s) {
         _tweakComponentSection(s);
-
-        final headers = s.queryAll('h2');
-        assert(headers.length <= 1);
-        if(headers.length == 1) {
-          sectionHeaders.add(headers[0]);
-        }
-
       });
+
+  final sectionHeaders = new List<Element>();
+  sectionHeaders.addAll(document.queryAll('h1'));
+  sectionHeaders.addAll(document.queryAll('h2'));
 
   //
   // TOC fun!
@@ -80,21 +75,23 @@ void _tweakDocument(Document document) {
 
   sectionHeaders.forEach((h) {
     final headerText = htmlSerializeEscape(h.innerHTML);
-    // TODO: eliminate spaces?
+    final headerId = headerText.toLowerCase().replaceAll(_whitespaceRegex, '_');
 
     final link = new Element.tag('a')
-      ..attributes['href'] = '#$headerText'
+      ..attributes['href'] = '#$headerId'
       ..innerHTML = headerText;
+
+    if(h.tagName.toLowerCase() == 'h1') {
+      link.attributes['class'] = 'h1';
+    }
 
     final li = new Element.tag('li')
       ..elements.add(link);
 
     tocUl.elements.add(li);
 
-    final anchor = new Element.tag('a')
-      ..attributes['name'] = headerText;
 
-    h.parent.insertBefore(anchor, h);
+    h.attributes['id'] = headerId;
   });
 }
 
