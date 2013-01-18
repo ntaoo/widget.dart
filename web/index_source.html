@@ -107,6 +107,18 @@
       .demo p {
         margin: 5px 0;
       }
+
+      .highlighted {
+        -webkit-animation-name: invert;
+        -webkit-animation-duration: 1s;
+      }
+
+      @-webkit-keyframes invert {
+        50% {
+          color: white;
+          text-shadow: black 0 0 5px;
+        }
+      }
     </style>
   </head>
   <body>
