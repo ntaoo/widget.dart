@@ -22,8 +22,7 @@ class Swapper {
     }
 
     if(child.parent != host) {
-      // only children of the provided host are supported
-      return new Future<bool>.immediate(false);
+      throw 'host is not the parent of the provided child';
     }
 
     // ensure at most one child of the host is visible before beginning
