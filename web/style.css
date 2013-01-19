@@ -93,10 +93,11 @@ pre.code::after {
 .highlighted {
   -webkit-animation-name: invert;
   -webkit-animation-duration: 1s;
+  -webkit-animation-delay: 0.5s;
 }
 
 @-webkit-keyframes invert {
-  50% {
+  20% {
     color: white;
     text-shadow: black 0 0 5px;
   }
