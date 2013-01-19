@@ -1,23 +1,235 @@
 <!DOCTYPE html>
-
-<html>
-  <head>
+<!-- This file was auto-generated from template web/index.html. -->
+<html><head>
     <meta charset="utf-8">
-    <title>ShowHide examples - widget.dart</title>
+    <title>Dart Widgets</title>
+    <link rel="stylesheet" href="style.css">
+    
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="dart.js"></script>
+
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="example.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap-responsive.css" rel="stylesheet">
   </head>
   <body>
-    <div class='container'>
-      <div id='effects' class='btn-group btn-group'></div>
-      <div id='demo'>
-        <img id='logo' class='content' src='bot_logo.png'>
+    <div class="container">
+      <header class="subhead">
+        <h1 id="dart_widgets">Dart Widgets</h1>
+        <a href="https://github.com/kevmoo/widget.dart">https://github.com/kevmoo/widget.dart</a>
+      </header>
+      <div class="row">
+        <div class="span3">
+          <ul class="nav nav-list affix">
+          <li><a href="#dart_widgets" class="h1">Dart Widgets</a></li><li><a href="#helpers" class="h1">Helpers</a></li><li><a href="#showhide" class="h2">ShowHide</a></li><li><a href="#swapper" class="h2">Swapper</a></li><li><a href="#components" class="h1">Components</a></li><li><a href="#accordion" class="h2">Accordion</a></li><li><a href="#carousel" class="h2">Carousel</a></li><li><a href="#dropdown" class="h2">Dropdown</a></li><li><a href="#expander" class="h2">Expander</a></li><li><a href="#headeredcontent" class="h2">HeaderedContent</a></li><li><a href="#swap" class="h2">Swap</a></li><li><a href="#tabs" class="h2">Tabs</a></li></ul>
+        </div>
+
+    <div class="span9">
+      <header>
+        <h1 id="helpers">Helpers</h1>
+      </header>
+      <section class="helper">
+        <h2 id="showhide">ShowHide</h2>
+        <blockquote><em>TODO: a nice intro to how this all works</em></blockquote>
+        <div class="demo showhide">
+          <div class="effects btn-group btn-group"></div>
+          <div class="logo_wrapper">
+            <img src="bot_logo.png">
+          </div>
+        </div>
+      </section>
+      <section class="helper">
+        <h2 id="swapper">Swapper</h2>
+        <blockquote><em>TODO: a nice intro to how this all works</em></blockquote>
+      </section>
+      
+      <header>
+        <h1 id="components">Components</h1>
+        <blockquote>Reusable elements. Based on the <a href="https://github.com/dart-lang/web-ui">web-ui library</a> sponsored by the <a href="http://www.dartlang.org/">Dart team</a>.</blockquote>
+      </header>
+      <section class="component">
+        <h2 id="accordion">Accordion</h2>
+
+        <div class="demo">
+          <x-accordion id="__e-3">
+            <x-expander id="__e-0">
+              <header>Item 1</header>
+              <p>Item 1 content - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </x-expander>
+            <x-expander id="__e-1">
+              <header>Item 2</header>
+              <p>Item 2 content - Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </x-expander>
+            <x-expander id="__e-2">
+              <header>Item 3</header>
+              <p>Item 3 content - Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </x-expander>
+          </x-accordion>
+        </div>
+
+        <pre class="code">&lt;x-accordion&gt;
+  &lt;x-expander&gt;
+    &lt;header&gt;Item 1&lt;/header&gt;
+    &lt;p&gt;Item 1 content - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+  &lt;/x-expander&gt;
+  &lt;x-expander&gt;
+    &lt;header&gt;Item 2&lt;/header&gt;
+    &lt;p&gt;Item 2 content - Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+  &lt;/x-expander&gt;
+  &lt;x-expander&gt;
+    &lt;header&gt;Item 3&lt;/header&gt;
+    &lt;p&gt;Item 3 content - Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
+  &lt;/x-expander&gt;
+&lt;/x-accordion&gt;</pre>
+      </section>
+
+      <section class="component">
+        <h2 id="carousel">Carousel</h2>
+
+        <div class="demo">
+          <x-carousel id="__e-4">
+            <figure>
+              <img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg">
+              <figcaption>A description of the first image.</figcaption>
+            </figure>
+
+            <figure class="active">
+              <img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-02.jpg">
+              <figcaption>A description of the second image.</figcaption>
+            </figure>
+
+            <figure>
+              <img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-03.jpg">
+              <figcaption>A description of the third image.</figcaption>
+            </figure>
+
+          </x-carousel>
+        </div>
+
+        <pre class="code">&lt;x-carousel&gt;
+  &lt;figure&gt;
+    &lt;img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg"&gt;
+    &lt;figcaption&gt;A description of the first image.&lt;/figcaption&gt;
+  &lt;/figure&gt;
+  &lt;figure class="active"&gt;
+    &lt;img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-02.jpg"&gt;
+    &lt;figcaption&gt;A description of the second image.&lt;/figcaption&gt;
+  &lt;/figure&gt;
+  &lt;figure&gt;
+    &lt;img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-03.jpg"&gt;
+    &lt;figcaption&gt;A description of the third image.&lt;/figcaption&gt;
+  &lt;/figure&gt;
+&lt;/x-carousel&gt;</pre>
+      </section>
+
+      <section class="component">
+        <h2 id="dropdown">Dropdown</h2>
+
+        <div class="demo">
+          <x-dropdown id="__e-5">
+            <button>Click me!</button>
+            <ul>
+              <li>This is some</li>
+              <li>content</li>
+            </ul>
+          </x-dropdown>
+        </div>
+
+        <pre class="code">&lt;x-dropdown&gt;
+  &lt;button&gt;Click me!&lt;/button&gt;
+  &lt;ul&gt;
+    &lt;li&gt;This is some&lt;/li&gt;
+    &lt;li&gt;content&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/x-dropdown&gt;</pre>
+      </section>
+
+      <section class="component">
+        <h2 id="expander">Expander</h2>
+
+        <div class="demo">
+          <x-expander id="__e-6">
+            <header>Click to toggle expand/collapse</header>
+            <ul>
+              <li>This is some</li>
+              <li>content</li>
+            </ul>
+          </x-expander>
+        </div>
+
+        <pre class="code">&lt;x-expander&gt;
+  &lt;header&gt;Click to toggle expand/collapse&lt;/header&gt;
+  &lt;ul&gt;
+    &lt;li&gt;This is some&lt;/li&gt;
+    &lt;li&gt;content&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/x-expander&gt;</pre>
+      </section>
+
+      <section class="component">
+        <h2 id="headeredcontent">HeaderedContent</h2>
+
+        <div class="demo">
+          <x-headered-content id="__e-7">
+            <header>This is the header</header>
+            <ul>
+              <li>This is some</li>
+              <li>content</li>
+            </ul>
+          </x-headered-content>
+        </div>
+
+        <pre class="code">&lt;x-headered-content&gt;
+  &lt;header&gt;This is the header&lt;/header&gt;
+  &lt;ul&gt;
+    &lt;li&gt;This is some&lt;/li&gt;
+    &lt;li&gt;content&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/x-headered-content&gt;</pre>
+      </section>
+
+      <section class="component">
+        <h2 id="swap">Swap</h2>
+        <blockquote>
+          <p><strong>Swap</strong> is a low-level component designed to be composed by other components.
+          It exposes the functionality of the <a href="#swapper">Swapper</a> helper as a simple container element with corresponding methods to
+          'swap' between child elements via code.</p>
+          <p><a href="#tabs">Tabs</a> and <a href="#carousel">Carousel</a> both use this component.</p></blockquote>
+      </section>
+
+      <section class="component">
+        <h2 id="tabs">Tabs</h2>
+
+        <div class="demo">
+          <x-tabs id="__e-8">
+            <x-tab target="tab1">Tab 1</x-tab>
+            <x-tab target="tab2">Tab 2</x-tab>
+            <x-tab target="tab3">Tab 3</x-tab>
+
+            <p id="tab1">Tab 1 content - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p id="tab2">Tab 2 content - Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p id="tab3">Tab 3 content - Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          </x-tabs>
+        </div>
+
+        <pre class="code">&lt;x-tabs&gt;
+  &lt;x-tab target="tab1"&gt;Tab 1&lt;/x-tab&gt;
+  &lt;x-tab target="tab2"&gt;Tab 2&lt;/x-tab&gt;
+  &lt;x-tab target="tab3"&gt;Tab 3&lt;/x-tab&gt;
+  &lt;p id="tab1"&gt;Tab 1 content - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+  &lt;p id="tab2"&gt;Tab 2 content - Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+  &lt;p id="tab3"&gt;Tab 3 content - Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
+&lt;/x-tabs&gt;</pre>
+
+      </section>
+    </div>
       </div>
     </div>
 
-    <iframe src="http://ghbtns.com/github-btn.html?user=kevmoo&amp;repo=widget.dart&amp;type=watch&amp;count=true&amp;size=large" allowtransparency="true" frameborder="0" scrolling="0"></iframe>
+  
 
-    <script type="application/dart" src="example.dart"></script>
-    <script src="dart.js"></script>
-  </body>
-</html>
+<script type="text/javascript" src="index.html_bootstrap.dart.js"></script></body></html>
