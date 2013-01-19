@@ -111,6 +111,10 @@ pre.code::after {
   margin: 0 auto;
   width: 333px;
   height: 250px;
+  background-image: -webkit-linear-gradient(top, white, #eee); /* For Chrome and Safari */
+  background-image:     -ms-linear-gradient(top, white; #eee);/* For pre-releases of IE 10*/
+  background-image:      -o-linear-gradient(top, white, #eee); /* For old Opera (11.1 to 12.0) */
+  background-image:         linear-gradient(to bottom, white, #eee); /* Standard syntax; must be last */
 }
 
 .demo.showhide .logo_wrapper img {
