@@ -11,8 +11,6 @@
     
     
     
-    <script type="text/javascript" src="dart.js"></script>
-
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap.css" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap-responsive.css" rel="stylesheet">
   </head>
@@ -27,7 +25,6 @@
           <ul class="nav nav-list affix">
           <li><a href="#dart_widgets" class="h1">Dart Widgets</a></li><li><a href="#helpers" class="h1">Helpers</a></li><li><a href="#showhide" class="h2">ShowHide</a></li><li><a href="#swapper" class="h2">Swapper</a></li><li><a href="#components" class="h1">Components</a></li><li><a href="#accordion" class="h2">Accordion</a></li><li><a href="#carousel" class="h2">Carousel</a></li><li><a href="#dropdown" class="h2">Dropdown</a></li><li><a href="#expander" class="h2">Expander</a></li><li><a href="#headeredcontent" class="h2">HeaderedContent</a></li><li><a href="#swap" class="h2">Swap</a></li><li><a href="#tabs" class="h2">Tabs</a></li></ul>
         </div>
-
     <div class="span9">
       <header>
         <h1 id="helpers">Helpers</h1>
@@ -53,7 +50,6 @@
       </header>
       <section class="component">
         <h2 id="accordion">Accordion</h2>
-
         <div class="demo">
           <x-accordion id="__e-3">
             <x-expander id="__e-0">
@@ -70,7 +66,6 @@
             </x-expander>
           </x-accordion>
         </div>
-
         <pre class="code">&lt;x-accordion&gt;
   &lt;x-expander&gt;
     &lt;header&gt;Item 1&lt;/header&gt;
@@ -86,30 +81,24 @@
   &lt;/x-expander&gt;
 &lt;/x-accordion&gt;</pre>
       </section>
-
       <section class="component">
         <h2 id="carousel">Carousel</h2>
-
         <div class="demo">
           <x-carousel id="__e-4">
             <figure>
               <img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg">
               <figcaption>A description of the first image.</figcaption>
             </figure>
-
             <figure class="active">
               <img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-02.jpg">
               <figcaption>A description of the second image.</figcaption>
             </figure>
-
             <figure>
               <img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-03.jpg">
               <figcaption>A description of the third image.</figcaption>
             </figure>
-
           </x-carousel>
         </div>
-
         <pre class="code">&lt;x-carousel&gt;
   &lt;figure&gt;
     &lt;img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg"&gt;
@@ -125,10 +114,8 @@
   &lt;/figure&gt;
 &lt;/x-carousel&gt;</pre>
       </section>
-
       <section class="component">
         <h2 id="dropdown">Dropdown</h2>
-
         <div class="demo">
           <x-dropdown id="__e-5">
             <button>Click me!</button>
@@ -138,7 +125,6 @@
             </ul>
           </x-dropdown>
         </div>
-
         <pre class="code">&lt;x-dropdown&gt;
   &lt;button&gt;Click me!&lt;/button&gt;
   &lt;ul&gt;
@@ -147,10 +133,8 @@
   &lt;/ul&gt;
 &lt;/x-dropdown&gt;</pre>
       </section>
-
       <section class="component">
         <h2 id="expander">Expander</h2>
-
         <div class="demo">
           <x-expander id="__e-6">
             <header>Click to toggle expand/collapse</header>
@@ -160,7 +144,6 @@
             </ul>
           </x-expander>
         </div>
-
         <pre class="code">&lt;x-expander&gt;
   &lt;header&gt;Click to toggle expand/collapse&lt;/header&gt;
   &lt;ul&gt;
@@ -169,10 +152,8 @@
   &lt;/ul&gt;
 &lt;/x-expander&gt;</pre>
       </section>
-
       <section class="component">
         <h2 id="headeredcontent">HeaderedContent</h2>
-
         <div class="demo">
           <x-headered-content id="__e-7">
             <header>This is the header</header>
@@ -182,7 +163,6 @@
             </ul>
           </x-headered-content>
         </div>
-
         <pre class="code">&lt;x-headered-content&gt;
   &lt;header&gt;This is the header&lt;/header&gt;
   &lt;ul&gt;
@@ -191,7 +171,6 @@
   &lt;/ul&gt;
 &lt;/x-headered-content&gt;</pre>
       </section>
-
       <section class="component">
         <h2 id="swap">Swap</h2>
         <blockquote>
@@ -200,22 +179,18 @@
           'swap' between child elements via code.</p>
           <p><a href="#tabs">Tabs</a> and <a href="#carousel">Carousel</a> both use this component.</p></blockquote>
       </section>
-
       <section class="component">
         <h2 id="tabs">Tabs</h2>
-
         <div class="demo">
           <x-tabs id="__e-8">
             <x-tab target="tab1">Tab 1</x-tab>
             <x-tab target="tab2">Tab 2</x-tab>
             <x-tab target="tab3">Tab 3</x-tab>
-
             <p id="tab1">Tab 1 content - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             <p id="tab2">Tab 2 content - Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             <p id="tab3">Tab 3 content - Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
           </x-tabs>
         </div>
-
         <pre class="code">&lt;x-tabs&gt;
   &lt;x-tab target="tab1"&gt;Tab 1&lt;/x-tab&gt;
   &lt;x-tab target="tab2"&gt;Tab 2&lt;/x-tab&gt;
@@ -224,12 +199,9 @@
   &lt;p id="tab2"&gt;Tab 2 content - Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
   &lt;p id="tab3"&gt;Tab 3 content - Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
 &lt;/x-tabs&gt;</pre>
-
       </section>
     </div>
       </div>
     </div>
-
   
-
 <script type="text/javascript" src="index.html_bootstrap.dart.js"></script></body></html>
