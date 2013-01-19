@@ -1,6 +1,6 @@
 #!/bin/bash -x
 BUILD_DIR=web/out
-WEB_DIR=example/component
+WEB_DIR=example
 rm -rf $WEB_DIR
 mkdir -p $WEB_DIR
 find $BUILD_DIR -maxdepth 1 -type f -print0 | xargs -0 -J % cp % $WEB_DIR
@@ -10,4 +10,17 @@ rm $WEB_DIR/*.dart
 TO_FIND='href="..\/style.css"'
 REPLACE_WITH='href="style.css"'
 COMMAND=s/$TO_FIND/$REPLACE_WITH/g
-sed -e $COMMAND $BUILD_DIR/index.html > $WEB_DIR/index.html
+
+TO_FIND='src="..\/dart.js"'
+REPLACE_WITH='src="dart.js"'
+COMMAND2=s/$TO_FIND/$REPLACE_WITH/g
+
+TO_FIND='type="application/dart"'
+REPLACE_WITH='type="text/javascript"'
+COMMAND3=s*$TO_FIND*$REPLACE_WITH*g
+
+TO_FIND='bootstrap.dart'
+REPLACE_WITH='bootstrap.dart.js'
+COMMAND4=s*$TO_FIND*$REPLACE_WITH*g
+
+sed -e $COMMAND -e $COMMAND2 -e $COMMAND3 -e $COMMAND4 -- $BUILD_DIR/index.html > $WEB_DIR/index.html
