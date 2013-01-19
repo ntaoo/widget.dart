@@ -10,7 +10,8 @@ void main() {
   addTask('build', buildTask);
 
   final paths = ['web/out/index.html_bootstrap.dart'];
-  addTask('dart2js', createDart2JsTask(paths));
+  addTask('dart2js', createDart2JsTask(paths,
+      minify: true, liveTypeAnalysis: true, rejectDeprecatedFeatures: true));
 
   addTask('test_dart2js', createDart2JsTask(['test/browser_test_harness.dart']));
 

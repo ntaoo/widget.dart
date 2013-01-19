@@ -1,3 +1,19 @@
+header.mainhead {
+  position: relative;
+}
+
+header.mainhead .icons {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 38.5px; /* same as bootstrap h1 */
+  line-height: 40px; /* same as bootstrap h1 */
+}
+
+header.mainhead .icons a i {
+ text-decoration: none;
+}
+
 ul, ol {
   margin: 0 0 3px 25px;
 }
@@ -93,10 +109,11 @@ pre.code::after {
 .highlighted {
   -webkit-animation-name: invert;
   -webkit-animation-duration: 1s;
+  -webkit-animation-delay: 0.5s;
 }
 
 @-webkit-keyframes invert {
-  50% {
+  20% {
     color: white;
     text-shadow: black 0 0 5px;
   }
