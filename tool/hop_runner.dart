@@ -12,8 +12,6 @@ void main() {
   final paths = ['web/out/index.html_bootstrap.dart'];
   addTask('dart2js', createDart2JsTask(paths));
 
-  addTask('example_dart2js', createDart2JsTask(['example/example.dart']));
-
   addTask('test_dart2js', createDart2JsTask(['test/browser_test_harness.dart']));
 
   //
