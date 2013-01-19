@@ -74,6 +74,7 @@ pre.code::after {
 }
 .demo figure {
   text-align: center;
+  position: relative;
 }
 .demo figure > figcaption {
   position: absolute;
