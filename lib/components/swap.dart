@@ -1,5 +1,6 @@
 library x_swap;
 
+import 'dart:async';
 import 'dart:html';
 import 'package:web_ui/web_ui.dart';
 import 'package:bot/bot.dart';
@@ -20,7 +21,7 @@ class Swap extends WebComponent implements SwapComponent {
   }
 
   Element get activeItem {
-    return $(items).singleOrDefault((e) => e.classes.contains(_activeClass));
+    return $(items).singleMatching((e) => e.classes.contains(_activeClass));
   }
 
   List<Element> get items => _contentElement.children;
@@ -48,12 +49,8 @@ class Swap extends WebComponent implements SwapComponent {
     item.classes.add(_activeClass);
 
     return Swapper.swap(_contentElement, item, effect: effect, duration: duration, effectTiming: effectTiming, hideEffect: hideEffect)
-        ..onComplete((future) {
+        .whenComplete(() {
           oldActiveChild.classes.remove(_dirClassPrev);
-          if(!future.hasValue) {
-            // TODO: how to handle such things? Hmm...
-            print("Exception! ${future.exception} -- ${future.stackTrace}");
-          }
         });
   }
 
@@ -82,7 +79,7 @@ class Swap extends WebComponent implements SwapComponent {
       final theItems = _contentElementField.children;
 
       // if there are any elements, make sure one and only one is 'active'
-      final activeFigures = new List<Element>.from(theItems.filter((e) => e.classes.contains(_activeClass)));
+      final activeFigures = new List<Element>.from(theItems.where((e) => e.classes.contains(_activeClass)).toList());
       if(activeFigures.length == 0) {
         if(theItems.length > 0) {
           // marke the first of the figures as active

@@ -20,8 +20,8 @@ void registerToolsTests() {
         pg.appendHtml('''
 <div class='container'>
 <style scoped>
-div.container { 
-  background: gray; 
+div.container {
+  background: gray;
   width: ${_containerSize.width}px; height: ${_containerSize.height}px;
 }
 div.foo { background: red; $css }
@@ -34,10 +34,10 @@ div.foo { background: red; $css }
         });
 
         pg.query('div.foo').getComputedStyle('')
-        .transform((css) => Tools.getOuterSize(css))
-        .chain((value) {
+        .then((css) => Tools.getOuterSize(css))
+        .then((value) {
           return getTimeoutFuture(1)
-              .transform((_) => value);
+              .then((_) => value);
         })
         .then(expectCallback);
 

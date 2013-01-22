@@ -96,22 +96,19 @@ void _swapperTest(int childCount,
     }
 
     Swapper.swap(pg, toShowElement)
-      .transform(expectAsync1((bool actualResult) {
+      .then(expectAsync1((bool actualResult) {
         expect(actualResult, expectedResult);
       }))
-      .chain((_) => _getDisplayedIndicies(pg))
-      .transform(expectAsync1((List<int> displayedIndicies) {
+      .then((_) => _getDisplayedIndicies(pg))
+      .then(expectAsync1((List<int> displayedIndicies) {
         if(expectedDisplayed == null) {
           expect(displayedIndicies, isEmpty, reason: 'There are no items to display');
         } else {
           expect(displayedIndicies.length, 1, reason: 'there should only be one displayed item');
           expect(displayedIndicies[0], expectedDisplayed);
         }
-      }))
-      .onComplete((future) {
-        if(!future.hasValue) {
-          registerException(future.exception, future.stackTrace);
-        }
+      }), onError: (AsyncError error) {
+        registerException(error.error, error.stackTrace);
       });
   });
 }
@@ -121,9 +118,9 @@ void _swapperTest(int childCount,
  * assume all animations on all children are finished
  */
 Future<List<int>> _getDisplayedIndicies(Element host) {
-  final futures = host.children.map(ShowHide.getState);
-  return Futures.wait(futures)
-      .transform((List<ShowHideState> states) {
+  final futures = host.children.mappedBy(ShowHide.getState).toList();
+  return Future.wait(futures)
+      .then((List<ShowHideState> states) {
         assert(states.length == host.children.length);
         final shownIndicies = new List<int>();
         for(int i= 0; i < states.length; i++) {

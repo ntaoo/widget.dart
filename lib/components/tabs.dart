@@ -43,10 +43,10 @@ class Tabs extends WebComponent {
     // so we're going to go through our 'known' tabs and pick it that way
     final tabs = _getAllTabs();
 
-    final matchingTab = $(tabs).singleOrDefault((e) => e == tabElement);
+    final matchingTab = $(tabs).singleMatching((e) => e == tabElement);
     if(matchingTab != null) {
       tabs
-        .filter((e) => e != tabElement)
+        .where((e) => e != tabElement)
         .forEach((e) {
           e.attributes.remove(_activeTabAttribute);
         });
@@ -93,7 +93,7 @@ class Tabs extends WebComponent {
   void _updateContent(String target) {
     final items = _swap.items;
 
-    final targetItem = $(items).firstOrDefault((e) => e.id == target);
+    final targetItem = $(items).firstMatching((e) => e.id == target);
     _swap.showItem(targetItem);
   }
 }

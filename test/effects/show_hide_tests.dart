@@ -60,11 +60,11 @@ void _registerTest(String tag, String sheetStyle, String inlineStyle) {
         String initialCalculatedValue;
 
         final futureTuple = element.getComputedStyle('')
-            .chain((css) {
+            .then((css) {
               initialCalculatedValue = css.display;
               return ShowHide.begin(a1, element);
             })
-            .chain((_) => _getValues(tag, sheetStyle, inlineStyle, element));
+            .then((_) => _getValues(tag, sheetStyle, inlineStyle, element));
 
         expectFutureComplete(futureTuple, (Tuple3<String, String, ShowHideState> tuple) {
           final defaultTagValue = tuple.item1;
@@ -86,12 +86,12 @@ void _registerTest(String tag, String sheetStyle, String inlineStyle) {
           String initialCalculatedValue;
 
           final futureTuple = element.getComputedStyle('')
-              .chain((css) {
+              .then((css) {
                 initialCalculatedValue = css.display;
                 return ShowHide.begin(a1, element);
               })
-              .chain((_) => ShowHide.begin(a2, element))
-              .chain((_) => _getValues(tag, sheetStyle, inlineStyle, element));
+              .then((_) => ShowHide.begin(a2, element))
+              .then((_) => _getValues(tag, sheetStyle, inlineStyle, element));
 
           expectFutureComplete(futureTuple, (Tuple3<String, String, ShowHideState> tuple) {
             final defaultTagValue = tuple.item1;
@@ -205,12 +205,12 @@ Future<Tuple3<String, String, ShowHideState>> _getValues(String tag, String shee
   final futureDefaultDisplay = Tools.getDefaultDisplay(tag);
 
   final futureCalculatedDisplayValue = element.getComputedStyle('')
-      .transform((css) => css.display);
+      .then((css) => css.display);
 
   final futureShowHide = ShowHide.getState(element);
 
-  return Futures.wait([futureDefaultDisplay, futureCalculatedDisplayValue, futureShowHide])
-      .transform((list) => new Tuple3(list[0], list[1], list[2]));
+  return Future.wait([futureDefaultDisplay, futureCalculatedDisplayValue, futureShowHide])
+      .then((list) => new Tuple3(list[0], list[1], list[2]));
 }
 
 ShowHideState _getState(String calculatedDisplay) {

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:html5lib/dom.dart';
 import 'package:html5lib/parser.dart';
@@ -21,7 +22,7 @@ void main() {
   build(new Options().arguments, [output]);
 
   Process.run('./bin/copy_assets.sh', [])
-    .transform((ProcessResult pr) {
+    .then((ProcessResult pr) {
       if(pr.exitCode == 0) {
         print('copy of pngs worked');
       } else {
@@ -35,7 +36,7 @@ Future<bool> _transform(String input, String output) {
   final file = new File(input);
   assert(file.existsSync());
   return file.readAsString()
-      .chain((String contents) {
+      .then((String contents) {
         var parser = new HtmlParser(contents, generateSpans: true);
         var document = parser.parse();
         _tweakDocument(document);
@@ -46,17 +47,17 @@ Future<bool> _transform(String input, String output) {
 Future<bool> _updateIfChanged(String filePath, String newContent) {
   final file = new File(filePath);
   return file.exists()
-      .chain((bool exists) {
+      .then((bool exists) {
         if(exists) {
           return file.readAsString()
-              .transform((String content) => content != newContent);
+              .then((String content) => content != newContent);
         } else {
           return new Future.immediate(true);
         }
-      }).chain((bool shouldUpdate) {
+      }).then((bool shouldUpdate) {
         if(shouldUpdate) {
           return file.writeAsString(newContent)
-            .transform((_) => true);
+            .then((_) => true);
         } else {
           return new Future.immediate(false);
         }
@@ -81,7 +82,7 @@ List<Element> _findElements(Element element, Func1<Element, bool> predicate, [Li
 
 void _tweakDocument(Document document) {
   document.queryAll('section')
-      .filter((s) => s.attributes['class'] == 'component')
+      .where((s) => s.attributes['class'] == 'component')
       .forEach((s) {
         _tweakComponentSection(s);
       });
@@ -94,10 +95,10 @@ void _tweakDocument(Document document) {
   // TOC fun!
   //
   final tocUls = document.queryAll('ul')
-      .filter((e) => e.attributes['class'] != null && e.attributes['class'].contains('nav-list'));
+      .where((e) => e.attributes['class'] != null && e.attributes['class'].contains('nav-list')).toList();
 
   assert(tocUls.length == 1);
-  final Element tocUl = $(tocUls).first();
+  final Element tocUl = $(tocUls).first;
 
   sectionHeaders.forEach((h) {
     final headerText = htmlSerializeEscape(h.innerHTML);
@@ -120,9 +121,9 @@ void _tweakDocument(Document document) {
 
 void _tweakComponentSection(Element element) {
   // find demo section
-  final demoSections = element.elements.filter((e) {
+  final demoSections = element.elements.where((e) {
     return e.attributes['class'] == 'demo';
-  });
+  }).toList();
 
   Element demoSection = null;
   if(demoSections.length == 1) {
@@ -130,9 +131,9 @@ void _tweakComponentSection(Element element) {
   }
 
   // find code section
-  final codeSections = element.elements.filter((e) {
+  final codeSections = element.elements.where((e) {
     return e.attributes['class'] == 'code';
-  });
+  }).toList();
 
   Element codeSection = null;
   if(demoSections.length == 1) {
@@ -150,9 +151,9 @@ String _cleanUpCode(String input) {
   input = htmlSerializeEscape(input);
 
   var lines = input.split('\n')
-      .filter((String line) {
+      .where((String line) {
         return line.trim().length > 0;
-      });
+      }).toList();
 
   final regex = new RegExp(r'^([ ]*).*$');
 

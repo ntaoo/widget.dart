@@ -27,7 +27,7 @@ class Swapper {
 
     // ensure at most one child of the host is visible before beginning
     return _ensureOneShown(host)
-        .chain((Element currentlyVisible) {
+        .then((Element currentlyVisible) {
           if(currentlyVisible == null) {
             return new Future.immediate(false);
           } else if(currentlyVisible == child) {
@@ -41,8 +41,8 @@ class Swapper {
           currentlyVisible.style.zIndex = '1';
           final hideFuture = ShowHide.hide(currentlyVisible, effect: hideEffect, duration: duration, effectTiming: effectTiming);
 
-          return Futures.wait([showFuture, hideFuture])
-              .transform((List<ShowHideResult> results) {
+          return Future.wait([showFuture, hideFuture])
+              .then((List<ShowHideResult> results) {
                 [child, currentlyVisible].forEach((e) => e.style.zIndex = '');
                 return results.every((a) => a.isSuccess);
               });
@@ -50,9 +50,9 @@ class Swapper {
   }
 
   static Future<bool> _hideEverything(Element host, ShowHideEffect effect, int duration, EffectTiming effectTiming) {
-    final futures = host.children.map((e) => ShowHide.hide(e, effect: effect, duration: duration, effectTiming: effectTiming));
-    return Futures.wait(futures)
-        .transform((List<ShowHideResult> successList) {
+    final futures = host.children.mappedBy((e) => ShowHide.hide(e, effect: effect, duration: duration, effectTiming: effectTiming)).toList();
+    return Future.wait(futures)
+        .then((List<ShowHideResult> successList) {
           return successList.every((v) => v.isSuccess);
         });
   }
@@ -65,7 +65,7 @@ class Swapper {
     } else if(host.children.length == 1) {
       final child = host.children[0];
       return ShowHide.show(child)
-          .transform((ShowHideResult result) {
+          .then((ShowHideResult result) {
             if(result.isSuccess) {
               return child;
             } else {
@@ -79,12 +79,12 @@ class Swapper {
 
     // 1 - get states of all children
     final futures = host.children
-        .map(ShowHide.getState);
+        .mappedBy(ShowHide.getState).toList();
 
     int shownIndex = null;
 
-    return Futures.wait(futures)
-        .chain((List<ShowHideState> states) {
+    return Future.wait(futures)
+        .then((List<ShowHideState> states) {
           // paranoid sanity check that at lesat the count of items
           // before and after haven't changed
           assert(states.length == host.children.length);
@@ -106,7 +106,7 @@ class Swapper {
             // if more than one is shown, hide all but the last one
             final toHide = showIndicies
                 .getRange(0, showIndicies.length - 1)
-                .map((int index) => host.children[index]);
+                .mappedBy((int index) => host.children[index]).toList();
             shownIndex = showIndicies[showIndicies.length - 1];
             return _hideAll(toHide);
           } else {
@@ -116,7 +116,7 @@ class Swapper {
             return new Future.immediate(true);
           }
         })
-        .transform((bool success) {
+        .then((bool success) {
           assert(success == true || success == false);
           assert(shownIndex != null);
           if(success) {
@@ -128,8 +128,8 @@ class Swapper {
   }
 
   static Future<bool> _hideAll(List<Element> elements) {
-    final futures = elements.map((Element e) => ShowHide.hide(e));
-    return Futures.wait(futures)
-        .transform((List<ShowHideResult> successValues) => successValues.every((v) => v.isSuccess));
+    final futures = elements.mappedBy((Element e) => ShowHide.hide(e)).toList();
+    return Future.wait(futures)
+        .then((List<ShowHideResult> successValues) => successValues.every((v) => v.isSuccess));
   }
 }

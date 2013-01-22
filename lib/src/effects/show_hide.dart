@@ -49,8 +49,8 @@ class ShowHide {
     assert(action != null);
     assert(element != null);
     return getState(element)
-        .transform(((oldState) => _getToggleState(action, oldState)))
-        .chain((bool doShow) =>
+        .then(((oldState) => _getToggleState(action, oldState)))
+        .then((bool doShow) =>
             _requestEffect(doShow, element, duration, effect, effectTiming));
   }
 
@@ -59,11 +59,11 @@ class ShowHide {
 
     if(currentValues != null) {
       return _updateCachedSize(element)
-          .transform((_) => currentValues.currentState);
+          .then((_) => currentValues.currentState);
     }
 
-    return Futures.wait([element.getComputedStyle(''), Tools.getDefaultDisplay(element.tagName)])
-        .transform((List items) {
+    return Future.wait([element.getComputedStyle(''), Tools.getDefaultDisplay(element.tagName)])
+        .then((List items) {
           final computedStyle = items[0];
           final tagDefaultDisplay = items[1];
 
@@ -83,8 +83,8 @@ class ShowHide {
     final values = _values[element];
     assert(values != null);
     return element.getComputedStyle('')
-        .transform(Tools.getSize)
-        .transform((Size size) {
+        .then(Tools.getSize)
+        .then((Size size) {
           return values.cachedSize = size;
         });
   }

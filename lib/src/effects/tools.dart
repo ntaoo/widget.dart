@@ -66,7 +66,7 @@ class Tools {
       return new Future.immediate(storedValue);
     } else {
       return _css_defaultDisplay(nodeName)
-          .chain((String defaultDisplay) {
+          .then((String defaultDisplay) {
             assert(defaultDisplay != null);
 
             if(defaultDisplay == 'none' || defaultDisplay == '') {
@@ -75,7 +75,7 @@ class Tools {
               return new Future.immediate(defaultDisplay);
             }
           })
-          .transform((String value) {
+          .then((String value) {
             assert(value != null);
             assert(value != 'none');
             assert(value != '');
@@ -119,7 +119,7 @@ class Tools {
     doc.body.append(elem);
 
     return elem.getComputedStyle('')
-        .transform((CssStyleDeclaration css) {
+        .then((CssStyleDeclaration css) {
           final value = css.display;
           elem.remove();
           return value;

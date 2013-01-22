@@ -1,5 +1,6 @@
 library effects_tests;
 
+import 'dart:async';
 import 'dart:html';
 import 'package:unittest/unittest.dart';
 import 'package:widget/effects.dart';

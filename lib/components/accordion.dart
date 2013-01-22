@@ -13,7 +13,7 @@ class Accordion extends WebComponent {
   void inserted() {
     // collapse all expander children
     this.queryAll('x-expander')
-      .map((Element e) => e.xtag)
+      .mappedBy((Element e) => e.xtag)
       .forEach((e) {
         e.isExpanded = false;
       });
@@ -29,8 +29,8 @@ class Accordion extends WebComponent {
 
   void _onExpanderOpen(dynamic expander) {
     this.queryAll('x-accordion > x-expander')
-    .map((Element e) => e.xtag)
-    .filter((e) => e != expander)
+    .mappedBy((Element e) => e.xtag)
+    .where((e) => e != expander)
     .forEach((e) {
       e.isExpanded = false;
     });

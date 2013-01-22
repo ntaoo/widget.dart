@@ -4,7 +4,7 @@ description:  A set of reusable Web Components for Dart applications
 author: Kevin Moore <kevin@thinkpixellab.com>
 version: 0.0.3-dev
 dependencies:
-  unittest: '>=0.2.9 <2.10.0'
-  web_ui: '>=0.2.11 <0.2.12'
-  bot: 0.10.0
-  html5lib: '0.2.2+1'
+  unittest: '>=0.3.1+1'
+  web_ui: '>=0.3.0'
+  bot: 0.11.0
+  html5lib: '>=0.3.0'
