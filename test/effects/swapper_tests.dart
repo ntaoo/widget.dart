@@ -95,21 +95,25 @@ void _swapperTest(int childCount,
       toShowElement = pg.children[childIndexToShow];
     }
 
-    Swapper.swap(pg, toShowElement)
-      .then(expectAsync1((bool actualResult) {
-        expect(actualResult, expectedResult);
-      }))
-      .then((_) => _getDisplayedIndicies(pg))
-      .then(expectAsync1((List<int> displayedIndicies) {
-        if(expectedDisplayed == null) {
-          expect(displayedIndicies, isEmpty, reason: 'There are no items to display');
-        } else {
-          expect(displayedIndicies.length, 1, reason: 'there should only be one displayed item');
-          expect(displayedIndicies[0], expectedDisplayed);
-        }
-      }), onError: (AsyncError error) {
-        registerException(error.error, error.stackTrace);
-      });
+    if(!expectedResult) {
+      expect(() => Swapper.swap(pg, toShowElement), throws);
+    } else {
+      Swapper.swap(pg, toShowElement)
+        .then(expectAsync1((bool actualResult) {
+          expect(actualResult, expectedResult);
+        }))
+        .then((_) => _getDisplayedIndicies(pg))
+        .then(expectAsync1((List<int> displayedIndicies) {
+          if(expectedDisplayed == null) {
+            expect(displayedIndicies, isEmpty, reason: 'There are no items to display');
+          } else {
+            expect(displayedIndicies.length, 1, reason: 'there should only be one displayed item');
+            expect(displayedIndicies[0], expectedDisplayed);
+          }
+        }), onError: (AsyncError error) {
+          registerException(error.error, error.stackTrace);
+        });
+    }
   });
 }
 
