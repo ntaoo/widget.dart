@@ -9,27 +9,64 @@ import 'package:bot/bot.dart';
 final _whitespaceRegex = new RegExp(r'\s+');
 
 void main() {
+  final args = new Options().arguments;
+  log(' ** ARGS: $args');
+  final changes = getChangedFiles(args);
+
+  if(onlyOutputFiles(changes)) {
+    log(' ** Nothing interesting changed');
+    return;
+  }
+
+  log(' ** CHANGES: $changes');
+
   final input = 'web/index_source.html';
   final output = 'web/index.html';
 
   _transform(input, output).then((bool value) {
     if(value) {
-      print('updated $output');
+      log('updated $output');
     } else {
-      print('no change to $output');
+      log('no change to $output');
     }
   });
-  build(new Options().arguments, [output]);
+  build(args, [output]);
 
   Process.run('./bin/copy_assets.sh', [])
     .then((ProcessResult pr) {
       if(pr.exitCode == 0) {
-        print('copy of pngs worked');
+        log('copy of pngs worked');
       } else {
-        print(pr.stderr);
+        log(pr.stderr);
       }
     });
+}
 
+void log(value) {
+  if(value != null) {
+    print(value);
+    /*
+     * NOTE: if you're having trouble debugging what's going on in build.dart
+     * You can un-comment this section. Changes to hidden files won't kick off the build
+     * so the file is named `.build.log`
+    final file = new File('.build.log');
+    final str = "$value\n";
+    file.writeAsStringSync(str, mode: FileMode.APPEND);
+    */
+  }
+}
+
+bool onlyOutputFiles(List<String> files) {
+  return files.every((value) => value.startsWith(r'web/out/'));
+}
+
+List<String> getChangedFiles(List<String> args) {
+  return args.where((value) => value.contains('='))
+      .mappedBy((value) {
+        final indexOfEqu = value.indexOf('=');
+        return value.substring(indexOfEqu+1);
+      })
+      .toList();
 }
 
 Future<bool> _transform(String input, String output) {
