@@ -10,6 +10,7 @@
     
     
     
+    
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap.css" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap-responsive.css" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.0.0/css/font-awesome.css" rel="stylesheet">
@@ -28,7 +29,7 @@
       <div class="row">
         <div class="span3">
           <ul class="nav nav-list affix">
-          <li><a href="#dart_widgets" class="h1">Dart Widgets</a></li><li><a href="#helpers" class="h1">Helpers</a></li><li><a href="#showhide" class="h2">ShowHide</a></li><li><a href="#swapper" class="h2">Swapper</a></li><li><a href="#components" class="h1">Components</a></li><li><a href="#accordion" class="h2">Accordion</a></li><li><a href="#carousel" class="h2">Carousel</a></li><li><a href="#dropdown" class="h2">Dropdown</a></li><li><a href="#expander" class="h2">Expander</a></li><li><a href="#headeredcontent" class="h2">HeaderedContent</a></li><li><a href="#swap" class="h2">Swap</a></li><li><a href="#tabs" class="h2">Tabs</a></li></ul>
+          <li><a href="#dart_widgets" class="h1">Dart Widgets</a></li><li><a href="#helpers" class="h1">Helpers</a></li><li><a href="#showhide" class="h2">ShowHide</a></li><li><a href="#swapper" class="h2">Swapper</a></li><li><a href="#components" class="h1">Components</a></li><li><a href="#accordion" class="h2">Accordion</a></li><li><a href="#alert" class="h2">Alert</a></li><li><a href="#carousel" class="h2">Carousel</a></li><li><a href="#dropdown" class="h2">Dropdown</a></li><li><a href="#expander" class="h2">Expander</a></li><li><a href="#headeredcontent" class="h2">HeaderedContent</a></li><li><a href="#swap" class="h2">Swap</a></li><li><a href="#tabs" class="h2">Tabs</a></li></ul>
         </div>
     <div class="span9">
       <header>
@@ -95,9 +96,24 @@
 &lt;/x-accordion&gt;</pre>
       </section>
       <section class="component">
+        <h2 id="alert">Alert</h2>
+        <blockquote><strong>Alert</strong> follows the same convention as its inspiration in Bootstrap.
+        Clicking on an element with the attribute <code>data-dismis='alert'</code> will cause the element to close.</blockquote>
+        <div class="demo">
+          <x-alert id="__e-4">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Holy guacamole!</strong> Best check yo self, you're not looking too good.
+          </x-alert>
+        </div>
+        <pre class="code">&lt;x-alert&gt;
+  &lt;button type="button" class="close" data-dismiss="alert"&gt;×&lt;/button&gt;
+  &lt;strong&gt;Holy guacamole!&lt;/strong&gt; Best check yo self, you're not looking too good.
+&lt;/x-alert&gt;</pre>
+      </section>
+      <section class="component">
         <h2 id="carousel">Carousel</h2>
         <div class="demo">
-          <x-carousel id="__e-4">
+          <x-carousel id="__e-5">
             <figure>
               <img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg">
               <figcaption>A description of the first image.</figcaption>
@@ -130,7 +146,7 @@
       <section class="component">
         <h2 id="dropdown">Dropdown</h2>
         <div class="demo">
-          <x-dropdown id="__e-5">
+          <x-dropdown id="__e-6">
             <button class="btn">Click me!</button>
             <ul>
               <li>This is some</li>
@@ -149,7 +165,7 @@
       <section class="component">
         <h2 id="expander">Expander</h2>
         <div class="demo">
-          <x-expander id="__e-6">
+          <x-expander id="__e-7">
             <header>Click to toggle expand/collapse</header>
             <ul>
               <li>This is some</li>
@@ -168,7 +184,7 @@
       <section class="component">
         <h2 id="headeredcontent">HeaderedContent</h2>
         <div class="demo">
-          <x-headered-content id="__e-7">
+          <x-headered-content id="__e-8">
             <header>This is the header</header>
             <ul>
               <li>This is some</li>
@@ -195,7 +211,7 @@
       <section class="component">
         <h2 id="tabs">Tabs</h2>
         <div class="demo">
-          <x-tabs id="__e-8">
+          <x-tabs id="__e-9">
             <x-tab target="tab1">Tab 1</x-tab>
             <x-tab target="tab2">Tab 2</x-tab>
             <x-tab target="tab3">Tab 3</x-tab>
