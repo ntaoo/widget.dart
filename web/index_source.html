@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Dart Widgets</title>
     <link rel="components" href="packages/widget/components/accordion.html">
+    <link rel="components" href="packages/widget/components/alert.html">
     <link rel="components" href="packages/widget/components/carousel.html">
     <link rel="components" href="packages/widget/components/dropdown.html">
     <link rel="components" href="packages/widget/components/expander.html">
@@ -88,6 +89,22 @@
         </div>
 
         <pre class='code'></pre>
+      </section>
+
+      <section class='component'>
+        <h2>Alert</h2>
+        <blockquote><strong>Alert</strong> follows the same convention as its inspiration in Bootstrap.
+        Clicking on an element with the attribute <code>data-dismis='alert'</code> will cause the element to close.</blockquote>
+
+        <div class='demo'>
+          <x-alert>
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Holy guacamole!</strong> Best check yo self, you're not looking too good.
+          </x-alert>
+        </div>
+
+        <pre class='code'></pre>
+
       </section>
 
       <section class='component'>
