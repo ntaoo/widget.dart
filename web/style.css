@@ -119,6 +119,9 @@ pre.code::after {
   }
 }
 
+.open button.btn {
+  background: #e6e6e6
+}
 
 /* ShowHide Styles */
 .demo.showhide {
