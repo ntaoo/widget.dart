@@ -1,17 +1,13 @@
 import 'dart:html';
 import 'package:web_ui/web_ui.dart';
 import 'package:widget/effects.dart';
+import 'package:bot/bot.dart';
 
 class Dropdown extends WebComponent {
-  const String _dropdownDivSelector = '.dropdown-content-x';
-  const String _headerOpenClass = 'dropdown-toggle-x';
-
   static final ShowHideEffect _effect = new FadeEffect();
   static const int _duration = 100;
 
   bool _isExpanded = false;
-  DivElement _expanderDiv;
-  Element _headerElem;
 
   bool get isExpanded => _isExpanded;
 
@@ -20,37 +16,39 @@ class Dropdown extends WebComponent {
       _isExpanded = value;
       final action = _isExpanded ? ShowHideAction.SHOW : ShowHideAction.HIDE;
 
-      if(_isExpanded) {
-        _headerElem.classes.add(_headerOpenClass);
-      } else {
-        _headerElem.classes.remove(_headerOpenClass);
+      final headerContainer = this.query('x-dropdown > .button-container-x');
+
+      if(headerContainer != null) {
+        if(_isExpanded) {
+          headerContainer.classes.add('open');
+        } else {
+          headerContainer.classes.remove('open');
+        }
       }
 
-      ShowHide.begin(action, _expanderDiv, effect: _effect);
+      final contentDiv = this.query('x-dropdown > .dropdown-content-x');
+      if(contentDiv != null) {
+        ShowHide.begin(action, contentDiv, effect: _effect);
+      }
     }
   }
 
   void toggle() {
-    assert(_expanderDiv != null);
     isExpanded = !isExpanded;
   }
 
-  void inserted() {
-    assert(_expanderDiv == null);
-    assert(_headerElem == null);
-    _expanderDiv = this.query(_dropdownDivSelector);
-    _headerElem = this.query('x-dropdown > button');
-    if(_headerElem != null) {
-      _headerElem.on.click.add((_) => toggle());
-    }
-    assert(_expanderDiv != null);
-    assert(_headerElem != null);
+  @protected
+  void created() {
+    this.onClick.listen(_onClick);
   }
 
-  void removed() {
-    assert(_expanderDiv != null);
-    assert(_headerElem != null);
-    _expanderDiv = null;
-    _headerElem = null;
+  void _onClick(MouseEvent event) {
+    final button = this.query('x-dropdown > .button-container-x > button');
+    print(button);
+    print(event.target);
+    if(event.target == button && !event.defaultPrevented) {
+      toggle();
+      event.preventDefault();
+    }
   }
 }
