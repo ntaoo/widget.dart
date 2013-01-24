@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <!-- This file was auto-generated from web/index.html. -->
-<html><head>
+<html lang="en"><head>
     <meta charset="utf-8">
     <title>Dart Widgets</title>
+    
     
     
     
@@ -29,12 +30,20 @@
       <div class="row">
         <div class="span3">
           <ul class="nav nav-list affix">
-          <li><a href="#dart_widgets" class="h1">Dart Widgets</a></li><li><a href="#helpers" class="h1">Helpers</a></li><li><a href="#showhide" class="h2">ShowHide</a></li><li><a href="#swapper" class="h2">Swapper</a></li><li><a href="#components" class="h1">Components</a></li><li><a href="#accordion" class="h2">Accordion</a></li><li><a href="#alert" class="h2">Alert</a></li><li><a href="#carousel" class="h2">Carousel</a></li><li><a href="#dropdown" class="h2">Dropdown</a></li><li><a href="#expander" class="h2">Expander</a></li><li><a href="#headeredcontent" class="h2">HeaderedContent</a></li><li><a href="#swap" class="h2">Swap</a></li><li><a href="#tabs" class="h2">Tabs</a></li></ul>
+          <li><a href="#dart_widgets" class="h1">Dart Widgets</a></li><li><a href="#helpers" class="h1">Helpers</a></li><li><a href="#modalmanager" class="h2">ModalManager</a></li><li><a href="#showhide" class="h2">ShowHide</a></li><li><a href="#swapper" class="h2">Swapper</a></li><li><a href="#components" class="h1">Components</a></li><li><a href="#accordion" class="h2">Accordion</a></li><li><a href="#alert" class="h2">Alert</a></li><li><a href="#carousel" class="h2">Carousel</a></li><li><a href="#dropdown" class="h2">Dropdown</a></li><li><a href="#expander" class="h2">Expander</a></li><li><a href="#headeredcontent" class="h2">HeaderedContent</a></li><li><a href="#modal" class="h2">Modal</a></li><li><a href="#swap" class="h2">Swap</a></li><li><a href="#tabs" class="h2">Tabs</a></li></ul>
         </div>
     <div class="span9">
       <header>
         <h1 id="helpers">Helpers</h1>
       </header>
+      <section class="helper">
+        <h2 id="modalmanager">ModalManager</h2>
+        <blockquote>
+          <p><strong>ModalManager</strong> is inspired by the <a href="http://twitter.github.com/bootstrap/javascript.html#modals">modal helper</a> in Bootstrap.</p>
+          <p>It has two static methods <code>show</code> and <code>hide</code> that both take the same paramaters as corresponding methods in <a href="#showhide">ShowHide</a>.</p>
+          <p><strong>ModalManager</strong> controls the display of the provided element while also creating a dark backdrop on the page. Any element used should have a fixed position, a z-index greater than 1040, and an initial display of none.</p>
+        </blockquote>
+      </section>
       <section class="helper">
         <h2 id="showhide">ShowHide</h2>
         <blockquote>
@@ -201,6 +210,49 @@
 &lt;/x-headered-content&gt;</pre>
       </section>
       <section class="component">
+        <h2 id="modal">Modal</h2>
+        <blockquote>
+          <p>When added to a page, <strong>Modal</strong> is hidden. It can be displayed by calling the <code>show</code> method.</p>
+          <p>Similiar to <a href="#alert">Alert</a>, you can add elements to <strong>Modal</strong> which cause it to hide by adding
+          the data attribute <code>data-dismiss="modal"</code>.</p>
+          <p>The <strong>Modal</strong> component leverages the <a href="#modalmanager">ModalManager</a> helper.</p>
+        </blockquote>
+        <div class="demo">
+          <!-- Button to trigger modal -->
+          <a role="button" class="btn btn-primary" id="__e-9">Launch demo modal</a>
+          <!-- Modal -->
+          <x-modal id="__e-10">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel">Modal header</h3>
+            </div>
+            <div class="modal-body">
+              <p>One fine body…</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+              <button class="btn btn-primary">Save changes</button>
+            </div>
+          </x-modal>
+        </div>
+        <pre class="code">&lt;!-- Button to trigger modal --&gt;
+&lt;a role="button" class="btn btn-primary" on-click="showModal();"&gt;Launch demo modal&lt;/a&gt;
+&lt;!-- Modal --&gt;
+&lt;x-modal&gt;
+  &lt;div class="modal-header"&gt;
+    &lt;button type="button" class="close" data-dismiss="modal" aria-hidden="true"&gt;×&lt;/button&gt;
+    &lt;h3 id="myModalLabel"&gt;Modal header&lt;/h3&gt;
+  &lt;/div&gt;
+  &lt;div class="modal-body"&gt;
+    &lt;p&gt;One fine body…&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="modal-footer"&gt;
+    &lt;button class="btn" data-dismiss="modal" aria-hidden="true"&gt;Close&lt;/button&gt;
+    &lt;button class="btn btn-primary"&gt;Save changes&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/x-modal&gt;</pre>
+      </section>
+      <section class="component">
         <h2 id="swap">Swap</h2>
         <blockquote>
           <p><strong>Swap</strong> is a low-level component designed to be composed by other components.
@@ -211,7 +263,7 @@
       <section class="component">
         <h2 id="tabs">Tabs</h2>
         <div class="demo">
-          <x-tabs id="__e-9">
+          <x-tabs id="__e-11">
             <x-tab target="tab1">Tab 1</x-tab>
             <x-tab target="tab2">Tab 2</x-tab>
             <x-tab target="tab3">Tab 3</x-tab>
