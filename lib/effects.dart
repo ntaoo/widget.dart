@@ -10,6 +10,7 @@ part 'src/effects/alignment.dart';
 part 'src/effects/css3_transition_effect.dart';
 part 'src/effects/css3_transition_effects.dart';
 part 'src/effects/effect_timing.dart';
+part 'src/effects/modal_manager.dart';
 part 'src/effects/show_hide.dart';
 part 'src/effects/show_hide_effect.dart';
 part 'src/effects/show_hide_state.dart';

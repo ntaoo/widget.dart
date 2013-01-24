@@ -4,8 +4,7 @@ import 'package:bot/bot.dart';
 import 'package:widget/effects.dart';
 import 'package:widget/widget.dart';
 
-// TODO: keyboard support for ESC and such
-// TODO: backdrop
+// TODO: ESC to close
 
 class Modal extends WebComponent implements ShowHideComponent {
   final _effect = new ScaleEffect();
@@ -25,10 +24,17 @@ class Modal extends WebComponent implements ShowHideComponent {
   }
 
   void show() {
-    ShowHide.show(this, effect: _effect);
+    ModalManager.show(this, effect: _effect, backdropClickHandler: _onBackdropClicked);
   }
 
   void hide() {
-    ShowHide.hide(this, effect: _effect);
+    ModalManager.hide(this, effect: _effect);
+  }
+
+  void _onBackdropClicked() {
+    // TODO: ignoring some edge cases here
+    // like what if this element has been removed from the tree before the backdrop is clicked
+    // ...etc
+    hide();
   }
 }
