@@ -22,6 +22,7 @@
     <div class="container">
       <header class="mainhead">
         <h1 id="dart_widgets">Dart Widgets</h1>
+        <p>A collection of <a href="#components">Components</a> and <a href="#effects">Effects</a>, written in <a href="http://www.dartlang.org/">Dart</a>, designed to make it easier to build rich web appplications.</p>
         <div class="icons">
           <a href="https://github.com/kevmoo/widget.dart" title="kevmoo/widget.dart"><i class="icon-github"></i></a>
           <a href="https://twitter.com/kevmoo" title="@kevmoo"><i class="icon-twitter"></i></a>
@@ -31,51 +32,18 @@
       <div class="row">
         <div class="span3">
           <ul class="nav nav-list affix">
-          <li><a href="#dart_widgets" class="h1">Dart Widgets</a></li><li><a href="#helpers" class="h1">Helpers</a></li><li><a href="#modalmanager" class="h2">ModalManager</a></li><li><a href="#showhide" class="h2">ShowHide</a></li><li><a href="#swapper" class="h2">Swapper</a></li><li><a href="#components" class="h1">Components</a></li><li><a href="#accordion" class="h2">Accordion</a></li><li><a href="#alert" class="h2">Alert</a></li><li><a href="#carousel" class="h2">Carousel</a></li><li><a href="#dropdown" class="h2">Dropdown</a></li><li><a href="#expander" class="h2">Expander</a></li><li><a href="#headeredcontent" class="h2">HeaderedContent</a></li><li><a href="#modal" class="h2">Modal</a></li><li><a href="#swap" class="h2">Swap</a></li><li><a href="#tabs" class="h2">Tabs</a></li></ul>
+          <li><a href="#dart_widgets" class="h1">Dart Widgets</a></li><li><a href="#components" class="h1">Components</a></li><li><a href="#accordion" class="h2">Accordion</a></li><li><a href="#alert" class="h2">Alert</a></li><li><a href="#carousel" class="h2">Carousel</a></li><li><a href="#dropdown" class="h2">Dropdown</a></li><li><a href="#expander" class="h2">Expander</a></li><li><a href="#headeredcontent" class="h2">HeaderedContent</a></li><li><a href="#modal" class="h2">Modal</a></li><li><a href="#swap" class="h2">Swap</a></li><li><a href="#tabs" class="h2">Tabs</a></li><li><a href="#effects" class="h1">Effects</a></li><li><a href="#modalmanager" class="h2">ModalManager</a></li><li><a href="#showhide" class="h2">ShowHide</a></li><li><a href="#swapper" class="h2">Swapper</a></li></ul>
         </div>
 
     <div class="span9">
       <header>
-        <h1 id="helpers">Helpers</h1>
-      </header>
-
-      <section class="helper">
-        <h2 id="modalmanager">ModalManager</h2>
-        <blockquote>
-          <p><strong>ModalManager</strong> is inspired by the <a href="http://twitter.github.com/bootstrap/javascript.html#modals">modal helper</a> in Bootstrap.</p>
-          <p>It has two static methods <code>show</code> and <code>hide</code> that both take the same paramaters as corresponding methods in <a href="#showhide">ShowHide</a>.</p>
-          <p><strong>ModalManager</strong> controls the display of the provided element while also creating a dark backdrop on the page. Any element used should have a fixed position, a z-index greater than 1040, and an initial display of none.</p>
-        </blockquote>
-
-      </section>
-
-      <section class="helper">
-        <h2 id="showhide">ShowHide</h2>
-        <blockquote>
-          <p><strong>ShowHide</strong> is a helper inspired by the <a href="http://api.jquery.com/category/effects/basics/">basic effects in jQuery</a>. Provide an element and an action--show, hide, toggle--and the element's display will change accordingly. Custom effects, duration, and easing values can also be provided.</p><p>
-          </p><p>At the moment, all of the provided effects leverage CSS3 transitions. Creating new effects is easy.</p>
-          <p><strong>ShowHide</strong> is used by <a href="#expander">Expander</a> and <a href="#dropdown">DropDown</a> to animate their content. It is also used by <a href="#swapper">Swapper</a></p>
-
-        </blockquote>
-        <div class="demo showhide">
-          <div class="effects btn-group btn-group"></div>
-          <div class="logo_wrapper">
-            <img src="bot_logo.png" alt="BOT Logo">
-          </div>
-        </div>
-      </section>
-      <section class="helper">
-        <h2 id="swapper">Swapper</h2>
-        <blockquote>
-          <p><strong>Swapper</strong> is a helper that builds on top of <a href="#showhide">ShowHide</a> to manage the visibility of a number of children contained in a parent element.</p>
-          <p>Provide a parent element and either a target child element or an index to a target child element and <strong>Swapper</strong> will display the target while hiding other visible elements using the provided effects, duration, and timing.</p>
-          <p><strong>Swapper</strong> is encapsulated into a component by <a href="#swap">Swap</a>.</p>
-        </blockquote>
-      </section>
-      
-      <header>
         <h1 id="components">Components</h1>
-        <blockquote>Reusable elements. Based on the <a href="https://github.com/dart-lang/web-ui">web-ui library</a> sponsored by the <a href="http://www.dartlang.org/">Dart team</a>.</blockquote>
+        <blockquote>
+          <p>Reusable elements. Based on the <a href="https://github.com/dart-lang/web-ui">web-ui library</a> sponsored by the Dart team.</p>
+          <p><strong>web-ui</strong> is an implementation of the W3C Draft spec for <a href="https://dvcs.w3.org/hg/webcomponents/raw-file/tip/explainer/index.html">Web Components</a> along with a set of related technologies.</p>
+
+
+        </blockquote>
       </header>
       <section class="component">
         <h2 id="accordion">Accordion</h2>
@@ -115,9 +83,9 @@
 
       <section class="component">
         <h2 id="alert">Alert</h2>
-        <blockquote><strong>Alert</strong> follows the same convention as its inspiration in Bootstrap.
-        Clicking on an element with the attribute <code>data-dismis='alert'</code> will cause the element to close.</blockquote>
-
+        <blockquote>
+          <p><strong>Alert</strong> follows the same convention as its inspiration in Bootstrap. Clicking on an element with the attribute <code>data-dismis='alert'</code> will cause the element to close.</p>
+        </blockquote>
         <div class="demo">
           <x-alert>
             <button type="button" class="close" data-dismiss="alert">×</button>
@@ -243,7 +211,7 @@
           <p>When added to a page, <strong>Modal</strong> is hidden. It can be displayed by calling the <code>show</code> method.</p>
           <p>Similiar to <a href="#alert">Alert</a>, you can add elements to <strong>Modal</strong> which cause it to hide by adding
           the data attribute <code>data-dismiss="modal"</code>.</p>
-          <p>The <strong>Modal</strong> component leverages the <a href="#modalmanager">ModalManager</a> helper.</p>
+          <p>The <strong>Modal</strong> component leverages the <a href="#modalmanager">ModalManager</a> effect.</p>
         </blockquote>
         <div class="demo">
           <!-- Button to trigger modal -->
@@ -287,7 +255,7 @@
         <h2 id="swap">Swap</h2>
         <blockquote>
           <p><strong>Swap</strong> is a low-level component designed to be composed by other components.
-          It exposes the functionality of the <a href="#swapper">Swapper</a> helper as a simple container element with corresponding methods to
+          It exposes the functionality of the <a href="#swapper">Swapper</a> effect as a simple container element with corresponding methods to
           'swap' between child elements via code.</p>
           <p><a href="#tabs">Tabs</a> and <a href="#carousel">Carousel</a> both use this component.</p></blockquote>
       </section>
@@ -317,6 +285,45 @@
 &lt;/x-tabs&gt;</pre>
 
       </section>
+
+      <header>
+        <h1 id="effects">Effects</h1>
+      </header>
+
+      <section class="effect">
+        <h2 id="modalmanager">ModalManager</h2>
+        <blockquote>
+          <p><strong>ModalManager</strong> is inspired by the <a href="http://twitter.github.com/bootstrap/javascript.html#modals">modal helper</a> in Bootstrap.</p>
+          <p>It has two static methods <code>show</code> and <code>hide</code> that both take the same paramaters as corresponding methods in <a href="#showhide">ShowHide</a>.</p>
+          <p><strong>ModalManager</strong> controls the display of the provided element while also creating a dark backdrop on the page. Any element used should have a fixed position, a z-index greater than 1040, and an initial display of none.</p>
+        </blockquote>
+
+      </section>
+
+      <section class="effect">
+        <h2 id="showhide">ShowHide</h2>
+        <blockquote>
+          <p><strong>ShowHide</strong> is an effect inspired by the <a href="http://api.jquery.com/category/effects/basics/">basic effects in jQuery</a>. Provide an element and an action--show, hide, toggle--and the element's display will change accordingly. Custom effects, duration, and easing values can also be provided.</p><p>
+          </p><p>At the moment, all of the provided effects leverage CSS3 transitions. Creating new effects is easy.</p>
+          <p><strong>ShowHide</strong> is used by <a href="#expander">Expander</a> and <a href="#dropdown">DropDown</a> to animate their content. It is also used by <a href="#swapper">Swapper</a></p>
+
+        </blockquote>
+        <div class="demo showhide">
+          <div class="effects btn-group btn-group"></div>
+          <div class="logo_wrapper">
+            <img src="bot_logo.png" alt="BOT Logo">
+          </div>
+        </div>
+      </section>
+      <section class="effect">
+        <h2 id="swapper">Swapper</h2>
+        <blockquote>
+          <p><strong>Swapper</strong> is an effect that builds on top of <a href="#showhide">ShowHide</a> to manage the visibility of a number of children contained in a parent element.</p>
+          <p>Provide a parent element and either a target child element or an index to a target child element and <strong>Swapper</strong> will display the target while hiding other visible elements using the provided effects, duration, and timing.</p>
+          <p><strong>Swapper</strong> is encapsulated into a component by <a href="#swap">Swap</a>.</p>
+        </blockquote>
+      </section>
+
     </div>
       </div>
     </div>
