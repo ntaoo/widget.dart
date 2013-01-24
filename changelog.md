@@ -8,9 +8,14 @@
 
 ### Components
 
+* _NEW!_ `Modal`
 * _NEW!_ `Alert`
 * _NEW!_ `Swap` is now a seperate component.
 * Removed a lot of state from individual components.
+
+### Effects
+
+* _NEW!_ `ModalManager`
 
 ## 0.0.2 - 17 Jan 2013 - (SDK 0.2.10.1 r16761)
 
