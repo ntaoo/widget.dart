@@ -1,3 +1,10 @@
+ul, ol {
+  margin: 0 0 3px 25px;
+}
+
+/* Main header
+-------------------------------------------------- */
+
 header.mainhead {
   position: relative;
 }
@@ -20,9 +27,9 @@ header.mainhead p {
   color: gray;
 }
 
-ul, ol {
-  margin: 0 0 3px 25px;
-}
+/* Navigation
+-------------------------------------------------- */
+
 ul.nav-list {
   padding: 0;
   width: 228px;
@@ -44,6 +51,31 @@ ul.nav-list > li > a.h1 {
 }
 ul.nav-list > li > a.h2 {
   padding-left: 25px;
+}
+
+/* Footer
+-------------------------------------------------- */
+
+.footer {
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 70px;
+  border-top: 1px solid #e5e5e5;
+  background-color: #f5f5f5;
+}
+.footer p {
+  margin-bottom: 1em;
+  color: #777;
+}
+.footer-links {
+  margin: 10px 0;
+}
+.footer-links li {
+  display: inline;
+  padding: 0 2px;
+}
+.footer-links li:first-child {
+  padding-left: 0;
 }
 
 /* Desktop large
