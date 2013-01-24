@@ -7,6 +7,7 @@
     <link rel="components" href="packages/widget/components/dropdown.html">
     <link rel="components" href="packages/widget/components/expander.html">
     <link rel="components" href="packages/widget/components/headered_content.html">
+    <link rel="components" href="packages/widget/components/modal.html">
     <link rel="components" href="packages/widget/components/tabs.html">
     <script type="application/dart" src="app.dart"></script>
     <script type="text/javascript" src="dart.js"></script>
@@ -30,7 +31,7 @@
       <div class="row">
         <div class="span3">
           <ul class="nav nav-list affix">
-          <li><a href="#dart_widgets" class="h1">Dart Widgets</a></li><li><a href="#helpers" class="h1">Helpers</a></li><li><a href="#showhide" class="h2">ShowHide</a></li><li><a href="#swapper" class="h2">Swapper</a></li><li><a href="#components" class="h1">Components</a></li><li><a href="#accordion" class="h2">Accordion</a></li><li><a href="#alert" class="h2">Alert</a></li><li><a href="#carousel" class="h2">Carousel</a></li><li><a href="#dropdown" class="h2">Dropdown</a></li><li><a href="#expander" class="h2">Expander</a></li><li><a href="#headeredcontent" class="h2">HeaderedContent</a></li><li><a href="#swap" class="h2">Swap</a></li><li><a href="#tabs" class="h2">Tabs</a></li></ul>
+          <li><a href="#dart_widgets" class="h1">Dart Widgets</a></li><li><a href="#helpers" class="h1">Helpers</a></li><li><a href="#showhide" class="h2">ShowHide</a></li><li><a href="#swapper" class="h2">Swapper</a></li><li><a href="#components" class="h1">Components</a></li><li><a href="#accordion" class="h2">Accordion</a></li><li><a href="#alert" class="h2">Alert</a></li><li><a href="#carousel" class="h2">Carousel</a></li><li><a href="#dropdown" class="h2">Dropdown</a></li><li><a href="#expander" class="h2">Expander</a></li><li><a href="#headeredcontent" class="h2">HeaderedContent</a></li><li><a href="#modal" class="h2">Modal</a></li><li><a href="#swap" class="h2">Swap</a></li><li><a href="#tabs" class="h2">Tabs</a></li></ul>
         </div>
 
     <div class="span9">
@@ -223,6 +224,47 @@
     &lt;li&gt;content&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/x-headered-content&gt;</pre>
+      </section>
+
+      <section class="component">
+        <h2 id="modal">Modal</h2>
+
+        <div class="demo">
+          <!-- Button to trigger modal -->
+          <a role="button" class="btn btn-primary" on-click="showModal();">Launch demo modal</a>
+
+          <!-- Modal -->
+          <x-modal>
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel">Modal header</h3>
+            </div>
+            <div class="modal-body">
+              <p>One fine body…</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+              <button class="btn btn-primary">Save changes</button>
+            </div>
+          </x-modal>
+        </div>
+
+        <pre class="code">&lt;!-- Button to trigger modal --&gt;
+&lt;a role="button" class="btn btn-primary" on-click="showModal();"&gt;Launch demo modal&lt;/a&gt;
+&lt;!-- Modal --&gt;
+&lt;x-modal&gt;
+  &lt;div class="modal-header"&gt;
+    &lt;button type="button" class="close" data-dismiss="modal" aria-hidden="true"&gt;×&lt;/button&gt;
+    &lt;h3 id="myModalLabel"&gt;Modal header&lt;/h3&gt;
+  &lt;/div&gt;
+  &lt;div class="modal-body"&gt;
+    &lt;p&gt;One fine body…&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="modal-footer"&gt;
+    &lt;button class="btn" data-dismiss="modal" aria-hidden="true"&gt;Close&lt;/button&gt;
+    &lt;button class="btn btn-primary"&gt;Save changes&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/x-modal&gt;</pre>
       </section>
 
       <section class="component">

@@ -10,6 +10,7 @@
     <link rel="components" href="packages/widget/components/dropdown.html">
     <link rel="components" href="packages/widget/components/expander.html">
     <link rel="components" href="packages/widget/components/headered_content.html">
+    <link rel="components" href="packages/widget/components/modal.html">
     <link rel="components" href="packages/widget/components/tabs.html">
     <script type="application/dart" src="app.dart"></script>
     <script type="text/javascript" src="dart.js"></script>
@@ -176,6 +177,32 @@
               <li>content</li>
             </ul>
           </x-headered-content>
+        </div>
+
+        <pre class='code'></pre>
+      </section>
+
+      <section class='component'>
+        <h2>Modal</h2>
+
+        <div class='demo'>
+          <!-- Button to trigger modal -->
+          <a role="button" class="btn btn-primary" on-click='showModal();'>Launch demo modal</a>
+
+          <!-- Modal -->
+          <x-modal>
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel">Modal header</h3>
+            </div>
+            <div class="modal-body">
+              <p>One fine body…</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+              <button class="btn btn-primary">Save changes</button>
+            </div>
+          </x-modal>
         </div>
 
         <pre class='code'></pre>

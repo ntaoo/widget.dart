@@ -1,6 +1,7 @@
 import 'dart:html';
 import 'package:bot/bot.dart';
 import 'package:widget/effects.dart';
+import 'package:widget/widget.dart';
 
 void main() {
   window.on.hashChange.add(_onNavigate);
@@ -29,6 +30,15 @@ void main() {
       ..on.click.add((_) => _showHideDemo_toggle(effect));
     effectsDiv.append(button);
   });
+}
+
+void showModal() {
+  final modalHost = query('x-modal');
+  if(modalHost != null && modalHost.xtag is ShowHideComponent) {
+    final ShowHideComponent modal = modalHost.xtag;
+
+    modal.show();
+  }
 }
 
 void _showHideDemo_toggle(ShowHideEffect effect) {

@@ -4,7 +4,12 @@ import 'package:bot/bot.dart';
 import 'package:widget/effects.dart';
 import 'package:widget/widget.dart';
 
-class Alert extends WebComponent implements ShowHideComponent {
+// TODO: keyboard support for ESC and such
+// TODO: backdrop
+
+class Modal extends WebComponent implements ShowHideComponent {
+  final _effect = new ScaleEffect();
+
   @protected
   void created() {
     this.onClick.listen(_onClick);
@@ -13,17 +18,17 @@ class Alert extends WebComponent implements ShowHideComponent {
   void _onClick(MouseEvent event) {
     if(!event.defaultPrevented) {
       final Element target = event.target as Element;
-      if(target != null && target.dataAttributes['dismiss'] == 'alert') {
+      if(target != null && target.dataAttributes['dismiss'] == 'modal') {
         hide();
       }
     }
   }
 
-  void hide() {
-    ShowHide.hide(this, effect: new ScaleEffect());
+  void show() {
+    ShowHide.show(this, effect: _effect);
   }
 
-  void show() {
-    ShowHide.show(this, effect: new ScaleEffect());
+  void hide() {
+    ShowHide.hide(this, effect: _effect);
   }
 }
