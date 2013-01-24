@@ -11,6 +11,7 @@ class Modal extends WebComponent implements ShowHideComponent {
 
   @protected
   void created() {
+    this.style.display = 'none';
     this.onClick.listen(_onClick);
   }
 
