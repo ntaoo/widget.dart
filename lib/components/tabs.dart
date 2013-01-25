@@ -9,6 +9,7 @@ import 'package:widget/widget.dart';
 // TODO:TEST: no tabs -> no crash
 
 // TODO: be more careful that the source tab is actually 'ours'
+// TODO: support click on child elements with data-toggle="tab"
 
 class Tabs extends WebComponent {
   @protected

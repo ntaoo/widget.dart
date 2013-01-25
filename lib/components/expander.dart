@@ -3,6 +3,8 @@ import 'package:bot/bot.dart';
 import 'package:web_ui/web_ui.dart';
 import 'package:widget/effects.dart';
 
+// TODO: support click on child elements of header with data-toggle="expander"
+
 class Expander extends WebComponent {
   static const String _openName = 'open';
   static const String _expanderDivSelector = '.expander-body-x';

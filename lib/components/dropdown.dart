@@ -3,6 +3,8 @@ import 'package:web_ui/web_ui.dart';
 import 'package:widget/effects.dart';
 import 'package:bot/bot.dart';
 
+// TODO: support click on child elements of header with data-toggle="dropdown"
+
 class Dropdown extends WebComponent {
   static final ShowHideEffect _effect = new FadeEffect();
   static const int _duration = 100;
