@@ -11,9 +11,6 @@ import 'package:widget/widget.dart';
 // TODO: be more careful that the source tab is actually 'ours'
 
 class Tabs extends WebComponent {
-  static const String _activeTabAttribute = 'active';
-  static const String _targetAttribute = 'target';
-
   @protected
   void created() {
     this.on.click.add(_clickListener);
@@ -25,19 +22,17 @@ class Tabs extends WebComponent {
   }
 
   void _clickListener(MouseEvent e) {
-    if(!e.defaultPrevented && e.target is Element) {
+    if(!e.defaultPrevented && _getAllTabs().contains(e.target)) {
       final Element target = e.target;
-      if(target.tagName.toLowerCase() == 'x-tab') {
-        final completed = _tabClick(target);
-        if(completed) {
-          e.preventDefault();
-        }
+      final completed = _tabClick(target);
+      if(completed) {
+        e.preventDefault();
       }
     }
   }
 
   bool _tabClick(Element tabElement) {
-    assert(tabElement.tagName.toLowerCase() == 'x-tab');
+    assert(tabElement.tagName.toLowerCase() == 'header');
 
     // it's possible that a nested tab was clicked, which we want to ignore
     // so we're going to go through our 'known' tabs and pick it that way
@@ -48,16 +43,16 @@ class Tabs extends WebComponent {
       tabs
         .where((e) => e != tabElement)
         .forEach((e) {
-          e.attributes.remove(_activeTabAttribute);
+          e.dataAttributes.remove('active');
         });
-      tabElement.attributes[_activeTabAttribute] = _activeTabAttribute;
+      tabElement.dataAttributes['active'] = 'active';
       _updateContentForTab(tabElement);
       return true;
     }
     return false;
   }
 
-  List<Element> _getAllTabs() => this.queryAll('x-tabs > .tabs > x-tab');
+  List<Element> _getAllTabs() => this.queryAll('x-tabs > .tabs > header');
 
   SwapComponent get _swap => this.query('x-tabs > x-swap').xtag;
 
@@ -65,18 +60,18 @@ class Tabs extends WebComponent {
     final tabs = _getAllTabs();
     Element activeTab = null;
     tabs.forEach((Element tab) {
-      if(tab.attributes.containsKey(_activeTabAttribute)) {
+      if(tab.dataAttributes['active'] == 'active') {
         if(activeTab == null) {
           activeTab = tab;
         } else {
-          tab.attributes.remove(_activeTabAttribute);
+          tab.dataAttributes.remove('active');
         }
       }
     });
 
     if(activeTab == null && !tabs.isEmpty) {
       activeTab = tabs[0];
-      activeTab.attributes[_activeTabAttribute] = _activeTabAttribute;
+      activeTab.dataAttributes['active'] = 'active';
     }
 
     _updateContentForTab(activeTab);
@@ -84,8 +79,8 @@ class Tabs extends WebComponent {
 
   void _updateContentForTab(Element activeTab) {
     String target = null;
-    if(activeTab != null && activeTab.attributes.containsKey(_targetAttribute)) {
-      target = activeTab.attributes[_targetAttribute];
+    if(activeTab != null && activeTab.dataAttributes['target'] != null) {
+      target = activeTab.dataAttributes['target'];
     }
     _updateContent(target);
   }

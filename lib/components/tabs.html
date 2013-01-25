@@ -11,7 +11,7 @@
             border-bottom: 1px solid #ddd;
             margin-bottom: 15px;
           }
-          x-tabs > .tabs > x-tab {
+          x-tabs > .tabs > header {
             border: 1px solid transparent;
             display: inline-block;
             padding: 8px;
@@ -19,11 +19,11 @@
             cursor: pointer;
             color: #666;
           }
-          x-tabs > .tabs > x-tab:hover {
+          x-tabs > .tabs > header:hover {
             text-decoration: underline;
             color: #999;
           }
-          x-tabs > .tabs > x-tab[active] {
+          x-tabs > .tabs > header[data-active='active'] {
             cursor: inherit;
             color: black;
             text-decoration: none;
@@ -38,7 +38,7 @@
           }
         </style>
         <div class='tabs'>
-          <content select='x-tab'></content>
+          <content select='header'></content>
         </div>
         <x-swap>
           <content></content>
