@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html';
 import 'package:web_ui/web_ui.dart';
 import 'package:bot/bot.dart';
@@ -7,7 +8,38 @@ import 'package:widget/widget.dart';
 // TODO: ESC to close
 
 class Modal extends WebComponent implements ShowHideComponent {
-  final _effect = new ScaleEffect();
+  bool _isShown = false;
+
+  bool get isShown => _isShown;
+
+  void set isShown(bool value) {
+    assert(value != null);
+    if(value != _isShown) {
+      _isShown = value;
+      final effect = new ScaleEffect();
+      if(_isShown) {
+        ModalManager.show(this, effect: effect, backdropClickHandler: _onBackdropClicked);
+      } else {
+        ModalManager.hide(this, effect: effect);
+      }
+
+      ShowHideComponent.dispatchToggleEvent(this);
+    }
+  }
+
+  Stream<Event> get onToggle => ShowHideComponent.toggleEvent.forTarget(this);
+
+  void hide() {
+    isShown = false;
+  }
+
+  void show() {
+    isShown = true;
+  }
+
+  void toggle() {
+    isShown = !isShown;
+  }
 
   @protected
   void created() {
@@ -22,14 +54,6 @@ class Modal extends WebComponent implements ShowHideComponent {
         hide();
       }
     }
-  }
-
-  void show() {
-    ModalManager.show(this, effect: _effect, backdropClickHandler: _onBackdropClicked);
-  }
-
-  void hide() {
-    ModalManager.hide(this, effect: _effect);
   }
 
   void _onBackdropClicked() {

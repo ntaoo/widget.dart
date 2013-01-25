@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html';
 import 'package:bot/bot.dart';
 import 'package:web_ui/web_ui.dart';
@@ -10,19 +11,19 @@ class Dropdown extends WebComponent implements ShowHideComponent {
   static final ShowHideEffect _effect = new FadeEffect();
   static const int _duration = 100;
 
-  bool _isExpanded = false;
+  bool _isShown = false;
 
-  bool get isExpanded => _isExpanded;
+  bool get isShown => _isShown;
 
-  void set isExpanded(bool value) {
-    if(value != _isExpanded) {
-      _isExpanded = value;
-      final action = _isExpanded ? ShowHideAction.SHOW : ShowHideAction.HIDE;
+  void set isShown(bool value) {
+    if(value != _isShown) {
+      _isShown = value;
+      final action = _isShown ? ShowHideAction.SHOW : ShowHideAction.HIDE;
 
       final headerContainer = this.query('x-dropdown > .button-container-x');
 
       if(headerContainer != null) {
-        if(_isExpanded) {
+        if(_isShown) {
           headerContainer.classes.add('open');
         } else {
           headerContainer.classes.remove('open');
@@ -33,19 +34,22 @@ class Dropdown extends WebComponent implements ShowHideComponent {
       if(contentDiv != null) {
         ShowHide.begin(action, contentDiv, effect: _effect);
       }
+      ShowHideComponent.dispatchToggleEvent(this);
     }
   }
 
+  Stream<Event> get onToggle => ShowHideComponent.toggleEvent.forTarget(this);
+
   void hide() {
-    isExpanded = false;
+    isShown = false;
   }
 
   void show() {
-    isExpanded = true;
+    isShown = true;
   }
 
   void toggle() {
-    isExpanded = !isExpanded;
+    isShown = !isShown;
   }
 
   @protected
