@@ -59,8 +59,6 @@ class Dropdown extends WebComponent implements ShowHideComponent {
 
   void _onClick(MouseEvent event) {
     final button = this.query('x-dropdown > .button-container-x > button');
-    print(button);
-    print(event.target);
     if(event.target == button && !event.defaultPrevented) {
       toggle();
       event.preventDefault();
