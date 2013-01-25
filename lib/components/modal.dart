@@ -5,7 +5,7 @@ import 'package:bot/bot.dart';
 import 'package:widget/effects.dart';
 import 'package:widget/widget.dart';
 
-// TODO: ESC to close
+// TODO: ESC to close: https://github.com/kevmoo/widget.dart/issues/17
 
 class Modal extends WebComponent implements ShowHideComponent {
   bool _isShown = false;
