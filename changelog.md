@@ -1,6 +1,6 @@
 # Changelog - Dart Widgets
 
-## 0.1.0-dev - *pre-release* - (SDK 0.3.1.2 r17463)
+## 0.1.0 - 25 Jan 2013 - (SDK 0.3.1.2 r17463)
 
 * Integrated all samples into one page.
 * Lot's of cleanup around samples and related code.
@@ -12,6 +12,8 @@
 * _NEW!_ `Alert`
 * _NEW!_ `Swap` is now a seperate component.
 * Removed a lot of state from individual components.
+* Moved 4 components--`Alert`, `DropDown`, `Expander`, and `Modal`--to implement new
+abstract class `ShowHideComponent` which standardizes methods, properties, and events
 
 ### Effects
 
