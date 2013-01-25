@@ -20,10 +20,18 @@ class Alert extends WebComponent implements ShowHideComponent {
   }
 
   void hide() {
-    ShowHide.hide(this, effect: new ScaleEffect());
+    _animate(ShowHideAction.HIDE);
   }
 
   void show() {
-    ShowHide.show(this, effect: new ScaleEffect());
+    _animate(ShowHideAction.SHOW);
+  }
+
+  void toggle() {
+    _animate(ShowHideAction.TOGGLE);
+  }
+
+  void _animate(ShowHideAction action) {
+    ShowHide.begin(action, this, effect: new ScaleEffect());
   }
 }

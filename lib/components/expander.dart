@@ -2,10 +2,11 @@ import 'dart:html';
 import 'package:bot/bot.dart';
 import 'package:web_ui/web_ui.dart';
 import 'package:widget/effects.dart';
+import 'package:widget/widget.dart';
 
 // TODO: support click on child elements of header with data-toggle="expander"
 
-class Expander extends WebComponent {
+class Expander extends WebComponent implements ShowHideComponent {
   static const String _openName = 'open';
   static const String _expanderDivSelector = '.expander-body-x';
   static final ShowHideEffect _effect = new ShrinkEffect();
@@ -32,6 +33,14 @@ class Expander extends WebComponent {
       _onOpen = super.on[_openName];
     }
     return _onOpen;
+  }
+
+  void hide() {
+    isExpanded = false;
+  }
+
+  void show() {
+    isExpanded = true;
   }
 
   void toggle() {
