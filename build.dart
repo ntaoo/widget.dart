@@ -23,23 +23,32 @@ void main() {
   final input = 'web/index_source.html';
   final output = 'web/index.html';
 
-  _transform(input, output).then((bool value) {
-    if(value) {
-      log('updated $output');
-    } else {
-      log('no change to $output');
-    }
-  });
-  build(args, [output]);
-
-  Process.run('./bin/copy_assets.sh', [])
-    .then((ProcessResult pr) {
-      if(pr.exitCode == 0) {
-        log('copy of pngs worked');
+  if(changes.contains(input)) {
+    _transform(input, output).then((bool value) {
+      if(value) {
+        log('updated $output');
       } else {
-        log(pr.stderr);
+        log('no change to $output');
       }
     });
+  } else {
+    log(" - skipping transform");
+  }
+
+  if(changes.any((c) => c.startsWith(r'web/'))) {
+    Process.run('./bin/copy_assets.sh', [])
+      .then((ProcessResult pr) {
+        if(pr.exitCode == 0) {
+          log('copy of assets from web dir completed');
+        } else {
+          log(pr.stderr);
+        }
+      });
+  } else {
+    log(' - skipping copy assets');
+  }
+
+  build(args, [output]);
 }
 
 void log(value) {
@@ -70,6 +79,7 @@ List<String> getChangedFiles(List<String> args) {
 }
 
 Future<bool> _transform(String input, String output) {
+  log('doing big page transform');
   final file = new File(input);
   assert(file.existsSync());
   return file.readAsString()
