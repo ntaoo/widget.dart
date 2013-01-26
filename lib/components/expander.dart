@@ -5,7 +5,7 @@ import 'package:web_ui/web_ui.dart';
 import 'package:widget/effects.dart';
 import 'package:widget/widget.dart';
 
-// TODO: support click on child elements of header with data-toggle="expander"
+// TODO: rename Collapse?
 
 class Expander extends WebComponent implements ShowHideComponent {
   static const String _expanderDivSelector = '.expander-body-x';
@@ -51,8 +51,9 @@ class Expander extends WebComponent implements ShowHideComponent {
 
   void _onClick(MouseEvent e) {
     if(!e.defaultPrevented) {
-      final header = this.query('x-expander > header');
-      if(e.target == header) {
+      final clickElement = e.target as Element;
+
+      if(clickElement != null && clickElement.dataAttributes['toggle'] == 'collapse') {
         toggle();
         e.preventDefault();
       }

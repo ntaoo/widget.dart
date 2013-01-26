@@ -3,34 +3,12 @@
   <body>
     <element name="x-expander" extends="div">
       <template>
-        <style type='text/css' scoped>
-          x-expander {
-            display: block;
-            margin-bottom: 2px;
-            border: 1px solid #e5e5e5;
-            -webkit-border-radius: 4px;
-            -moz-border-radius: 4px;
-            border-radius: 4px;
-          }
-
-          x-expander > header {
-            padding: 8px 15px;
-            cursor: pointer;
-          }
-
-          x-expander > header:hover {
-            text-decoration: underline;
-          }
-
-          x-expander > .expander-body-x > .expander-inner-x {
-            padding: 9px 15px;
-            border-top: 1px solid #e5e5e5;
-          }
-        </style>
-        <content select='header'></content>
-        <div class='expander-body-x'>
-          <div class='expander-inner-x'>
-            <content></content>
+        <div class='accordion-group'>
+          <content select='.accordion-heading'></content>
+          <div class='expander-body-x'>
+            <div class='accordion-inner'>
+              <content></content>
+            </div>
           </div>
         </div>
       </template>
