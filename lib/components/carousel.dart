@@ -13,11 +13,11 @@ class Carousel extends WebComponent {
 
   static const _duration = 2000;
 
-  SwapComponent get _swap => this.query('x-carousel > x-swap').xtag;
-
   Future<bool> next() => _moveDelta(true);
 
   Future<bool> previous() => _moveDelta(false);
+
+  SwapComponent get _swap => this.query('x-carousel > .carousel > x-swap').xtag;
 
   Future<bool> _moveDelta(bool doNext) {
     final swap = _swap;

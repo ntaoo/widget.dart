@@ -7,48 +7,18 @@
     <element name="x-carousel" extends="div">
       <template>
         <style type='text/css' scoped>
-          x-carousel {
-            position: relative;
-            display: block;
-          }
-          x-carousel > a.carousel-control {
-            display: block;
-            position: absolute;
-            top: 40%;
-            left: 15px;
-            width: 40px;
-            height: 40px;
-            margin-top: -20px;
-            font-size: 60px;
-            font-weight: 100;
-            line-height: 30px;
-            color: #ffffff;
-            text-align: center;
-            background: #222222;
-            border: 3px solid #ffffff;
-            border-radius: 23px;
-            opacity: 0.5;
+          .carousel > a.carousel-control {
             cursor: pointer;
-            -moz-user-select: none;
-            -webkit-user-select: none;
-            -ms-user-select: none;
             z-index: 5;
           }
-          x-carousel > .carousel-control.right {
-            right: 15px;
-            left: auto;
-          }
-          x-carousel > .carousel-control:hover {
-            color: #ffffff;
-            text-decoration: none;
-            opacity: 0.9;
-          }
         </style>
-        <x-swap>
-          <content></content>
-        </x-swap>
-        <a class="left carousel-control" on-click='previous()'>&lsaquo;</a>
-        <a class="right carousel-control" on-click='next()'>&rsaquo;</a>
+        <div class='carousel'>
+          <x-swap>
+            <content></content>
+          </x-swap>
+          <a class="left carousel-control" on-click='previous()'>&lsaquo;</a>
+          <a class="right carousel-control" on-click='next()'>&rsaquo;</a>
+        </div>
       </template>
       <script type="application/dart" src='carousel.dart'></script>
     </element>
