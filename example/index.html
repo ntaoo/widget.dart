@@ -46,30 +46,42 @@
         <div class="demo">
           <x-accordion id="__e-3">
             <x-expander id="__e-0">
-              <header>Item 1</header>
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse">Item 1</a>
+              </div>
               <p>Item 1 content - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </x-expander>
             <x-expander id="__e-1">
-              <header>Item 2</header>
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse">Item 2</a>
+              </div>
               <p>Item 2 content - Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             </x-expander>
             <x-expander id="__e-2">
-              <header>Item 3</header>
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse">Item 3</a>
+              </div>
               <p>Item 3 content - Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             </x-expander>
           </x-accordion>
         </div>
         <pre class="code">&lt;x-accordion&gt;
   &lt;x-expander&gt;
-    &lt;header&gt;Item 1&lt;/header&gt;
+    &lt;div class="accordion-heading"&gt;
+      &lt;a class="accordion-toggle" data-toggle="collapse"&gt;Item 1&lt;/a&gt;
+    &lt;/div&gt;
     &lt;p&gt;Item 1 content - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
   &lt;/x-expander&gt;
   &lt;x-expander&gt;
-    &lt;header&gt;Item 2&lt;/header&gt;
+    &lt;div class="accordion-heading"&gt;
+      &lt;a class="accordion-toggle" data-toggle="collapse"&gt;Item 2&lt;/a&gt;
+    &lt;/div&gt;
     &lt;p&gt;Item 2 content - Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
   &lt;/x-expander&gt;
   &lt;x-expander&gt;
-    &lt;header&gt;Item 3&lt;/header&gt;
+    &lt;div class="accordion-heading"&gt;
+      &lt;a class="accordion-toggle" data-toggle="collapse"&gt;Item 3&lt;/a&gt;
+    &lt;/div&gt;
     &lt;p&gt;Item 3 content - Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
   &lt;/x-expander&gt;
 &lt;/x-accordion&gt;</pre>
@@ -127,18 +139,24 @@
         <h2 id="dropdown">Dropdown</h2>
         <div class="demo">
           <x-dropdown id="__e-6">
-            <button class="btn">Click me!</button>
-            <ul>
-              <li>This is some</li>
-              <li>content</li>
+            <button class="btn" data-toggle="dropdown">Click me!</button>
+            <ul class="dropdown-menu">
+              <li><a>Action</a></li>
+              <li><a>Another action</a></li>
+              <li><a>Something else here</a></li>
+              <li class="divider"></li>
+              <li><a>Separated link</a></li>
             </ul>
           </x-dropdown>
         </div>
         <pre class="code">&lt;x-dropdown&gt;
-  &lt;button class="btn"&gt;Click me!&lt;/button&gt;
-  &lt;ul&gt;
-    &lt;li&gt;This is some&lt;/li&gt;
-    &lt;li&gt;content&lt;/li&gt;
+  &lt;button class="btn" data-toggle="dropdown"&gt;Click me!&lt;/button&gt;
+  &lt;ul class="dropdown-menu"&gt;
+    &lt;li&gt;&lt;a&gt;Action&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a&gt;Another action&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="divider"&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a&gt;Separated link&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/x-dropdown&gt;</pre>
       </section>
@@ -146,7 +164,9 @@
         <h2 id="expander">Expander</h2>
         <div class="demo">
           <x-expander id="__e-7">
-            <header>Click to toggle expand/collapse</header>
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse">Click to toggle expand/collapse</a>
+            </div>
             <ul>
               <li>This is some</li>
               <li>content</li>
@@ -154,7 +174,9 @@
           </x-expander>
         </div>
         <pre class="code">&lt;x-expander&gt;
-  &lt;header&gt;Click to toggle expand/collapse&lt;/header&gt;
+  &lt;div class="accordion-heading"&gt;
+    &lt;a class="accordion-toggle" data-toggle="collapse"&gt;Click to toggle expand/collapse&lt;/a&gt;
+  &lt;/div&gt;
   &lt;ul&gt;
     &lt;li&gt;This is some&lt;/li&gt;
     &lt;li&gt;content&lt;/li&gt;
@@ -184,8 +206,7 @@
         <h2 id="modal">Modal</h2>
         <blockquote>
           <p>When added to a page, <strong>Modal</strong> is hidden. It can be displayed by calling the <code>show</code> method.</p>
-          <p>Similiar to <a href="#alert">Alert</a>, you can add elements to <strong>Modal</strong> which cause it to hide by adding
-          the data attribute <code>data-dismiss="modal"</code>.</p>
+          <p>Similiar to <a href="#alert">Alert</a>, elements with the attribute <code>data-dismiss="modal"</code> will close <strong>Modal</strong> when clicked.</p>
           <p>The <strong>Modal</strong> component leverages the <a href="#modalmanager">ModalManager</a> effect.</p>
         </blockquote>
         <div class="demo">
