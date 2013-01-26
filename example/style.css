@@ -103,10 +103,41 @@ blockquote p {
   margin-bottom: 2ex;
 }
 
-pre.code {
-  margin: 25px;
-  padding-top: 30px;
+div.demo, pre.code {
   position: relative;
+  display: block;
+  padding: 9.5px;
+  padding-top: 36px;
+  margin: 15px;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+
+div.demo::after, pre.code::after {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  padding: 3px 7px;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  color: #666;
+  border-radius: 4px 0 4px 0;
+}
+
+div.demo {
+  background-color: white;
+}
+
+div.demo::after {
+  content: "Demo";
+}
+
+pre.code {
   word-wrap: normal;
   word-break: normal;
   white-space: pre;
@@ -115,17 +146,9 @@ pre.code {
 }
 pre.code::after {
   content: "Markup";
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  padding: 3px 7px;
-  font-size: 12px;
-  font-weight: bold;
-  background-color: #f5f5f5;
-  border: 1px solid #ddd;
-  color: #666;
-  border-radius: 4px 0 4px 0;
 }
+
+
 .demo figure {
   text-align: center;
   position: relative;
