@@ -5,7 +5,8 @@ import 'package:web_ui/web_ui.dart';
 import 'package:widget/effects.dart';
 import 'package:widget/widget.dart';
 
-// TODO: support click on child elements of header with data-toggle="dropdown"
+// TODO: esc and click outside to collapse
+// https://github.com/kevmoo/widget.dart/issues/14
 
 class Dropdown extends WebComponent implements ShowHideComponent {
   static final ShowHideEffect _effect = new FadeEffect();
@@ -20,17 +21,17 @@ class Dropdown extends WebComponent implements ShowHideComponent {
       _isShown = value;
       final action = _isShown ? ShowHideAction.SHOW : ShowHideAction.HIDE;
 
-      final headerContainer = this.query('x-dropdown > .button-container-x');
+      final wrapper = this.query('x-dropdown > .dropdown');
 
-      if(headerContainer != null) {
+      if(wrapper != null) {
         if(_isShown) {
-          headerContainer.classes.add('open');
+          wrapper.classes.add('open');
         } else {
-          headerContainer.classes.remove('open');
+          wrapper.classes.remove('open');
         }
       }
 
-      final contentDiv = this.query('x-dropdown > .dropdown-content-x');
+      final contentDiv = this.query('x-dropdown > .dropdown-menu');
       if(contentDiv != null) {
         ShowHide.begin(action, contentDiv, effect: _effect);
       }
@@ -58,10 +59,12 @@ class Dropdown extends WebComponent implements ShowHideComponent {
   }
 
   void _onClick(MouseEvent event) {
-    final button = this.query('x-dropdown > .button-container-x > button');
-    if(event.target == button && !event.defaultPrevented) {
-      toggle();
-      event.preventDefault();
+    if(!event.defaultPrevented) {
+      final Element target = event.target as Element;
+      if(target != null && target.dataAttributes['toggle'] == 'dropdown') {
+        toggle();
+        event.preventDefault();
+      }
     }
   }
 }

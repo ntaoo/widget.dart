@@ -156,19 +156,25 @@
 
         <div class="demo">
           <x-dropdown>
-            <button class="btn">Click me!</button>
-            <ul>
-              <li>This is some</li>
-              <li>content</li>
+            <button class="btn" data-toggle="dropdown">Click me!</button>
+            <ul class="dropdown-menu">
+              <li><a>Action</a></li>
+              <li><a>Another action</a></li>
+              <li><a>Something else here</a></li>
+              <li class="divider"></li>
+              <li><a>Separated link</a></li>
             </ul>
           </x-dropdown>
         </div>
 
         <pre class="code">&lt;x-dropdown&gt;
-  &lt;button class="btn"&gt;Click me!&lt;/button&gt;
-  &lt;ul&gt;
-    &lt;li&gt;This is some&lt;/li&gt;
-    &lt;li&gt;content&lt;/li&gt;
+  &lt;button class="btn" data-toggle="dropdown"&gt;Click me!&lt;/button&gt;
+  &lt;ul class="dropdown-menu"&gt;
+    &lt;li&gt;&lt;a&gt;Action&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a&gt;Another action&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="divider"&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a&gt;Separated link&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/x-dropdown&gt;</pre>
       </section>
