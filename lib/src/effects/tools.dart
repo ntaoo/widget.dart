@@ -3,6 +3,17 @@ part of effects;
 class Tools {
   static final Map<String, String> _elemDisplay = new Map<String, String>();
 
+  static List<Element> getAncestors(Element source, [bool includeSelf = false]) {
+    assert(source != null);
+    List<Element> ancestors = new List<Element>();
+    source = includeSelf ? source : source.parent;
+    while(source != null) {
+      ancestors.add(source);
+      source = source.parent;
+    }
+    return ancestors;
+  }
+
   static Size getSize(CssStyleDeclaration css) {
     assert(css != null);
     final width = _getPixelCount(css.width);

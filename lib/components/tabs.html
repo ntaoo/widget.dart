@@ -6,40 +6,9 @@
   <body>
     <element name="x-tabs" extends="div">
       <template>
-        <style type='text/css' scoped>
-          x-tabs > .tabs {
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 15px;
-          }
-          x-tabs > .tabs > header {
-            border: 1px solid transparent;
-            display: inline-block;
-            padding: 8px;
-            margin-bottom: -1px;
-            cursor: pointer;
-            color: #666;
-          }
-          x-tabs > .tabs > header:hover {
-            text-decoration: underline;
-            color: #999;
-          }
-          x-tabs > .tabs > header[data-active='active'] {
-            cursor: inherit;
-            color: black;
-            text-decoration: none;
-            border: 1px solid #ddd;
-            border-bottom: 1px solid white;
-            -webkit-border-radius: 4px 4px 0 0;
-            -moz-border-radius: 4px 4px 0 0;
-            border-radius: 4px 4px 0 0;
-          }
-          x-tabs > .content {
-            padding: 0 8px;
-          }
-        </style>
-        <div class='tabs'>
-          <content select='header'></content>
-        </div>
+        <ul class='nav nav-tabs'>
+          <content select='li'></content>
+        </ul>
         <x-swap>
           <content></content>
         </x-swap>

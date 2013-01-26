@@ -23,73 +23,107 @@ class Tabs extends WebComponent {
   }
 
   void _clickListener(MouseEvent e) {
-    if(!e.defaultPrevented && _getAllTabs().contains(e.target)) {
+    if(!e.defaultPrevented && e.target is Element) {
       final Element target = e.target;
-      final completed = _tabClick(target);
+      final completed = _targetClick(target);
       if(completed) {
         e.preventDefault();
       }
     }
   }
 
-  bool _tabClick(Element tabElement) {
-    assert(tabElement.tagName.toLowerCase() == 'header');
-
-    // it's possible that a nested tab was clicked, which we want to ignore
-    // so we're going to go through our 'known' tabs and pick it that way
-    final tabs = _getAllTabs();
-
-    final matchingTab = $(tabs).singleMatching((e) => e == tabElement);
-    if(matchingTab != null) {
-      tabs
-        .where((e) => e != tabElement)
-        .forEach((e) {
-          e.dataAttributes.remove('active');
-        });
-      tabElement.dataAttributes['active'] = 'active';
-      _updateContentForTab(tabElement);
-      return true;
+  bool _targetClick(Element clickElement) {
+    final toggleData = clickElement.dataAttributes['toggle'];
+    if(toggleData != 'tab' && toggleData != 'pill') {
+      return false;
     }
-    return false;
+
+    //
+    // The parent tab to the click should become active
+    //
+    final allTabs = _getAllTabs();
+    final clickAncestors = Tools.getAncestors(clickElement);
+    final activatedTab = allTabs.firstMatching((t) => clickAncestors.contains(t), orElse: () => null);
+    if(activatedTab != null) {
+      allTabs.forEach((t) {
+        if(t == activatedTab) {
+          t.classes.add('active');
+        } else {
+          t.classes.remove('active');
+        }
+      });
+    }
+
+    //
+    // Find the target for the click
+    //
+    final target = _getClickTarget(clickElement);
+
+    //
+    // Try to find and activate the content for the target
+    //
+    if(target != null) {
+      _updateContent(target);
+    }
+
+    return true;
   }
 
-  List<Element> _getAllTabs() => this.queryAll('x-tabs > .tabs > header');
+  static String _getClickTarget(Element clickedElement) {
+    assert(clickedElement != null);
+    String target = clickedElement.dataAttributes['target'];
+    if(target == null) {
+      final href = clickedElement.attributes['href'];
+      if(href != null && href.startsWith('#')) {
+        target = href.substring(1);
+      }
+    }
+    return target;
+  }
 
-  SwapComponent get _swap => this.query('x-tabs > x-swap').xtag;
+  List<Element> _getAllTabs() => this.queryAll('x-tabs > .nav-tabs > li');
 
   void _ensureAtMostOneTabActive() {
     final tabs = _getAllTabs();
     Element activeTab = null;
     tabs.forEach((Element tab) {
-      if(tab.dataAttributes['active'] == 'active') {
+      if(tab.classes.contains('active')) {
         if(activeTab == null) {
           activeTab = tab;
         } else {
-          tab.dataAttributes.remove('active');
+          tab.classes.remove('active');
         }
       }
     });
 
     if(activeTab == null && !tabs.isEmpty) {
       activeTab = tabs[0];
-      activeTab.dataAttributes['active'] = 'active';
+      activeTab.classes.add('active');
     }
-
-    _updateContentForTab(activeTab);
   }
 
-  void _updateContentForTab(Element activeTab) {
-    String target = null;
-    if(activeTab != null && activeTab.dataAttributes['target'] != null) {
-      target = activeTab.dataAttributes['target'];
+  SwapComponent _getSwap() {
+    final Element element = this.query('x-tabs > x-swap');
+    if(element != null) {
+      if(element is SwapComponent) {
+        return element;
+      } else if(element.xtag is SwapComponent) {
+        return element.xtag;
+      }
     }
-    _updateContent(target);
+    return null;
   }
 
   void _updateContent(String target) {
-    final items = _swap.items;
+    final swap = _getSwap();
 
-    final targetItem = $(items).firstMatching((e) => e.id == target);
-    _swap.showItem(targetItem);
+    if(swap != null) {
+      final items = swap.items;
+
+      final targetItem = $(items).firstMatching((e) => e.id == target, orElse: () => null);
+      if(targetItem != null) {
+        swap.showItem(targetItem);
+      }
+    }
   }
 }
