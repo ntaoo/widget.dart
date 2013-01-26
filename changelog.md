@@ -1,5 +1,7 @@
 # Changelog - Dart Widgets
 
+## 0.2.0 - *pre-release* (SDK 0.3.1.3 r17594)
+
 ## 0.1.0 - 25 Jan 2013 - (SDK 0.3.1.2 r17463)
 
 * Integrated all samples into one page.
