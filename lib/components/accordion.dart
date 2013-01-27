@@ -4,6 +4,10 @@ import 'package:widget/effects.dart';
 import 'package:widget/widget.dart';
 import 'package:bot/bot.dart';
 
+/**
+ * [Accordion] wraps a set of [Expander] elements and ensures only one is visible
+ * at a time.
+ */
 class Accordion extends WebComponent {
   @protected
   void created() {

@@ -7,6 +7,13 @@ import 'package:widget/widget.dart';
 
 // TODO: ESC to close: https://github.com/kevmoo/widget.dart/issues/17
 
+/**
+ * When added to a page, [Modal] is hidden. It can be displayed by calling the `show` method.
+ *
+ * Similiar to [Alert], elements with the attribute `data-dismiss="modal"` will close [Modal] when clicked.
+ *
+ * The [Modal] component leverages the [ModalManager] effect.
+ */
 class Modal extends WebComponent implements ShowHideComponent {
   bool _isShown = false;
 

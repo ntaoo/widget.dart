@@ -5,6 +5,11 @@ import 'package:bot/bot.dart';
 import 'package:widget/effects.dart';
 import 'package:widget/widget.dart';
 
+/**
+ * [Alert] follows the same convention as its inspiration in Bootstrap.
+ *
+ * Clicking on an element with the attribute `data-dismiss='alert'` will cause the element to close.
+ */
 class Alert extends WebComponent implements ShowHideComponent {
 
   bool _isShown = true;
