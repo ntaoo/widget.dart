@@ -4,9 +4,6 @@ import 'package:widget/effects.dart';
 import 'package:widget/widget.dart';
 import 'package:bot/bot.dart';
 
-/**
- * A cool component...
- */
 class Accordion extends WebComponent {
   @protected
   void created() {
