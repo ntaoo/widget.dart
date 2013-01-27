@@ -7,6 +7,7 @@ the demo page.
 
 ### Components
 
+* __BREAKING__ Removed `HeaderedContent` - An interesting sample, but pretty useless.
 * __BREAKING__ Leveraging Twitter Bootstrap for almost all component styles.
     * Internal styles have been stripped away from most components.
     * The content model for most components has changed to be compatible with that of
