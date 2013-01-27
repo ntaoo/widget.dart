@@ -2,6 +2,16 @@
 
 ## 0.2.0 - *pre-release* (SDK 0.3.1.3 r17594)
 
+A lot more in-line documentation in libraries. Scripts harvest this data to populate
+the demo page.
+
+### Components
+
+* __BREAKING__ Leveraging Twitter Bootstrap for almost all component styles.
+    * Internal styles have been stripped away from most components.
+    * The content model for most components has changed to be compatible with that of
+    Bootstrap.
+
 ## 0.1.0 - 25 Jan 2013 - (SDK 0.3.1.2 r17463)
 
 * Integrated all samples into one page.
