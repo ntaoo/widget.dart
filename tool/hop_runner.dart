@@ -37,11 +37,9 @@ void main() {
 
 List<String> _getLibraryPaths() {
   final libLocations = [r'lib/', r'lib/components'];
-  return CollectionUtil.selectMany(libLocations, (libLoc) {
-    return util.getDartFilePaths(libLoc);
-  })
-  .mappedBy((Path p) => p.toString())
-  .toList();
+  return util.getDartLibraryPaths()
+    .mappedBy((Path p) => p.toString())
+    .toList();
 }
 
 void _assertKnownPath() {
