@@ -11,6 +11,17 @@ import 'package:widget/widget.dart';
 // TODO: be more careful that the source tab is actually 'ours'
 // TODO: support click on child elements with data-toggle="tab"
 
+/**
+ * [Tabs] is based on the [analogous feature](http://twitter.github.com/bootstrap/javascript.html#tabs) in Bootstrap.
+ *
+ * The tab headers are processed as all child `<li>` elements in content.
+ * The rest of the child elements are considered tab content.
+ *
+ * [Tabs] responds to click events from any child with `data-toggle="tab"` or `data-toggle="pill"`.
+ *
+ * The target content id is either the value of `data-target` on the clicked element or the anchor
+ * in `href`.
+ */
 class Tabs extends WebComponent {
   @protected
   void created() {
