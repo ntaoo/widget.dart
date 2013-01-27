@@ -1,6 +1,9 @@
+import 'dart:async';
 import 'dart:io';
+import 'package:bot/bot.dart';
 import 'package:bot/hop.dart';
 import 'package:bot/hop_tasks.dart';
+import 'util.dart' as util;
 
 void main() {
   _assertKnownPath();
@@ -26,7 +29,19 @@ void main() {
   //
   addAsyncTask('copy_components', (ctx) => startProcess(ctx, './bin/copy_out.sh'));
 
+
+  addTask('docs', getCompileDocsFunc('docs', 'packages/', () => new Future.immediate(_getLibraryPaths())));
+
   runHopCore();
+}
+
+List<String> _getLibraryPaths() {
+  final libLocations = [r'lib/', r'lib/components'];
+  return CollectionUtil.selectMany(libLocations, (libLoc) {
+    return util.getDartFilePaths(libLoc);
+  })
+  .mappedBy((Path p) => p.toString())
+  .toList();
 }
 
 void _assertKnownPath() {
