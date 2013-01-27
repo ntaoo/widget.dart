@@ -26,7 +26,7 @@ class ShowHideResult extends _Enum {
  *
  * At the moment, all of the provided effects leverage CSS3 transitions. Creating new effects is easy.
  *
- * [ShowHide] is used by [Expander] and [DropDown] to animate their content.
+ * [ShowHide] is used by [Collapse] and [DropDown] to animate their content.
  * It is also used by [Swapper].
  */
 class ShowHide {

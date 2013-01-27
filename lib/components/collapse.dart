@@ -5,13 +5,11 @@ import 'package:web_ui/web_ui.dart';
 import 'package:widget/effects.dart';
 import 'package:widget/widget.dart';
 
-// TODO: rename Collapse?
-
 /**
- * [Expander] uses a content model similiar to [Collapse](http://twitter.github.com/bootstrap/javascript.html#collapse) in Bootstrap.
+ * [Collapse] uses a content model similiar to [Collapse](http://twitter.github.com/bootstrap/javascript.html#collapse) in Bootstrap.
  */
-class Expander extends WebComponent implements ShowHideComponent {
-  static const String _expanderDivSelector = '.expander-body-x';
+class Collapse extends WebComponent implements ShowHideComponent {
+  static const String _collapseDivSelector = '.collapse-body-x';
   static final ShowHideEffect _effect = new ShrinkEffect();
 
   bool _isShown = true;
@@ -64,11 +62,11 @@ class Expander extends WebComponent implements ShowHideComponent {
   }
 
   void _updateElements([bool skipAnimation = false]) {
-    final expanderDiv = this.query(_expanderDivSelector);
-    if(expanderDiv != null) {
+    final collapseDiv = this.query(_collapseDivSelector);
+    if(collapseDiv != null) {
       final action = _isShown ? ShowHideAction.SHOW : ShowHideAction.HIDE;
       final effect = skipAnimation ? null : _effect;
-      ShowHide.begin(action, expanderDiv, effect: effect);
+      ShowHide.begin(action, collapseDiv, effect: effect);
     }
   }
 }

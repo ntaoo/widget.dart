@@ -4,8 +4,8 @@
     <link rel="components" href="packages/widget/components/accordion.html">
     <link rel="components" href="packages/widget/components/alert.html">
     <link rel="components" href="packages/widget/components/carousel.html">
+    <link rel="components" href="packages/widget/components/collapse.html">
     <link rel="components" href="packages/widget/components/dropdown.html">
-    <link rel="components" href="packages/widget/components/expander.html">
     <link rel="components" href="packages/widget/components/headered_content.html">
     <link rel="components" href="packages/widget/components/modal.html">
     <link rel="components" href="packages/widget/components/tabs.html">
@@ -47,30 +47,30 @@
       </header>
       <section class="component">
         <h2>Accordion</h2>
-        <blockquote class="comments"><p><strong>Accordion</strong> wraps a set of <a href="#expander">Expander</a> elements and ensures only one is visible
+        <blockquote class="comments"><p><strong>Accordion</strong> wraps a set of <a href="#collapse">Collapse</a> elements and ensures only one is visible
 at a time.</p>
-<p>See <a href="#expander">Expander</a> for details on how content is interpreted.</p></blockquote>
+<p>See <a href="#collapse">Collapse</a> for details on how content is interpreted.</p></blockquote>
 
         <div class="demo">
           <x-accordion>
-            <x-expander>
+            <x-collapse>
               <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse">Item 1</a>
               </div>
               <p>Item 1 content - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </x-expander>
-            <x-expander>
+            </x-collapse>
+            <x-collapse>
               <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse">Item 2</a>
               </div>
               <p>Item 2 content - Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </x-expander>
-            <x-expander>
+            </x-collapse>
+            <x-collapse>
               <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse">Item 3</a>
               </div>
               <p>Item 3 content - Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </x-expander>
+            </x-collapse>
           </x-accordion>
         </div>
 
@@ -119,30 +119,11 @@ at a time.</p>
       </section>
 
       <section class="component">
-        <h2>Dropdown</h2>
+        <h2>Collapse</h2>
+        <blockquote class="comments"><p><strong>Collapse</strong> uses a content model similiar to <a href="http://twitter.github.com/bootstrap/javascript.html#collapse">Collapse</a> in Bootstrap.</p></blockquote>
 
         <div class="demo">
-          <x-dropdown>
-            <button class="btn" data-toggle="dropdown">Click me!</button>
-            <ul class="dropdown-menu">
-              <li><a>Action</a></li>
-              <li><a>Another action</a></li>
-              <li><a>Something else here</a></li>
-              <li class="divider"></li>
-              <li><a>Separated link</a></li>
-            </ul>
-          </x-dropdown>
-        </div>
-
-        <pre class="code"></pre>
-      </section>
-
-      <section class="component">
-        <h2>Expander</h2>
-        <blockquote class="comments"><p><strong>Expander</strong> uses a content model similiar to <a href="http://twitter.github.com/bootstrap/javascript.html#collapse">Collapse</a> in Bootstrap.</p></blockquote>
-
-        <div class="demo">
-          <x-expander>
+          <x-collapse>
             <div class="accordion-heading">
               <a class="accordion-toggle" data-toggle="collapse">Click to toggle expand/collapse</a>
             </div>
@@ -150,7 +131,7 @@ at a time.</p>
               <li>This is some</li>
               <li>content</li>
             </ul>
-          </x-expander>
+          </x-collapse>
         </div>
 
         <pre class="code"></pre>
@@ -167,6 +148,25 @@ at a time.</p>
               <li>content</li>
             </ul>
           </x-headered-content>
+        </div>
+
+        <pre class="code"></pre>
+      </section>
+
+      <section class="component">
+        <h2>Dropdown</h2>
+
+        <div class="demo">
+          <x-dropdown>
+            <button class="btn" data-toggle="dropdown">Click me!</button>
+            <ul class="dropdown-menu">
+              <li><a>Action</a></li>
+              <li><a>Another action</a></li>
+              <li><a>Something else here</a></li>
+              <li class="divider"></li>
+              <li><a>Separated link</a></li>
+            </ul>
+          </x-dropdown>
         </div>
 
         <pre class="code"></pre>
@@ -257,7 +257,7 @@ Any element used should have a fixed position, a z-index greater than 1040, and 
 Provide an element and an action--show, hide, toggle--and the element's display will change accordingly.
 Custom effects, duration, and easing values can also be provided.</p>
 <p>At the moment, all of the provided effects leverage CSS3 transitions. Creating new effects is easy.</p>
-<p><strong>ShowHide</strong> is used by <a href="#expander">Expander</a> and <a href="#dropdown">DropDown</a> to animate their content.
+<p><strong>ShowHide</strong> is used by <a href="#collapse">Collapse</a> and <a href="#dropdown">DropDown</a> to animate their content.
 It is also used by <a href="#swapper">Swapper</a>.</p></blockquote>
         <div class="demo showhide">
           <div class="effects btn-group btn-group"></div>
