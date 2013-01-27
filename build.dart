@@ -200,11 +200,18 @@ void _tweakComponentSection(Element element) {
 String _cleanUpCode(String input) {
   input = htmlSerializeEscape(input);
 
+  //
+  // Get all non-empty lines
+  //
   var lines = input.split('\n')
       .where((String line) {
         return line.trim().length > 0;
       }).toList();
 
+  //
+  // Figure out the max number of spaces that prefix all lines
+  // and remove them so the sample output is indented just enough
+  //
   final regex = new RegExp(r'^([ ]*).*$');
 
   int minPrefix = null;
