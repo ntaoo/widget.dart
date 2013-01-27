@@ -43,6 +43,8 @@
       </header>
       <section class="component">
         <h2 id="accordion">Accordion</h2>
+        <blockquote class="comments"><p><strong>Accordion</strong> wraps a set of <a href="#expander">Expander</a> elements and ensures only one is visible
+at a time.</p></blockquote>
         <div class="demo">
           <x-accordion id="__e-3">
             <x-expander id="__e-0">
@@ -88,9 +90,8 @@
       </section>
       <section class="component">
         <h2 id="alert">Alert</h2>
-        <blockquote>
-          <p><strong>Alert</strong> follows the same convention as its inspiration in Bootstrap. Clicking on an element with the attribute <code>data-dismiss='alert'</code> will cause the element to close.</p>
-        </blockquote>
+        <blockquote class="comments"><p><strong>Alert</strong> follows the same convention as its inspiration in Bootstrap.</p>
+<p>Clicking on an element with the attribute <code>data-dismiss='alert'</code> will cause the element to close.</p></blockquote>
         <div class="demo">
           <x-alert id="__e-4">
             <button type="button" class="close" data-dismiss="alert">×</button>
@@ -204,11 +205,9 @@
       </section>
       <section class="component">
         <h2 id="modal">Modal</h2>
-        <blockquote>
-          <p>When added to a page, <strong>Modal</strong> is hidden. It can be displayed by calling the <code>show</code> method.</p>
-          <p>Similiar to <a href="#alert">Alert</a>, elements with the attribute <code>data-dismiss="modal"</code> will close <strong>Modal</strong> when clicked.</p>
-          <p>The <strong>Modal</strong> component leverages the <a href="#modalmanager">ModalManager</a> effect.</p>
-        </blockquote>
+        <blockquote class="comments"><p>When added to a page, <strong>Modal</strong> is hidden. It can be displayed by calling the <code>show</code> method.</p>
+<p>Similiar to <a href="#alert">Alert</a>, elements with the attribute <code>data-dismiss="modal"</code> will close <strong>Modal</strong> when clicked.</p>
+<p>The <strong>Modal</strong> component leverages the <a href="#modalmanager">ModalManager</a> effect.</p></blockquote>
         <div class="demo">
           <!-- Button to trigger modal -->
           <a role="button" class="btn btn-primary" id="__e-9">Launch demo modal</a>
@@ -246,11 +245,10 @@
       </section>
       <section class="component">
         <h2 id="swap">Swap</h2>
-        <blockquote>
-          <p><strong>Swap</strong> is a low-level component designed to be composed by other components.
-          It exposes the functionality of the <a href="#swapper">Swapper</a> effect as a simple container element with corresponding methods to
-          'swap' between child elements via code.</p>
-          <p><a href="#tabs">Tabs</a> and <a href="#carousel">Carousel</a> both use this component.</p></blockquote>
+        <blockquote class="comments"><p><strong>Swap</strong> is a low-level component designed to be composed by other components.
+It exposes the functionality of the <a href="#swapper">Swapper</a> effect as a simple container element with corresponding methods to
+<code>swap</code> between child elements via code.</p>
+<p><a href="#tabs">Tabs</a> and <a href="#carousel">Carousel</a> both use this component.</p></blockquote>
       </section>
       <section class="component">
         <h2 id="tabs">Tabs</h2>
@@ -290,11 +288,10 @@
       </header>
       <section class="effect">
         <h2 id="modalmanager">ModalManager</h2>
-        <blockquote>
-          <p><strong>ModalManager</strong> is inspired by the <a href="http://twitter.github.com/bootstrap/javascript.html#modals">modal helper</a> in Bootstrap.</p>
-          <p>It has two static methods <code>show</code> and <code>hide</code> that both take the same parameters as corresponding methods in <a href="#showhide">ShowHide</a>.</p>
-          <p><strong>ModalManager</strong> controls the display of the provided element while also creating a dark backdrop on the page. Any element used should have a fixed position, a z-index greater than 1040, and an initial display of none.</p>
-        </blockquote>
+        <blockquote class="comments"><p><strong>ModalManager</strong> is inspired by the <a href="http://twitter.github.com/bootstrap/javascript.html#modals">modal helper</a> in Bootstrap.</p>
+<p>It has two static methods <code>show</code> and <code>hide</code> that both take the same parameters as corresponding methods in <a href="#showhide">ShowHide</a>.</p>
+<p><strong>ModalManager</strong> controls the display of the provided element while also creating a dark backdrop on the page.
+Any element used should have a fixed position, a z-index greater than 1040, and an initial display of none.</p></blockquote>
       </section>
       <section class="effect">
         <h2 id="showhide">ShowHide</h2>
