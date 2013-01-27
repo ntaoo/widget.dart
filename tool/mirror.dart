@@ -1,42 +1,23 @@
-library mirror;
+/**
+ * Note: there is a LOT of hard-coded paths here. Ideally, mirrors and markdown
+ * would be available without linking into Dart SDK internals
+ * DARTBUG: TBD!!!
+ * TODO: file a dart bug on accessing these guys...
+ */
 
 import 'dart:io';
 import 'package:bot/bot.dart';
-import '/usr/local/Cellar/dart-editor/17594/dart-sdk/lib/_internal/compiler/implementation/mirrors/mirrors.dart';
+import '/usr/local/Cellar/dart-editor/17594/dart-sdk/lib/_internal/compiler/implementation/mirrors/mirrors.dart' as mirrors;
 import '/usr/local/Cellar/dart-editor/17594/dart-sdk/lib/_internal/dartdoc/lib/markdown.dart' as md;
 import 'package:html5lib/dom.dart' as dom;
 import 'package:html5lib/parser.dart';
 import 'package:html5lib/dom_parsing.dart';
 import 'util.dart' as util;
 
+const _libPath = r'/usr/local/Cellar/dart-editor/17594/dart-sdk/';
 const _htmlToHack = r'web/index_source.html';
 
-String getHtml(String className, String markdown) {
-  md.setImplicitLinkResolver((name) {
-    if(name == className) {
-      return new md.Element.text('strong', name);
-    } else {
-      final anchor = new md.Element.text('a', name);
-      anchor.attributes['href'] = '#${name.toLowerCase()}';
-      return anchor;
-    }
-  });
-
-  final blocks = _getBlocks(markdown);
-
-  return md.renderToHtml(blocks);
-}
-
-List<md.Node> _getBlocks(String markdown) {
-  final document = new md.Document();
-
-  // Replace windows line endings with unix line endings, and split.
-  final lines = markdown.replaceAll('\r\n','\n').split('\n');
-
-  document.parseRefLinks(lines);
-  return document.parseLines(lines);
-}
-
+// TODO: should be using async methods here...hmm...
 
 void main() {
   final classes = _getTargetClasses();
@@ -54,13 +35,13 @@ void main() {
     final classSimpleName = componentClass.simpleName;
 
 
-    final CommentInstanceMirror classComment = componentClass.metadata
-        .firstMatching((m) => m is CommentInstanceMirror && m.isDocComment, orElse: () => null);
+    final mirrors.CommentInstanceMirror classComment = componentClass.metadata
+        .firstMatching((m) => m is mirrors.CommentInstanceMirror && m.isDocComment, orElse: () => null);
 
     if(classComment == null) {
-      print('*** $classSimpleName - no comment');
+      print('- $classSimpleName - no comment');
     } else {
-      print('* ${componentClass.simpleName}');
+      print('+ ${componentClass.simpleName} - has doc comments');
       _writeClassComment(document, componentClass.simpleName, classComment.trimmedText);
     }
   }
@@ -69,14 +50,16 @@ void main() {
   final updatedContent = document.outerHTML;
   if(updatedContent != originalContent) {
     // we should write!
-    print("updating $_htmlToHack");
+    print("+ Updating $_htmlToHack");
     htmlFile.writeAsStringSync(updatedContent);
+  } else {
+    print('- No changes to $_htmlToHack');
   }
 }
 
-List<ClassMirror> _getTargetClasses() {
+List<mirrors.ClassMirror> _getTargetClasses() {
   final currentLibraryPath = new Directory.current().path;
-  final libPath = new Path(r'/usr/local/Cellar/dart-editor/17594/dart-sdk/');
+  final libPath = new Path(_libPath);
   final packageRoot = new Path(r'packages/');
 
   final componentPaths = util.getDartLibraryPaths().toList();
@@ -85,23 +68,23 @@ List<ClassMirror> _getTargetClasses() {
 
   final targetPaths = componentPaths.mappedBy((Path p) => p.toNativePath());
 
-  final compilation = new Compilation.library(targetPaths, libPath, packageRoot, ['--preserve-comments']);
+  final compilation = new mirrors.Compilation.library(targetPaths, libPath, packageRoot, ['--preserve-comments']);
 
   final mirrors = compilation.mirrors;
 
-  final componentLibraries = mirrors.libraries.values.where((LibraryMirror lm) {
+  final componentLibraries = mirrors.libraries.values.where((lm) {
     final uri = lm.location.sourceUri;
     return uri.scheme == 'file' && uri.path.startsWith(currentLibraryPath);
   }).toList();
 
-  return CollectionUtil.selectMany(componentLibraries, (LibraryMirror lm) {
+  return CollectionUtil.selectMany(componentLibraries, (lm) {
     return lm.classes.values;
   }).toList();
 }
 
 void _writeClassComment(dom.Document doc, String className, String markdownCommentContent) {
 
-  final htmlContent = getHtml(className, markdownCommentContent);
+  final htmlContent = _getHtmlFromMarkdown(className, markdownCommentContent);
   assert(htmlContent != null);
 
   // find the rigth quote block...right?
@@ -139,3 +122,28 @@ bool _isRightBlockQuote(dom.Element element, String className) {
   return firstChild.tagName == 'h2' && firstChild.innerHTML == className;
 }
 
+String _getHtmlFromMarkdown(String className, String markdown) {
+  md.setImplicitLinkResolver((name) {
+    if(name == className) {
+      return new md.Element.text('strong', name);
+    } else {
+      final anchor = new md.Element.text('a', name);
+      anchor.attributes['href'] = '#${name.toLowerCase()}';
+      return anchor;
+    }
+  });
+
+  final blocks = _getMarkdownNodes(markdown);
+
+  return md.renderToHtml(blocks);
+}
+
+List<md.Node> _getMarkdownNodes(String markdown) {
+  final document = new md.Document();
+
+  // Replace windows line endings with unix line endings, and split.
+  final lines = markdown.replaceAll('\r\n','\n').split('\n');
+
+  document.parseRefLinks(lines);
+  return document.parseLines(lines);
+}
