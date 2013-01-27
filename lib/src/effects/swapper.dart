@@ -1,10 +1,20 @@
 part of effects;
 
 /**
- * [effect] is used as the [hideEffect] unless [hideEffect] is provided.
+ * [Swapper] is an effect that builds on top of [ShowHide] to manage the visibility
+ * of a number of children contained in a parent element.
+ *
+ * Provide a parent element and either a target child element or an index to a
+ * target child element and [Swapper] will display the target while hiding other
+ * visible elements using the provided effects, duration, and timing.
+ *
+ * [Swapper] is encapsulated into a component by [Swap].
  */
 class Swapper {
 
+  /**
+   * [effect] is used as the [hideEffect] unless [hideEffect] is provided.
+   */
   static Future<bool> swap(Element host, Element child,
       {ShowHideEffect effect, int duration, EffectTiming effectTiming, ShowHideEffect hideEffect}) {
 
