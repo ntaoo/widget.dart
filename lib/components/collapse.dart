@@ -6,7 +6,14 @@ import 'package:widget/effects.dart';
 import 'package:widget/widget.dart';
 
 /**
- * [Collapse] uses a content model similiar to [Collapse](http://twitter.github.com/bootstrap/javascript.html#collapse) in Bootstrap.
+ * [Collapse] uses a content model similar to [collapse functionality](http://twitter.github.com/bootstrap/javascript.html#collapse) in Bootstrap.
+ *
+ * The header element for [Collapse] is a child element with class `accordion-heading`.
+ *
+ * The rest of the children are rendered as content.
+ *
+ * [Collapse] listens for `click` events and toggles visibility of content if the
+ * click target has attribute `data-toggle="collapse"`.
  */
 class Collapse extends WebComponent implements ShowHideComponent {
   static const String _collapseDivSelector = '.collapse-body-x';
