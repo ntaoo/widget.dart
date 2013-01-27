@@ -10,20 +10,23 @@ final _whitespaceRegex = new RegExp(r'\s+');
 
 void main() {
   final args = new Options().arguments;
-  log(' ** ARGS: $args');
+  log('** ARGS: $args');
+
+  final bool buildAll = args.length == 0;
+
   final changes = getChangedFiles(args);
 
-  if(onlyOutputFiles(changes)) {
+  if(!buildAll && onlyOutputFiles(changes)) {
     log(' ** Nothing interesting changed');
     return;
   }
 
-  log(' ** CHANGES: $changes');
+  log('** CHANGES: $changes');
 
   final input = 'web/index_source.html';
   final output = 'web/index.html';
 
-  if(changes.contains(input)) {
+  if(buildAll || changes.contains(input)) {
     _transform(input, output).then((bool value) {
       if(value) {
         log('updated $output');
@@ -35,7 +38,7 @@ void main() {
     log(" - skipping transform");
   }
 
-  if(changes.any((c) => c.startsWith(r'web/'))) {
+  if(buildAll || changes.any((c) => c.startsWith(r'web/'))) {
     Process.run('./bin/copy_assets.sh', [])
       .then((ProcessResult pr) {
         if(pr.exitCode == 0) {
