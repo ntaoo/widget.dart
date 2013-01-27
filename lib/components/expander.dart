@@ -7,6 +7,9 @@ import 'package:widget/widget.dart';
 
 // TODO: rename Collapse?
 
+/**
+ * [Expander] uses a content model similiar to [Collapse](http://twitter.github.com/bootstrap/javascript.html#collapse) in Bootstrap.
+ */
 class Expander extends WebComponent implements ShowHideComponent {
   static const String _expanderDivSelector = '.expander-body-x';
   static final ShowHideEffect _effect = new ShrinkEffect();

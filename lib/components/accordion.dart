@@ -7,6 +7,8 @@ import 'package:bot/bot.dart';
 /**
  * [Accordion] wraps a set of [Expander] elements and ensures only one is visible
  * at a time.
+ *
+ * See [Expander] for details on how content is interpreted.
  */
 class Accordion extends WebComponent {
   @protected

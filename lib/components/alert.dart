@@ -6,9 +6,9 @@ import 'package:widget/effects.dart';
 import 'package:widget/widget.dart';
 
 /**
- * [Alert] follows the same convention as its inspiration in Bootstrap.
+ * [Alert] follows the same convention as [its inspiration](http://twitter.github.com/bootstrap/javascript.html#alerts) in Bootstrap.
  *
- * Clicking on an element with the attribute `data-dismiss='alert'` will cause the element to close.
+ * Clicking on a nested element with the attribute `data-dismiss='alert'` will cause [Alert] to close.
  */
 class Alert extends WebComponent implements ShowHideComponent {
 
