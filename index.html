@@ -183,6 +183,7 @@ matching <code>.open &gt; .dropdown-menu</code>. When <strong>Dropdown</strong> 
 added to the inner element wrapping all content. Causing child elements with
 class <code>dropdown-menu</code> to become visible.</p></blockquote>
         <div class="demo">
+          <h3>A a button</h3>
           <x-dropdown id="__e-7">
             <button class="btn" data-toggle="dropdown">Click me!</button>
             <ul class="dropdown-menu">
@@ -193,8 +194,41 @@ class <code>dropdown-menu</code> to become visible.</p></blockquote>
               <li><a>Separated link</a></li>
             </ul>
           </x-dropdown>
+          <h3>In a nav</h3>
+          <!-- Because Bootstrap css assumes a certain hierarchy of items in a nav
+          .navbar .nav > li > a
+          To use a DropDown element, one has to copy and modify Bootstrap styles to
+          apply to x-dropdown
+          -->
+          <div class="navbar">
+            <div class="navbar-inner">
+              <div class="container">
+                <div class="nav">
+                  <x-dropdown id="__e-8">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nav Menu 1<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Item 1</a></li>
+                      <li><a href="#">Item 2</a></li>
+                    </ul>
+                  </x-dropdown>
+                  <x-dropdown id="__e-9">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nav Menu 2<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li class="nav-header">Header 1</li>
+                      <li><a href="#">Item 1</a></li>
+                      <li><a href="#">Item 2</a></li>
+                      <li class="nav-header">Header 2</li>
+                      <li><a href="#">Item 3</a></li>
+                      <li><a href="#">Item 4</a></li>
+                    </ul>
+                  </x-dropdown>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <pre class="code">&lt;x-dropdown&gt;
+        <pre class="code">&lt;h3&gt;A a button&lt;/h3&gt;
+&lt;x-dropdown&gt;
   &lt;button class="btn" data-toggle="dropdown"&gt;Click me!&lt;/button&gt;
   &lt;ul class="dropdown-menu"&gt;
     &lt;li&gt;&lt;a&gt;Action&lt;/a&gt;&lt;/li&gt;
@@ -203,18 +237,51 @@ class <code>dropdown-menu</code> to become visible.</p></blockquote>
     &lt;li class="divider"&gt;&lt;/li&gt;
     &lt;li&gt;&lt;a&gt;Separated link&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
-&lt;/x-dropdown&gt;</pre>
+&lt;/x-dropdown&gt;
+&lt;h3&gt;In a nav&lt;/h3&gt;
+&lt;!-- Because Bootstrap css assumes a certain hierarchy of items in a nav
+.navbar .nav &gt; li &gt; a
+To use a DropDown element, one has to copy and modify Bootstrap styles to
+apply to x-dropdown
+--&gt;
+&lt;div class="navbar"&gt;
+  &lt;div class="navbar-inner"&gt;
+    &lt;div class="container"&gt;
+      &lt;div class="nav"&gt;
+        &lt;x-dropdown&gt;
+          &lt;a href="#" class="dropdown-toggle" data-toggle="dropdown"&gt;Nav Menu 1&lt;b class="caret"&gt;&lt;/b&gt;&lt;/a&gt;
+          &lt;ul class="dropdown-menu"&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Item 1&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Item 2&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/x-dropdown&gt;
+        &lt;x-dropdown&gt;
+          &lt;a href="#" class="dropdown-toggle" data-toggle="dropdown"&gt;Nav Menu 2&lt;b class="caret"&gt;&lt;/b&gt;&lt;/a&gt;
+          &lt;ul class="dropdown-menu"&gt;
+            &lt;li class="nav-header"&gt;Header 1&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Item 1&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Item 2&lt;/a&gt;&lt;/li&gt;
+            &lt;li class="nav-header"&gt;Header 2&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Item 3&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Item 4&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/x-dropdown&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
       </section>
       <section class="component">
         <h2 id="modal">Modal</h2>
         <blockquote class="comments"><p>When added to a page, <strong>Modal</strong> is hidden. It can be displayed by calling the <code>show</code> method.</p>
 <p>Similar to <a href="#alert">Alert</a>, elements with the attribute <code>data-dismiss="modal"</code> will close <strong>Modal</strong> when clicked.</p>
+<p>Content within <strong>Modal</strong> is placed in a div with class <code>modal</code> so related styles from Bootstrap are applied.</p>
 <p>The <strong>Modal</strong> component leverages the <a href="#modalmanager">ModalManager</a> effect.</p></blockquote>
         <div class="demo">
           <!-- Button to trigger modal -->
-          <a role="button" class="btn btn-primary" id="__e-8">Launch demo modal</a>
+          <a role="button" class="btn btn-primary" id="__e-10">Launch demo modal</a>
           <!-- Modal -->
-          <x-modal id="__e-9">
+          <x-modal id="modal_example">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               <h3 id="myModalLabel">Modal header</h3>
@@ -229,9 +296,9 @@ class <code>dropdown-menu</code> to become visible.</p></blockquote>
           </x-modal>
         </div>
         <pre class="code">&lt;!-- Button to trigger modal --&gt;
-&lt;a role="button" class="btn btn-primary" on-click="showModal();"&gt;Launch demo modal&lt;/a&gt;
+&lt;a role="button" class="btn btn-primary" on-click="query('#modal_example').xtag.show();"&gt;Launch demo modal&lt;/a&gt;
 &lt;!-- Modal --&gt;
-&lt;x-modal&gt;
+&lt;x-modal id="modal_example"&gt;
   &lt;div class="modal-header"&gt;
     &lt;button type="button" class="close" data-dismiss="modal" aria-hidden="true"&gt;×&lt;/button&gt;
     &lt;h3 id="myModalLabel"&gt;Modal header&lt;/h3&gt;
@@ -261,7 +328,7 @@ The rest of the child elements are considered tab content.</p>
 <p>The target content id is either the value of <code>data-target</code> on the clicked element or the anchor
 in <code>href</code>.</p></blockquote>
         <div class="demo">
-          <x-tabs id="__e-10">
+          <x-tabs id="__e-11">
             <li class="active">
               <a href="#tab1" data-toggle="tab">Tab 1</a>
             </li>
