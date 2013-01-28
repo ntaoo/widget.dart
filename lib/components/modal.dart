@@ -12,6 +12,8 @@ import 'package:widget/widget.dart';
  *
  * Similar to [Alert], elements with the attribute `data-dismiss="modal"` will close [Modal] when clicked.
  *
+ * Content within [Modal] is placed in a div with class `modal` so related styles from Bootstrap are applied.
+ *
  * The [Modal] component leverages the [ModalManager] effect.
  */
 class Modal extends WebComponent implements ShowHideComponent {
@@ -23,11 +25,16 @@ class Modal extends WebComponent implements ShowHideComponent {
     assert(value != null);
     if(value != _isShown) {
       _isShown = value;
-      final effect = new ScaleEffect();
-      if(_isShown) {
-        ModalManager.show(this, effect: effect, backdropClickHandler: _onBackdropClicked);
-      } else {
-        ModalManager.hide(this, effect: effect);
+
+      final modal = _getModalElement();
+      if(modal != null) {
+        final effect = new ScaleEffect();
+
+        if(_isShown) {
+          ModalManager.show(modal, effect: effect, backdropClickHandler: _onBackdropClicked);
+        } else {
+          ModalManager.hide(modal, effect: effect);
+        }
       }
 
       ShowHideComponent.dispatchToggleEvent(this);
@@ -50,9 +57,18 @@ class Modal extends WebComponent implements ShowHideComponent {
 
   @protected
   void created() {
-    this.style.display = 'none';
     this.onClick.listen(_onClick);
   }
+
+  @protected
+  void inserted() {
+    final modal = _getModalElement();
+    if(modal != null && !isShown) {
+      ModalManager.hide(modal);
+    }
+  }
+
+  Element _getModalElement() => this.query('x-modal > .modal');
 
   void _onClick(MouseEvent event) {
     if(!event.defaultPrevented) {
