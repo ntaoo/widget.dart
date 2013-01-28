@@ -11,7 +11,6 @@
     
     
     
-    
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap.css" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap-responsive.css" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.0.0/css/font-awesome.css" rel="stylesheet">
@@ -31,7 +30,7 @@
       <div class="row">
         <div class="span3">
           <ul class="nav nav-list affix">
-          <li><a href="#dart_widgets" class="h1">Dart Widgets</a></li><li><a href="#components" class="h1">Components</a></li><li><a href="#accordion" class="h2">Accordion</a></li><li><a href="#alert" class="h2">Alert</a></li><li><a href="#carousel" class="h2">Carousel</a></li><li><a href="#collapse" class="h2">Collapse</a></li><li><a href="#headeredcontent" class="h2">HeaderedContent</a></li><li><a href="#dropdown" class="h2">Dropdown</a></li><li><a href="#modal" class="h2">Modal</a></li><li><a href="#swap" class="h2">Swap</a></li><li><a href="#tabs" class="h2">Tabs</a></li><li><a href="#effects" class="h1">Effects</a></li><li><a href="#modalmanager" class="h2">ModalManager</a></li><li><a href="#showhide" class="h2">ShowHide</a></li><li><a href="#swapper" class="h2">Swapper</a></li></ul>
+          <li><a href="#dart_widgets" class="h1">Dart Widgets</a></li><li><a href="#components" class="h1">Components</a></li><li><a href="#accordion" class="h2">Accordion</a></li><li><a href="#alert" class="h2">Alert</a></li><li><a href="#carousel" class="h2">Carousel</a></li><li><a href="#collapse" class="h2">Collapse</a></li><li><a href="#dropdown" class="h2">Dropdown</a></li><li><a href="#modal" class="h2">Modal</a></li><li><a href="#swap" class="h2">Swap</a></li><li><a href="#tabs" class="h2">Tabs</a></li><li><a href="#effects" class="h1">Effects</a></li><li><a href="#modalmanager" class="h2">ModalManager</a></li><li><a href="#showhide" class="h2">ShowHide</a></li><li><a href="#swapper" class="h2">Swapper</a></li></ul>
         </div>
     <div class="span9">
       <header>
@@ -106,6 +105,10 @@ at a time.</p>
       </section>
       <section class="component">
         <h2 id="carousel">Carousel</h2>
+        <blockquote class="comments"><p><strong>Carousel</strong> allows moving back and forth through a set of child elements.</p>
+<p>It is based on a <a href="http://twitter.github.com/bootstrap/javascript.html#carousel">similar component</a>
+in Bootstrap.</p>
+<p><strong>Carousel</strong> leverages the <a href="#swap">Swap</a> component to render the transition between items.</p></blockquote>
         <div class="demo">
           <x-carousel id="__e-5">
             <figure>
@@ -139,7 +142,11 @@ at a time.</p>
       </section>
       <section class="component">
         <h2 id="collapse">Collapse</h2>
-        <blockquote class="comments"><p><strong>Collapse</strong> uses a content model similiar to <a href="http://twitter.github.com/bootstrap/javascript.html#collapse">Collapse</a> in Bootstrap.</p></blockquote>
+        <blockquote class="comments"><p><strong>Collapse</strong> uses a content model similar to <a href="http://twitter.github.com/bootstrap/javascript.html#collapse">collapse functionality</a> in Bootstrap.</p>
+<p>The header element for <strong>Collapse</strong> is a child element with class <code>accordion-heading</code>.</p>
+<p>The rest of the children are rendered as content.</p>
+<p><strong>Collapse</strong> listens for <code>click</code> events and toggles visibility of content if the
+click target has attribute <code>data-toggle="collapse"</code>.</p></blockquote>
         <div class="demo">
           <x-collapse id="__e-6">
             <div class="accordion-heading">
@@ -162,28 +169,21 @@ at a time.</p>
 &lt;/x-collapse&gt;</pre>
       </section>
       <section class="component">
-        <h2 id="headeredcontent">HeaderedContent</h2>
-        <div class="demo">
-          <x-headered-content id="__e-7">
-            <header>This is the header</header>
-            <ul>
-              <li>This is some</li>
-              <li>content</li>
-            </ul>
-          </x-headered-content>
-        </div>
-        <pre class="code">&lt;x-headered-content&gt;
-  &lt;header&gt;This is the header&lt;/header&gt;
-  &lt;ul&gt;
-    &lt;li&gt;This is some&lt;/li&gt;
-    &lt;li&gt;content&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/x-headered-content&gt;</pre>
-      </section>
-      <section class="component">
         <h2 id="dropdown">Dropdown</h2>
+        <blockquote class="comments"><p><strong>Dropdown</strong> aligns closely with the model provided by the
+<a href="http://twitter.github.com/bootstrap/javascript.html#dropdowns">dropdown functionality</a>
+in Bootstrap.</p>
+<p><strong>Dropdown</strong> content is inferred from all child elements that have
+class <code>dropdown-menu</code>. Bootstrap defines a CSS selector for <code>.dropdown-menu</code>
+with an initial display of <code>none</code>.</p>
+<p><strong>Dropdown</strong> listens for <code>click</code> events and toggles visibility of content if the
+click target has attribute <code>data-toggle="dropdown"</code>.</p>
+<p>Bootstrap also defines a CSS selector which sets <code>display: block;</code> for elements
+matching <code>.open &gt; .dropdown-menu</code>. When <strong>Dropdown</strong> opens, the class <code>open</code> is
+added to the inner element wrapping all content. Causing child elements with
+class <code>dropdown-menu</code> to become visible.</p></blockquote>
         <div class="demo">
-          <x-dropdown id="__e-8">
+          <x-dropdown id="__e-7">
             <button class="btn" data-toggle="dropdown">Click me!</button>
             <ul class="dropdown-menu">
               <li><a>Action</a></li>
@@ -208,13 +208,13 @@ at a time.</p>
       <section class="component">
         <h2 id="modal">Modal</h2>
         <blockquote class="comments"><p>When added to a page, <strong>Modal</strong> is hidden. It can be displayed by calling the <code>show</code> method.</p>
-<p>Similiar to <a href="#alert">Alert</a>, elements with the attribute <code>data-dismiss="modal"</code> will close <strong>Modal</strong> when clicked.</p>
+<p>Similar to <a href="#alert">Alert</a>, elements with the attribute <code>data-dismiss="modal"</code> will close <strong>Modal</strong> when clicked.</p>
 <p>The <strong>Modal</strong> component leverages the <a href="#modalmanager">ModalManager</a> effect.</p></blockquote>
         <div class="demo">
           <!-- Button to trigger modal -->
-          <a role="button" class="btn btn-primary" id="__e-9">Launch demo modal</a>
+          <a role="button" class="btn btn-primary" id="__e-8">Launch demo modal</a>
           <!-- Modal -->
-          <x-modal id="__e-10">
+          <x-modal id="__e-9">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               <h3 id="myModalLabel">Modal header</h3>
@@ -261,7 +261,7 @@ The rest of the child elements are considered tab content.</p>
 <p>The target content id is either the value of <code>data-target</code> on the clicked element or the anchor
 in <code>href</code>.</p></blockquote>
         <div class="demo">
-          <x-tabs id="__e-11">
+          <x-tabs id="__e-10">
             <li class="active">
               <a href="#tab1" data-toggle="tab">Tab 1</a>
             </li>
@@ -293,6 +293,11 @@ in <code>href</code>.</p></blockquote>
       </section>
       <header>
         <h1 id="effects">Effects</h1>
+        <blockquote>
+          <p>A set of behaviors that can be used directly with elements on a web page.</p>
+          <p>Effects are used by <a href="#components">Components</a> to offer easy,
+          declarative access to these features.</p>
+        </blockquote>
       </header>
       <section class="effect">
         <h2 id="modalmanager">ModalManager</h2>
