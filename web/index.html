@@ -301,10 +301,10 @@ apply to x-dropdown
 <p>The <strong>Modal</strong> component leverages the <a href="#modalmanager">ModalManager</a> effect.</p></blockquote>
         <div class="demo">
           <!-- Button to trigger modal -->
-          <a role="button" class="btn btn-primary" on-click="showModal();">Launch demo modal</a>
+          <a role="button" class="btn btn-primary" on-click="query('#modal_example').xtag.show();">Launch demo modal</a>
 
           <!-- Modal -->
-          <x-modal>
+          <x-modal id="modal_example">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               <h3 id="myModalLabel">Modal header</h3>
@@ -320,9 +320,9 @@ apply to x-dropdown
         </div>
 
         <pre class="code">&lt;!-- Button to trigger modal --&gt;
-&lt;a role="button" class="btn btn-primary" on-click="showModal();"&gt;Launch demo modal&lt;/a&gt;
+&lt;a role="button" class="btn btn-primary" on-click="query('#modal_example').xtag.show();"&gt;Launch demo modal&lt;/a&gt;
 &lt;!-- Modal --&gt;
-&lt;x-modal&gt;
+&lt;x-modal id="modal_example"&gt;
   &lt;div class="modal-header"&gt;
     &lt;button type="button" class="close" data-dismiss="modal" aria-hidden="true"&gt;×&lt;/button&gt;
     &lt;h3 id="myModalLabel"&gt;Modal header&lt;/h3&gt;

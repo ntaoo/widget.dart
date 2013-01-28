@@ -32,15 +32,6 @@ void main() {
   });
 }
 
-void showModal() {
-  final modalHost = query('x-modal');
-  if(modalHost != null && modalHost.xtag is ShowHideComponent) {
-    final ShowHideComponent modal = modalHost.xtag;
-
-    modal.show();
-  }
-}
-
 void _showHideDemo_toggle(ShowHideEffect effect) {
   queryAll('.demo.showhide .logo_wrapper > img').forEach((Element e) {
     ShowHide.toggle(e, effect: effect);
