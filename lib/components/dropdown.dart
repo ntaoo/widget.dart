@@ -34,8 +34,17 @@ class Dropdown extends WebComponent implements ShowHideComponent {
   bool get isShown => _isShown;
 
   void set isShown(bool value) {
+    assert(value != null);
     if(value != _isShown) {
+
+      if(value) {
+        // before we set the local shown value, ensure
+        // all of the other dropdowns are closed
+        closeDropdowns();
+      }
+
       _isShown = value;
+
       final action = _isShown ? ShowHideAction.SHOW : ShowHideAction.HIDE;
 
       final headerElement = this.query('x-dropdown > .dropdown');
@@ -68,6 +77,13 @@ class Dropdown extends WebComponent implements ShowHideComponent {
 
   void toggle() {
     isShown = !isShown;
+  }
+
+  static void closeDropdowns() {
+    document.queryAll('x-dropdown')
+      .where((e) => e.xtag is Dropdown)
+      .mappedBy((e) => e.xtag as Dropdown)
+      .forEach((dd) => dd.hide());
   }
 
   @protected
