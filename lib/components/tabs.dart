@@ -25,7 +25,7 @@ import 'package:widget/widget.dart';
 class Tabs extends WebComponent {
   @protected
   void created() {
-    this.on.click.add(_clickListener);
+    this.onClick.listen(_clickListener);
   }
 
   @protected

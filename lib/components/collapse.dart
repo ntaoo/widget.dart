@@ -49,7 +49,7 @@ class Collapse extends WebComponent implements ShowHideComponent {
 
   @protected
   void created() {
-    this.on.click.add(_onClick);
+    this.onClick.listen(_onClick);
   }
 
   @protected

@@ -17,9 +17,9 @@ abstract class SwapComponent {
 }
 
 abstract class ShowHideComponent {
-  static const String TOGGLE_EVENT_NAME = 'toggle';
+  static const String _toggleEventName = 'toggle';
 
-  static const EventStreamProvider<Event> toggleEvent = const EventStreamProvider<Event>(TOGGLE_EVENT_NAME);
+  static const EventStreamProvider<Event> toggleEvent = const EventStreamProvider<Event>(_toggleEventName);
 
   void show();
 
@@ -34,6 +34,6 @@ abstract class ShowHideComponent {
   Stream<Event> get onToggle;
 
   static void dispatchToggleEvent(Element element) {
-    element.on[TOGGLE_EVENT_NAME].dispatch(new Event(ShowHideComponent.TOGGLE_EVENT_NAME));
+    element.dispatchEvent(new Event(ShowHideComponent._toggleEventName));
   }
 }

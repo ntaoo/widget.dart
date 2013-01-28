@@ -13,7 +13,7 @@ import 'package:bot/bot.dart';
 class Accordion extends WebComponent {
   @protected
   void created() {
-    this.on[ShowHideComponent.TOGGLE_EVENT_NAME].add(_onOpen);
+    ShowHideComponent.toggleEvent.forTarget(this).listen(_onOpen);
   }
 
   @protected
@@ -29,7 +29,6 @@ class Accordion extends WebComponent {
   List<Element> _getAllCollapseElements() => this.queryAll('x-accordion > x-collapse');
 
   void _onOpen(Event openEvent) {
-    assert(openEvent.type == ShowHideComponent.TOGGLE_EVENT_NAME);
     if(openEvent.target is UnknownElement) {
       final UnknownElement target = openEvent.target;
       final ShowHideComponent shc = target.xtag as ShowHideComponent;

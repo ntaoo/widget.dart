@@ -4,7 +4,7 @@ import 'package:widget/effects.dart';
 import 'package:widget/widget.dart';
 
 void main() {
-  window.on.hashChange.add(_onNavigate);
+  window.onHashChange.listen(_onNavigate);
 
 
   //
@@ -27,7 +27,7 @@ void main() {
     final button = new ButtonElement()
       ..appendText(name)
       ..classes.add('btn')
-      ..on.click.add((_) => _showHideDemo_toggle(effect));
+      ..onClick.listen((_) => _showHideDemo_toggle(effect));
     effectsDiv.append(button);
   });
 }
