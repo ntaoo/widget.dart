@@ -89,14 +89,23 @@ class Dropdown extends WebComponent implements ShowHideComponent {
   @protected
   void created() {
     this.onClick.listen(_onClick);
+    this.onKeyDown.listen(_onKeyDown);
+  }
+
+  void _onKeyDown(KeyboardEvent e) {
+    if(!e.defaultPrevented && e.keyCode == KeyCode.ESC) {
+      this.hide();
+      e.preventDefault();
+    }
   }
 
   void _onClick(MouseEvent event) {
-    if(!event.defaultPrevented) {
-      final Element target = event.target as Element;
+    if(!event.defaultPrevented && event.target is Element) {
+      final Element target = event.target;
       if(target != null && target.dataAttributes['toggle'] == 'dropdown') {
         toggle();
         event.preventDefault();
+        target.focus();
       }
     }
   }
