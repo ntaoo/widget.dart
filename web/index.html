@@ -201,6 +201,7 @@ added to the inner element wrapping all content. Causing child elements with
 class <code>dropdown-menu</code> to become visible.</p></blockquote>
 
         <div class="demo">
+          <h3>A a button</h3>
           <x-dropdown>
             <button class="btn" data-toggle="dropdown">Click me!</button>
             <ul class="dropdown-menu">
@@ -211,9 +212,45 @@ class <code>dropdown-menu</code> to become visible.</p></blockquote>
               <li><a>Separated link</a></li>
             </ul>
           </x-dropdown>
+
+          <h3>In a nav</h3>
+          <!-- Because Bootstrap css assumes a certain hierarchy of items in a nav
+          .navbar .nav > li > a
+          To use a DropDown element, one has to copy and modify Bootstrap styles to
+          apply to x-dropdown
+          -->
+
+          <div class="navbar">
+            <div class="navbar-inner">
+              <div class="container">
+                <div class="nav">
+                  <x-dropdown>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nav Menu 1<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Item 1</a></li>
+                      <li><a href="#">Item 2</a></li>
+                    </ul>
+                  </x-dropdown>
+                  <x-dropdown>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nav Menu 2<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li class="nav-header">Header 1</li>
+                      <li><a href="#">Item 1</a></li>
+                      <li><a href="#">Item 2</a></li>
+                      <li class="nav-header">Header 2</li>
+                      <li><a href="#">Item 3</a></li>
+                      <li><a href="#">Item 4</a></li>
+                    </ul>
+                  </x-dropdown>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        <pre class="code">&lt;x-dropdown&gt;
+        <pre class="code">&lt;h3&gt;A a button&lt;/h3&gt;
+&lt;x-dropdown&gt;
   &lt;button class="btn" data-toggle="dropdown"&gt;Click me!&lt;/button&gt;
   &lt;ul class="dropdown-menu"&gt;
     &lt;li&gt;&lt;a&gt;Action&lt;/a&gt;&lt;/li&gt;
@@ -222,7 +259,39 @@ class <code>dropdown-menu</code> to become visible.</p></blockquote>
     &lt;li class="divider"&gt;&lt;/li&gt;
     &lt;li&gt;&lt;a&gt;Separated link&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
-&lt;/x-dropdown&gt;</pre>
+&lt;/x-dropdown&gt;
+&lt;h3&gt;In a nav&lt;/h3&gt;
+&lt;!-- Because Bootstrap css assumes a certain hierarchy of items in a nav
+.navbar .nav &gt; li &gt; a
+To use a DropDown element, one has to copy and modify Bootstrap styles to
+apply to x-dropdown
+--&gt;
+&lt;div class="navbar"&gt;
+  &lt;div class="navbar-inner"&gt;
+    &lt;div class="container"&gt;
+      &lt;div class="nav"&gt;
+        &lt;x-dropdown&gt;
+          &lt;a href="#" class="dropdown-toggle" data-toggle="dropdown"&gt;Nav Menu 1&lt;b class="caret"&gt;&lt;/b&gt;&lt;/a&gt;
+          &lt;ul class="dropdown-menu"&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Item 1&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Item 2&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/x-dropdown&gt;
+        &lt;x-dropdown&gt;
+          &lt;a href="#" class="dropdown-toggle" data-toggle="dropdown"&gt;Nav Menu 2&lt;b class="caret"&gt;&lt;/b&gt;&lt;/a&gt;
+          &lt;ul class="dropdown-menu"&gt;
+            &lt;li class="nav-header"&gt;Header 1&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Item 1&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Item 2&lt;/a&gt;&lt;/li&gt;
+            &lt;li class="nav-header"&gt;Header 2&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Item 3&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Item 4&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/x-dropdown&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
       </section>
 
       <section class="component">
