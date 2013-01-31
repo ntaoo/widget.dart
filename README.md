@@ -1,7 +1,7 @@
 # Dart Widgets
 ## A set of reusable Web Components for Dart applications
 
-[![Build Status](https://drone.io/github.com/kevmoo/widget.dart/status.png)](https://github.com/kevmoo/widget.dart/latest)
+[![Build Status](https://drone.io/github.com/kevmoo/widget.dart/status.png)](https://drone.io/github.com/kevmoo/widget.dart/latest)
 
 # Web UI
 
