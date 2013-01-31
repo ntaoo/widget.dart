@@ -1,6 +1,8 @@
 # Dart Widgets
 ## A set of reusable Web Components for Dart applications
 
+[![Build Status](https://drone.io/github.com/kevmoo/widget.dart/status.png)](https://github.com/kevmoo/widget.dart/latest)
+
 # Web UI
 
 **Dart Widgets** leverages the [Web UI](https://github.com/dart-lang/web-ui) Dart project, sponsored by the [Google Dart](http://www.dartlang.org/) team.
