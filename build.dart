@@ -90,7 +90,7 @@ Future<bool> _transform(String input, String output) {
         var parser = new HtmlParser(contents, generateSpans: true);
         var document = parser.parse();
         _tweakDocument(document);
-        return _updateIfChanged(output, document.outerHTML);
+        return _updateIfChanged(output, document.outerHtml);
       });
 }
 
@@ -125,7 +125,7 @@ List<Element> _findElements(Element element, Func1<Element, bool> predicate, [Li
     target.add(element);
   }
 
-  element.elements.forEach((e) => _findElements(e, predicate, target));
+  element.children.forEach((e) => _findElements(e, predicate, target));
 
   return target;
 }
@@ -151,18 +151,18 @@ void _tweakDocument(Document document) {
   final Element tocUl = $(tocUls).first;
 
   sectionHeaders.forEach((h) {
-    final headerText = htmlSerializeEscape(h.innerHTML);
+    final headerText = htmlSerializeEscape(h.innerHtml);
     final headerId = headerText.toLowerCase().replaceAll(_whitespaceRegex, '_');
 
     final link = new Element.tag('a')
       ..attributes['href'] = '#$headerId'
       ..attributes['class'] = h.tagName
-      ..innerHTML = headerText;
+      ..innerHtml = headerText;
 
     final li = new Element.tag('li')
-      ..elements.add(link);
+      ..children.add(link);
 
-    tocUl.elements.add(li);
+    tocUl.children.add(li);
 
 
     h.attributes['id'] = headerId;
@@ -171,7 +171,7 @@ void _tweakDocument(Document document) {
 
 void _tweakComponentSection(Element element) {
   // find demo section
-  final demoSections = element.elements.where((e) {
+  final demoSections = element.children.where((e) {
     return e.attributes['class'] == 'demo';
   }).toList();
 
@@ -181,7 +181,7 @@ void _tweakComponentSection(Element element) {
   }
 
   // find code section
-  final codeSections = element.elements.where((e) {
+  final codeSections = element.children.where((e) {
     return e.attributes['class'] == 'code';
   }).toList();
 
@@ -192,8 +192,8 @@ void _tweakComponentSection(Element element) {
 
   // if we have both, take content of demo section, html encode and put it in demo
   if(demoSection != null && codeSection != null) {
-    final demoMarkup = demoSection.innerHTML;
-    codeSection.innerHTML = _cleanUpCode(demoMarkup);
+    final demoMarkup = demoSection.innerHtml;
+    codeSection.innerHtml = _cleanUpCode(demoMarkup);
   }
 }
 

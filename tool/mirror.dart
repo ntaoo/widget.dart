@@ -47,7 +47,7 @@ void main() {
   }
 
   // Now document has been updated
-  final updatedContent = document.outerHTML;
+  final updatedContent = document.outerHtml;
   if(updatedContent != originalContent) {
     // we should write!
     print("+ Updating $_htmlToHack");
@@ -92,7 +92,7 @@ void _writeClassComment(dom.Document doc, String className, String markdownComme
   final bq = _getBlockQuoteElement(doc, className);
 
   if(bq != null) {
-    bq.innerHTML = htmlContent;
+    bq.innerHtml = htmlContent;
     print(' * updated blockquote');
   }
 }
@@ -112,14 +112,14 @@ bool _isRightBlockQuote(dom.Element element, String className) {
     return false;
   }
 
-  if(parent.elements.indexOf(element) != 1) {
+  if(parent.children.indexOf(element) != 1) {
     return false;
   }
 
   // this should be an h2
-  final firstChild = parent.elements.first;
+  final firstChild = parent.children.first;
 
-  return firstChild.tagName == 'h2' && firstChild.innerHTML == className;
+  return firstChild.tagName == 'h2' && firstChild.innerHtml == className;
 }
 
 String _getHtmlFromMarkdown(String className, String markdown) {
