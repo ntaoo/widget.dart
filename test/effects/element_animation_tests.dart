@@ -21,11 +21,10 @@ void registerElementAnimationTests() {
       final fooDiv = query('div.playground div.foo');
       expect(fooDiv, isNotNull);
 
-      final styleComplete = expectAsync1((CssStyleDeclaration style) {
-        expect(style.height, equals('50px'));
-        expect(fooDiv.style.height, equals(''));
-      });
-      fooDiv.computedStyle.then(styleComplete);
+      final style = fooDiv.getComputedStyle('');
+
+      expect(style.height, equals('50px'));
+      expect(fooDiv.style.height, equals(''));
 
       final animation = new ElementAnimation(fooDiv, 'height', '0px');
 

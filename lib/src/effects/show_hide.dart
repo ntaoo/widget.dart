@@ -72,7 +72,7 @@ class ShowHide {
           .then((_) => currentValues.currentState);
     }
 
-    return Future.wait([element.getComputedStyle(''), Tools.getDefaultDisplay(element.tagName)])
+    return Future.wait([getElementComputedStyle(element), Tools.getDefaultDisplay(element.tagName)])
         .then((List items) {
           final computedStyle = items[0];
           final tagDefaultDisplay = items[1];
@@ -92,7 +92,7 @@ class ShowHide {
   static Future<Size> _updateCachedSize(Element element) {
     final values = _values[element];
     assert(values != null);
-    return element.getComputedStyle('')
+    return getElementComputedStyle(element)
         .then(Tools.getSize)
         .then((Size size) {
           return values.cachedSize = size;

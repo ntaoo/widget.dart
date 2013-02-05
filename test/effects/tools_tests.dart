@@ -33,13 +33,15 @@ div.foo { background: red; $css }
           expect(size, result);
         });
 
-        pg.query('div.foo').getComputedStyle('')
-        .then((css) => Tools.getOuterSize(css))
-        .then((value) {
-          return getTimeoutFuture(1)
-              .then((_) => value);
-        })
-        .then(expectCallback);
+        final element = pg.query('div.foo');
+
+        getElementComputedStyle(element)
+          .then((css) => Tools.getOuterSize(css))
+          .then((value) {
+            return getTimeoutFuture(1)
+                .then((_) => value);
+          })
+          .then(expectCallback);
 
       });
     });

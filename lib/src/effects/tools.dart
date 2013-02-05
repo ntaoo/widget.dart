@@ -129,7 +129,7 @@ class Tools {
     final elem = new Element.tag(name);
     doc.body.append(elem);
 
-    return elem.getComputedStyle('')
+    return getElementComputedStyle(elem)
         .then((CssStyleDeclaration css) {
           final value = css.display;
           elem.remove();

@@ -59,7 +59,7 @@ void _registerTest(String tag, String sheetStyle, String inlineStyle) {
 
         String initialCalculatedValue;
 
-        final futureTuple = element.getComputedStyle('')
+        final futureTuple = getElementComputedStyle(element)
             .then((css) {
               initialCalculatedValue = css.display;
               return ShowHide.begin(a1, element);
@@ -85,7 +85,7 @@ void _registerTest(String tag, String sheetStyle, String inlineStyle) {
 
           String initialCalculatedValue;
 
-          final futureTuple = element.getComputedStyle('')
+          final futureTuple = getElementComputedStyle(element)
               .then((css) {
                 initialCalculatedValue = css.display;
                 return ShowHide.begin(a1, element);
@@ -204,7 +204,7 @@ ShowHideState _getActionResult(ShowHideAction action, ShowHideState initial) {
 Future<Tuple3<String, String, ShowHideState>> _getValues(String tag, String sheetStyle, String inlineStyle, Element element) {
   final futureDefaultDisplay = Tools.getDefaultDisplay(tag);
 
-  final futureCalculatedDisplayValue = element.getComputedStyle('')
+  final futureCalculatedDisplayValue = getElementComputedStyle(element)
       .then((css) => css.display);
 
   final futureShowHide = ShowHide.getState(element);

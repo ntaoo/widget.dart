@@ -1,6 +1,6 @@
 # Changelog - Dart Widgets
 
-## 0.2.0 - *pre-release* (SDK 0.3.2.0 r17657)
+## 0.2.0 - *pre-release* (SDK 0.3.4.0 r18115)
 
 A lot more in-line documentation in libraries. Scripts harvest this data to populate
 the demo page.

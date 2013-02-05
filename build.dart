@@ -231,7 +231,7 @@ String _cleanUpCode(String input) {
     lines[i] = lines[i].substring(minPrefix);
   }
 
-  input = Strings.join(lines, '\n');
+  input = lines.join('\n');
 
   return input;
 }

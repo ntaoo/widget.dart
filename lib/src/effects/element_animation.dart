@@ -22,7 +22,7 @@ class ElementAnimation extends AnimationCore {
 
   void onStart() {
     assert(_initialValues == null);
-    element.getComputedStyle('').then(_populateInitialValues);
+    getElementComputedStyle(element).then(_populateInitialValues);
   }
 
   void onProgress(num progress) {
