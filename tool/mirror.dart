@@ -14,7 +14,7 @@ import 'package:html5lib/parser.dart';
 import 'package:html5lib/dom_parsing.dart';
 import 'util.dart' as util;
 
-const _libPath = r'/usr/local/Cellar/dart-editor/17657/dart-sdk/';
+const _libPath = r'/usr/local/Cellar/dart-editor/18115/dart-sdk/';
 const _htmlToHack = r'web/index_source.html';
 
 // TODO: should be using async methods here...hmm...
