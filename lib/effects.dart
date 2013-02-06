@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:html';
 import 'dart:math' as math;
 import 'package:bot/bot.dart';
+import 'package:bot/bot_html.dart';
 
 part 'src/effects/_enum.dart';
 part 'src/effects/alignment.dart';
@@ -21,16 +22,6 @@ part 'src/effects/animation_core.dart';
 part 'src/effects/animation_queue.dart';
 part 'src/effects/element_animation.dart';
 part 'src/effects/time_manager.dart';
-
-
-// TODO: move to BOT
-Future getImmediateFuture() {
-  final completer = new Completer();
-
-  window.setImmediate(() => completer.complete(null));
-
-  return completer.future;
-}
 
 // TODO: remove this temp method
 // here to verify original behavior
