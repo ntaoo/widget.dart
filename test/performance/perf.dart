@@ -3,17 +3,10 @@ import 'dart:html';
 import 'package:widget/effects.dart';
 
 void main() {
-  query('#do-init').onClick.listen(_initClick);
+
+  _initialize();
   query('#do-swap').onClick.listen(_doSwap);
 
-
-}
-
-void _initClick(event) {
-  if(!_initialized) {
-    _initialized = true;
-    _initialize();
-  }
 }
 
 int _time = 0;
