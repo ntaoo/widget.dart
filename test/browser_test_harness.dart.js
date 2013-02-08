@@ -5649,9 +5649,6 @@ $$._SpreadArgsHelper = {"": "Object;_liblib2$_callback,_expectedCalls,_actualCal
   _liblib2$_callback$1: function(arg0) {
     return this._liblib2$_callback.call$1(arg0);
   },
-  _liblib2$_callback$2: function(arg0, arg1) {
-    return this._liblib2$_callback.call$2(arg0, arg1);
-  },
   _shouldCallBack$0: function() {
     return this._shouldCallBack.call$0();
   },
@@ -5693,12 +5690,6 @@ $$._SpreadArgsHelper = {"": "Object;_liblib2$_callback,_expectedCalls,_actualCal
   },
   get$invoke1: function() {
     return new $.BoundClosure$1(this, "invoke1$1");
-  },
-  invoke2$2: function(arg1, arg2) {
-    return $.guardAsync(new $._SpreadArgsHelper_invoke2_anon(this, arg1, arg2), this.get$_after(), this._testNum);
-  },
-  get$invoke2: function() {
-    return new $.BoundClosure$2(this, "invoke2$2");
   },
   _checkCallCount$0: function() {
     if ($.$$gt(this._actualCalls, this._expectedCalls) === true) {
@@ -6237,22 +6228,22 @@ $$._IsNot = {"": "BaseMatcher;_matcher>",
   }
 };
 
-$$.TestTimeManager = {"": "TimeManager;_liblib7$_callback,_liblib7$_callbackId,_currentTick,_callbackId,_disposed",
-  _liblib7$_callback$1: function(arg0) {
-    return this._liblib7$_callback.call$1(arg0);
+$$.TestTimeManager = {"": "TimeManager;_liblib8$_callback,_liblib8$_callbackId,_currentTick,_callbackId,_disposed",
+  _liblib8$_callback$1: function(arg0) {
+    return this._liblib8$_callback.call$1(arg0);
   },
   tick$1: function(count) {
     this._currentTick = this._currentTick + count;
-    if (!(this._liblib7$_callback == null))
-      this._liblib7$_callback$1(this._currentTick);
+    if (!(this._liblib8$_callback == null))
+      this._liblib8$_callback$1(this._currentTick);
   },
   requestFrame$1: function(callback) {
-    this._liblib7$_callback = callback;
-    return this._liblib7$_callbackId;
+    this._liblib8$_callback = callback;
+    return this._liblib8$_callbackId;
   },
   cancelAnimationFrame$1: function(id) {
-    this._liblib7$_callback = null;
-    this._liblib7$_callbackId = this._liblib7$_callbackId + 1;
+    this._liblib8$_callback = null;
+    this._liblib8$_callbackId = this._liblib8$_callbackId + 1;
   },
   getNowMilliseconds$0: function() {
     return this._currentTick;
@@ -6277,18 +6268,7 @@ $$.ShowHideResult = {"": "_Enum;name",
   }
 };
 
-$$._ShowHideValues = {"": "Object;initialComputedDisplay>,initialLocalDisplay>,currentState=,_cachedSize",
-  get$cachedSize: function() {
-    return this._cachedSize;
-  },
-  set$cachedSize: function(value) {
-    if (value.get$isValid() === true)
-      this._cachedSize = value;
-  },
-  _ShowHideValues$4: function(initialComputedDisplay, initialLocalDisplay, currentState, size) {
-    this.set$cachedSize(size);
-  }
-};
+$$._ShowHideValues = {"": "Object;initialComputedDisplay>,initialLocalDisplay>,currentState="};
 
 $$._AnimatingValues = {"": "Object;_liblib3$_element,_cleanupAction,_finishFunc,_completer,_setTimeoutHandle",
   _cleanupAction$1: function(arg0) {
@@ -6324,10 +6304,10 @@ $$._AnimatingValues = {"": "Object;_liblib3$_element,_cleanupAction,_finishFunc,
 };
 
 $$.ShowHideEffect = {"": "Object;",
-  startShow$4: function(element, desiredDuration, timing, size) {
+  startShow$3: function(element, desiredDuration, timing) {
     return 0;
   },
-  startHide$4: function(element, desiredDuration, timing, size) {
+  startHide$3: function(element, desiredDuration, timing) {
     return 0;
   },
   clearAnimation$1: function(element) {
@@ -6500,9 +6480,9 @@ $$.NumberEnumerable = {"": "Iterable;",
   }
 };
 
-$$._SimpleNumEnumerable = {"": "NumberEnumerable;_liblib6$_source",
+$$._SimpleNumEnumerable = {"": "NumberEnumerable;_liblib7$_source",
   get$iterator: function() {
-    return $.CONSTANT1.get$iterator(this._liblib6$_source);
+    return $.CONSTANT1.get$iterator(this._liblib7$_source);
   }
 };
 
@@ -6557,16 +6537,6 @@ $$.Size = {"": "Object;width>,height>",
   get$isEmpty: function() {
     return new $.BoundClosure$0(this, "isEmpty$0");
   },
-  get$isValid: function() {
-    var t1, t2;
-    t1 = this.width;
-    if ($.isValidNumber(t1)) {
-      t2 = this.height;
-      t1 = $.isValidNumber(t2) && $.$$ge(t1, 0) === true && $.$$ge(t2, 0) === true;
-    } else
-      t1 = false;
-    return t1;
-  },
   scale$1: function(magnitude) {
     return $.Size$($.$$mul(this.width, magnitude), $.$$mul(this.height, magnitude));
   },
@@ -6575,6 +6545,25 @@ $$.Size = {"": "Object;width>,height>",
   },
   toString$0: function() {
     return "(" + $.S(this.width) + " x " + $.S(this.height) + ")";
+  }
+};
+
+$$._Finishes = {"": "BaseMatcher;_liblib6$_matcher>",
+  matches$2: function(item, matchState) {
+    var done;
+    if (!(typeof item === "object" && item !== null && !!item.$isFuture))
+      return false;
+    done = $.get$wrapAsync().call$1(new $._Finishes_matches_anon());
+    item.then$2$onError(new $._Finishes_matches_anon0(this, done), new $._Finishes_matches_anon1(done));
+    return true;
+  },
+  describe$1: function(description) {
+    var t1 = this._liblib6$_matcher;
+    if (t1 == null)
+      description.add$1("completes successfully");
+    else
+      description.add$1("completes to a value that ").addDescriptionOf$1(t1);
+    return description;
   }
 };
 
@@ -7612,7 +7601,7 @@ $$._registerTest__anon1 = {"": "Closure;tag_11,sheetStyle_12,inlineStyle_13,a1_1
     t4 = this.tag_11;
     t5 = this.sheetStyle_12;
     t6 = this.inlineStyle_13;
-    $.expectFutureComplete(t2.then$1(new $._registerTest___anon4(t4, t5, t6, element)), new $._registerTest___anon5(t1, t4, t5, t6, t3, element));
+    $.expect(t2.then$1(new $._registerTest___anon4(t4, t5, t6, element)).then$1(new $._registerTest___anon5(t1, t4, t5, t6, t3, element)), $.finishes, null, null, false);
   },
   $isFunction: true
 };
@@ -7658,7 +7647,7 @@ $$._registerTest__anon2 = {"": "Closure;tag_26,sheetStyle_27,inlineStyle_28,a1_2
     t5 = this.tag_26;
     t6 = this.sheetStyle_27;
     t7 = this.inlineStyle_28;
-    $.expectFutureComplete(t2.then$1(new $._registerTest___anon1(t5, t6, t7, element)), new $._registerTest___anon2(t1, t5, t6, t7, t3, t4, element));
+    $.expect(t2.then$1(new $._registerTest___anon1(t5, t6, t7, element)).then$1(new $._registerTest___anon2(t1, t5, t6, t7, t3, t4, element)), $.finishes, null, null, false);
   },
   $isFunction: true
 };
@@ -7693,45 +7682,6 @@ $$._registerTest___anon2 = {"": "Closure;box_1,tag_39,sheetStyle_40,inlineStyle_
     calculatedDisplayValue = tuple.get$item2();
     calculatedState = tuple.get$item3();
     $._verifyState([this.a1_42, this.a2_43], this.tag_39, this.sheetStyle_40, this.inlineStyle_41, defaultTagValue, this.element_44, this.box_1.initialCalculatedValue_1, calculatedState, calculatedDisplayValue);
-  },
-  $isFunction: true
-};
-
-$$.expectFutureComplete_anon = {"": "Closure;onComplete_0",
-  call$2: function(isError, result) {
-    var t1, t2;
-    if (isError === true) {
-      t1 = result.get$error();
-      t2 = result.get$stackTrace();
-      $._registerException($._currentTest, t1, t2);
-    }
-    t1 = this.onComplete_0;
-    if (!(t1 == null))
-      t1.call$1(result);
-  },
-  $isFunction: true
-};
-
-$$.expectFutureComplete_anon0 = {"": "Closure;testWait_1",
-  call$1: function(value) {
-    return this.testWait_1.call$2(false, value);
-  },
-  $isFunction: true
-};
-
-$$.expectFutureComplete_anon1 = {"": "Closure;testWait_2",
-  call$1: function(error) {
-    return this.testWait_2.call$2(true, error);
-  },
-  $isFunction: true
-};
-
-$$._SpreadArgsHelper_invoke2_anon = {"": "Closure;this_0,arg1_1,arg2_2",
-  call$0: function() {
-    var t1 = this.this_0;
-    t1.set$_actualCalls($.$$add(t1.get$_actualCalls(), 1));
-    if (t1._shouldCallBack$0() === true)
-      return t1._liblib2$_callback$2(this.arg1_1, this.arg2_2);
   },
   $isFunction: true
 };
@@ -8257,6 +8207,72 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"": "Closure;findSlot_
 $$._convertDartToNative_PrepareForStructuredClone_walk_anon = {"": "Closure;box_0,walk_8",
   call$2: function(key, value) {
     this.box_0.copy_0[key] = this.walk_8.call$1(value);
+  },
+  $isFunction: true
+};
+
+$$._Finishes_matches_anon = {"": "Closure;",
+  call$1: function(fn) {
+    return fn.call$0();
+  },
+  $isFunction: true
+};
+
+$$._Finishes_matches_anon0 = {"": "Closure;this_1,done_2",
+  call$1: function(value) {
+    this.done_2.call$1(new $._Finishes_matches__anon1(this.this_1, value));
+  },
+  $isFunction: true
+};
+
+$$._Finishes_matches__anon1 = {"": "Closure;this_3,value_4",
+  call$0: function() {
+    var t1 = this.this_3.get$_liblib6$_matcher();
+    if (!(t1 == null))
+      $.expect(this.value_4, t1, null, null, false);
+  },
+  $isFunction: true
+};
+
+$$._Finishes_matches_anon1 = {"": "Closure;done_5",
+  call$1: function(e) {
+    var t1, t2, stackTrace;
+    t1 = {};
+    if (!(e.get$error() == null)) {
+      t2 = e.get$error();
+      t2 = typeof t2 === "object" && t2 !== null && !!t2.$isExpectException;
+    } else
+      t2 = false;
+    if (t2)
+      this.done_5.call$1(new $._Finishes_matches__anon(e));
+    else {
+      t1.reason_0 = "Expected future to complete successfully, but it failed with " + $.S(e.get$error());
+      t2 = e.get$stackTrace();
+      if (!(t2 == null)) {
+        stackTrace = "  " + $.S($.replaceAll($.toString(t2), "\n", "\n  "));
+        t1.reason_0 = $.S(t1.reason_0) + "\nStack trace:\n" + stackTrace;
+      }
+      this.done_5.call$1(new $._Finishes_matches__anon0(t1));
+    }
+  },
+  $isFunction: true
+};
+
+$$._Finishes_matches__anon = {"": "Closure;e_6",
+  call$0: function() {
+    var t1, t2;
+    t1 = this.e_6;
+    t2 = t1.get$error();
+    t1 = t1.get$stackTrace();
+    $._registerException($._currentTest, t2, t1);
+    return;
+  },
+  $isFunction: true
+};
+
+$$._Finishes_matches__anon0 = {"": "Closure;box_0",
+  call$0: function() {
+    return $.expect(false, $.CONSTANT19, null, this.box_0.reason_0, false);
   },
   $isFunction: true
 };
@@ -11550,11 +11566,6 @@ $.InvalidOperationError$ = function(message) {
   return new $.InvalidOperationError(message);
 };
 
-$.isValidNumber = function(value) {
-  var t1 = $.getInterceptor(value);
-  return !(value == null) && t1.get$isInfinite(value) !== true && t1.get$isNaN(value) !== true;
-};
-
 $.lerp = function(a, b, x) {
   var t1, t2, t3;
   t1 = $.getInterceptor(a);
@@ -11613,11 +11624,6 @@ $.getImmediateFuture = function() {
   var completer = $._CompleterImpl$();
   window.setImmediate$1(new $.getImmediateFuture_anon(completer));
   return completer.future;
-};
-
-$.expectFutureComplete = function(future, onComplete) {
-  var testWait = $.expectAsync2(new $.expectFutureComplete_anon(onComplete), 1);
-  future.then$2$onError(new $.expectFutureComplete_anon0(testWait), new $.expectFutureComplete_anon1(testWait));
 };
 
 $.MatchState$ = function(state) {
@@ -11728,10 +11734,6 @@ $._SpreadArgsHelper$fixedCallCount = function(callback, expectedCalls) {
 
 $.expectAsync1 = function(callback, count) {
   return $._SpreadArgsHelper$fixedCallCount(callback, count).get$invoke1();
-};
-
-$.expectAsync2 = function(callback, count) {
-  return $._SpreadArgsHelper$fixedCallCount(callback, count).get$invoke2();
 };
 
 $.group = function(description, body) {
@@ -11949,29 +11951,19 @@ $.ShowHide_begin = function(action, element, duration, effect, effectTiming) {
 };
 
 $.ShowHide__populateState = function(element) {
-  var currentValues, computedStyle, tagDefaultDisplay, localDisplay, computedDisplay, inferredState, size;
+  var currentValues, computedStyle, tagDefaultDisplay, localDisplay, computedDisplay, inferredState;
   currentValues = $.$$index($.get$ShowHide__values(), element);
-  if (!(currentValues == null)) {
-    $.ShowHide__updateCachedSize(element);
+  if (!(currentValues == null))
     return currentValues.get$currentState();
-  }
   computedStyle = element.getComputedStyle$1("");
   tagDefaultDisplay = $.Tools_getDefaultDisplay(element.get$tagName());
   $.get$ShowHide__defaultDisplays().putIfAbsent$2(element.get$tagName(), new $.ShowHide__populateState_anon(tagDefaultDisplay));
   localDisplay = element.get$style().get$display();
   computedDisplay = computedStyle.get$display();
   inferredState = $.$$eq(computedDisplay, "none") === true ? $.CONSTANT7 : $.CONSTANT8;
-  size = $.Tools_getSize(computedStyle);
-  $.$$indexSet($.get$ShowHide__values(), element, $._ShowHideValues$(computedDisplay, localDisplay, inferredState, size));
+  $.Tools_getSize(computedStyle);
+  $.$$indexSet($.get$ShowHide__values(), element, $._ShowHideValues$(computedDisplay, localDisplay, inferredState));
   return inferredState;
-};
-
-$.ShowHide__updateCachedSize = function(element) {
-  var values, size;
-  values = $.$$index($.get$ShowHide__values(), element);
-  size = $.Tools_getSize(element.getComputedStyle$1(""));
-  values.set$cachedSize(size);
-  return size;
 };
 
 $.ShowHide__getToggleState = function(action, state) {
@@ -11997,7 +11989,6 @@ $.ShowHide__getToggleState = function(action, state) {
 };
 
 $.ShowHide__requestEffect = function(doShow, element, desiredDuration, effect, effectTiming) {
-  var size;
   if (desiredDuration == null)
     desiredDuration = 400;
   else if ($.$$lt(desiredDuration, 0) === true)
@@ -12006,14 +11997,13 @@ $.ShowHide__requestEffect = function(doShow, element, desiredDuration, effect, e
     effect = $.CONSTANT14;
   if (effectTiming == null)
     effectTiming = $.get$EffectTiming_ease();
-  size = $.$$index($.get$ShowHide__values(), element).get$cachedSize();
   if (doShow === true)
-    return $.ShowHide__requestShow(element, desiredDuration, effect, effectTiming, size);
+    return $.ShowHide__requestShow(element, desiredDuration, effect, effectTiming);
   else
-    return $.ShowHide__requestHide(element, desiredDuration, effect, effectTiming, size);
+    return $.ShowHide__requestHide(element, desiredDuration, effect, effectTiming);
 };
 
-$.ShowHide__requestShow = function(element, desiredDuration, effect, effectTiming, size) {
+$.ShowHide__requestShow = function(element, desiredDuration, effect, effectTiming) {
   var values, t1, durationMS;
   values = $.$$index($.get$ShowHide__values(), element);
   t1 = values.get$currentState();
@@ -12031,7 +12021,7 @@ $.ShowHide__requestShow = function(element, desiredDuration, effect, effectTimin
       throw $.$$throw($.DetailedArgumentError$("oldState", "the provided value " + $.S(t1) + " is not supported"));
   }
   $.ShowHide__finishShow(element);
-  durationMS = effect.startShow$4(element, desiredDuration, effectTiming, size);
+  durationMS = effect.startShow$3(element, desiredDuration, effectTiming);
   if ($.$$gt(durationMS, 0) === true) {
     values.set$currentState($.CONSTANT13);
     return $._AnimatingValues_scheduleCleanup(durationMS, element, effect.get$clearAnimation(), $.ShowHide__finishShow);
@@ -12047,7 +12037,7 @@ $.ShowHide__finishShow = function(element) {
   values.set$currentState($.CONSTANT8);
 };
 
-$.ShowHide__requestHide = function(element, desiredDuration, effect, effectTiming, size) {
+$.ShowHide__requestHide = function(element, desiredDuration, effect, effectTiming) {
   var t1, durationMS;
   t1 = $.$$index($.get$ShowHide__values(), element).get$currentState();
   switch (t1) {
@@ -12064,7 +12054,7 @@ $.ShowHide__requestHide = function(element, desiredDuration, effect, effectTimin
     default:
       throw $.$$throw($.DetailedArgumentError$("oldState", "the provided value " + $.S(t1) + " is not supported"));
   }
-  durationMS = effect.startHide$4(element, desiredDuration, effectTiming, size);
+  durationMS = effect.startHide$3(element, desiredDuration, effectTiming);
   if ($.$$gt(durationMS, 0) === true) {
     $.$$index($.get$ShowHide__values(), element).set$currentState($.CONSTANT12);
     return $._AnimatingValues_scheduleCleanup(durationMS, element, effect.get$clearAnimation(), $.ShowHide__finishHide);
@@ -12090,10 +12080,8 @@ $.ShowHide__getShowDisplayValue = function(element) {
     return values.get$initialComputedDisplay();
 };
 
-$._ShowHideValues$ = function(initialComputedDisplay, initialLocalDisplay, currentState, size) {
-  var t1 = new $._ShowHideValues(initialComputedDisplay, initialLocalDisplay, currentState, null);
-  t1._ShowHideValues$4(initialComputedDisplay, initialLocalDisplay, currentState, size);
-  return t1;
+$._ShowHideValues$ = function(initialComputedDisplay, initialLocalDisplay, currentState) {
+  return new $._ShowHideValues(initialComputedDisplay, initialLocalDisplay, currentState);
 };
 
 $._AnimatingValues$_internal = function(_element, _cleanupAction, _finishFunc) {
@@ -12298,10 +12286,11 @@ $.CONSTANT29 = new Isolate.$isolateProperties.ConstantMap(9, {caption: null, col
 $.CONSTANT14 = new Isolate.$isolateProperties.ShowHideEffect();
 $.CONSTANT33 = new Isolate.$isolateProperties.Object();
 $.CONSTANT15 = new Isolate.$isolateProperties.ShowHideResult("no-op");
+$.CONSTANT36 = new Isolate.$isolateProperties._Finishes(null);
 $.CONSTANT24 = new Isolate.$isolateProperties.Size(100, 80);
 $.CONSTANT32 = new Isolate.$isolateProperties.EventStreamProvider("error");
-$.CONSTANT36 = Isolate.makeConstantList(["body", "head", "caption", "td", "th", "colgroup", "col", "tr", "tbody", "tfoot", "thead", "track"]);
-$.CONSTANT30 = new Isolate.$isolateProperties.ConstantMap(12, {body: "html", head: "html", caption: "table", td: "tr", th: "tr", colgroup: "table", col: "colgroup", tr: "tbody", tbody: "table", tfoot: "table", thead: "table", track: "audio"}, Isolate.$isolateProperties.CONSTANT36);
+$.CONSTANT37 = Isolate.makeConstantList(["body", "head", "caption", "td", "th", "colgroup", "col", "tr", "tbody", "tfoot", "thead", "track"]);
+$.CONSTANT30 = new Isolate.$isolateProperties.ConstantMap(12, {body: "html", head: "html", caption: "table", td: "tr", th: "tr", colgroup: "table", col: "colgroup", tr: "tbody", tbody: "table", tfoot: "table", thead: "table", track: "audio"}, Isolate.$isolateProperties.CONSTANT37);
 $.CONSTANT18 = new Isolate.$isolateProperties.ShowHideResult("canceled");
 $.CONSTANT21 = new Isolate.$isolateProperties.EventStreamProvider("message");
 $.CONSTANT16 = new Isolate.$isolateProperties.ShowHideResult("immediate");
@@ -12336,6 +12325,7 @@ $.Primitives_hashCodeSeed = 0;
 $._getTypeNameOf = null;
 $._pendingMicrotasks = null;
 $._microtaskScheduler = null;
+$.finishes = Isolate.$isolateProperties.CONSTANT36;
 $._assertFailureHandler = null;
 $._assertErrorFormatter = null;
 $._config = null;
