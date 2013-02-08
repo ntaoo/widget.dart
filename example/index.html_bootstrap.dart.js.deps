@@ -1,4 +1,5 @@
 file:///Users/kevin/source/github/widget.dart/packages/bot/bot.dart
+file:///Users/kevin/source/github/widget.dart/packages/bot/bot_html.dart
 file:///Users/kevin/source/github/widget.dart/packages/bot/src/bot/annotations.dart
 file:///Users/kevin/source/github/widget.dart/packages/bot/src/bot/attached/attachable.dart
 file:///Users/kevin/source/github/widget.dart/packages/bot/src/bot/attached/attachable_object.dart
@@ -34,10 +35,19 @@ file:///Users/kevin/source/github/widget.dart/packages/bot/src/bot/math/size.dar
 file:///Users/kevin/source/github/widget.dart/packages/bot/src/bot/math/tarjan_cycle_detect.dart
 file:///Users/kevin/source/github/widget.dart/packages/bot/src/bot/math/vector.dart
 file:///Users/kevin/source/github/widget.dart/packages/bot/src/bot/requires.dart
+file:///Users/kevin/source/github/widget.dart/packages/bot/src/bot/string_line_reader.dart
 file:///Users/kevin/source/github/widget.dart/packages/bot/src/bot/tuple.dart
 file:///Users/kevin/source/github/widget.dart/packages/bot/src/bot/tuple3.dart
 file:///Users/kevin/source/github/widget.dart/packages/bot/src/bot/typedefs.dart
 file:///Users/kevin/source/github/widget.dart/packages/bot/src/bot/util.dart
+file:///Users/kevin/source/github/widget.dart/packages/bot/src/bot_html/_resource_entry.dart
+file:///Users/kevin/source/github/widget.dart/packages/bot/src/bot_html/audio_loader.dart
+file:///Users/kevin/source/github/widget.dart/packages/bot/src/bot_html/canvas_util.dart
+file:///Users/kevin/source/github/widget.dart/packages/bot/src/bot_html/dragger.dart
+file:///Users/kevin/source/github/widget.dart/packages/bot/src/bot_html/html_view.dart
+file:///Users/kevin/source/github/widget.dart/packages/bot/src/bot_html/image_loader.dart
+file:///Users/kevin/source/github/widget.dart/packages/bot/src/bot_html/resource_loader.dart
+file:///Users/kevin/source/github/widget.dart/packages/bot/src/bot_html/top_level.dart
 file:///Users/kevin/source/github/widget.dart/packages/meta/meta.dart
 file:///Users/kevin/source/github/widget.dart/packages/web_ui/safe_html.dart
 file:///Users/kevin/source/github/widget.dart/packages/web_ui/src/linked_list.dart
