@@ -57,23 +57,23 @@ void _registerTest(String tag, String sheetStyle, String inlineStyle) {
 
         String initialCalculatedValue;
 
-        final futureTuple = getElementComputedStyle(element)
+        final future = getElementComputedStyle(element)
             .then((css) {
               initialCalculatedValue = css.display;
               return ShowHide.begin(a1, element);
             })
-            .then((_) => _getValues(tag, sheetStyle, inlineStyle, element));
+            .then((_) => _getValues(tag, sheetStyle, inlineStyle, element))
+            .then((Tuple3<String, String, ShowHideState> tuple) {
+              final defaultTagValue = tuple.item1;
+              final calculatedDisplayValue = tuple.item2;
 
-        expectFutureComplete(futureTuple, (Tuple3<String, String, ShowHideState> tuple) {
-          final defaultTagValue = tuple.item1;
-          final calculatedDisplayValue = tuple.item2;
+              final calculatedState = tuple.item3;
 
-          final calculatedState = tuple.item3;
+              _verifyState([a1], tag, sheetStyle, inlineStyle, defaultTagValue, element,
+                  initialCalculatedValue, calculatedState, calculatedDisplayValue);
+            });
 
-          _verifyState([a1], tag, sheetStyle, inlineStyle, defaultTagValue, element,
-              initialCalculatedValue, calculatedState, calculatedDisplayValue);
-
-        });
+        expect(future, finishes);
 
       });
 
@@ -83,24 +83,25 @@ void _registerTest(String tag, String sheetStyle, String inlineStyle) {
 
           String initialCalculatedValue;
 
-          final futureTuple = getElementComputedStyle(element)
+          final future = getElementComputedStyle(element)
               .then((css) {
                 initialCalculatedValue = css.display;
                 return ShowHide.begin(a1, element);
               })
               .then((_) => ShowHide.begin(a2, element))
-              .then((_) => _getValues(tag, sheetStyle, inlineStyle, element));
+              .then((_) => _getValues(tag, sheetStyle, inlineStyle, element))
+              .then((Tuple3<String, String, ShowHideState> tuple) {
 
-          expectFutureComplete(futureTuple, (Tuple3<String, String, ShowHideState> tuple) {
-            final defaultTagValue = tuple.item1;
-            final calculatedDisplayValue = tuple.item2;
+                final defaultTagValue = tuple.item1;
+                final calculatedDisplayValue = tuple.item2;
 
-            final calculatedState = tuple.item3;
+                final calculatedState = tuple.item3;
 
-            _verifyState([a1, a2], tag, sheetStyle, inlineStyle, defaultTagValue, element,
-                initialCalculatedValue, calculatedState, calculatedDisplayValue);
+                _verifyState([a1, a2], tag, sheetStyle, inlineStyle, defaultTagValue, element,
+                    initialCalculatedValue, calculatedState, calculatedDisplayValue);
+              });
 
-          });
+          expect(future, finishes);
         });
       }
     }
