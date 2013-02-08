@@ -71,38 +71,31 @@ class Tools {
   // borrowing from here:
   // https://github.com/jquery/jquery/blob/054daa20afc0e2c84e66f450b155d0253a62aedb/src/css.js#L428
   // Try to determine the default display value of an element
-  static Future<String> getDefaultDisplay(String nodeName ) {
+  static String getDefaultDisplay(String nodeName ) {
     final storedValue = _elemDisplay[nodeName];
     if(storedValue != null) {
-      return new Future.immediate(storedValue);
+      return storedValue;
     } else {
-      return _css_defaultDisplay(nodeName)
-          .then((String defaultDisplay) {
-            assert(defaultDisplay != null);
+      final defaultDisplay = _css_defaultDisplay(nodeName);
 
-            if(defaultDisplay == 'none' || defaultDisplay == '') {
-              return _defaultDisplayHard(nodeName);
-            } else {
-              return new Future.immediate(defaultDisplay);
-            }
-          })
-          .then((String value) {
-            assert(value != null);
-            assert(value != 'none');
-            assert(value != '');
-            return value;
-          });
+      assert(defaultDisplay != null);
+
+      if(defaultDisplay == 'none' || defaultDisplay == '') {
+        return _defaultDisplayHard(nodeName);
+      } else {
+        return defaultDisplay;
+      }
     }
   }
 
-  static Future<String> _css_defaultDisplay(String nodeName) {
+  static String _css_defaultDisplay(String nodeName) {
     final doc = document;
 
     // skipping crazy iframe dance for now...
     return _actualDisplay(nodeName, document);
   }
 
-  static Future<String> _defaultDisplayHard(String nodeName) {
+  static String _defaultDisplayHard(String nodeName) {
     throw 'Not sure how to calculate display of: $nodeName';
 
     // TODO: can't make any progress here
@@ -125,16 +118,14 @@ class Tools {
     */
   }
 
-  static Future<String> _actualDisplay(String name, HtmlDocument doc) {
+  static String _actualDisplay(String name, HtmlDocument doc) {
     final elem = new Element.tag(name);
     doc.body.append(elem);
 
-    return getElementComputedStyle(elem)
-        .then((CssStyleDeclaration css) {
-          final value = css.display;
-          elem.remove();
-          return value;
-        });
+    final css = elem.getComputedStyle('');
+    final value = css.display;
+    elem.remove();
+    return value;
   }
 
 }

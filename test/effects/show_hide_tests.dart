@@ -31,23 +31,21 @@ void _registerTest(String tag, String sheetStyle, String inlineStyle) {
 
       final sampleElement = query('.sample');
 
-      final futureTuple = _getValues(tag, sheetStyle, inlineStyle, sampleElement);
+      final tuple = _getValues(tag, sheetStyle, inlineStyle, sampleElement);
 
-      expectFutureComplete(futureTuple, (Tuple3<String, String, ShowHideState> tuple) {
-        final defaultTagValue = tuple.item1;
-        final calculatedDisplayValue = tuple.item2;
-        final calculatedState = tuple.item3;
+      final defaultTagValue = tuple.item1;
+      final calculatedDisplayValue = tuple.item2;
+      final calculatedState = tuple.item3;
 
-        final expectedDisplayValue = _getExpectedInitialCalculatedValue(defaultTagValue, sheetStyle, inlineStyle);
+      final expectedDisplayValue = _getExpectedInitialCalculatedValue(defaultTagValue, sheetStyle, inlineStyle);
 
-        expect(expectedDisplayValue, isNot(isEmpty), reason: 'Expected value should not be empty string');
-        expect(calculatedDisplayValue, expectedDisplayValue);
+      expect(expectedDisplayValue, isNot(isEmpty), reason: 'Expected value should not be empty string');
+      expect(calculatedDisplayValue, expectedDisplayValue);
 
-        final expectedState = _getState(calculatedDisplayValue);
+      final expectedState = _getState(calculatedDisplayValue);
 
-        expect(calculatedState, isNotNull);
-        expect(calculatedState, expectedState);
-      });
+      expect(calculatedState, isNotNull);
+      expect(calculatedState, expectedState);
     });
 
     final actions = [ShowHideAction.SHOW, ShowHideAction.HIDE, ShowHideAction.TOGGLE];
@@ -201,16 +199,14 @@ ShowHideState _getActionResult(ShowHideAction action, ShowHideState initial) {
   }
 }
 
-Future<Tuple3<String, String, ShowHideState>> _getValues(String tag, String sheetStyle, String inlineStyle, Element element) {
-  final futureDefaultDisplay = Tools.getDefaultDisplay(tag);
+Tuple3<String, String, ShowHideState> _getValues(String tag, String sheetStyle, String inlineStyle, Element element) {
+  final defaultDisplay = Tools.getDefaultDisplay(tag);
 
-  final futureCalculatedDisplayValue = getElementComputedStyle(element)
-      .then((css) => css.display);
+  final calculatedDisplayValue = element.getComputedStyle('').display;
 
-  final futureShowHide = ShowHide.getState(element);
+  final showHide = ShowHide.getState(element);
 
-  return Future.wait([futureDefaultDisplay, futureCalculatedDisplayValue, futureShowHide])
-      .then((list) => new Tuple3(list[0], list[1], list[2]));
+  return new Tuple3(defaultDisplay, calculatedDisplayValue, showHide);
 }
 
 ShowHideState _getState(String calculatedDisplay) {

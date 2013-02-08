@@ -121,20 +121,18 @@ void _swapperTest(int childCount,
  * get the list of all children of [host] that are currently 'shown'
  * assume all animations on all children are finished
  */
-Future<List<int>> _getDisplayedIndicies(Element host) {
-  final futures = host.children.mappedBy(ShowHide.getState).toList();
-  return Future.wait(futures)
-      .then((List<ShowHideState> states) {
-        assert(states.length == host.children.length);
-        final shownIndicies = new List<int>();
-        for(int i= 0; i < states.length; i++) {
-          expect(states[i].isFinished, true, reason: 'every item should be done animating by now');
-          if(states[i].isShow) {
-            shownIndicies.add(i);
-          }
-        }
-        return shownIndicies;
-      });
+List<int> _getDisplayedIndicies(Element host) {
+  final states = host.children.mappedBy(ShowHide.getState).toList();
+
+  assert(states.length == host.children.length);
+  final shownIndicies = new List<int>();
+  for(int i= 0; i < states.length; i++) {
+    expect(states[i].isFinished, true, reason: 'every item should be done animating by now');
+    if(states[i].isShow) {
+      shownIndicies.add(i);
+    }
+  }
+  return shownIndicies;
 }
 
 void _addTestElementToPlayground(String text, bool hidden) {

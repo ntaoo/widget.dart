@@ -11,18 +11,25 @@ class ElementAnimation extends AnimationCore {
   final Map<String, Object> _targets = new Map<String, Object>();
   Map<String, Object> _initialValues;
 
-  ElementAnimation(this.element, String property, target, {num duration: 400})
+  final String _property;
+  final _target;
+
+  ElementAnimation(this.element, this._property, this._target, {num duration: 400})
   : super(duration) {
-    assert(property != null);
-    if(target is String) {
-      target = _getPixels(target);
-    }
-    _targets[property] = target;
+    assert(_property != null);
   }
 
   void onStart() {
     assert(_initialValues == null);
-    getElementComputedStyle(element).then(_populateInitialValues);
+
+    var target = _target;
+    if(target is String) {
+      target = _getPixels(target);
+    }
+
+    _targets[_property] = target;
+    final style = element.getComputedStyle('');
+    _populateInitialValues(style);
   }
 
   void onProgress(num progress) {

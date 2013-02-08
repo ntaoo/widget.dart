@@ -3,6 +3,7 @@ library effects;
 import 'dart:async';
 import 'dart:html';
 import 'dart:math' as math;
+import 'package:meta/meta.dart';
 import 'package:bot/bot.dart';
 import 'package:bot/bot_html.dart';
 
@@ -25,6 +26,7 @@ part 'src/effects/time_manager.dart';
 
 // TODO: remove this temp method
 // here to verify original behavior
+@deprecated
 Future<CssStyleDeclaration> getElementComputedStyle(Element element) {
   return getImmediateFuture()
       .then((_) => element.getComputedStyle(''));

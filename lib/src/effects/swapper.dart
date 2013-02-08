@@ -83,17 +83,14 @@ class Swapper {
             }
           });
     }
-    // NOTE: there is *no* way, with async computerStyle APis, to do this
-    // in a way that ensures the host child collection doesn't change while
-    // we're figuring things out. FYI.
 
     // 1 - get states of all children
-    final futures = host.children
+    final theStates = host.children
         .mappedBy(ShowHide.getState).toList();
 
     int shownIndex = null;
 
-    return Future.wait(futures)
+    return new Future.immediate(theStates)
         .then((List<ShowHideState> states) {
           // paranoid sanity check that at lesat the count of items
           // before and after haven't changed
@@ -111,7 +108,8 @@ class Swapper {
             // show last item -> likely the visible one
             shownIndex = host.children.length-1;
 
-            return ShowHide.show(host.children[shownIndex]);
+            return ShowHide.show(host.children[shownIndex])
+                .then((ShowHideResult r) => r.isSuccess);
           } else if(showIndicies.length > 1) {
             // if more than one is shown, hide all but the last one
             final toHide = showIndicies
@@ -123,7 +121,7 @@ class Swapper {
             assert(showIndicies.length == 1);
             shownIndex = showIndicies[0];
             // only one is shown...so...leave it
-            return new Future.immediate(true);
+            return true;
           }
         })
         .then((bool success) {

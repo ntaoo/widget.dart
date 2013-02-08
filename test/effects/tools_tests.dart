@@ -29,20 +29,12 @@ div.foo { background: red; $css }
 <div class='foo'>content</div>
         ''');
 
-        final expectCallback = expectAsync1((Size size) {
-          expect(size, result);
-        });
-
         final element = pg.query('div.foo');
 
-        getElementComputedStyle(element)
-          .then((css) => Tools.getOuterSize(css))
-          .then((value) {
-            return getTimeoutFuture(1)
-                .then((_) => value);
-          })
-          .then(expectCallback);
+        final style = element.getComputedStyle('');
+        final size = Tools.getOuterSize(style);
 
+        expect(size, result);
       });
     });
   });

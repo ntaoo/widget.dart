@@ -34,7 +34,7 @@ class ShowHide {
   static final Map<String, String> _defaultDisplays = new Map<String, String>();
   static final Expando<_ShowHideValues> _values = new Expando<_ShowHideValues>('_ShowHideValues');
 
-  static Future<ShowHideState> getState(Element element) {
+  static ShowHideState getState(Element element) {
     assert(element != null);
     return _populateState(element);
   }
@@ -58,45 +58,43 @@ class ShowHide {
       {ShowHideEffect effect, int duration, EffectTiming effectTiming}) {
     assert(action != null);
     assert(element != null);
-    return getState(element)
-        .then(((oldState) => _getToggleState(action, oldState)))
-        .then((bool doShow) =>
-            _requestEffect(doShow, element, duration, effect, effectTiming));
+
+    final oldState = getState(element);
+    final doShow = _getToggleState(action, oldState);
+
+    return _requestEffect(doShow, element, duration, effect, effectTiming);
   }
 
-  static Future<ShowHideState> _populateState(Element element) {
+  static ShowHideState _populateState(Element element) {
     final currentValues = _values[element];
 
     if(currentValues != null) {
-      return _updateCachedSize(element)
-          .then((_) => currentValues.currentState);
+      _updateCachedSize(element);
+      return currentValues.currentState;
     }
 
-    return Future.wait([getElementComputedStyle(element), Tools.getDefaultDisplay(element.tagName)])
-        .then((List items) {
-          final computedStyle = items[0];
-          final tagDefaultDisplay = items[1];
+    final computedStyle = element.getComputedStyle('');
+    final tagDefaultDisplay = Tools.getDefaultDisplay(element.tagName);
 
-          _defaultDisplays.putIfAbsent(element.tagName, () => tagDefaultDisplay);
+    _defaultDisplays.putIfAbsent(element.tagName, () => tagDefaultDisplay);
 
-          final localDisplay = element.style.display;
-          final computedDisplay = computedStyle.display;
-          final inferredState = computedDisplay == 'none' ? ShowHideState.HIDDEN : ShowHideState.SHOWN;
-          final size = Tools.getSize(computedStyle);
+    final localDisplay = element.style.display;
+    final computedDisplay = computedStyle.display;
+    final inferredState = computedDisplay == 'none' ? ShowHideState.HIDDEN : ShowHideState.SHOWN;
+    final size = Tools.getSize(computedStyle);
 
-          _values[element] = new _ShowHideValues(computedDisplay, localDisplay, inferredState, size);
-          return inferredState;
-        });
+    _values[element] = new _ShowHideValues(computedDisplay, localDisplay, inferredState, size);
+    return inferredState;
   }
 
-  static Future<Size> _updateCachedSize(Element element) {
+  static Size _updateCachedSize(Element element) {
     final values = _values[element];
     assert(values != null);
-    return getElementComputedStyle(element)
-        .then(Tools.getSize)
-        .then((Size size) {
-          return values.cachedSize = size;
-        });
+
+    final style = element.getComputedStyle('');
+
+    final size = Tools.getSize(style);
+    return values.cachedSize = size;
   }
 
   static bool _getToggleState(ShowHideAction action, ShowHideState state) {
