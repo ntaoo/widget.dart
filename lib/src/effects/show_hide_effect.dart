@@ -6,13 +6,13 @@ class ShowHideEffect {
 
   @protected
   // NOTE: size can be null
-  int startShow(Element element, int desiredDuration, EffectTiming timing, Size size) {
+  int startShow(Element element, int desiredDuration, EffectTiming timing) {
     return 0;
   }
 
   @protected
   // NOTE: size can be null
-  int startHide(Element element, int desiredDuration, EffectTiming timing, Size size) {
+  int startHide(Element element, int desiredDuration, EffectTiming timing) {
     return 0;
   }
 

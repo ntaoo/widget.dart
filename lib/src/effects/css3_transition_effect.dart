@@ -14,20 +14,20 @@ class Css3TransitionEffect extends ShowHideEffect {
   }
 
   @protected
-  int startShow(Element element, int desiredDuration, EffectTiming timing, Size size) {
-    return _startAnimation(true, element, desiredDuration, _hideValue, _showValue, timing, size);
+  int startShow(Element element, int desiredDuration, EffectTiming timing) {
+    return _startAnimation(true, element, desiredDuration, _hideValue, _showValue, timing);
   }
 
   @protected
-  int startHide(Element element, int desiredDuration, EffectTiming timing, Size size) {
-    return _startAnimation(false, element, desiredDuration, _showValue, _hideValue, timing, size);
+  int startHide(Element element, int desiredDuration, EffectTiming timing) {
+    return _startAnimation(false, element, desiredDuration, _showValue, _hideValue, timing);
   }
 
   @protected
   // Use this to modify a provided override given the calculated size of the element
   // Note that if the size is not calculatable, this method is not called and the
   // original value is used
-  String overrideStartEndValues(bool showValue, String property, String originalValue, Size size) {
+  String overrideStartEndValues(bool showValue, String property, String originalValue) {
     return originalValue;
   }
 
@@ -44,10 +44,9 @@ class Css3TransitionEffect extends ShowHideEffect {
   }
 
   int _startAnimation(bool doingShow, Element element, int desiredDuration,
-                      String startValue, String endValue, EffectTiming timing, Size size) {
+                      String startValue, String endValue, EffectTiming timing) {
     assert(desiredDuration > 0);
     assert(timing != null);
-    assert(size == null || (size.isValid && size.area > 0));
 
     final localPropsToKeep = [_property];
     localPropsToKeep.addAll(_animatingOverrides.keys);
@@ -58,10 +57,9 @@ class Css3TransitionEffect extends ShowHideEffect {
       element.style.setProperty(p, v);
     });
 
-    if(size != null) {
-      startValue = overrideStartEndValues(!doingShow, _property, startValue, size);
-      endValue = overrideStartEndValues(doingShow, _property, endValue, size);
-    }
+    startValue = overrideStartEndValues(!doingShow, _property, startValue);
+    endValue = overrideStartEndValues(doingShow, _property, endValue);
+
     element.style.setProperty(_property, startValue);
     _css3TransitionEffectValues.delayStart(element, localValues,
         () => _setShowValue(element, endValue, desiredDuration, timing));
