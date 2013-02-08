@@ -23,11 +23,3 @@ part 'src/effects/animation_core.dart';
 part 'src/effects/animation_queue.dart';
 part 'src/effects/element_animation.dart';
 part 'src/effects/time_manager.dart';
-
-// TODO: remove this temp method
-// here to verify original behavior
-@deprecated
-Future<CssStyleDeclaration> getElementComputedStyle(Element element) {
-  return getImmediateFuture()
-      .then((_) => element.getComputedStyle(''));
-}

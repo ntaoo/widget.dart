@@ -57,9 +57,9 @@ void _registerTest(String tag, String sheetStyle, String inlineStyle) {
 
         String initialCalculatedValue;
 
-        final future = getElementComputedStyle(element)
-            .then((css) {
-              initialCalculatedValue = css.display;
+        final future = getImmediateFuture()
+            .then((_) {
+              initialCalculatedValue = element.getComputedStyle('').display;
               return ShowHide.begin(a1, element);
             })
             .then((_) => _getValues(tag, sheetStyle, inlineStyle, element))
@@ -83,9 +83,9 @@ void _registerTest(String tag, String sheetStyle, String inlineStyle) {
 
           String initialCalculatedValue;
 
-          final future = getElementComputedStyle(element)
-              .then((css) {
-                initialCalculatedValue = css.display;
+          final future = getImmediateFuture()
+              .then((_) {
+                initialCalculatedValue = element.getComputedStyle('').display;
                 return ShowHide.begin(a1, element);
               })
               .then((_) => ShowHide.begin(a2, element))
