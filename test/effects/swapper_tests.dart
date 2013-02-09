@@ -122,7 +122,7 @@ void _swapperTest(int childCount,
  * assume all animations on all children are finished
  */
 List<int> _getDisplayedIndicies(Element host) {
-  final states = host.children.mappedBy(ShowHide.getState).toList();
+  final states = host.children.map(ShowHide.getState).toList();
 
   assert(states.length == host.children.length);
   final shownIndicies = new List<int>();

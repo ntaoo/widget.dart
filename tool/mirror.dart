@@ -63,10 +63,10 @@ List<mirrors.ClassMirror> _getTargetClasses() {
   final packageRoot = new Path(r'packages/');
 
   final componentPaths = util.getDartLibraryPaths().toList();
-  final componentLibraryNames = componentPaths.mappedBy((p) => p.filename).toList();
+  final componentLibraryNames = componentPaths.map((p) => p.filename).toList();
 
 
-  final targetPaths = componentPaths.mappedBy((Path p) => p.toNativePath());
+  final targetPaths = componentPaths.map((Path p) => p.toNativePath());
 
   final compilation = new mirrors.Compilation.library(targetPaths, libPath, packageRoot, ['--preserve-comments']);
 

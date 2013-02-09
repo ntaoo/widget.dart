@@ -60,7 +60,7 @@ class Swapper {
   }
 
   static Future<bool> _hideEverything(Element host, ShowHideEffect effect, int duration, EffectTiming effectTiming) {
-    final futures = host.children.mappedBy((e) => ShowHide.hide(e, effect: effect, duration: duration, effectTiming: effectTiming)).toList();
+    final futures = host.children.map((e) => ShowHide.hide(e, effect: effect, duration: duration, effectTiming: effectTiming)).toList();
     return Future.wait(futures)
         .then((List<ShowHideResult> successList) {
           return successList.every((v) => v.isSuccess);
@@ -86,7 +86,7 @@ class Swapper {
 
     // 1 - get states of all children
     final theStates = host.children
-        .mappedBy(ShowHide.getState).toList();
+        .map(ShowHide.getState).toList();
 
     int shownIndex = null;
 
@@ -114,7 +114,7 @@ class Swapper {
             // if more than one is shown, hide all but the last one
             final toHide = showIndicies
                 .getRange(0, showIndicies.length - 1)
-                .mappedBy((int index) => host.children[index]).toList();
+                .map((int index) => host.children[index]).toList();
             shownIndex = showIndicies[showIndicies.length - 1];
             return _hideAll(toHide);
           } else {
@@ -136,7 +136,7 @@ class Swapper {
   }
 
   static Future<bool> _hideAll(List<Element> elements) {
-    final futures = elements.mappedBy((Element e) => ShowHide.hide(e)).toList();
+    final futures = elements.map((Element e) => ShowHide.hide(e)).toList();
     return Future.wait(futures)
         .then((List<ShowHideResult> successValues) => successValues.every((v) => v.isSuccess));
   }

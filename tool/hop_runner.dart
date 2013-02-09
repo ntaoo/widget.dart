@@ -38,7 +38,7 @@ void main() {
 List<String> _getLibraryPaths() {
   final libLocations = [r'lib/', r'lib/components'];
   return util.getDartLibraryPaths()
-    .mappedBy((Path p) => p.toString())
+    .map((Path p) => p.toString())
     .toList();
 }
 

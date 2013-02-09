@@ -74,7 +74,7 @@ bool onlyOutputFiles(List<String> files) {
 
 List<String> getChangedFiles(List<String> args) {
   return args.where((value) => value.contains('='))
-      .mappedBy((value) {
+      .map((value) {
         final indexOfEqu = value.indexOf('=');
         return value.substring(indexOfEqu+1);
       })

@@ -20,7 +20,7 @@ class Accordion extends WebComponent {
   void inserted() {
     // collapse all 'collapse' children
     _getAllCollapseElements()
-      .mappedBy((Element e) => e.xtag)
+      .map((Element e) => e.xtag)
       .forEach((ShowHideComponent e) {
         e.hide();
       });
@@ -41,7 +41,7 @@ class Accordion extends WebComponent {
   void _onShowHideToggle(ShowHideComponent shc) {
     if(shc.isShown) {
       _getAllCollapseElements()
-        .mappedBy((Element e) => e.xtag)
+        .map((Element e) => e.xtag)
         .where((e) => e != shc)
         .forEach((ShowHideComponent e) {
           e.hide();

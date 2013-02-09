@@ -82,7 +82,7 @@ class Dropdown extends WebComponent implements ShowHideComponent {
   static void closeDropdowns() {
     document.queryAll('x-dropdown')
       .where((e) => e.xtag is Dropdown)
-      .mappedBy((e) => e.xtag as Dropdown)
+      .map((e) => e.xtag as Dropdown)
       .forEach((dd) => dd.hide());
   }
 
