@@ -12,7 +12,7 @@ void main() {
   final args = new Options().arguments;
   log('** ARGS: $args');
 
-  final bool buildAll = args.length == 0;
+  final bool buildAll = args.where((a) => !a.startsWith('--')).isEmpty;
 
   final changes = getChangedFiles(args);
 
