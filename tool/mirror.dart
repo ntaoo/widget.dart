@@ -7,14 +7,14 @@
 
 import 'dart:io';
 import 'package:bot/bot.dart';
-import '/usr/local/Cellar/dart-editor/18115/dart-sdk/lib/_internal/compiler/implementation/mirrors/mirrors.dart' as mirrors;
-import '/usr/local/Cellar/dart-editor/18115/dart-sdk/lib/_internal/dartdoc/lib/markdown.dart' as md;
+import '/usr/local/Cellar/dart-editor/18300/dart-sdk/lib/_internal/compiler/implementation/mirrors/mirrors.dart' as mirrors;
+import '/usr/local/Cellar/dart-editor/18300/dart-sdk/lib/_internal/dartdoc/lib/markdown.dart' as md;
 import 'package:html5lib/dom.dart' as dom;
 import 'package:html5lib/parser.dart';
 import 'package:html5lib/dom_parsing.dart';
 import 'util.dart' as util;
 
-const _libPath = r'/usr/local/Cellar/dart-editor/18115/dart-sdk/';
+const _libPath = r'/usr/local/Cellar/dart-editor/18300/dart-sdk/';
 const _htmlToHack = r'web/index_source.html';
 
 // TODO: should be using async methods here...hmm...
