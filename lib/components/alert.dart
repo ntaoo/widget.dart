@@ -49,7 +49,7 @@ class Alert extends WebComponent implements ShowHideComponent {
   void _onClick(MouseEvent event) {
     if(!event.defaultPrevented) {
       final Element target = event.target as Element;
-      if(target != null && target.dataAttributes['dismiss'] == 'alert') {
+      if(target != null && target.dataset['dismiss'] == 'alert') {
         hide();
       }
     }

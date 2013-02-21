@@ -73,7 +73,7 @@ class Modal extends WebComponent implements ShowHideComponent {
   void _onClick(MouseEvent event) {
     if(!event.defaultPrevented) {
       final Element target = event.target as Element;
-      if(target != null && target.dataAttributes['dismiss'] == 'modal') {
+      if(target != null && target.dataset['dismiss'] == 'modal') {
         hide();
       }
     }

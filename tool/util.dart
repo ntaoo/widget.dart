@@ -10,7 +10,7 @@ Iterable<Path> getDartLibraryPaths() {
 }
 
 Iterable<Path> _getDartFilePaths(List<String> dirPaths) {
-  return CollectionUtil.selectMany(dirPaths, (String dirPath) {
+  return dirPaths.expand((String dirPath) {
     final dir = new Directory(dirPath);
     assert(dir.existsSync());
     return dir.listSync()

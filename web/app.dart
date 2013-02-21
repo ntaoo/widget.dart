@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html';
 import 'package:bot/bot.dart';
 import 'package:widget/effects.dart';
@@ -5,7 +6,6 @@ import 'package:widget/widget.dart';
 
 void main() {
   window.onHashChange.listen(_onNavigate);
-
 
   //
   // ShowHide Demo
@@ -52,7 +52,7 @@ void _onNavigate(HashChangeEvent e) {
 
 void _flashElement(Element element) {
   element.classes.add(_highlightedClass);
-  window.setTimeout(() => element.classes.remove(_highlightedClass), 1000);
+  new Timer(const Duration(seconds: 1), () => element.classes.remove(_highlightedClass));
 }
 
 const _highlightedClass = 'highlighted';

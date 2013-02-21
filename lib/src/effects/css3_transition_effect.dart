@@ -93,14 +93,14 @@ class _css3TransitionEffectValues {
 
   final Element element;
   final Map<String, String> originalValues;
-  int timeoutHandle = null;
+  Timer timer;
 
   _css3TransitionEffectValues(this.element, this.originalValues);
 
   Map<String, String> _cleanup() {
-    if(timeoutHandle != null) {
-      window.clearTimeout(timeoutHandle);
-      timeoutHandle = null;
+    if(timer != null) {
+      timer.cancel();
+      timer = null;
     }
 
     return originalValues;
@@ -111,11 +111,11 @@ class _css3TransitionEffectValues {
 
     final value = _values[element] = new _css3TransitionEffectValues(element, originalValues);
 
-    value.timeoutHandle = window.setTimeout(() {
-      assert(value.timeoutHandle != null);
-      value.timeoutHandle = null;
+    value.timer = new Timer(const Duration(milliseconds: 1), () {
+      assert(value.timer != null);
+      value.timer = null;
       action();
-    }, 1);
+    });
 
   }
 

@@ -46,33 +46,33 @@ void _swapperTest(int childCount,
   final buffer = new StringBuffer('A host with child count: $childCount, with');
 
   if(hiddenIndicies.length == 0) {
-    buffer.add(' no hidden children,');
+    buffer.write(' no hidden children,');
   } else {
-    buffer.add(' hidden children at indicies $hiddenIndicies,');
+    buffer.write(' hidden children at indicies $hiddenIndicies,');
   }
 
-  buffer.add(' trying to');
+  buffer.write(' trying to');
 
   if(childIndexToShow == null) {
-    buffer.add(' hide all of the elements,');
+    buffer.write(' hide all of the elements,');
   } else if(childIndexToShow < 0) {
-    buffer.add(' show an element not in the host,');
+    buffer.write(' show an element not in the host,');
   } else {
-    buffer.add(' show the child element at index $childIndexToShow,');
+    buffer.write(' show the child element at index $childIndexToShow,');
   }
 
-  buffer.add(' should');
+  buffer.write(' should');
   if(expectedResult) {
-    buffer.add(' succeed');
+    buffer.write(' succeed');
   } else {
-    buffer.add(' fail');
+    buffer.write(' fail');
   }
 
-  buffer.add(' with a final shown item');
+  buffer.write(' with a final shown item');
   if(expectedDisplayed == null) {
-    buffer.add(' of nothing');
+    buffer.write(' of nothing');
   } else {
-    buffer.add(' at index $expectedDisplayed');
+    buffer.write(' at index $expectedDisplayed');
   }
 
   test(buffer.toString(), () {
@@ -122,7 +122,7 @@ void _swapperTest(int childCount,
  * assume all animations on all children are finished
  */
 List<int> _getDisplayedIndicies(Element host) {
-  final states = host.children.map(ShowHide.getState).toList();
+  final states = host.children.map(ShowHide.getState).toList().toList();
 
   assert(states.length == host.children.length);
   final shownIndicies = new List<int>();

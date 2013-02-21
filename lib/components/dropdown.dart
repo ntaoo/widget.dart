@@ -102,7 +102,7 @@ class Dropdown extends WebComponent implements ShowHideComponent {
   void _onClick(MouseEvent event) {
     if(!event.defaultPrevented && event.target is Element) {
       final Element target = event.target;
-      if(target != null && target.dataAttributes['toggle'] == 'dropdown') {
+      if(target != null && target.dataset['toggle'] == 'dropdown') {
         toggle();
         event.preventDefault();
         target.focus();

@@ -61,7 +61,7 @@ class Collapse extends WebComponent implements ShowHideComponent {
     if(!e.defaultPrevented) {
       final clickElement = e.target as Element;
 
-      if(clickElement != null && clickElement.dataAttributes['toggle'] == 'collapse') {
+      if(clickElement != null && clickElement.dataset['toggle'] == 'collapse') {
         toggle();
         e.preventDefault();
       }

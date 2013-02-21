@@ -277,7 +277,7 @@ class _AnimatingValues {
   final Action1<Element> _finishFunc;
   final Completer<ShowHideResult> _completer = new Completer<ShowHideResult>();
 
-  int _setTimeoutHandle;
+  Timer _timer;
 
   _AnimatingValues._internal(this._element, this._cleanupAction, this._finishFunc) {
     assert(_aniValues[_element] == null);
@@ -286,14 +286,14 @@ class _AnimatingValues {
 
   Future<ShowHideResult> _start(int durationMS) {
     assert(durationMS > 0);
-    assert(_setTimeoutHandle == null);
-    _setTimeoutHandle = window.setTimeout(_complete, durationMS);
+    assert(_timer == null);
+    _timer = new Timer(new Duration(milliseconds: durationMS), _complete);
     return _completer.future;
   }
 
   void _cancel() {
-    assert(_setTimeoutHandle != null);
-    window.clearTimeout(_setTimeoutHandle);
+    assert(_timer != null);
+    _timer.cancel();
     _cleanup();
     _completer.complete(ShowHideResult.CANCELED);
   }

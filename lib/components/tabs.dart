@@ -44,7 +44,7 @@ class Tabs extends WebComponent {
   }
 
   bool _targetClick(Element clickElement) {
-    final toggleData = clickElement.dataAttributes['toggle'];
+    final toggleData = clickElement.dataset['toggle'];
     if(toggleData != 'tab' && toggleData != 'pill') {
       return false;
     }
@@ -82,7 +82,7 @@ class Tabs extends WebComponent {
 
   static String _getClickTarget(Element clickedElement) {
     assert(clickedElement != null);
-    String target = clickedElement.dataAttributes['target'];
+    String target = clickedElement.dataset['target'];
     if(target == null) {
       final href = clickedElement.attributes['href'];
       if(href != null && href.startsWith('#')) {
