@@ -1,5 +1,11 @@
 # Changelog - Dart Widgets
 
+## 0.2.1 - 20 Feb 2013 (SDK 0.3.7.6 r18717)
+
+Updated everything to align with latest Dart SDK release. Also updated related libraries.
+
+No other changes.
+
 ## 0.2.0 - 9 Feb 2013 (SDK 0.3.5.1 r18300)
 
 A lot more in-line documentation in libraries. Scripts harvest this data to populate
