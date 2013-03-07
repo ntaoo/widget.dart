@@ -9,6 +9,7 @@ class ShrinkEffect extends Css3TransitionEffect {
   ShrinkEffect() : super('max-height', '0', '500px', {'overflow': 'hidden'});
 
   @protected
+  @override
   String overrideStartEndValues(bool showValue, String property, String originalValue) {
     if(property == 'max-height' && showValue) {
       // TODO: this is a horrible hack. Need to figure out a way to get the original size

@@ -14,11 +14,13 @@ class Css3TransitionEffect extends ShowHideEffect {
   }
 
   @protected
+  @override
   int startShow(Element element, int desiredDuration, EffectTiming timing) {
     return _startAnimation(true, element, desiredDuration, _hideValue, _showValue, timing);
   }
 
   @protected
+  @override
   int startHide(Element element, int desiredDuration, EffectTiming timing) {
     return _startAnimation(false, element, desiredDuration, _showValue, _hideValue, timing);
   }
@@ -31,6 +33,7 @@ class Css3TransitionEffect extends ShowHideEffect {
     return originalValue;
   }
 
+  @override
   void clearAnimation(Element element) {
     final restoreValues = _css3TransitionEffectValues.cleanup(element);
 
