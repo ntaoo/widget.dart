@@ -2,6 +2,7 @@ library x_swap;
 
 import 'dart:async';
 import 'dart:html';
+import 'package:meta/meta.dart';
 import 'package:web_ui/web_ui.dart';
 import 'package:bot/bot.dart';
 import 'package:widget/effects.dart';
@@ -23,16 +24,20 @@ class Swap extends WebComponent implements SwapComponent {
   // should only be accessed via the [_contentElement] property
   Element _contentElementField;
 
+  @override
   int get activeItemIndex {
     return items.indexOf(activeItem);
   }
 
+  @override
   Element get activeItem {
     return $(items).singleMatching((e) => e.classes.contains(_activeClass));
   }
 
+  @override
   List<Element> get items => _contentElement.children;
 
+  @override
   Future<bool> showItemAtIndex(int index, {ShowHideEffect effect, int duration, EffectTiming effectTiming, ShowHideEffect hideEffect}) {
     // TODO: support hide all if index == null
 
@@ -40,6 +45,7 @@ class Swap extends WebComponent implements SwapComponent {
     return showItem(newActive, effect: effect, duration: duration, effectTiming: effectTiming, hideEffect: hideEffect);
   }
 
+  @override
   Future<bool> showItem(Element item, {ShowHideEffect effect, int duration, EffectTiming effectTiming, ShowHideEffect hideEffect}) {
     assert(items.contains(item));
 
