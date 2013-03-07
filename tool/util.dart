@@ -15,7 +15,7 @@ Iterable<Path> _getDartFilePaths(List<String> dirPaths) {
     assert(dir.existsSync());
     return dir.listSync()
         .where((i) => i is File)
-        .where((File f) => f.name.endsWith(_dartFileExtension))
+        .where((File f) => f.path.endsWith(_dartFileExtension))
         .map((File f) => new Path(f.fullPathSync()));
   });
 }

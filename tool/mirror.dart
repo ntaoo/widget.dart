@@ -7,14 +7,14 @@
 
 import 'dart:io';
 import 'package:bot/bot.dart';
-import '/usr/local/Cellar/dart-editor/18915/dart-sdk/lib/_internal/compiler/implementation/mirrors/mirrors.dart' as mirrors;
-import '/usr/local/Cellar/dart-editor/18915/dart-sdk/lib/_internal/dartdoc/lib/markdown.dart' as md;
+import '/usr/local/Cellar/dart-editor/19425/dart-sdk/lib/_internal/compiler/implementation/mirrors/mirrors.dart' as mirrors;
+import '/usr/local/Cellar/dart-editor/19425/dart-sdk/lib/_internal/dartdoc/lib/markdown.dart' as md;
 import 'package:html5lib/dom.dart' as dom;
 import 'package:html5lib/parser.dart';
 import 'package:html5lib/dom_parsing.dart';
 import 'util.dart' as util;
 
-const _libPath = r'/usr/local/Cellar/dart-editor/18915/dart-sdk/';
+const _libPath = r'/usr/local/Cellar/dart-editor/19425/dart-sdk/';
 const _htmlToHack = r'web/index_source.html';
 
 // TODO: should be using async methods here...hmm...
@@ -123,7 +123,7 @@ bool _isRightBlockQuote(dom.Element element, String className) {
 }
 
 String _getHtmlFromMarkdown(String className, String markdown) {
-  md.setImplicitLinkResolver((name) {
+  final md.Resolver resolver = (name) {
     if(name == className) {
       return new md.Element.text('strong', name);
     } else {
@@ -131,19 +131,14 @@ String _getHtmlFromMarkdown(String className, String markdown) {
       anchor.attributes['href'] = '#${name.toLowerCase()}';
       return anchor;
     }
-  });
+  };
 
-  final blocks = _getMarkdownNodes(markdown);
+  final document = new md.Document(linkResolver: resolver);
 
-  return md.renderToHtml(blocks);
-}
-
-List<md.Node> _getMarkdownNodes(String markdown) {
-  final document = new md.Document();
-
-  // Replace windows line endings with unix line endings, and split.
-  final lines = markdown.replaceAll('\r\n','\n').split('\n');
+  final lines = Util.splitLines(markdown).toList();
 
   document.parseRefLinks(lines);
-  return document.parseLines(lines);
+  final blocks = document.parseLines(lines);
+
+  return md.renderToHtml(blocks);
 }

@@ -30,9 +30,9 @@ void main() {
   addAsyncTask('copy_components', (ctx) => startProcess(ctx, './bin/copy_out.sh'));
 
 
-  addTask('docs', getCompileDocsFunc('docs', 'packages/', () => new Future.immediate(_getLibraryPaths())));
+  addTask('docs', createDartDocTask(_getLibraryPaths, targetBranch: 'docs'));
 
-  runHopCore();
+  runHop();
 }
 
 List<String> _getLibraryPaths() {
