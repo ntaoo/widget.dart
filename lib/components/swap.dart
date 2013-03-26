@@ -31,7 +31,7 @@ class Swap extends WebComponent implements SwapComponent {
 
   @override
   Element get activeItem {
-    return $(items).singleMatching((e) => e.classes.contains(_activeClass));
+    return $(items).singleWhere((e) => e.classes.contains(_activeClass));
   }
 
   @override
@@ -99,7 +99,7 @@ class Swap extends WebComponent implements SwapComponent {
           theItems[0].classes.add(_activeClass);
         }
       } else {
-        activeFigures.getRange(1, activeFigures.length - 1)
+        activeFigures.sublist(1)
           .forEach((e) => e.classes.remove(_activeClass));
       }
 

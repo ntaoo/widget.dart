@@ -41,7 +41,7 @@ int get _activeItemIndex {
 }
 
 Element get _activeItem {
-  return _contentElementField.children.singleMatching((e) => e.classes.contains(_activeClass));
+  return _contentElementField.children.singleWhere((e) => e.classes.contains(_activeClass));
 }
 
 Future<bool> _moveDelta() {
@@ -101,7 +101,7 @@ void _initialize() {
         theItems[0].classes.add(_activeClass);
       }
     } else {
-      activeFigures.getRange(1, activeFigures.length - 1)
+      activeFigures.sublist(1)
       .forEach((e) => e.classes.remove(_activeClass));
     }
 

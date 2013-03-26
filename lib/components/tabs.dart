@@ -54,7 +54,7 @@ class Tabs extends WebComponent {
     //
     final allTabs = _getAllTabs();
     final clickAncestors = Tools.getAncestors(clickElement);
-    final activatedTab = allTabs.firstMatching((t) => clickAncestors.contains(t), orElse: () => null);
+    final activatedTab = allTabs.firstWhere((t) => clickAncestors.contains(t), orElse: () => null);
     if(activatedTab != null) {
       allTabs.forEach((t) {
         if(t == activatedTab) {
@@ -131,7 +131,7 @@ class Tabs extends WebComponent {
     if(swap != null) {
       final items = swap.items;
 
-      final targetItem = $(items).firstMatching((e) => e.id == target, orElse: () => null);
+      final targetItem = $(items).firstWhere((e) => e.id == target, orElse: () => null);
       if(targetItem != null) {
         swap.showItem(targetItem);
       }

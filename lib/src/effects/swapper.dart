@@ -113,7 +113,7 @@ class Swapper {
           } else if(showIndicies.length > 1) {
             // if more than one is shown, hide all but the last one
             final toHide = showIndicies
-                .getRange(0, showIndicies.length - 1)
+                .sublist(0, showIndicies.length - 1)
                 .map((int index) => host.children[index]).toList();
             shownIndex = showIndicies[showIndicies.length - 1];
             return _hideAll(toHide);
