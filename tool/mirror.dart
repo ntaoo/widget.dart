@@ -5,23 +5,28 @@
  * TODO: file a dart bug on accessing these guys...
  */
 
+import 'dart:async';
 import 'dart:io';
 import 'package:bot/bot.dart';
-import '/usr/local/Cellar/dart-editor/19425/dart-sdk/lib/_internal/compiler/implementation/mirrors/mirrors.dart' as mirrors;
-import '/usr/local/Cellar/dart-editor/19425/dart-sdk/lib/_internal/dartdoc/lib/markdown.dart' as md;
+import '/usr/local/Cellar/dart-editor/20444/dart-sdk/lib/_internal/compiler/implementation/mirrors/mirrors.dart' as mirrors;
+import '/usr/local/Cellar/dart-editor/20444/dart-sdk/lib/_internal/compiler/implementation/mirrors/dart2js_mirror.dart' as dart2js;
+import '/usr/local/Cellar/dart-editor/20444/dart-sdk/lib/_internal/dartdoc/lib/markdown.dart' as md;
 import 'package:html5lib/dom.dart' as dom;
 import 'package:html5lib/parser.dart';
 import 'package:html5lib/dom_parsing.dart';
 import 'util.dart' as util;
 
-const _libPath = r'/usr/local/Cellar/dart-editor/19425/dart-sdk/';
+const _libPath = r'/usr/local/Cellar/dart-editor/20444/dart-sdk/';
 const _htmlToHack = r'web/index_source.html';
 
 // TODO: should be using async methods here...hmm...
 
 void main() {
-  final classes = _getTargetClasses();
 
+  _getTargetClasses().then(_continue);
+}
+
+void _continue(List<mirrors.ClassMirror> classes) {
   final htmlFile = new File(_htmlToHack);
   assert(htmlFile.existsSync());
 
@@ -36,7 +41,8 @@ void main() {
 
 
     final mirrors.CommentInstanceMirror classComment = componentClass.metadata
-        .firstMatching((m) => m is mirrors.CommentInstanceMirror && m.isDocComment, orElse: () => null);
+        .firstWhere((m) => m is mirrors.CommentInstanceMirror && m.isDocComment,
+        orElse: () => null);
 
     if(classComment == null) {
       print('- $classSimpleName - no comment');
@@ -57,7 +63,7 @@ void main() {
   }
 }
 
-List<mirrors.ClassMirror> _getTargetClasses() {
+Future<List<mirrors.ClassMirror>> _getTargetClasses() {
   final currentLibraryPath = new Directory.current().path;
   final libPath = new Path(_libPath);
   final packageRoot = new Path(r'packages/');
@@ -68,21 +74,23 @@ List<mirrors.ClassMirror> _getTargetClasses() {
 
   final targetPaths = componentPaths.map((Path p) => p.toNativePath());
 
-  final compilation = new mirrors.Compilation.library(targetPaths, libPath, packageRoot, ['--preserve-comments']);
+  return dart2js.analyze(targetPaths, libPath, packageRoot: packageRoot,
+      options: ['--preserve-comments'])
+      .then((mirrors.MirrorSystem mirrors) {
 
-  final mirrors = compilation.mirrors;
+        final componentLibraries = mirrors.libraries.values.where((lm) {
+          final uri = lm.location.sourceUri;
+          return uri.scheme == 'file' && uri.path.startsWith(currentLibraryPath);
+        }).toList();
 
-  final componentLibraries = mirrors.libraries.values.where((lm) {
-    final uri = lm.location.sourceUri;
-    return uri.scheme == 'file' && uri.path.startsWith(currentLibraryPath);
-  }).toList();
-
-  return componentLibraries.expand((lm) {
-    return lm.classes.values;
-  }).toList();
+        return componentLibraries.expand((lm) {
+          return lm.classes.values;
+        }).toList();
+      });
 }
 
-void _writeClassComment(dom.Document doc, String className, String markdownCommentContent) {
+void _writeClassComment(dom.Document doc, String className,
+                        String markdownCommentContent) {
 
   final htmlContent = _getHtmlFromMarkdown(className, markdownCommentContent);
   assert(htmlContent != null);
@@ -99,7 +107,7 @@ void _writeClassComment(dom.Document doc, String className, String markdownComme
 
 dom.Element _getBlockQuoteElement(dom.Document doc, String className) {
   return doc.queryAll('blockquote')
-      .firstMatching((e) => _isRightBlockQuote(e, className), orElse: () => null);
+      .firstWhere((e) => _isRightBlockQuote(e, className), orElse: () => null);
 }
 
 bool _isRightBlockQuote(dom.Element element, String className) {
