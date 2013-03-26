@@ -19,48 +19,49 @@ import 'util.dart' as util;
 const _libPath = r'/usr/local/Cellar/dart-editor/20444/dart-sdk/';
 const _htmlToHack = r'web/index_source.html';
 
-// TODO: should be using async methods here...hmm...
-
 void main() {
-
-  _getTargetClasses().then(_continue);
-}
-
-void _continue(List<mirrors.ClassMirror> classes) {
   final htmlFile = new File(_htmlToHack);
   assert(htmlFile.existsSync());
 
-  final originalContent = htmlFile.readAsStringSync();
+  List<mirrors.ClassMirror> classes;
 
-  final parser = new HtmlParser(originalContent, generateSpans: true);
-  final document = parser.parse();
+  _getTargetClasses()
+  .then((List<mirrors.ClassMirror> value) {
+    classes = value;
 
-  for(final componentClass in classes) {
+    return htmlFile.readAsString();
+  })
+  .then((String originalContent) {
 
-    final classSimpleName = componentClass.simpleName;
+    final parser = new HtmlParser(originalContent, generateSpans: true);
+    final document = parser.parse();
 
+    for(final componentClass in classes) {
 
-    final mirrors.CommentInstanceMirror classComment = componentClass.metadata
-        .firstWhere((m) => m is mirrors.CommentInstanceMirror && m.isDocComment,
-        orElse: () => null);
+      final classSimpleName = componentClass.simpleName;
 
-    if(classComment == null) {
-      print('- $classSimpleName - no comment');
-    } else {
-      print('+ ${componentClass.simpleName} - has doc comments');
-      _writeClassComment(document, componentClass.simpleName, classComment.trimmedText);
+      final mirrors.CommentInstanceMirror classComment = componentClass.metadata
+          .firstWhere((m) => m is mirrors.CommentInstanceMirror && m.isDocComment,
+          orElse: () => null);
+
+      if(classComment == null) {
+        print('- $classSimpleName - no comment');
+      } else {
+        print('+ ${componentClass.simpleName} - has doc comments');
+        _writeClassComment(document, componentClass.simpleName, classComment.trimmedText);
+      }
     }
-  }
 
-  // Now document has been updated
-  final updatedContent = document.outerHtml;
-  if(updatedContent != originalContent) {
-    // we should write!
-    print("+ Updating $_htmlToHack");
-    htmlFile.writeAsStringSync(updatedContent);
-  } else {
-    print('- No changes to $_htmlToHack');
-  }
+    // Now document has been updated
+    final updatedContent = document.outerHtml;
+    if(updatedContent != originalContent) {
+      // we should write!
+      print("+ Updating $_htmlToHack");
+      return htmlFile.writeAsString(updatedContent);
+    } else {
+      print('- No changes to $_htmlToHack');
+    }
+  });
 }
 
 Future<List<mirrors.ClassMirror>> _getTargetClasses() {
