@@ -1,5 +1,5 @@
 name: widget
-version: 0.2.2
+version: 0.2.3
 author: Kevin Moore <kevin@thinkpixellab.com>
 description: A set of reusable Web Components for Dart applications
 homepage: https://github.com/kevmoo/widget.dart
@@ -11,4 +11,4 @@ dependencies:
   web_ui: '>=0.4.3'
   meta: '>=0.4.3+1'
 dev_dependencies:
-  unittest: '>=0.4.1'
+  unittest: '>=0.4.3+1'
