@@ -8,15 +8,15 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:bot/bot.dart';
-import '/usr/local/Cellar/dart-editor/20444/dart-sdk/lib/_internal/compiler/implementation/mirrors/mirrors.dart' as mirrors;
-import '/usr/local/Cellar/dart-editor/20444/dart-sdk/lib/_internal/compiler/implementation/mirrors/dart2js_mirror.dart' as dart2js;
-import '/usr/local/Cellar/dart-editor/20444/dart-sdk/lib/_internal/dartdoc/lib/markdown.dart' as md;
+import '/usr/local/Cellar/dart-editor/20810/dart-sdk/lib/_internal/compiler/implementation/mirrors/mirrors.dart' as mirrors;
+import '/usr/local/Cellar/dart-editor/20810/dart-sdk/lib/_internal/compiler/implementation/mirrors/dart2js_mirror.dart' as dart2js;
+import '/usr/local/Cellar/dart-editor/20810/dart-sdk/lib/_internal/dartdoc/lib/markdown.dart' as md;
 import 'package:html5lib/dom.dart' as dom;
 import 'package:html5lib/parser.dart';
 import 'package:html5lib/dom_parsing.dart';
 import 'util.dart' as util;
 
-const _libPath = r'/usr/local/Cellar/dart-editor/20444/dart-sdk/';
+const _libPath = r'/usr/local/Cellar/dart-editor/20810/dart-sdk/';
 const _htmlToHack = r'web/index_source.html';
 
 void main() {
@@ -70,12 +70,8 @@ Future<List<mirrors.ClassMirror>> _getTargetClasses() {
   final packageRoot = new Path(r'packages/');
 
   final componentPaths = util.getDartLibraryPaths().toList();
-  final componentLibraryNames = componentPaths.map((p) => p.filename).toList();
 
-
-  final targetPaths = componentPaths.map((Path p) => p.toNativePath());
-
-  return dart2js.analyze(targetPaths, libPath, packageRoot: packageRoot,
+  return dart2js.analyze(componentPaths, libPath, packageRoot: packageRoot,
       options: ['--preserve-comments'])
       .then((mirrors.MirrorSystem mirrors) {
 
