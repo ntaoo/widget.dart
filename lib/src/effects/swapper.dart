@@ -39,10 +39,10 @@ class Swapper {
     return _ensureOneShown(host)
         .then((Element currentlyVisible) {
           if(currentlyVisible == null) {
-            return new Future.immediate(false);
+            return new Future.value(false);
           } else if(currentlyVisible == child) {
             // target element is already shown
-            return new Future.immediate(true);
+            return new Future.value(true);
           }
 
           child.style.zIndex = '2';
@@ -71,7 +71,7 @@ class Swapper {
     assert(host != null);
     if(host.children.length == 0) {
       // no elements to show
-      return new Future.immediate(null);
+      return new Future.value(null);
     } else if(host.children.length == 1) {
       final child = host.children[0];
       return ShowHide.show(child)
@@ -90,7 +90,7 @@ class Swapper {
 
     int shownIndex = null;
 
-    return new Future.immediate(theStates)
+    return new Future.value(theStates)
         .then((List<ShowHideState> states) {
           // paranoid sanity check that at lesat the count of items
           // before and after haven't changed

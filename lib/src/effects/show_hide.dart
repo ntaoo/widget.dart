@@ -153,11 +153,11 @@ class ShowHide {
       case ShowHideState.SHOWING:
         // no op - let the current animation finish
         assert(_AnimatingValues.isAnimating(element));
-        return new Future.immediate(ShowHideResult.NOOP);
+        return new Future.value(ShowHideResult.NOOP);
       case ShowHideState.SHOWN:
         // no op. If shown leave it.
         assert(!_AnimatingValues.isAnimating(element));
-        return new Future.immediate(ShowHideResult.NOOP);
+        return new Future.value(ShowHideResult.NOOP);
       case ShowHideState.HIDING:
         _AnimatingValues.cancelAnimation(element);
         break;
@@ -179,7 +179,7 @@ class ShowHide {
       return _AnimatingValues.scheduleCleanup(durationMS, element, effect.clearAnimation, _finishShow);
     } else {
       assert(values.currentState == ShowHideState.SHOWN);
-      return new Future.immediate(ShowHideResult.IMMEDIATE);
+      return new Future.value(ShowHideResult.IMMEDIATE);
     }
   }
 
@@ -202,12 +202,12 @@ class ShowHide {
       case ShowHideState.HIDING:
         // no op - let the current animation finish
         assert(_AnimatingValues.isAnimating(element));
-        return new Future.immediate(ShowHideResult.NOOP);
+        return new Future.value(ShowHideResult.NOOP);
       case ShowHideState.HIDDEN:
         // it's possible we're here because the inferred calculated value is 'none'
         // this hard-wires the local display value to 'none'...just to be clear
         _finishHide(element);
-        return new Future.immediate(ShowHideResult.NOOP);
+        return new Future.value(ShowHideResult.NOOP);
       case ShowHideState.SHOWING:
         _AnimatingValues.cancelAnimation(element);
         break;
@@ -226,7 +226,7 @@ class ShowHide {
     } else {
       _finishHide(element);
       assert(values.currentState == ShowHideState.HIDDEN);
-      return new Future.immediate(ShowHideResult.IMMEDIATE);
+      return new Future.value(ShowHideResult.IMMEDIATE);
     }
   }
 

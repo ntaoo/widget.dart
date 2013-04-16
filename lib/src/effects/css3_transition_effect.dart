@@ -78,7 +78,7 @@ class Css3TransitionEffect extends ShowHideEffect {
     element.style.setProperty(_property, value);
   }
 
-  static Map<String, String> _recordProperties(Element element, Collection<String> properties) {
+  static Map<String, String> _recordProperties(Element element, Iterable<String> properties) {
     final map = new Map<String, String>();
 
     for(final p in properties) {

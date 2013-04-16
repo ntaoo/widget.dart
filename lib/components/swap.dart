@@ -51,7 +51,7 @@ class Swap extends WebComponent implements SwapComponent {
 
     final oldActiveChild = activeItem;
     if(oldActiveChild == item) {
-      return new Future<bool>.immediate(true);
+      return new Future<bool>.value(true);
     }
 
     [oldActiveChild, item].forEach((e) => e.classes.remove(_dirClassPrev));
@@ -84,7 +84,7 @@ class Swap extends WebComponent implements SwapComponent {
 
   void _initialize() {
     if(_contentElementField == null) {
-      _contentElementField = this.query('x-swap > .content');
+      _contentElementField = this.query('[is=x-swap] > .content');
       if(_contentElementField == null) {
         throw 'Could not find the content element. Either the template has changed or state was accessed too early in the component lifecycle.';
       }

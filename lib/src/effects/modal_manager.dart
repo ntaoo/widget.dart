@@ -40,7 +40,7 @@ class ModalManager {
     }
 
     return Future.wait(futures)
-        .catchError((AsyncError err) {
+        .catchError((err) {
           print(err);
         }, test: (v) => false)
         ..whenComplete(() => _clearOutBackdrop(element.document));

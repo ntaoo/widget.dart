@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <element name="x-accordion" extends="div">
+    <element name="x-accordion" extends="div" constructor="Accordion">
       <template>
-        <content select='x-collapse'></content>
+        <content select='[is=x-collapse]'></content>
       </template>
       <script type="application/dart" src='accordion.dart'></script>
     </element>
