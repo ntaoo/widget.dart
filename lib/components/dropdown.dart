@@ -47,7 +47,7 @@ class Dropdown extends WebComponent implements ShowHideComponent {
 
       final action = _isShown ? ShowHideAction.SHOW : ShowHideAction.HIDE;
 
-      final headerElement = this.query('x-dropdown > .dropdown');
+      final headerElement = this.query('[is=x-dropdown] > .dropdown');
 
       if(headerElement != null) {
         if(_isShown) {
@@ -57,7 +57,7 @@ class Dropdown extends WebComponent implements ShowHideComponent {
         }
       }
 
-      final contentDiv = this.query('x-dropdown > .dropdown-menu');
+      final contentDiv = this.query('[is=x-dropdown] > .dropdown-menu');
       if(contentDiv != null) {
         ShowHide.begin(action, contentDiv, effect: _effect);
       }
@@ -80,7 +80,7 @@ class Dropdown extends WebComponent implements ShowHideComponent {
   }
 
   static void closeDropdowns() {
-    document.queryAll('x-dropdown')
+    document.queryAll('[is=x-dropdown]')
       .where((e) => e.xtag is Dropdown)
       .map((e) => e.xtag as Dropdown)
       .forEach((dd) => dd.hide());

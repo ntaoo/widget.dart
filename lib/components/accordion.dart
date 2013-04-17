@@ -26,20 +26,18 @@ class Accordion extends WebComponent {
       });
   }
 
-  List<Element> _getAllCollapseElements() => this.queryAll('x-accordion > x-collapse');
+  List<Element> _getAllCollapseElements() =>
+      this.queryAll('[is=x-accordion] > [is=x-collapse]');
 
   void _onOpen(Event openEvent) {
-    if(openEvent.target is UnknownElement) {
-      final UnknownElement target = openEvent.target;
-      final ShowHideComponent shc = target.xtag as ShowHideComponent;
-      if(shc != null) {
-        _onShowHideToggle(shc);
-      }
+    Element target = openEvent.target;
+    if (target.xtag is ShowHideComponent) {
+      _onShowHideToggle(target.xtag);
     }
   }
 
   void _onShowHideToggle(ShowHideComponent shc) {
-    if(shc.isShown) {
+    if (shc.isShown) {
       _getAllCollapseElements()
         .map((Element e) => e.xtag)
         .where((e) => e != shc)

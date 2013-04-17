@@ -4,7 +4,7 @@ author: Kevin Moore <kevin@thinkpixellab.com>
 description: A set of reusable Web Components for Dart applications
 homepage: https://github.com/kevmoo/widget.dart
 environment:
-  sdk: '>=0.4.5+1.r21094'
+  sdk: '>=0.4.7+1'
 dependencies:
   html5lib: '>=0.4.3'
   bot: '>=0.20.0'

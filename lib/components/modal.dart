@@ -68,7 +68,7 @@ class Modal extends WebComponent implements ShowHideComponent {
     }
   }
 
-  Element _getModalElement() => this.query('x-modal > .modal');
+  Element _getModalElement() => this.query('[is=x-modal] > .modal');
 
   void _onClick(MouseEvent event) {
     if(!event.defaultPrevented) {

@@ -25,12 +25,13 @@ class Carousel extends WebComponent {
 
   Future<bool> previous() => _moveDelta(false);
 
-  SwapComponent get _swap => this.query('x-carousel > .carousel > x-swap').xtag;
+  SwapComponent get _swap =>
+      this.query('[is=x-carousel] > .carousel > [is=x-swap]').xtag;
 
   Future<bool> _moveDelta(bool doNext) {
     final swap = _swap;
     assert(swap != null);
-    if(swap.items.length == 0) {
+    if (swap.items.length == 0) {
       return new Future.value(false);
     }
 
@@ -38,7 +39,7 @@ class Carousel extends WebComponent {
     final delta = doNext ? 1 : -1;
 
     ShowHideEffect showEffect, hideEffect;
-    if(doNext) {
+    if (doNext) {
       showEffect = _fromTheRight;
       hideEffect = _fromTheLeft;
     } else {
@@ -50,6 +51,7 @@ class Carousel extends WebComponent {
 
     final newIndex = (activeIndex + delta) % _swap.items.length;
 
-    return _swap.showItemAtIndex(newIndex, effect: showEffect, hideEffect: hideEffect, duration: _duration);
+    return _swap.showItemAtIndex(newIndex, effect: showEffect,
+        hideEffect: hideEffect, duration: _duration);
   }
 }

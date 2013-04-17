@@ -92,7 +92,7 @@ class Tabs extends WebComponent {
     return target;
   }
 
-  List<Element> _getAllTabs() => this.queryAll('x-tabs > .nav-tabs > li');
+  List<Element> _getAllTabs() => this.queryAll('[is=x-tabs] > .nav-tabs > li');
 
   void _ensureAtMostOneTabActive() {
     final tabs = _getAllTabs();
@@ -114,7 +114,7 @@ class Tabs extends WebComponent {
   }
 
   SwapComponent _getSwap() {
-    final Element element = this.query('x-tabs > x-swap');
+    final Element element = this.query('[is=x-tabs] > [is=x-swap]');
     if(element != null) {
       if(element is SwapComponent) {
         return element;
