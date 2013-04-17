@@ -1,6 +1,6 @@
 # Changelog - Dart Widgets
 
-## 0.2.5 - 16 April 2013 (SDK 0.4.7 r21548)
+## 0.2.5-dev *pre-release* (SDK 0.4.7 r21548)
 
 Updated to lastest web_ui and SDK.
 
