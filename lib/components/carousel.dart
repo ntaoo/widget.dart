@@ -31,7 +31,7 @@ class Carousel extends WebComponent {
     final swap = _swap;
     assert(swap != null);
     if(swap.items.length == 0) {
-      return new Future.immediate(false);
+      return new Future.value(false);
     }
 
     assert(doNext != null);

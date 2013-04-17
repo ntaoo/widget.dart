@@ -102,14 +102,14 @@ Future<bool> _updateIfChanged(String filePath, String newContent) {
           return file.readAsString()
               .then((String content) => content != newContent);
         } else {
-          return new Future.immediate(true);
+          return new Future.value(true);
         }
       }).then((bool shouldUpdate) {
         if(shouldUpdate) {
           return file.writeAsString(newContent)
             .then((_) => true);
         } else {
-          return new Future.immediate(false);
+          return new Future.value(false);
         }
       });
 }

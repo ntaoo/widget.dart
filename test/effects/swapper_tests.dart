@@ -110,8 +110,8 @@ void _swapperTest(int childCount,
             expect(displayedIndicies.length, 1, reason: 'there should only be one displayed item');
             expect(displayedIndicies[0], expectedDisplayed);
           }
-        }), onError: (AsyncError error) {
-          registerException(error.error, error.stackTrace);
+        }), onError: (error) {
+          registerException(error, getAttachedStackTrace(error));
         });
     }
   });

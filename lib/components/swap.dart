@@ -51,7 +51,7 @@ class Swap extends WebComponent implements SwapComponent {
 
     final oldActiveChild = activeItem;
     if(oldActiveChild == item) {
-      return new Future<bool>.immediate(true);
+      return new Future<bool>.value(true);
     }
 
     [oldActiveChild, item].forEach((e) => e.classes.remove(_dirClassPrev));

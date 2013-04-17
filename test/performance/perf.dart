@@ -67,7 +67,7 @@ Future<bool> showItem(Element item, {ShowHideEffect effect, int duration, Effect
 
   final oldActiveChild = _activeItem;
   if(oldActiveChild == item) {
-    return new Future<bool>.immediate(true);
+    return new Future<bool>.value(true);
   }
 
   [oldActiveChild, item].forEach((e) => e.classes.remove(_dirClassPrev));
