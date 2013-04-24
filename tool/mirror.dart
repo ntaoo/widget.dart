@@ -8,15 +8,15 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:bot/bot.dart';
-import '/usr/local/Cellar/dart-editor/21604/dart-sdk/lib/_internal/compiler/implementation/mirrors/mirrors.dart' as mirrors;
-import '/usr/local/Cellar/dart-editor/21604/dart-sdk/lib/_internal/compiler/implementation/mirrors/dart2js_mirror.dart' as dart2js;
-import '/usr/local/Cellar/dart-editor/21604/dart-sdk/lib/_internal/dartdoc/lib/markdown.dart' as md;
+import '/usr/local/Cellar/dart-editor/21823/dart-sdk/lib/_internal/compiler/implementation/mirrors/mirrors.dart' as mirrors;
+import '/usr/local/Cellar/dart-editor/21823/dart-sdk/lib/_internal/compiler/implementation/mirrors/dart2js_mirror.dart' as dart2js;
+import '/usr/local/Cellar/dart-editor/21823/dart-sdk/lib/_internal/dartdoc/lib/markdown.dart' as md;
 import 'package:html5lib/dom.dart' as dom;
 import 'package:html5lib/parser.dart';
 import 'package:html5lib/dom_parsing.dart';
 import 'util.dart' as util;
 
-const _libPath = r'/usr/local/Cellar/dart-editor/21604/dart-sdk/';
+const _libPath = r'/usr/local/Cellar/dart-editor/21823/dart-sdk/';
 const _htmlToHack = r'web/index_source.html';
 
 void main() {
