@@ -12,11 +12,9 @@ void main() {
   final args = new Options().arguments;
   log('** ARGS: $args');
 
-  final bool buildAll = args.contains('all');
-
   final changes = getChangedFiles(args);
 
-  if(!buildAll && onlyOutputFiles(changes)) {
+  if(!args.isEmpty && onlyOutputFiles(changes)) {
     log(' ** Nothing interesting changed');
     return;
   }
@@ -26,7 +24,7 @@ void main() {
   final input = 'web/index_source.html';
   final output = 'web/index.html';
 
-  if(buildAll || changes.contains(input)) {
+  if(changes.contains(input)) {
     _transform(input, output).then((bool value) {
       if(value) {
         log('updated $output');
@@ -38,7 +36,7 @@ void main() {
     log(" - skipping transform");
   }
 
-  if(buildAll || changes.any((c) => c.startsWith(r'web/'))) {
+  if(changes.any((c) => c.startsWith(r'web/'))) {
     Process.run('./bin/copy_assets.sh', [])
       .then((ProcessResult pr) {
         if(pr.exitCode == 0) {
