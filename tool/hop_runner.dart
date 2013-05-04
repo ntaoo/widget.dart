@@ -6,8 +6,6 @@ import 'package:hop/hop_tasks.dart';
 import 'util.dart' as util;
 
 void main() {
-  _assertKnownPath();
-
   final buildTask = createProcessTask('dart', args: ['build.dart'],
       description: "execute the project's build.dart file");
   addTask('build', buildTask);
@@ -40,12 +38,4 @@ List<String> _getLibraryPaths() {
   return util.getDartLibraryPaths()
     .map((Path p) => p.toString())
     .toList();
-}
-
-void _assertKnownPath() {
-  // since there is no way to determine the path of 'this' file
-  // assume that Directory.current() is the root of the project.
-  // So check for existance of /bin/hop_runner.dart
-  final thisFile = new File('tool/hop_runner.dart');
-  assert(thisFile.existsSync());
 }
