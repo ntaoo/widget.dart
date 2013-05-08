@@ -1,16 +1,8 @@
 <!DOCTYPE html>
 <!-- This file was auto-generated from web/index.html. -->
-<html lang="en"><head><style>template { display: none; }</style>
+<html lang="en"><head><style>template { display: none; }</style><link rel="stylesheet" type="text/css" href="index.html.css">
     <meta charset="utf-8">
     <title>Dart Widgets</title>
-    
-    
-    
-    
-    
-    
-    
-    
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.0.2/css/font-awesome.min.css" rel="stylesheet">
@@ -46,26 +38,26 @@
 at a time.</p>
 <p>See <a href="#collapse">Collapse</a> for details on how content is interpreted.</p></blockquote>
         <div class="demo">
-          <x-accordion id="__e-3">
-            <x-collapse id="__e-0">
+          <div is="x-accordion">
+            <div is="x-collapse">
               <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse">Item 1</a>
               </div>
               <p>Item 1 content - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </x-collapse>
-            <x-collapse id="__e-1">
+            </div>
+            <div is="x-collapse">
               <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse">Item 2</a>
               </div>
               <p>Item 2 content - Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </x-collapse>
-            <x-collapse id="__e-2">
+            </div>
+            <div is="x-collapse">
               <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse">Item 3</a>
               </div>
               <p>Item 3 content - Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </x-collapse>
-          </x-accordion>
+            </div>
+          </div>
         </div>
         <pre class="code">&lt;x-accordion&gt;
   &lt;x-collapse&gt;
@@ -93,10 +85,10 @@ at a time.</p>
         <blockquote class="comments"><p><strong>Alert</strong> follows the same convention as <a href="http://twitter.github.com/bootstrap/javascript.html#alerts">its inspiration</a> in Bootstrap.</p>
 <p>Clicking on a nested element with the attribute <code>data-dismiss='alert'</code> will cause <strong>Alert</strong> to close.</p></blockquote>
         <div class="demo">
-          <x-alert id="__e-4">
+          <div is="x-alert">
             <button type="button" class="close" data-dismiss="alert">×</button>
             <strong>Holy guacamole!</strong> Best check yo self, you're not looking too good.
-          </x-alert>
+          </div>
         </div>
         <pre class="code">&lt;x-alert&gt;
   &lt;button type="button" class="close" data-dismiss="alert"&gt;×&lt;/button&gt;
@@ -110,7 +102,7 @@ at a time.</p>
 in Bootstrap.</p>
 <p><strong>Carousel</strong> leverages the <a href="#swap">Swap</a> component to render the transition between items.</p></blockquote>
         <div class="demo">
-          <x-carousel id="__e-5">
+          <div is="x-carousel">
             <figure>
               <img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg">
               <figcaption>A description of the first image.</figcaption>
@@ -123,7 +115,7 @@ in Bootstrap.</p>
               <img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-03.jpg">
               <figcaption>A description of the third image.</figcaption>
             </figure>
-          </x-carousel>
+          </div>
         </div>
         <pre class="code">&lt;x-carousel&gt;
   &lt;figure&gt;
@@ -148,7 +140,7 @@ in Bootstrap.</p>
 <p><strong>Collapse</strong> listens for <code>click</code> events and toggles visibility of content if the
 click target has attribute <code>data-toggle="collapse"</code>.</p></blockquote>
         <div class="demo">
-          <x-collapse id="__e-6">
+          <div is="x-collapse">
             <div class="accordion-heading">
               <a class="accordion-toggle" data-toggle="collapse">Click to toggle expand/collapse</a>
             </div>
@@ -156,7 +148,7 @@ click target has attribute <code>data-toggle="collapse"</code>.</p></blockquote>
               <li>This is some</li>
               <li>content</li>
             </ul>
-          </x-collapse>
+          </div>
         </div>
         <pre class="code">&lt;x-collapse&gt;
   &lt;div class="accordion-heading"&gt;
@@ -184,7 +176,7 @@ added to the inner element wrapping all content. Causing child elements with
 class <code>dropdown-menu</code> to become visible.</p></blockquote>
         <div class="demo">
           <h3>A a button</h3>
-          <x-dropdown id="__e-7">
+          <div is="x-dropdown">
             <button class="btn" data-toggle="dropdown">Click me!</button>
             <ul class="dropdown-menu">
               <li><a>Action</a></li>
@@ -193,7 +185,7 @@ class <code>dropdown-menu</code> to become visible.</p></blockquote>
               <li class="divider"></li>
               <li><a>Separated link</a></li>
             </ul>
-          </x-dropdown>
+          </div>
           <h3>In a nav</h3>
           <!-- Because Bootstrap css assumes a certain hierarchy of items in a nav
           .navbar .nav > li > a
@@ -204,14 +196,14 @@ class <code>dropdown-menu</code> to become visible.</p></blockquote>
             <div class="navbar-inner">
               <div class="container">
                 <div class="nav">
-                  <x-dropdown id="__e-8">
+                  <div is="x-dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nav Menu 1<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                       <li><a href="#">Item 1</a></li>
                       <li><a href="#">Item 2</a></li>
                     </ul>
-                  </x-dropdown>
-                  <x-dropdown id="__e-9">
+                  </div>
+                  <div is="x-dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nav Menu 2<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                       <li class="nav-header">Header 1</li>
@@ -221,7 +213,7 @@ class <code>dropdown-menu</code> to become visible.</p></blockquote>
                       <li><a href="#">Item 3</a></li>
                       <li><a href="#">Item 4</a></li>
                     </ul>
-                  </x-dropdown>
+                  </div>
                 </div>
               </div>
             </div>
@@ -279,9 +271,9 @@ apply to x-dropdown
 <p>The <strong>Modal</strong> component leverages the <a href="#modalmanager">ModalManager</a> effect.</p></blockquote>
         <div class="demo">
           <!-- Button to trigger modal -->
-          <a role="button" class="btn btn-primary" id="__e-10">Launch demo modal</a>
+          <a role="button" class="btn btn-primary">Launch demo modal</a>
           <!-- Modal -->
-          <x-modal id="modal_example">
+          <div is="x-modal" id="modal_example">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               <h3 id="myModalLabel">Modal header</h3>
@@ -293,7 +285,7 @@ apply to x-dropdown
               <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
               <button class="btn btn-primary">Save changes</button>
             </div>
-          </x-modal>
+          </div>
         </div>
         <pre class="code">&lt;!-- Button to trigger modal --&gt;
 &lt;a role="button" class="btn btn-primary" on-click="query('#modal_example').xtag.show();"&gt;Launch demo modal&lt;/a&gt;
@@ -328,7 +320,7 @@ The rest of the child elements are considered tab content.</p>
 <p>The target content id is either the value of <code>data-target</code> on the clicked element or the anchor
 in <code>href</code>.</p></blockquote>
         <div class="demo">
-          <x-tabs id="__e-12">
+          <div is="x-tabs">
             <li class="active">
               <a href="#tab1" data-toggle="tab">Tab 1</a>
             </li>
@@ -341,7 +333,7 @@ in <code>href</code>.</p></blockquote>
             <p id="tab1" class="active">Tab 1 content - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             <p id="tab2">Tab 2 content - Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             <p id="tab3">Tab 3 content - Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          </x-tabs>
+          </div>
         </div>
         <pre class="code">&lt;x-tabs&gt;
   &lt;li class="active"&gt;
