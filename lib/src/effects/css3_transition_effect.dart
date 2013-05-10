@@ -42,7 +42,9 @@ class Css3TransitionEffect extends ShowHideEffect {
     element.style.transitionDuration = '';
 
     restoreValues.forEach((p, v) {
-      element.style.setProperty(p, v);
+      // TODO: Remove empty string as third param
+      // Waiting on dartbug.com/10583
+      element.style.setProperty(p, v, '');
     });
   }
 
@@ -57,13 +59,17 @@ class Css3TransitionEffect extends ShowHideEffect {
     final localValues = _recordProperties(element, localPropsToKeep);
 
     _animatingOverrides.forEach((p, v) {
-      element.style.setProperty(p, v);
+      // TODO: Remove empty string as third param
+      // Waiting on dartbug.com/10583
+      element.style.setProperty(p, v, '');
     });
 
     startValue = overrideStartEndValues(!doingShow, _property, startValue);
     endValue = overrideStartEndValues(doingShow, _property, endValue);
 
-    element.style.setProperty(_property, startValue);
+    // TODO: Remove empty string as third param
+    // Waiting on dartbug.com/10583
+    element.style.setProperty(_property, startValue, '');
     _css3TransitionEffectValues.delayStart(element, localValues,
         () => _setShowValue(element, endValue, desiredDuration, timing));
     return desiredDuration;
@@ -75,7 +81,9 @@ class Css3TransitionEffect extends ShowHideEffect {
     element.style.transitionTimingFunction = cssTimingValue;
     element.style.transitionProperty = _property;
     element.style.transitionDuration = '${desiredDuration}ms';
-    element.style.setProperty(_property, value);
+    // TODO: Remove empty string as third param
+    // Waiting on dartbug.com/10583
+    element.style.setProperty(_property, value, '');
   }
 
   static Map<String, String> _recordProperties(Element element, Iterable<String> properties) {

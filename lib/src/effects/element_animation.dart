@@ -60,7 +60,9 @@ class ElementAnimation extends AnimationCore {
 
   void _setValue(String property, num value) {
     final str = "${value.toInt().toString()}px";
-    element.style.setProperty(property, str);
+    // TODO: Remove empty string as third param
+    // Waiting on dartbug.com/10583
+    element.style.setProperty(property, str, '');
   }
 
   double _getPixels(String value) {
