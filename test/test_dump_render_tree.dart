@@ -3,9 +3,15 @@ library test_dump_render_tree;
 import 'dart:async';
 import 'dart:io';
 import 'package:unittest/unittest.dart';
-import 'package:bot/bot_test.dart';
+import 'package:unittest/vm_config.dart';
 
-void main() {
+main() {
+  testCore(new VMConfiguration());
+}
+
+void testCore(Configuration config) {
+  unittestConfiguration = config;
+  groupSep = ' - ';
   final browserTests = ['test/browser_test_harness.html'];
 
   group('DumpRenderTree', () {
