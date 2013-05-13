@@ -1,6 +1,9 @@
 # Changelog - Dart Widgets
 
-## 0.2.6-beta *pre-release* (SDK 0.5.7 r22576)
+## 0.2.6 13 May 2013 (SDK 0.5.7+2 r22611)
+
+* Updates for latest SDK
+* Tweaks to test infrastructure
 
 ## 0.2.5 - 08 May 2013 (SDK 0.5.5 r22416)
 
