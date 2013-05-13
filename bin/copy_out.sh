@@ -11,18 +11,21 @@ TO_FIND='href="..\/style.css"'
 REPLACE_WITH='href="style.css"'
 COMMAND=s/$TO_FIND/$REPLACE_WITH/g
 
-TO_FIND='src="..\/dart.js"'
+TO_FIND='packages\/browser\/dart.js"'
 COMMAND2=/$TO_FIND/d
+
+TO_FIND='rel="import"'
+COMMAND3=/$TO_FIND/d
 
 TO_FIND='type="application/dart"'
 REPLACE_WITH='type="text/javascript"'
-COMMAND3=s*$TO_FIND*$REPLACE_WITH*g
+COMMAND4=s*$TO_FIND*$REPLACE_WITH*g
 
 TO_FIND='bootstrap.dart'
 REPLACE_WITH='bootstrap.dart.js'
-COMMAND4=s*$TO_FIND*$REPLACE_WITH*g
+COMMAND5=s*$TO_FIND*$REPLACE_WITH*g
 
 # remove empty lines
-COMMAND5='/^$/d'
+COMMAND6='/^[[:blank:]]*$/d'
 
-sed -E -e $COMMAND -e $COMMAND2 -e $COMMAND3 -e $COMMAND4 -e $COMMAND5 -- $BUILD_DIR/index.html > $WEB_DIR/index.html
+sed -E -e $COMMAND -e $COMMAND2 -e $COMMAND3 -e $COMMAND4 -e $COMMAND5 -e $COMMAND6 -- $BUILD_DIR/index.html > $WEB_DIR/index.html
