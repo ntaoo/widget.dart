@@ -49,6 +49,8 @@ void main() {
     log(' - skipping copy assets');
   }
 
+  args.addAll(['--', '--no-rewrite-urls', '--warnings_as_errors', '--verbose']);
+
   build_utils.build(args, [output]);
 }
 
