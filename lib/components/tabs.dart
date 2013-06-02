@@ -117,6 +117,8 @@ class Tabs extends WebComponent {
     final Element element = this.query('[is=x-tabs] > [is=x-swap]');
     if(element != null) {
       if(element is SwapComponent) {
+        // Analyzer
+        // DARTBUG: https://code.google.com/p/dart/issues/detail?id=9666
         return element;
       } else if(element.xtag is SwapComponent) {
         return element.xtag;
