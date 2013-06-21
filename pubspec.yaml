@@ -2,7 +2,7 @@ name: widget
 version: 0.2.7-dev
 author: Kevin Moore <kevin@thinkpixellab.com>
 description: A set of reusable Web Components for Dart applications
-homepage: https://github.com/kevmoo/widget.dart
+homepage: https://github.com/dart-lang/widget.dart
 environment:
   sdk: '>=0.5.20'
 dependencies:
