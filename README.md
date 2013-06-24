@@ -1,7 +1,7 @@
 # Dart Widgets
 ## A set of reusable Web Components for Dart applications
 
-[![Build Status](https://drone.io/github.com/kevmoo/widget.dart/status.png)](https://drone.io/github.com/kevmoo/widget.dart/latest)
+[![Build Status](https://drone.io/github.com/dart-lang/widget.dart/status.png)](https://drone.io/github.com/dart-lang/widget.dart/latest)
 
 # Web UI
 
@@ -9,7 +9,7 @@
 
 * **Web UI** is in heavy development, as is **Dart**.
 * Read up on the **WEB UI** project before trying to use the code in this project.
-* Pay attention to the current version of **WEB UI** being used by looking at `pubspec.yaml`. 
+* Pay attention to the current version of **WEB UI** being used by looking at `pubspec.yaml`.
 
 # Conventions
 
