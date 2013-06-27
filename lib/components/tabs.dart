@@ -85,8 +85,8 @@ class Tabs extends WebComponent {
     String target = clickedElement.dataset['target'];
     if(target == null) {
       final href = clickedElement.attributes['href'];
-      if(href != null && href.startsWith('#')) {
-        target = href.substring(1);
+      if(href != null) {
+        target = Uri.parse(href).fragment;
       }
     }
     return target;

@@ -16,16 +16,6 @@ class Accordion extends WebComponent {
     ShowHideComponent.toggleEvent.forTarget(this).listen(_onOpen);
   }
 
-  @protected
-  void inserted() {
-    // collapse all 'collapse' children
-    _getAllCollapseElements()
-      .map((Element e) => e.xtag)
-      .forEach((ShowHideComponent e) {
-        e.hide();
-      });
-  }
-
   List<Element> _getAllCollapseElements() =>
       this.queryAll('[is=x-accordion] > [is=x-collapse]');
 

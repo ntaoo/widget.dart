@@ -19,7 +19,9 @@ class Carousel extends WebComponent {
   final ShowHideEffect _fromTheLeft = new SlideEffect(xStart: HorizontalAlignment.LEFT);
   final ShowHideEffect _fromTheRight = new SlideEffect(xStart: HorizontalAlignment.RIGHT);
 
-  static const _duration = 2000;
+  static const _duration = 1000;
+
+  Future<bool> _pendingAction = null;
 
   Future<bool> next() => _moveDelta(true);
 
@@ -29,6 +31,12 @@ class Carousel extends WebComponent {
       this.query('[is=x-carousel] > .carousel > [is=x-swap]').xtag;
 
   Future<bool> _moveDelta(bool doNext) {
+    if (_pendingAction != null) {
+      // Ignore all calls to moveDelta until the current pending action is
+      // complete to avoid ugly janky UI.
+      return _pendingAction.then((_) => false);
+    }
+    
     final swap = _swap;
     assert(swap != null);
     if (swap.items.length == 0) {
@@ -51,7 +59,9 @@ class Carousel extends WebComponent {
 
     final newIndex = (activeIndex + delta) % _swap.items.length;
 
-    return _swap.showItemAtIndex(newIndex, effect: showEffect,
+    _pendingAction = _swap.showItemAtIndex(newIndex, effect: showEffect,
         hideEffect: hideEffect, duration: _duration);
+    _pendingAction.whenComplete(() { _pendingAction = null; });
+    return _pendingAction;
   }
 }
