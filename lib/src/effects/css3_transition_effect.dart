@@ -7,7 +7,7 @@ abstract class Css3TransitionEffect extends ShowHideEffect {
 
   Css3TransitionEffect(this._property, [Map<String, String> animatingOverrides])
       : _animatingOverrides = animatingOverrides == null ?
-          <String, String>{} : new Map<String, String>.from(animatingOverrides) {
+          new Map<String, String>() : new Map<String, String>.from(animatingOverrides) {
     assert(!_animatingOverrides.containsKey(_property));
     assert(!_reservedProperties.contains(_property));
     assert(_reservedProperties.every((p) => !_animatingOverrides.containsKey(p)));
@@ -60,7 +60,7 @@ abstract class Css3TransitionEffect extends ShowHideEffect {
     String endValue = computePropertyValue(doingShow ? 1 : 0, element);
 
     num animationFractionLeft = doingShow ? (1 - fractionComplete) : fractionComplete;
-    int actualDuration = (desiredDuration * animationFractionLeft).round(); 
+    int actualDuration = (desiredDuration * animationFractionLeft).round();
     element.style.setProperty(_property, startValue);
     _css3TransitionEffectValues.delayStart(element, localValues,
         () => _setShowValue(element, endValue, actualDuration, timing));
@@ -114,7 +114,7 @@ class _css3TransitionEffectValues {
     final value = _values[element] = new _css3TransitionEffectValues(element, originalValues);
     // TODO(jacobr): we should be able to use runAsync for this but it does the
     // wrong thing.
-    
+
     value.timer = new Timer(const Duration(milliseconds: 1), () {
       assert(value.timer != null);
       value.timer = null;
