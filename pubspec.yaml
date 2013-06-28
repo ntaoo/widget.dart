@@ -10,7 +10,7 @@ dependencies:
   bot_web: '>=0.20.1'
   html5lib: '>=0.4.3'
   meta: '>=0.5.20'
-  web_ui: '>=0.4.12+2'
+  web_ui: '>=0.4.13+1'
 dev_dependencies:
   hop: '>=0.22.2'
   unittest: '>=0.5.20'

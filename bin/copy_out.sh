@@ -3,7 +3,7 @@ BUILD_DIR=web/out
 WEB_DIR=example
 rm -rf $WEB_DIR
 mkdir -p $WEB_DIR
-find $BUILD_DIR -maxdepth 1 -type f -print0 | xargs -0 -J % cp % $WEB_DIR
+find $BUILD_DIR -maxdepth 1 -type f -print0 | xargs -0 -I % cp % $WEB_DIR
 rm $WEB_DIR/*.dart
 
 # Since we're using the JS file directly, remove the dart.js helper

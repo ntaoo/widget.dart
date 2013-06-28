@@ -23,6 +23,8 @@ import 'package:widget/widget.dart';
  * in `href`.
  */
 class Tabs extends WebComponent {
+  ScopedCssMapper get css => getScopedCss("x-tabs");
+
   @protected
   void created() {
     this.onClick.listen(_clickListener);
@@ -92,7 +94,7 @@ class Tabs extends WebComponent {
     return target;
   }
 
-  List<Element> _getAllTabs() => this.queryAll('[is=x-tabs] > .nav-tabs > li');
+  List<Element> _getAllTabs() => this.queryAll('${css["x-tabs"]} .nav-tabs > li');
 
   void _ensureAtMostOneTabActive() {
     final tabs = _getAllTabs();
@@ -114,7 +116,7 @@ class Tabs extends WebComponent {
   }
 
   SwapComponent _getSwap() {
-    final Element element = this.query('[is=x-tabs] > [is=x-swap]');
+    final Element element = this.query('${css["x-tabs"]} [is=x-swap]');
     if(element != null) {
       if(element is SwapComponent) {
         // Analyzer
