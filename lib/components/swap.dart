@@ -21,7 +21,7 @@ class Swap extends WebComponent implements SwapComponent {
   static const _activeClass = 'active';
   static const _dirClassPrev = 'prev';
 
-  ScopedCssMapper get css => getScopedCss("x-swap");
+  ScopedCssMapper get _css => getScopedCss("x-swap");
 
   // should only be accessed via the [_contentElement] property
   Element _contentElementField;
@@ -87,7 +87,7 @@ class Swap extends WebComponent implements SwapComponent {
   void _initialize() {
     if(_contentElementField == null) {
       _contentElementField =
-          this.query('${css["x-swap"]} ${css.getSelector(".content")}');
+          this.query('${_css["x-swap"]} ${_css.getSelector(".content")}');
       if(_contentElementField == null) {
         throw 'Could not find the content element. Either the template has changed or state was accessed too early in the component lifecycle.';
       }
