@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:html5lib/dom.dart';
 import 'package:html5lib/parser.dart';
 import 'package:html5lib/dom_parsing.dart';
-import 'package:web_ui/component_build.dart' as build_utils;
+import 'package:polymer/component_build.dart' as build_utils;
 import 'package:bot/bot.dart';
 
 final _whitespaceRegex = new RegExp(r'\s+');
