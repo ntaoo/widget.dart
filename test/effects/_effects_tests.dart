@@ -6,7 +6,7 @@ import 'package:unittest/unittest.dart';
 import 'package:widget/effects.dart';
 import 'package:bot/bot.dart';
 import 'package:bot_web/bot_html.dart';
-import 'package:bot/bot_test.dart';
+import 'package:bot_test/bot_test.dart';
 
 part 'animation_core_tests.dart';
 part 'element_animation_tests.dart';
