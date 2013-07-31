@@ -5,12 +5,12 @@ import 'package:widget/widget.dart';
 import 'package:bot/bot.dart';
 
 /**
- * [Accordion] wraps a set of [Collapse] elements and ensures only one is visible
+ * [AccordionWidget] wraps a set of [Collapse] elements and ensures only one is visible
  * at a time.
  *
  * See [Collapse] for details on how content is interpreted.
  */
-class Accordion extends WebComponent {
+class AccordionWidget extends PolymerElement {
   @protected
   void created() {
     ShowHideComponent.toggleEvent.forTarget(this).listen(_onOpen);

@@ -9,23 +9,23 @@ import 'package:widget/widget.dart';
 // https://github.com/kevmoo/widget.dart/issues/14
 
 /**
- * [Dropdown] aligns closely with the model provided by the
+ * [DropdownWidget] aligns closely with the model provided by the
  * [dropdown functionality](http://twitter.github.com/bootstrap/javascript.html#dropdowns)
  * in Bootstrap.
  *
- * [Dropdown] content is inferred from all child elements that have
+ * [DropdownWidget] content is inferred from all child elements that have
  * class `dropdown-menu`. Bootstrap defines a CSS selector for `.dropdown-menu`
  * with an initial display of `none`.
  *
- * [Dropdown] listens for `click` events and toggles visibility of content if the
+ * [DropdownWidget] listens for `click` events and toggles visibility of content if the
  * click target has attribute `data-toggle="dropdown"`.
  *
  * Bootstrap also defines a CSS selector which sets `display: block;` for elements
- * matching `.open > .dropdown-menu`. When [Dropdown] opens, the class `open` is
+ * matching `.open > .dropdown-menu`. When [DropdownWidget] opens, the class `open` is
  * added to the inner element wrapping all content. Causing child elements with
  * class `dropdown-menu` to become visible.
  */
-class Dropdown extends WebComponent implements ShowHideComponent {
+class DropdownWidget extends PolymerElement implements ShowHideComponent {
   static final ShowHideEffect _effect = new FadeEffect();
   static const int _duration = 100;
 
@@ -81,8 +81,8 @@ class Dropdown extends WebComponent implements ShowHideComponent {
 
   static void closeDropdowns() {
     document.queryAll('[is=x-dropdown]')
-      .where((e) => e.xtag is Dropdown)
-      .map((e) => e.xtag as Dropdown)
+      .where((e) => e.xtag is DropdownWidget)
+      .map((e) => e.xtag as DropdownWidget)
       .forEach((dd) => dd.hide());
   }
 

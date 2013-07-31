@@ -6,23 +6,23 @@ import 'package:widget/effects.dart';
 import 'package:widget/widget.dart';
 
 /**
- * [Collapse] uses a content model similar to [collapse functionality](http://twitter.github.com/bootstrap/javascript.html#collapse) in Bootstrap.
+ * [CollapseWidget] uses a content model similar to [collapse functionality](http://twitter.github.com/bootstrap/javascript.html#collapse) in Bootstrap.
  *
- * The header element for [Collapse] is a child element with class `accordion-heading`.
+ * The header element for [CollapseWidget] is a child element with class `accordion-heading`.
  *
  * The rest of the children are rendered as content.
  *
- * [Collapse] listens for `click` events and toggles visibility of content if the
+ * [CollapseWidget] listens for `click` events and toggles visibility of content if the
  * click target has attribute `data-toggle="collapse"`.
  */
-class Collapse extends WebComponent implements ShowHideComponent {
+class CollapseWidget extends PolymerElement implements ShowHideComponent {
   static const String _collapseDivSelector = '.collapse-body-x';
   static final ShowHideEffect _effect = new ShrinkEffect();
 
   bool _isShown = false;
 
   bool get isShown => _isShown;
-  
+
   bool _insertedCalled = false;
 
   void set isShown(bool value) {

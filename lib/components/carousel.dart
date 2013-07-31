@@ -8,14 +8,14 @@ import 'package:widget/widget.dart';
 // TODO: option to enable/disable wrapping. Disable buttons if the end is hit...
 
 /**
- * [Carousel] allows moving back and forth through a set of child elements.
+ * [CarouselWidget] allows moving back and forth through a set of child elements.
  *
  * It is based on a [similar component](http://twitter.github.com/bootstrap/javascript.html#carousel)
  * in Bootstrap.
  *
- * [Carousel] leverages the [Swap] component to render the transition between items.
+ * [CarouselWidget] leverages the [Swap] component to render the transition between items.
  */
-class Carousel extends WebComponent {
+class CarouselWidget extends PolymerElement {
   ScopedCssMapper get _css => getScopedCss("x-swap");
 
   final ShowHideEffect _fromTheLeft = new SlideEffect(xStart: HorizontalAlignment.LEFT);
@@ -28,6 +28,14 @@ class Carousel extends WebComponent {
   Future<bool> next() => _moveDelta(true);
 
   Future<bool> previous() => _moveDelta(false);
+
+  void _next(event, detail, target) {
+    next();
+  }
+
+  void _previous(event, detail, target) {
+    previous();
+  }
 
   SwapComponent get _swap =>
       this.query('${_css["x-carousel"]} ${_css.getSelector(".carousel")} > [is=x-swap]').xtag;

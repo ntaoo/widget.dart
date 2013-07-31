@@ -6,11 +6,11 @@ import 'package:widget/effects.dart';
 import 'package:widget/widget.dart';
 
 /**
- * [Alert] follows the same convention as [its inspiration](http://twitter.github.com/bootstrap/javascript.html#alerts) in Bootstrap.
+ * [AlertWidget] follows the same convention as [its inspiration](http://twitter.github.com/bootstrap/javascript.html#alerts) in Bootstrap.
  *
- * Clicking on a nested element with the attribute `data-dismiss='alert'` will cause [Alert] to close.
+ * Clicking on a nested element with the attribute `data-dismiss='alert'` will cause [AlertWidget] to close.
  */
-class Alert extends WebComponent implements ShowHideComponent {
+class AlertWidget extends PolymerElement implements ShowHideComponent {
 
   bool _isShown = true;
 

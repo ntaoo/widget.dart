@@ -8,15 +8,15 @@ import 'package:widget/widget.dart';
 // TODO: ESC to close: https://github.com/kevmoo/widget.dart/issues/17
 
 /**
- * When added to a page, [Modal] is hidden. It can be displayed by calling the `show` method.
+ * When added to a page, [ModalWidget] is hidden. It can be displayed by calling the `show` method.
  *
- * Similar to [Alert], elements with the attribute `data-dismiss="modal"` will close [Modal] when clicked.
+ * Similar to [Alert], elements with the attribute `data-dismiss="modal"` will close [ModalWidget] when clicked.
  *
- * Content within [Modal] is placed in a div with class `modal` so related styles from Bootstrap are applied.
+ * Content within [ModalWidget] is placed in a div with class `modal` so related styles from Bootstrap are applied.
  *
- * The [Modal] component leverages the [ModalManager] effect.
+ * The [ModalWidget] component leverages the [ModalManager] effect.
  */
-class Modal extends WebComponent implements ShowHideComponent {
+class ModalWidget extends PolymerElement implements ShowHideComponent {
   /** If false, clicking the backdrop closes the dialog. */
   bool staticBackdrop = false;
   bool _isShown = false;

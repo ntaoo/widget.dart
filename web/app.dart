@@ -32,6 +32,10 @@ void main() {
   });
 }
 
+void _show(event, detail, target) {
+  query('#modal_example').xtag.show();
+}
+
 void _showHideDemo_toggle(ShowHideEffect effect) {
   queryAll('.demo.showhide .logo_wrapper > img').forEach((Element e) {
     ShowHide.toggle(e, effect: effect);

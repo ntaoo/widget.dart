@@ -49,48 +49,48 @@ at a time.</p>
 <p>See <a href="#collapse">Collapse</a> for details on how content is interpreted.</p></blockquote>
 
         <div class="demo">
-          <x-accordion>
-            <x-collapse>
+          <accordion-widget>
+            <collapse-widget>
               <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse">Item 1</a>
               </div>
               <p>Item 1 content - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </x-collapse>
-            <x-collapse>
+            </collapse-widget>
+            <collapse-widget>
               <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse">Item 2</a>
               </div>
               <p>Item 2 content - Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </x-collapse>
-            <x-collapse>
+            </collapse-widget>
+            <collapse-widget>
               <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse">Item 3</a>
               </div>
               <p>Item 3 content - Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </x-collapse>
-          </x-accordion>
+            </collapse-widget>
+          </accordion-widget>
         </div>
 
-        <pre class="code">&lt;x-accordion&gt;
-  &lt;x-collapse&gt;
+        <pre class="code">&lt;accordion-widget&gt;
+  &lt;collapse-widget&gt;
     &lt;div class="accordion-heading"&gt;
       &lt;a class="accordion-toggle" data-toggle="collapse"&gt;Item 1&lt;/a&gt;
     &lt;/div&gt;
     &lt;p&gt;Item 1 content - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
-  &lt;/x-collapse&gt;
-  &lt;x-collapse&gt;
+  &lt;/collapse-widget&gt;
+  &lt;collapse-widget&gt;
     &lt;div class="accordion-heading"&gt;
       &lt;a class="accordion-toggle" data-toggle="collapse"&gt;Item 2&lt;/a&gt;
     &lt;/div&gt;
     &lt;p&gt;Item 2 content - Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
-  &lt;/x-collapse&gt;
-  &lt;x-collapse&gt;
+  &lt;/collapse-widget&gt;
+  &lt;collapse-widget&gt;
     &lt;div class="accordion-heading"&gt;
       &lt;a class="accordion-toggle" data-toggle="collapse"&gt;Item 3&lt;/a&gt;
     &lt;/div&gt;
     &lt;p&gt;Item 3 content - Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
-  &lt;/x-collapse&gt;
-&lt;/x-accordion&gt;</pre>
+  &lt;/collapse-widget&gt;
+&lt;/accordion-widget&gt;</pre>
       </section>
 
       <section class="component">
@@ -98,16 +98,16 @@ at a time.</p>
         <blockquote class="comments"><p><strong>Alert</strong> follows the same convention as <a href="http://twitter.github.com/bootstrap/javascript.html#alerts">its inspiration</a> in Bootstrap.</p>
 <p>Clicking on a nested element with the attribute <code>data-dismiss='alert'</code> will cause <strong>Alert</strong> to close.</p></blockquote>
         <div class="demo">
-          <x-alert>
+          <alert-widget>
             <button type="button" class="close" data-dismiss="alert">×</button>
             <strong>Holy guacamole!</strong> Best check yo self, you're not looking too good.
-          </x-alert>
+          </alert-widget>
         </div>
 
-        <pre class="code">&lt;x-alert&gt;
+        <pre class="code">&lt;alert-widget&gt;
   &lt;button type="button" class="close" data-dismiss="alert"&gt;×&lt;/button&gt;
   &lt;strong&gt;Holy guacamole!&lt;/strong&gt; Best check yo self, you're not looking too good.
-&lt;/x-alert&gt;</pre>
+&lt;/alert-widget&gt;</pre>
 
       </section>
 
@@ -119,7 +119,7 @@ in Bootstrap.</p>
 <p><strong>Carousel</strong> leverages the <a href="#swap">Swap</a> component to render the transition between items.</p></blockquote>
 
         <div class="demo">
-          <x-carousel>
+          <carousel-widget>
             <figure>
               <img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg">
               <figcaption>A description of the first image.</figcaption>
@@ -135,10 +135,10 @@ in Bootstrap.</p>
               <figcaption>A description of the third image.</figcaption>
             </figure>
 
-          </x-carousel>
+          </carousel-widget>
         </div>
 
-        <pre class="code">&lt;x-carousel&gt;
+        <pre class="code">&lt;carousel-widget&gt;
   &lt;figure&gt;
     &lt;img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg"&gt;
     &lt;figcaption&gt;A description of the first image.&lt;/figcaption&gt;
@@ -151,7 +151,7 @@ in Bootstrap.</p>
     &lt;img src="//twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-03.jpg"&gt;
     &lt;figcaption&gt;A description of the third image.&lt;/figcaption&gt;
   &lt;/figure&gt;
-&lt;/x-carousel&gt;</pre>
+&lt;/carousel-widget&gt;</pre>
       </section>
 
       <section class="component">
@@ -163,7 +163,7 @@ in Bootstrap.</p>
 click target has attribute <code>data-toggle="collapse"</code>.</p></blockquote>
 
         <div class="demo">
-          <x-collapse>
+          <collapse-widget>
             <div class="accordion-heading">
               <a class="accordion-toggle" data-toggle="collapse">Click to toggle expand/collapse</a>
             </div>
@@ -171,10 +171,10 @@ click target has attribute <code>data-toggle="collapse"</code>.</p></blockquote>
               <li>This is some</li>
               <li>content</li>
             </ul>
-          </x-collapse>
+          </collapse-widget>
         </div>
 
-        <pre class="code">&lt;x-collapse&gt;
+        <pre class="code">&lt;collapse-widget&gt;
   &lt;div class="accordion-heading"&gt;
     &lt;a class="accordion-toggle" data-toggle="collapse"&gt;Click to toggle expand/collapse&lt;/a&gt;
   &lt;/div&gt;
@@ -182,7 +182,7 @@ click target has attribute <code>data-toggle="collapse"</code>.</p></blockquote>
     &lt;li&gt;This is some&lt;/li&gt;
     &lt;li&gt;content&lt;/li&gt;
   &lt;/ul&gt;
-&lt;/x-collapse&gt;</pre>
+&lt;/collapse-widget&gt;</pre>
       </section>
 
       <section class="component">
@@ -202,7 +202,7 @@ class <code>dropdown-menu</code> to become visible.</p></blockquote>
 
         <div class="demo">
           <h3>A a button</h3>
-          <x-dropdown>
+          <dropdown-widget>
             <button class="btn" data-toggle="dropdown">Click me!</button>
             <ul class="dropdown-menu">
               <li><a>Action</a></li>
@@ -211,7 +211,7 @@ class <code>dropdown-menu</code> to become visible.</p></blockquote>
               <li class="divider"></li>
               <li><a>Separated link</a></li>
             </ul>
-          </x-dropdown>
+          </dropdown-widget>
 
           <h3>In a nav</h3>
           <!-- Because Bootstrap css assumes a certain hierarchy of items in a nav
@@ -224,14 +224,14 @@ class <code>dropdown-menu</code> to become visible.</p></blockquote>
             <div class="navbar-inner">
               <div class="container">
                 <div class="nav">
-                  <x-dropdown>
+                  <dropdown-widget>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nav Menu 1<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                       <li><a href="#">Item 1</a></li>
                       <li><a href="#">Item 2</a></li>
                     </ul>
-                  </x-dropdown>
-                  <x-dropdown>
+                  </dropdown-widget>
+                  <dropdown-widget>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nav Menu 2<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                       <li class="nav-header">Header 1</li>
@@ -241,7 +241,7 @@ class <code>dropdown-menu</code> to become visible.</p></blockquote>
                       <li><a href="#">Item 3</a></li>
                       <li><a href="#">Item 4</a></li>
                     </ul>
-                  </x-dropdown>
+                  </dropdown-widget>
                 </div>
               </div>
             </div>
@@ -250,7 +250,7 @@ class <code>dropdown-menu</code> to become visible.</p></blockquote>
         </div>
 
         <pre class="code">&lt;h3&gt;A a button&lt;/h3&gt;
-&lt;x-dropdown&gt;
+&lt;dropdown-widget&gt;
   &lt;button class="btn" data-toggle="dropdown"&gt;Click me!&lt;/button&gt;
   &lt;ul class="dropdown-menu"&gt;
     &lt;li&gt;&lt;a&gt;Action&lt;/a&gt;&lt;/li&gt;
@@ -259,7 +259,7 @@ class <code>dropdown-menu</code> to become visible.</p></blockquote>
     &lt;li class="divider"&gt;&lt;/li&gt;
     &lt;li&gt;&lt;a&gt;Separated link&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
-&lt;/x-dropdown&gt;
+&lt;/dropdown-widget&gt;
 &lt;h3&gt;In a nav&lt;/h3&gt;
 &lt;!-- Because Bootstrap css assumes a certain hierarchy of items in a nav
 .navbar .nav &gt; li &gt; a
@@ -270,14 +270,14 @@ apply to x-dropdown
   &lt;div class="navbar-inner"&gt;
     &lt;div class="container"&gt;
       &lt;div class="nav"&gt;
-        &lt;x-dropdown&gt;
+        &lt;dropdown-widget&gt;
           &lt;a href="#" class="dropdown-toggle" data-toggle="dropdown"&gt;Nav Menu 1&lt;b class="caret"&gt;&lt;/b&gt;&lt;/a&gt;
           &lt;ul class="dropdown-menu"&gt;
             &lt;li&gt;&lt;a href="#"&gt;Item 1&lt;/a&gt;&lt;/li&gt;
             &lt;li&gt;&lt;a href="#"&gt;Item 2&lt;/a&gt;&lt;/li&gt;
           &lt;/ul&gt;
-        &lt;/x-dropdown&gt;
-        &lt;x-dropdown&gt;
+        &lt;/dropdown-widget&gt;
+        &lt;dropdown-widget&gt;
           &lt;a href="#" class="dropdown-toggle" data-toggle="dropdown"&gt;Nav Menu 2&lt;b class="caret"&gt;&lt;/b&gt;&lt;/a&gt;
           &lt;ul class="dropdown-menu"&gt;
             &lt;li class="nav-header"&gt;Header 1&lt;/li&gt;
@@ -287,7 +287,7 @@ apply to x-dropdown
             &lt;li&gt;&lt;a href="#"&gt;Item 3&lt;/a&gt;&lt;/li&gt;
             &lt;li&gt;&lt;a href="#"&gt;Item 4&lt;/a&gt;&lt;/li&gt;
           &lt;/ul&gt;
-        &lt;/x-dropdown&gt;
+        &lt;/dropdown-widget&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -302,10 +302,10 @@ apply to x-dropdown
 <p>The <strong>Modal</strong> component leverages the <a href="#modalmanager">ModalManager</a> effect.</p></blockquote>
         <div class="demo">
           <!-- Button to trigger modal -->
-          <a role="button" class="btn btn-primary" on-click="query('#modal_example').xtag.show();">Launch demo modal</a>
+          <a role="button" class="btn btn-primary" on-click="_show">Launch demo modal</a>
 
           <!-- Modal -->
-          <x-modal id="modal_example">
+          <modal-widget id="modal_example">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               <h3 id="myModalLabel">Modal header</h3>
@@ -317,13 +317,13 @@ apply to x-dropdown
               <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
               <button class="btn btn-primary">Save changes</button>
             </div>
-          </x-modal>
+          </modal-widget>
         </div>
 
         <pre class="code">&lt;!-- Button to trigger modal --&gt;
-&lt;a role="button" class="btn btn-primary" on-click="query('#modal_example').xtag.show();"&gt;Launch demo modal&lt;/a&gt;
+&lt;a role="button" class="btn btn-primary" on-click="_show"&gt;Launch demo modal&lt;/a&gt;
 &lt;!-- Modal --&gt;
-&lt;x-modal id="modal_example"&gt;
+&lt;modal-widget id="modal_example"&gt;
   &lt;div class="modal-header"&gt;
     &lt;button type="button" class="close" data-dismiss="modal" aria-hidden="true"&gt;×&lt;/button&gt;
     &lt;h3 id="myModalLabel"&gt;Modal header&lt;/h3&gt;
@@ -335,7 +335,7 @@ apply to x-dropdown
     &lt;button class="btn" data-dismiss="modal" aria-hidden="true"&gt;Close&lt;/button&gt;
     &lt;button class="btn btn-primary"&gt;Save changes&lt;/button&gt;
   &lt;/div&gt;
-&lt;/x-modal&gt;</pre>
+&lt;/modal-widget&gt;</pre>
       </section>
 
       <section class="component">
@@ -356,7 +356,7 @@ The rest of the child elements are considered tab content.</p>
 in <code>href</code>.</p></blockquote>
 
         <div class="demo">
-          <x-tabs>
+          <tabs-widget>
             <li class="active">
               <a href="#tab1" data-toggle="tab">Tab 1</a>
             </li>
@@ -370,10 +370,10 @@ in <code>href</code>.</p></blockquote>
             <p id="tab1" class="active">Tab 1 content - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             <p id="tab2">Tab 2 content - Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             <p id="tab3">Tab 3 content - Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          </x-tabs>
+          </tabs-widget>
         </div>
 
-        <pre class="code">&lt;x-tabs&gt;
+        <pre class="code">&lt;tabs-widget&gt;
   &lt;li class="active"&gt;
     &lt;a href="#tab1" data-toggle="tab"&gt;Tab 1&lt;/a&gt;
   &lt;/li&gt;
@@ -386,7 +386,7 @@ in <code>href</code>.</p></blockquote>
   &lt;p id="tab1" class="active"&gt;Tab 1 content - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
   &lt;p id="tab2"&gt;Tab 2 content - Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
   &lt;p id="tab3"&gt;Tab 3 content - Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
-&lt;/x-tabs&gt;</pre>
+&lt;/tabs-widget&gt;</pre>
 
       </section>
 
