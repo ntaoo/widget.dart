@@ -2,7 +2,6 @@ library widget;
 
 import 'dart:async';
 import 'dart:html';
-import 'package:polymer/polymer.dart';
 import 'package:widget/effects.dart';
 
 abstract class SwapComponent {

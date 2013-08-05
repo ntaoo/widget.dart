@@ -1,7 +1,5 @@
-import 'package:bot/bot.dart';
 import 'package:hop/hop.dart';
 import 'package:hop/hop_tasks.dart';
-import 'util.dart' as util;
 
 import '../test/test_dump_render_tree.dart' as test_drt;
 
