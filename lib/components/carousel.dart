@@ -15,7 +15,7 @@ import 'package:widget/widget.dart';
  * [Carousel] leverages the [Swap] component to render the transition between items.
  */
 class Carousel extends WebComponent {
-  ScopedCssMapper get _css => getScopedCss("x-swap");
+  ScopedCssMapper get __css => getScopedCss("x-swap");
 
   final ShowHideEffect _fromTheLeft = new SlideEffect(xStart: HorizontalAlignment.LEFT);
   final ShowHideEffect _fromTheRight = new SlideEffect(xStart: HorizontalAlignment.RIGHT);
@@ -29,7 +29,7 @@ class Carousel extends WebComponent {
   Future<bool> previous() => _moveDelta(false);
 
   SwapComponent get _swap =>
-      this.query('${_css["x-carousel"]} ${_css.getSelector(".carousel")} > [is=x-swap]').xtag;
+      this.query('${__css["x-carousel"]} ${__css.getSelector(".carousel")} > [is=x-swap]').xtag;
 
   Future<bool> _moveDelta(bool doNext) {
     if (_pendingAction != null) {
