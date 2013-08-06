@@ -1,7 +1,7 @@
 import 'package:hop/hop.dart';
 import 'package:hop/hop_tasks.dart';
 
-import '../test/test_dump_render_tree.dart' as test_drt;
+import '../test/harness_console.dart' as test;
 
 void main() {
   addTask('build', createProcessTask('dart', args: ['build.dart'],
@@ -14,7 +14,7 @@ void main() {
   addTask('test_dart2js',
       createDartCompilerTask(['test/browser_test_harness.dart']));
 
-  addTask('test', createUnitTestTask(test_drt.testCore));
+  addTask('test', createUnitTestTask(test.testCore));
 
   //
   // gh_pages
