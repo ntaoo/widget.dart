@@ -1,7 +1,6 @@
 library widegt_util;
 
 import 'dart:io';
-import 'package:bot/bot.dart';
 
 const _dartFileExtension = '.dart';
 
