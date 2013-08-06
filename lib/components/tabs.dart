@@ -23,7 +23,7 @@ import 'package:widget/widget.dart';
  * in `href`.
  */
 class TabsWidget extends PolymerElement {
-  ScopedCssMapper get _css => getScopedCss("x-tabs");
+  ScopedCssMapper get __css => getScopedCss("x-tabs");
 
   @protected
   void created() {
@@ -94,7 +94,7 @@ class TabsWidget extends PolymerElement {
     return target;
   }
 
-  List<Element> _getAllTabs() => this.queryAll('${_css["x-tabs"]} .nav-tabs > li');
+  List<Element> _getAllTabs() => this.queryAll('${__css["x-tabs"]} .nav-tabs > li');
 
   void _ensureAtMostOneTabActive() {
     final tabs = _getAllTabs();
@@ -116,7 +116,7 @@ class TabsWidget extends PolymerElement {
   }
 
   SwapComponent _getSwap() {
-    final Element element = this.query('${_css["x-tabs"]} [is=x-swap]');
+    final Element element = this.query('${__css["x-tabs"]} [is=x-swap]');
     if(element != null) {
       if(element is SwapComponent) {
         // Analyzer
