@@ -3,24 +3,26 @@
 
 header.mainhead {
   position: relative;
-  .icons {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 38.5px; /* same as bootstrap h1 */
-    line-height: 40px; /* same as bootstrap h1 */
-  }
-
-  .icons a i {
-   text-decoration: none;
-  }
-
-  p {
-    font-size: 150%;
-    line-height: 1.1em;
-    color: gray;
-  }
 }
+
+header.mainhead .icons {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 38.5px; /* same as bootstrap h1 */
+  line-height: 40px; /* same as bootstrap h1 */
+}
+
+header.mainhead .icons a i {
+ text-decoration: none;
+}
+
+header.mainhead p {
+  font-size: 150%;
+  line-height: 1.1em;
+  color: gray;
+}
+
 
 /* Navigation
 -------------------------------------------------- */
@@ -29,23 +31,28 @@ ul.nav-list {
   padding: 0;
   width: 228px;
   margin-top: 20px;
-  & > li {
-    border: 1px solid #ddd;
-    padding: 3px 15px;
-    margin-bottom: -1px;
-    &:first-child {
-      border-radius: 6px 6px 0 0;
-    }
-    &:last-child {
-      border-radius: 0 0 6px 6px;
-    }
-    & > a.h1 {
-      font-weight: bold;
-    }
-    & > a.h2 {
-      padding-left: 25px;
-    }
-  }
+}
+
+ul.nav-list > li {
+  border: 1px solid #ddd;
+  padding: 3px 15px;
+  margin-bottom: -1px;
+}
+
+ul.nav-list > li:first-child {
+  border-radius: 6px 6px 0 0;
+}
+
+ul.nav-list > li:last-child {
+  border-radius: 0 0 6px 6px;
+}
+
+ul.nav-list > li > a.h1 {
+  font-weight: bold;
+}
+
+ul.nav-list > li > a.h2 {
+  padding-left: 25px;
 }
 
 /* Footer
@@ -57,21 +64,28 @@ ul.nav-list {
   margin-top: 70px;
   border-top: 1px solid #e5e5e5;
   background-color: #f5f5f5;
-  p {
-    margin-bottom: 1em;
-    color: #777;
-  }
 }
+
+.footer p {
+  margin-bottom: 1em;
+  color: #777;
+}
+
+
 .footer-links {
   margin: 10px 0;
-  li {
-    display: inline;
-    padding: 0 2px;
-    &:first-child {
-      padding-left: 0;
-    }
-  }
 }
+
+.footer-links li {
+  display: inline;
+  padding: 0 2px;
+}
+
+.footer-links li:first-child {
+  padding-left: 0;
+}
+
+
 
 /* Desktop large
 ------------------------- */
@@ -152,25 +166,27 @@ div.demo, pre.code {
   -webkit-border-radius: 4px;
      -moz-border-radius: 4px;
           border-radius: 4px;
-  &::after {
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    padding: 3px 7px;
-    font-weight: bold;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background-color: #f5f5f5;
-    border: 1px solid #ddd;
-    color: #9da0a4;
-    border-radius: 4px 0 4px 0;
-  }
+}
+
+div.demo::after, pre.code::after {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  padding: 3px 7px;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  color: #9da0a4;
+  border-radius: 4px 0 4px 0;
 }
 
 div.demo {
   background-color: white;
-  &::after {
-    content: "Example";
-  }
+}
+
+div.demo::after {
+  content: 'Example';
 }
 
 pre.code {
@@ -179,29 +195,30 @@ pre.code {
   white-space: pre;
   overflow-x: hidden;
   text-overflow: ellipsis;
-  &::after {
-    content: "Markup";
-  }
 }
 
-.demo {
-  figure {
-    text-align: center;
-    position: relative;
-    & > figcaption {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      padding: 15px;
-      color: white;
-      background: #333333;
-      background: rgba(0, 0, 0, 0.75);
-    }
-  }
-  p {
-    margin: 5px 0;
-  }
+pre.code::after {
+  content: 'Markup';
+}
+
+.demo figure {
+  text-align: center;
+  position: relative;
+}
+
+.demo figure > figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 15px;
+  color: white;
+  background: #333333;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.demo p {
+  margin: 5px 0;
 }
 
 .highlighted {
@@ -224,17 +241,19 @@ pre.code {
 /* ShowHide Styles */
 .demo.showhide {
   text-align: center;
-  .logo_wrapper {
-    margin: 0 auto;
-    width: 333px;
-    height: 250px;
-    background-image: -webkit-linear-gradient(top, white, #eee); /* For Chrome and Safari */
-    background-image:     -ms-linear-gradient(top, white, #eee); /* For pre-releases of IE 10*/
-    background-image:      -o-linear-gradient(top, white, #eee); /* For old Opera (11.1 to 12.0) */
-    background-image:         linear-gradient(to bottom, white, #eee); /* Standard syntax; must be last */
-    img {
-      width: 333px;
-      height: 250px;
-    }
-  }
+}
+
+.demo.showhide .logo_wrapper {
+  margin: 0 auto;
+  width: 333px;
+  height: 250px;
+  background-image: -webkit-linear-gradient(top, white, #eee); /* For Chrome and Safari */
+  background-image:     -ms-linear-gradient(top, white, #eee); /* For pre-releases of IE 10*/
+  background-image:      -o-linear-gradient(top, white, #eee); /* For old Opera (11.1 to 12.0) */
+  background-image:         linear-gradient(to bottom, white, #eee); /* Standard syntax; must be last */
+}
+
+.demo.showhide .logo_wrapper img {
+  width: 333px;
+  height: 250px;
 }
