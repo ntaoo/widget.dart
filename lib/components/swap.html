@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <body>
-<polymer-element name="swap-widget" extends="div" apply-author-styles>
+<polymer-element name="swap-widget">
   <template>
-    <style scoped>
+    <style>
       @host {
         * {
           display: block;
@@ -12,22 +12,26 @@
       .content {
         position: relative;
         overflow: hidden;
-        & > * {
-          position: absolute;
-          top: 0;
-          left: 0;
-          display: none;
-          margin: 0 auto;
-          width: 100%;
-        }
-        & > .active {
-          position: relative;
-          display: block;
-        }
-        & > .prev {
-          display: block;
-        }
       }
+
+      .content > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .content > .active {
+        position: relative;
+        display: block;
+      }
+
+      .content > .prev {
+        display: block;
+      }
+
     </style>
     <div class='content'>
       <content></content>

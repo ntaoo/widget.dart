@@ -17,6 +17,7 @@ import 'package:widget/widget.dart';
  *
  * [Tabs] and [Carousel] both use this component.
  */
+@CustomTag('swap-widget')
 class SwapWidget extends PolymerElement implements SwapComponent {
   static const _activeClass = 'active';
   static const _dirClassPrev = 'prev';
@@ -84,7 +85,7 @@ class SwapWidget extends PolymerElement implements SwapComponent {
 
   void _initialize() {
     if(_contentElementField == null) {
-      _contentElementField = this.query('x-swap > .content');
+      _contentElementField = getShadowRoot('swap-widget').query('.content');
       if(_contentElementField == null) {
         throw 'Could not find the content element. Either the template has changed or state was accessed too early in the component lifecycle.';
       }
