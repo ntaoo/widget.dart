@@ -22,15 +22,20 @@ import 'package:widget/widget.dart';
  * The target content id is either the value of `data-target` on the clicked element or the anchor
  * in `href`.
  */
+@CustomTag('tabs-widget')
 class TabsWidget extends PolymerElement {
+
+  bool get applyAuthorStyles => true;
 
   @protected
   void created() {
+    super.created();
     this.onClick.listen(_clickListener);
   }
 
   @protected
   void inserted() {
+    super.inserted();
     _ensureAtMostOneTabActive();
   }
 
