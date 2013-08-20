@@ -16,11 +16,18 @@ import 'package:widget/widget.dart';
  *
  * The [ModalWidget] component leverages the [ModalManager] effect.
  */
+@CustomTag('modal-widget')
 class ModalWidget extends PolymerElement implements ShowHideComponent {
+
+  bool get applyAuthorStyles => true;
+
   /** If false, clicking the backdrop closes the dialog. */
   bool staticBackdrop = false;
+
   bool _isShown = false;
+
   bool get isShown => _isShown;
+
   ShowHideEffect effect = new ScaleEffect();
 
   void set isShown(bool value) {
@@ -58,20 +65,23 @@ class ModalWidget extends PolymerElement implements ShowHideComponent {
 
   @protected
   void created() {
+    super.created();
     this.onClick.listen(_onClick);
   }
 
   @protected
   void inserted() {
+    super.inserted();
     final modal = _getModalElement();
     if(modal != null && !isShown) {
       ModalManager.hide(modal);
     }
   }
 
-  Element _getModalElement() => this.query('[is=x-modal] > .modal');
+  Element _getModalElement() => getShadowRoot('modal-widget').query('.modal');
 
   void _onClick(MouseEvent event) {
+
     if(!event.defaultPrevented) {
       final Element target = event.target as Element;
       if(target != null && target.dataset['dismiss'] == 'modal') {

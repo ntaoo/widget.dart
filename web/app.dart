@@ -28,9 +28,11 @@ void main() {
       ..onClick.listen((_) => _showHideDemo_toggle(effect));
     effectsDiv.append(button);
   });
+
+  query('#modalOpenButton').onClick.listen(_show);
 }
 
-void _show(event, detail, target) {
+void _show(event) {
   query('#modal_example').xtag.show();
 }
 
