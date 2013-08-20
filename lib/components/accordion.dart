@@ -1,6 +1,5 @@
 import 'dart:html';
 import 'package:polymer/polymer.dart';
-import 'package:widget/effects.dart';
 import 'package:widget/widget.dart';
 import 'package:bot/bot.dart';
 
@@ -10,14 +9,17 @@ import 'package:bot/bot.dart';
  *
  * See [Collapse] for details on how content is interpreted.
  */
+@CustomTag('accordion-widget')
 class AccordionWidget extends PolymerElement {
+
   @protected
   void created() {
+    super.created();
     ShowHideComponent.toggleEvent.forTarget(this).listen(_onOpen);
   }
 
   List<Element> _getAllCollapseElements() =>
-      this.queryAll('[is=x-accordion] > [is=x-collapse]');
+      this.queryAll('collapse-widget');
 
   void _onOpen(Event openEvent) {
     Element target = openEvent.target;

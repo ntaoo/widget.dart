@@ -15,9 +15,12 @@ import 'package:widget/widget.dart';
  * [CollapseWidget] listens for `click` events and toggles visibility of content if the
  * click target has attribute `data-toggle="collapse"`.
  */
+@CustomTag('collapse-widget')
 class CollapseWidget extends PolymerElement implements ShowHideComponent {
   static const String _collapseDivSelector = '.collapse-body-x';
   static final ShowHideEffect _effect = new ShrinkEffect();
+  
+  bool get applyAuthorStyles => true;
 
   bool _isShown = false;
 
@@ -51,11 +54,14 @@ class CollapseWidget extends PolymerElement implements ShowHideComponent {
 
   @protected
   void created() {
+    super.created();
     this.onClick.listen(_onClick);
   }
 
   @protected
   void inserted() {
+    super.inserted();
+    
     // TODO(jacobr): find a way to prevent animations upon calls to the isShown
     // setter that occur from the intial web_ui template binding that do not
     // require manually tracking _insertedCalled. If this.parent was null
@@ -76,7 +82,7 @@ class CollapseWidget extends PolymerElement implements ShowHideComponent {
   }
 
   void _updateElements([bool skipAnimation = false]) {
-    final collapseDiv = this.query(_collapseDivSelector);
+    final collapseDiv = getShadowRoot('collapse-widget').query(_collapseDivSelector);
     if(collapseDiv != null) {
       final action = _isShown ? ShowHideAction.SHOW : ShowHideAction.HIDE;
       final effect = skipAnimation ? null : _effect;

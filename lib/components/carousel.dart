@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:html';
 import 'package:polymer/polymer.dart';
-import 'package:bot/bot.dart';
 import 'package:widget/effects.dart';
 import 'package:widget/widget.dart';
 
@@ -16,7 +15,6 @@ import 'package:widget/widget.dart';
  * [CarouselWidget] leverages the [Swap] component to render the transition between items.
  */
 class CarouselWidget extends PolymerElement {
-  ScopedCssMapper get __css => getScopedCss("x-swap");
 
   final ShowHideEffect _fromTheLeft = new SlideEffect(xStart: HorizontalAlignment.LEFT);
   final ShowHideEffect _fromTheRight = new SlideEffect(xStart: HorizontalAlignment.RIGHT);
@@ -38,7 +36,7 @@ class CarouselWidget extends PolymerElement {
   }
 
   SwapComponent get _swap =>
-      this.query('${__css["x-carousel"]} ${__css.getSelector(".carousel")} > [is=x-swap]').xtag;
+      this.query('"x-carousel > .carousel > [is=x-swap]').xtag;
 
   Future<bool> _moveDelta(bool doNext) {
     if (_pendingAction != null) {
