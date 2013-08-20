@@ -10,7 +10,10 @@ import 'package:widget/widget.dart';
  *
  * Clicking on a nested element with the attribute `data-dismiss='alert'` will cause [AlertWidget] to close.
  */
+@CustomTag('alert-widget')
 class AlertWidget extends PolymerElement implements ShowHideComponent {
+  
+  bool get applyAuthorStyles => true;
 
   bool _isShown = true;
 
@@ -43,6 +46,7 @@ class AlertWidget extends PolymerElement implements ShowHideComponent {
 
   @protected
   void created() {
+    super.created();
     this.onClick.listen(_onClick);
   }
 
