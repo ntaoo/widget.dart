@@ -10,8 +10,8 @@
     <link rel="import" href="packages/widget/components/tabs.html">
     <script src="packages/polymer/boot.js"></script>
 
-    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.0.2/css/font-awesome.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
@@ -28,12 +28,25 @@
         </div>
       </header>
       <div class="row">
-        <div class="span3">
+        <div class="col-md-3">
           <ul class="nav nav-list affix">
-          <li><a href="#dart_widgets" class="h1">Dart Widgets</a></li><li><a href="#components" class="h1">Components</a></li><li><a href="#accordion" class="h2">Accordion</a></li><li><a href="#alert" class="h2">Alert</a></li><li><a href="#carousel" class="h2">Carousel</a></li><li><a href="#collapse" class="h2">Collapse</a></li><li><a href="#dropdown" class="h2">Dropdown</a></li><li><a href="#modal" class="h2">Modal</a></li><li><a href="#swap" class="h2">Swap</a></li><li><a href="#tabs" class="h2">Tabs</a></li><li><a href="#effects" class="h1">Effects</a></li><li><a href="#modalmanager" class="h2">ModalManager</a></li><li><a href="#showhide" class="h2">ShowHide</a></li><li><a href="#swapper" class="h2">Swapper</a></li></ul>
+          <li><a href="#dart_widgets" class="h1">Dart Widgets</a></li>
+          <li><a href="#components" class="h2">Components</a></li>
+          <li><a href="#accordion" class="h2">Accordion</a></li>
+          <li><a href="#alert" class="h2">Alert</a></li>
+          <li><a href="#carousel" class="h2">Carousel</a></li>
+          <li><a href="#collapse" class="h2">Collapse</a></li>
+          <li><a href="#dropdown" class="h2">Dropdown</a></li>
+          <li><a href="#modal" class="h2">Modal</a></li>
+          <li><a href="#swap" class="h2">Swap</a></li>
+          <li><a href="#tabs" class="h2">Tabs</a></li>
+          <li><a href="#effects" class="h1">Effects</a></li>
+          <li><a href="#modalmanager" class="h2">ModalManager</a></li>
+          <li><a href="#showhide" class="h2">ShowHide</a></li>
+          <li><a href="#swapper" class="h2">Swapper</a></li></ul>
         </div>
 
-    <div class="span9">
+    <div class="col-md-9">
       <header>
         <h1 id="components">Components</h1>
         <blockquote>
@@ -303,20 +316,25 @@ apply to x-dropdown
           <!-- Button to trigger modal -->
           <a role="button" class="btn btn-primary" id="modalOpenButton">Launch demo modal</a>
 
-          <!-- Modal -->
-          <modal-widget id="modal_example">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="myModalLabel">Modal header</h3>
-            </div>
-            <div class="modal-body">
-              <p>One fine body…</p>
-            </div>
-            <div class="modal-footer">
-              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-              <button class="btn btn-primary">Save changes</button>
-            </div>
-          </modal-widget>
+  <!-- Modal -->
+        <modal-widget id="modal_example" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" class="modal fade">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Modal title</h4>
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </modal-widget>
+
         </div>
 
         <pre class="code">&lt;!-- Button to trigger modal --&gt;
