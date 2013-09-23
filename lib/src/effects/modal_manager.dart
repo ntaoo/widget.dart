@@ -25,6 +25,7 @@ class ModalManager {
       ..add('fade')
       ..remove('in');
     runAsync(() => backDropElement.classes.add('in'));
+    document.query('body').classes.add('modal-open');
     return Future.wait([showElement, Tools.onTransitionEnd(backDropElement)]);
   }
 
@@ -40,7 +41,7 @@ class ModalManager {
       backDropElement.classes.remove('in');
       futures.add(Tools.onTransitionEnd(backDropElement));
     }
-
+    document.query('body').classes.remove('modal-open');
     return Future.wait(futures)
         .catchError((err) {
           print(err);
@@ -57,7 +58,6 @@ class ModalManager {
 
   static Element _getBackdrop(HtmlDocument parentDocument, bool addIfMissing) {
     assert(parentDocument != null);
-
 
     Element element = parentDocument.body.query('.$_backdropClass');
     if(element == null && addIfMissing) {
